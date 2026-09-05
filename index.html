@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>White Room V7 - ARISE</title>
+<link rel="manifest" href="manifest.json">
+<style>
+body{background:#0a0a12;color:#a0a0b0;font-family:monospace;margin:0;padding:12px}
+.header{border-bottom:1px solid #222;padding:10px 0}
+.glow{color:#fff;text-shadow:0 0 10px #fff}
+.card{background:#12121f;border:1px solid #22223a;padding:14px;margin:8px 0;border-radius:14px;display:flex;justify-content:space-between;align-items:center}
+.card.checked{opacity:0.35;text-decoration:line-through}
+.card.time{font-size:11px;opacity:0.5;width:90px}
+.card.info{flex:1}.card.info b{color:#fff;display:block;font-size:13px}.card.info i{font-size:11px;opacity:0.6}
+.circle{width:28px;height:28px;border:1px solid #555;border-radius:50%;display:flex;justify-content:center;align-items:center;cursor:pointer}
+.circle.checked{background:#c8ff5a;border-color:#c8ff5a;color:#000}
+.active-red{border-color:#ff2a2a!important;box-shadow:0 0 15px #ff2a2a40;background:#1a0a0a!important}
+.btn{width:100%;padding:14px;border-radius:12px;border:1px solid #333;font-weight:bold;margin-top:8px}
+.progress-wrap{background:#1a1a2e;height:10px;border-radius:10px;margin:6px 0;overflow:hidden}
+#progress{height:100%;background:#fff;width:0%;transition:0.4s}
+#xpProgress{height:100%;background:#00ffff;box-shadow:0 0 10px #00ffff;width:0%;transition:0.4s}
+.extra-card{border-style:dashed;border-color:#2a2a4a;background:#0e0e1a}
+</style>
+</head>
+<body>
+<div class="header">
+<b class="glow" id="modeTitle">DAY SCHEDULE</b> <span id="rank" style="color:#00ffff;float:right">E-RANK</span><br>
+<small>LVL <span id="level">1</span> | <span id="count">0/10</span> DONE | TOTAL XP: <span id="xp">0</span></small>
+<div class="progress-wrap"><div id="progress"></div></div>
+<div class="progress-wrap" style="height:6px"><div id="xpProgress"></div></div>
+<small style="opacity:0.5">Next Level: <span id="nextXp">100</span> XP</small>
+<div style="display:flex;gap:8px;margin:10px 0">
+<button class="btn" id="modeBtn" style="background:#222;color:#fff">SWITCH MODE</button>
+<button class="btn" id="chuttiBtn" style="background:#111;color:#fff">AAJ CHUTTI</button>
+</div>
+</div>
+<div id="task-list"></div>
+<div style="margin-top:20px;border-top:1px solid #222;padding-top:10px">
+<b style="letter-spacing:2px;color:#c8ff5a">EXTRA CHALLENGES [+20 XP EACH]</b>
+<small style="opacity:0.5;display:block;margin-bottom:8px">Ye kar liya to S-Rank pakka hai</small>
+<div id="extra-list"></div>
+</div>
+<div style="margin-top:20px;border-top:1px solid #222;padding-top:15px">
+<b style="letter-spacing:3px;font-size:12px">PRIVATE LOGS [AUTO SAVE]</b>
+<textarea id="log1" placeholder="Aaj kya sikha?" style="width:100%;background:#12121f;border:1px solid #22223a;padding:12px;border-radius:12px;color:#fff;margin-top:8px"></textarea>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">
+<button class="btn" style="background:#fef3c7;color:#000" id="lockBtn">LOCK TODAY -> NEXT DAY</button>
+<button class="btn" style="background:#12121f;color:#ff5555;border:1px solid #331111" id="cheatBtn">CHEAT -200 XP</button>
+</div>
+</div>
+<script>
+const SCHOOL_DATA = [
+{t:"05:20 AM", title:"UTHNA", q:"Winners don't wait."},
+{t:"05:20-06:30", title:"MORNING REVISION", q:"While they dream, you sharpen."},
+{t:"06:30-01:10", title:"SCHOOL", q:"Don't attend. Dominate."},
+{t:"01:10-02:00", title:"POWER NAP + LUNCH", q:"Rest is strategy."},
+{t:"02:00-04:50", title:"DEEP STUDY", q:"Distraction is a choice."},
+{t:"04:50-06:15", title:"WORKOUT", q:"Pain is just data."},
+{t:"06:15-07:30", title:"CODING & CHESS", q:"World is chessboard."},
+{t:"07:30-08:00", title:"FRESH RESET", q:"Wash emotions away."},
+{t:"08:00-10:00", title:"HOMEWORK & DINNER", q:"Leave nothing for tomorrow.", red:true},
+{t:"10:00 PM", title:"SLEEP", q:"Preparation for war."}
+];
+const HOLIDAY_DATA = [
+{t:"05:20 AM", title:"WAKE UP", q:"Discipline starts when others sleep."},
+{t:"05:20-07:00", title:"REVISION", q:"First revision is real power."},
+{t:"07:00-08:30", title:"STUDY", q:"Attack your weakness."},
+{t:"08:30-09:00", title:"BREAKFAST", q:"Fuel like a warrior."},
+{t:"09:00-11:00", title:"STUDY", q:"Silence + Focus = Fear."},
+{t:"11:00-01:00", title:"CODING AND CHESS", q:"Control the board, control the world."},
+{t:"01:00-02:00", title:"REST AND LUNCH", q:"Rest is strategy, not escape."},
+{t:"02:00-04:15", title:"STUDY", q:"Revision is domination."},
+{t:"04:15-06:30", title:"WORKOUT", q:"Strong mind in strong body."},
+{t:"06:30-07:30", title:"REST AND FRESH", q:"Reset. Rebuild."},
+{t:"07:30-09:30", title:"HOMEWORK AND DINNER", q:"End day with zero debt.", red:true},
+{t:"09:30 PM", title:"SLEEP", q:"Sleep is weapon reloading."}
+];
+// NAYE EXTRA CHALLENGES
+const EXTRA_DATA = [
+{title:"NO PHONE / SOCIAL MEDIA", q:"+20 XP - Dopamine detox"},
+{title:"NO SUGAR", q:"+20 XP - No sweet poison"},
+{title:"NO JUNK FOOD", q:"+20 XP - Clean fuel only"},
+{title:"2L WATER", q:"+20 XP - Hydration"},
+{title:"NO FAP / NO DISTRACTION", q:"+25 XP - Real control"},
+{title:"MEDITATION 10 MIN", q:"+20 XP - Mind sharpen"},
+{title:"READING 20 PAGES", q:"+20 XP - Knowledge +"},
+{title:"NO ABUSE / NO GOSSIP", q:"+15 XP - Clean mouth"},
+{title:"COLD SHOWER", q:"+20 XP - Pain = Power"},
+{title:"EARLY SLEEP BEFORE 11", q:"+20 XP - Discipline"}
+];
+
+let mode = localStorage.getItem('v7_mode') || 'SCHOOL';
+if(!localStorage.getItem('v7_mode') && new Date().getDay()===0) mode='HOLIDAY';
+
+function renderAll(){
+let DATA = mode==='SCHOOL'?SCHOOL_DATA:HOLIDAY_DATA;
+document.getElementById('modeTitle').innerText=`DAY SCHEDULE - ${mode}`;
+let listEl=document.getElementById('task-list'); listEl.innerHTML='';
+DATA.forEach((d,i)=>{
+let saved=JSON.parse(localStorage.getItem('tasks_'+mode)||'[]');
+let checked=saved[i];
+let div=document.createElement('div');
+div.className='card'+(checked?' checked':'')+(d.red &&!checked?' active-red':'');
+div.innerHTML=`<div class="time">${d.t}</div><div class="info"><b>${d.title}</b><i>"${d.q}"</i></div><div class="circle ${checked?'checked':''}">${checked?'✓':''}</div>`;
+div.onclick=()=>{ saved[i]=!saved[i]; localStorage.setItem('tasks_'+mode, JSON.stringify(saved)); renderAll(); };
+listEl.appendChild(div);
+});
+// Extra render
+let extraEl=document.getElementById('extra-list'); extraEl.innerHTML='';
+let extraSaved=JSON.parse(localStorage.getItem('extra_tasks')||'[]');
+EXTRA_DATA.forEach((d,i)=>{
+let checked=extraSaved[i];
+let div=document.createElement('div');
+div.className='card extra-card'+(checked?' checked':'');
+div.innerHTML=`<div class="info"><b>${d.title}</b><i>${d.q}</i></div><div class="circle ${checked?'checked':''}">${checked?'✓':''}</div>`;
+div.onclick=()=>{ extraSaved[i]=!extraSaved[i]; localStorage.setItem('extra_tasks', JSON.stringify(extraSaved)); renderAll(); };
+extraEl.appendChild(div);
+});
+updateStats();
+}
+function updateStats(){
+let DATA = mode==='SCHOOL'?SCHOOL_DATA:HOLIDAY_DATA;
+let main=JSON.parse(localStorage.getItem('tasks_'+mode)||'[]').filter(Boolean).length;
+let extra=JSON.parse(localStorage.getItem('extra_tasks')||'[]').filter(Boolean).length;
+let mainXP = main*12;
+let extraXP = extra*20;
+let todayXP = mainXP+extraXP;
+let totalXP = parseInt(localStorage.getItem('totalXP')||'0');
+let displayTotal = totalXP + todayXP;
+
+document.getElementById('count').innerText=`${main}/${DATA.length}`;
+document.getElementById('xp').innerText=displayTotal;
+document.getElementById('progress').style.width=(main/DATA.length*100)+'%';
+// Level System
+let level = Math.floor(displayTotal/100)+1;
+document.getElementById('level').innerText=level;
+let nextLevelXP = level*100;
+document.getElementById('nextXp').innerText=nextLevelXP - displayTotal + ' XP to go';
+document.getElementById('xpProgress').style.width=((displayTotal%100))+'%';
+// Rank
+let rank='E-RANK'; if(level>=5) rank='D-RANK'; if(level>=15) rank='C-RANK'; if(level>=30) rank='B-RANK'; if(level>=50) rank='A-RANK'; if(level>=75) rank='S-RANK';
+document.getElementById('rank').innerText=rank;
+}
+document.getElementById('modeBtn').onclick=()=>{ mode=mode==='SCHOOL'?'HOLIDAY':'SCHOOL'; localStorage.setItem('v7_mode',mode); renderAll(); }
+document.getElementById('chuttiBtn').onclick=()=>{ mode='HOLIDAY'; localStorage.setItem('v7_mode',mode); renderAll(); }
+document.getElementById('lockBtn').onclick=()=>{
+let main=JSON.parse(localStorage.getItem('tasks_'+mode)||'[]').filter(Boolean).length;
+let extra=JSON.parse(localStorage.getItem('extra_tasks')||'[]').filter(Boolean).length;
+let todayXP = main*12 + extra*20;
+let total=parseInt(localStorage.getItem('totalXP')||'0')+todayXP;
+localStorage.setItem('totalXP', total);
+localStorage.removeItem('tasks_'+mode);
+localStorage.removeItem('extra_tasks');
+alert('LOCKED! +'+todayXP+' XP Added. Total: '+total);
+renderAll();
+}
+document.getElementById('cheatBtn').onclick=()=>{ let t=parseInt(localStorage.getItem('totalXP')||'0'); localStorage.setItem('totalXP', Math.max(0,t-200)); renderAll(); }
+renderAll();
+</script>
+</body>
+</html>
