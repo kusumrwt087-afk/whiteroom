@@ -3,142 +3,152 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WHITE ROOM V10 // SUBJECT 01</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<title>WHITE ROOM V12 // BLOOD PROTOCOL</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#F5F5F0;--ink:#0A0A0A;--paper:#FFFFFF;--line:#0A0A0A;--neon:#D6FF57;--cyan:#00E5CC}
+:root{--bg:#060606;--card:#0F0F0F;--line:#222;--red:#FF0F0F;--blood:#3A0000}
 *{margin:0;padding:0;box-sizing:border-box;font-family:'JetBrains Mono',monospace}
-body{background:var(--bg);color:var(--ink);overflow-x:hidden}
-.top{position:sticky;top:0;z-index:10;background:var(--ink);color:#fff;padding:10px 18px;display:flex;justify-content:space-between;font-size:10px;letter-spacing:2px}
-.wrap{max-width:520px;margin:0 auto;padding:18px}
-.hero{border:3px solid var(--ink);background:var(--paper);padding:18px;position:relative;overflow:hidden}
-.hero::after{content:'';position:absolute;top:0;right:0;width:80px;height:80px;background:repeating-linear-gradient(45deg, #000 0 2px, transparent 2px 6px);opacity:0.08}
-.title{font-family:'Space Grotesk',sans-serif;font-size:52px;line-height:0.85;font-weight:700;text-transform:uppercase;letter-spacing:-3px}
-.title.outline{-webkit-text-stroke:2px var(--ink);color:transparent}
-.meta{margin-top:14px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-.meta-box{border:2px solid var(--ink);padding:10px;background:#fff}
-.meta-box.dark{background:var(--ink);color:#fff}
-.meta-lbl{font-size:9px;opacity:0.6;letter-spacing:1px}
-.meta-val{font-size:18px;font-weight:700;margin-top:2px}
-.bar{height:14px;border:2px solid var(--ink);background:#E9E9E3;margin-top:10px;position:relative}
-.bar-fill{height:100%;background:var(--ink);width:0%;transition:width 0.6s cubic-bezier(0.16,1,0.3,1)}
-.bar-fill.neon{background:var(--neon)}
-.btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
-.btn{border:3px solid var(--ink);padding:12px;font-weight:700;font-size:12px;text-align:center;cursor:pointer;text-transform:uppercase;transition:0.15s}
-.btn:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0px var(--ink)}
-.btn:active{transform:translate(0,0);box-shadow:none}
-.btn-black{background:var(--ink);color:#fff}
-.section-label{margin-top:30px;margin-bottom:12px;font-family:'Space Grotesk';font-size:14px;font-weight:700;letter-spacing:2px;display:flex;align-items:center;gap:8px}
-.section-label::before{content:'';width:10px;height:10px;background:var(--ink);display:inline-block}
+body{background:var(--bg);color:#EAEAEA}
+.top{position:sticky;top:0;z-index:99;background:#000;border-bottom:2px solid var(--red);padding:12px 14px;display:flex;justify-content:space-between;font-size:10px;letter-spacing:2px}
+.wrap{max-width:520px;margin:0 auto;padding:14px}
+.hero{border:1px solid #1A1A1A;background:#0A0A0A;padding:16px;position:relative}
+.hero::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--red);box-shadow:0 0 15px var(--red)}
+.title{font-family:'Space Grotesk';font-size:46px;line-height:0.85;font-weight:700}
+.title span{color:var(--red);text-shadow:0 0 20px var(--red)}
+.clock{font-size:32px;font-weight:800;margin-top:12px}
+.clock b{color:var(--red);font-size:11px;letter-spacing:3px;display:block;margin-top:4px}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,15,15,0.7)}70%{box-shadow:0 0 0 15px rgba(255,15,15,0)}100%{box-shadow:0 0 0 0 rgba(255,15,15,0)}}
+.live{animation:pulse 2s infinite;border-color:var(--red)!important;background:#2A0000!important}
+.meta{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px}
+.mbox{border:1px solid var(--line);background:#0E0E0E;padding:10px}
+.mbox.red{border-color:var(--red);background:#1A0000}
+.m-l{font-size:8px;color:#666}.m-v{font-size:16px;font-weight:800;color:#fff}
+.bar{height:12px;background:#111;border:1px solid #222;margin-top:10px}.fill{height:100%;background:var(--red);width:0%;box-shadow:0 0 15px var(--red);transition:0.6s}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.btn{border:1px solid #333;background:#111;color:#fff;padding:12px;font-weight:800;font-size:11px;text-align:center;cursor:pointer}
+.btn.red{background:var(--red);color:#000;border-color:var(--red)}
+.label{margin:26px 0 10px 0;font-size:11px;letter-spacing:3px;color:var(--red);font-weight:800;display:flex;gap:8px;align-items:center}
+.label::before{content:'';width:8px;height:8px;background:var(--red);box-shadow:0 0 10px var(--red)}
 </style>
 </head>
 <body>
-<div class="top"><span>CLASSIFIED // WR-01</span><span id="liveTime">00:00:00</span><span id="rankTop">E-RANK</span></div>
+<div class="top"><span style="color:var(--red);font-weight:800">CLASSIFIED // WR-01</span><span id="liveTime">00:00:00</span><span id="rankTop">E-RANK</span></div>
 <div class="wrap">
 <div class="hero">
-<div class="title">WHITE<br><span class="outline">ROOM</span><br><span id="modeTitle" style="font-size:18px;letter-spacing:4px;background:var(--neon);padding:2px 8px;-webkit-text-stroke:0;color:#000">- SCHOOL PROTOCOL</span></div>
+<div class="title">WHITE<br>ROOM <span id="modeTitle">SCHOOL</span></div>
+<div class="clock"><span id="fullTime">00:00:00</span><b id="currentBlockText">SYSTEM STANDBY</b></div>
 <div class="meta">
-<div class="meta-box dark"><div class="meta-lbl">RANK</div><div class="meta-val" id="rank">E-RANK</div><div style="font-size:9px;margin-top:4px">LVL <span id="level">1</span></div></div>
-<div class="meta-box"><div class="meta-lbl">COMPLETION</div><div class="meta-val" id="count">0/10</div><div style="font-size:9px">DONE TODAY</div></div>
-<div class="meta-box"><div class="meta-lbl">TOTAL XP</div><div class="meta-val" id="xp">0</div><div style="font-size:9px">NEXT: <span id="nextXp">100</span></div></div>
+<div class="mbox red"><div class="m-l">RANK / LEVEL</div><div class="m-v" id="rank">E-RANK</div><div style="font-size:9px">LVL <span id="level">1</span></div></div>
+<div class="mbox"><div class="m-l">PROGRESS</div><div class="m-v" id="count">0/10</div><div style="font-size:8px" id="nextXp">XP TO NEXT</div></div>
+<div class="mbox"><div class="m-l">TOTAL XP</div><div class="m-v" id="xp">0</div></div>
 </div>
-<div class="bar"><div class="bar-fill" id="progress"></div></div>
-<div class="bar" style="height:8px;margin-top:6px"><div class="bar-fill neon" id="xpProgress"></div></div>
-<div class="btns"><div class="btn btn-black" id="modeBtn">⟡ SWITCH MODE</div><div class="btn" id="chuttiBtn">☾ HOLIDAY</div></div>
+<div class="bar"><div class="fill" id="progress"></div></div>
+<div class="bar" style="height:6px"><div class="fill" id="xpProgress" style="background:#fff;box-shadow:none"></div></div>
+<div class="btns"><div class="btn red" id="modeBtn">SWITCH MODE</div><div class="btn" id="chuttiBtn">HOLIDAY</div></div>
 </div>
-<div class="section-label">DAY PROTOCOL</div>
+<div class="label">DAY PROTOCOL - <span id="dateNow" style="color:#fff"></span></div>
 <div id="task-list"></div>
-<div class="section-label" style="margin-top:28px">EXTRA PROTOCOLS <span style="background:var(--neon);border:1.5px solid #000;padding:2px 6px;font-size:10px">+20 XP EACH</span></div>
+<div class="label" style="color:#fff">EXTRA PROTOCOLS <span style="background:var(--red);color:#000;padding:1px 6px;margin-left:6px">+20 XP EACH</span></div>
 <div id="extra-list"></div>
 
-<div style="margin-top:30px;border:3px solid var(--ink);background:#fff;padding:14px">
-<div style="display:flex;justify-content:space-between"><span style="font-weight:700;font-size:12px;letter-spacing:2px">PRIVATE LOG // AUTO-SAVE</span><span style="font-size:10px;opacity:0.5">WR-LOG</span></div>
-<textarea id="log1" placeholder="What did you conquer today?" style="width:100%;border:2px solid #000;padding:12px;margin-top:12px;outline:none;font-size:12px;min-height:70px;resize:none;background:#F9F9F6"></textarea>
-<div style="display:grid;grid-template-columns:1.2fr 0.8fr;gap:10px;margin-top:10px">
-<div class="btn btn-black" id="lockBtn" style="font-size:11px">LOCK DAY → NEXT DAY</div>
-<div class="btn" id="cheatBtn" style="border-color:#FF3B30;color:#FF3B30">-200 XP CHEAT</div>
+<div style="margin-top:28px;border:1px solid #222;background:#0A0A0A;padding:12px">
+<div style="font-size:10px;letter-spacing:2px;color:var(--red);font-weight:800">PRIVATE LOG // BLOOD-LOCKED [AUTO SAVE]</div>
+<textarea id="log1" placeholder="Aaj kya conquer kiya?" style="width:100%;background:#000;border:1px solid #222;color:#fff;padding:10px;margin-top:10px;outline:none;min-height:60px"></textarea>
+<textarea id="log2" placeholder="Kal kya improve karna hai?" style="width:100%;background:#000;border:1px solid #222;color:#fff;padding:10px;margin-top:8px;outline:none;min-height:60px"></textarea>
+<div style="display:grid;grid-template-columns:1.3fr 0.7fr;gap:8px;margin-top:10px">
+<div class="btn red" id="lockBtn">LOCK DAY → NEXT DAY</div><div class="btn" id="cheatBtn" style="color:var(--red)">-200 XP CHEAT</div>
 </div>
-<div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:10px">
-<div class="btn" id="restartBtn" style="font-size:10px;padding:10px">RESTART TODAY</div>
-<div class="btn" id="resetAllBtn" style="font-size:10px;padding:10px;background:#FFEAEA">RESET ALL</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+<div class="btn" id="restartBtn" style="font-size:10px">RESTART TODAY</div><div class="btn" id="resetAllBtn" style="font-size:10px;background:#1A0000;color:var(--red);border-color:var(--red)">RESET ALL - PURA ZERO</div>
 </div>
 </div>
 </div>
 <script>
-const SCHOOL_DATA=[
-{t:"05:20 AM",title:"UTHNA",q:"Winners don't wait for sunrise."},
-{t:"05:20-06:30",title:"MORNING REVISION",q:"While they dream, you sharpen."},
-{t:"06:30-01:10",title:"SCHOOL",q:"Don't attend. Dominate."},
-{t:"01:10-02:00",title:"POWER NAP + LUNCH",q:"Rest is strategy, not escape."},
-{t:"02:00-04:50",title:"DEEP STUDY",q:"Distraction is a choice you make."},
-{t:"04:50-06:15",title:"WORKOUT",q:"Pain is just data entering the body."},
-{t:"06:15-07:30",title:"CODING & CHESS",q:"The world is a chessboard."},
-{t:"07:30-08:00",title:"FRESH RESET",q:"Wash emotions away."},
-{t:"08:00-10:00",title:"HOMEWORK & DINNER",q:"Leave nothing for tomorrow.",red:true},
-{t:"10:00 PM",title:"SLEEP",q:"Preparation for next war."}
+const SCHOOL=[
+{st:"05:20",en:"05:20",t:"05:20 AM",title:"UTHNA",q:"Winners don't wait."},
+{st:"05:20",en:"06:30",t:"05:20-06:30",title:"MORNING REVISION",q:"While they dream, you sharpen."},
+{st:"06:30",en:"13:10",t:"06:30-01:10",title:"SCHOOL",q:"Don't attend. Dominate."},
+{st:"13:10",en:"14:00",t:"01:10-02:00",title:"POWER NAP + LUNCH",q:"Rest is strategy, not escape."},
+{st:"14:00",en:"16:50",t:"02:00-04:50",title:"DEEP STUDY",q:"Distraction is a choice you make."},
+{st:"16:50",en:"18:15",t:"04:50-06:15",title:"WORKOUT",q:"Pain is just data entering the body."},
+{st:"18:15",en:"19:30",t:"06:15-07:30",title:"CODING & CHESS",q:"The world is a chessboard."},
+{st:"19:30",en:"20:00",t:"07:30-08:00",title:"FRESH RESET",q:"Wash emotions away."},
+{st:"20:00",en:"22:00",t:"08:00-10:00",title:"HOMEWORK & DINNER",q:"Leave nothing for tomorrow."},
+{st:"22:00",en:"05:19",t:"10:00 PM",title:"SLEEP",q:"Preparation for next war."}
 ];
-const HOLIDAY_DATA=[
-{t:"05:20 AM",title:"WAKE UP",q:"Discipline starts when others sleep."},
-{t:"05:20-07:00",title:"REVISION",q:"First revision is real power."},
-{t:"07:00-08:30",title:"STUDY",q:"Attack your weakest subject."},
-{t:"08:30-09:00",title:"BREAKFAST",q:"Fuel like a warrior."},
-{t:"09:00-11:00",title:"STUDY",q:"Silence + Focus = Fear for others."},
-{t:"11:00-01:00",title:"CODING AND CHESS",q:"Control the board, control the world."},
-{t:"01:00-02:00",title:"REST AND LUNCH",q:"Rest is strategy."},
-{t:"02:00-04:15",title:"STUDY",q:"Revision is domination."},
-{t:"04:15-06:30",title:"WORKOUT",q:"Strong mind needs strong body."},
-{t:"06:30-07:30",title:"REST AND FRESH",q:"Reset. Rebuild. Return."},
-{t:"07:30-09:30",title:"HOMEWORK AND DINNER",q:"End day with zero debt.",red:true},
-{t:"09:30 PM",title:"SLEEP",q:"Sleep is weapon reloading."}
+const HOLIDAY=[
+{st:"05:20",en:"07:00",t:"05:20 AM",title:"WAKE UP",q:"Discipline starts when others sleep."},
+{st:"07:00",en:"08:30",t:"05:20-07:00",title:"REVISION",q:"First revision is real power."},
+{st:"08:30",en:"09:00",t:"07:00-08:30",title:"STUDY",q:"Attack your weakness."},
+{st:"09:00",en:"11:00",t:"08:30-09:00",title:"BREAKFAST",q:"Fuel like a warrior."},
+{st:"11:00",en:"13:00",t:"09:00-11:00",title:"STUDY",q:"Silence + Focus = Fear."},
+{st:"13:00",en:"14:00",t:"11:00-01:00",title:"CODING AND CHESS",q:"Control the board, control the world."},
+{st:"14:00",en:"16:15",t:"01:00-02:00",title:"REST AND LUNCH",q:"Rest is strategy, not escape."},
+{st:"16:15",en:"18:30",t:"02:00-04:15",title:"STUDY",q:"Revision is domination."},
+{st:"18:30",en:"19:30",t:"04:15-06:30",title:"WORKOUT",q:"Strong mind in strong body."},
+{st:"19:30",en:"21:30",t:"06:30-07:30",title:"REST AND FRESH",q:"Reset. Rebuild."},
+{st:"21:30",en:"05:19",t:"07:30-09:30",title:"HOMEWORK AND DINNER",q:"End day with zero debt."}
 ];
-const EXTRA_DATA=[
-{title:"NO PHONE / NO SOCIAL",q:"Dopamine detox"},
-{title:"NO SUGAR",q:"No poison"},
-{title:"NO JUNK FOOD",q:"Clean fuel"},
-{title:"2L WATER",q:"Hydration protocol"},
-{title:"NO FAP",q:"Absolute control"},
-{title:"MEDITATION 10M",q:"Mind sharpening"},
-{title:"READ 20 PAGES",q:"Knowledge stack"},
-{title:"COLD SHOWER",q:"Pain = Power"},
-{title:"SLEEP BEFORE 11PM",q:"Discipline check"}
+const EXTRA=[
+{title:"NO PHONE / SOCIAL MEDIA",q:"Dopamine detox +20"},
+{title:"NO SUGAR",q:"No poison +20"},
+{title:"NO JUNK FOOD",q:"Clean fuel +20"},
+{title:"2L WATER",q:"Hydration +20"},
+{title:"NO FAP / NO DISTRACTION",q:"Absolute control +25"},
+{title:"MEDITATION 10 MIN",q:"Mind sharpen +20"},
+{title:"READING 20 PAGES",q:"Knowledge +20"},
+{title:"COLD SHOWER",q:"Pain = Power +20"},
+{title:"EARLY SLEEP BEFORE 11",q:"Discipline +20"}
 ];
 let mode=localStorage.getItem('v7_mode')||'SCHOOL';
 if(!localStorage.getItem('v7_mode') && new Date().getDay()===0) mode='HOLIDAY';
-
+function toMin(t){let [h,m]=t.split(':').map(Number);return h*60+m;}
+function getActive(DATA){
+let now=new Date();let cur=now.getHours()*60+now.getMinutes();
+for(let i=0;i<DATA.length;i++){let s=toMin(DATA[i].st), e=toMin(DATA[i].en);
+if(e < s){if(cur>=s || cur<=e) return i;} else {if(cur>=s && cur<=e) return i;}} return -1;
+}
 function render(){
-let DATA=mode==='SCHOOL'?SCHOOL_DATA:HOLIDAY_DATA;
-document.getElementById('modeTitle').innerText=`- ${mode} PROTOCOL`;
+let DATA=mode==='SCHOOL'?SCHOOL:HOLIDAY;
+let active=getActive(DATA);
+document.getElementById('modeTitle').innerText=mode;
+document.getElementById('dateNow').innerText=new Date().toDateString();
+let blockTxt=document.getElementById('currentBlockText');
+if(active>=0){blockTxt.innerText='● LIVE NOW: '+DATA[active].title+' ['+DATA[active].t+']'; blockTxt.style.color='#FF0F0F';}
+else {blockTxt.innerText='○ STANDBY - NO ACTIVE PROTOCOL'; blockTxt.style.color='#666';}
 let list=document.getElementById('task-list');list.innerHTML='';
 let saved=JSON.parse(localStorage.getItem('tasks_'+mode)||'[]');
 DATA.forEach((d,i)=>{
-let ok=saved[i];
+let ok=saved[i];let isActive=i===active;
 let el=document.createElement('div');
-el.style.cssText=`border:3px solid ${d.red&&!ok?'#FF3B30':'#000'};background:${ok?'#0A0A0A':'#fff'};color:${ok?'#fff':'#000'};padding:12px 14px;margin-bottom:10px;display:flex;gap:12px;align-items:center;cursor:pointer;transition:0.2s;${d.red&&!ok?'box-shadow:6px 6px 0 #FF3B30':''}`;
-el.innerHTML=`<div style="font-size:11px;min-width:75px;opacity:0.6;border-right:${ok?'1px solid #333':'1px solid #ddd'};padding-right:10px">${d.t}</div><div style="flex:1"><div style="font-family:Space Grotesk;font-weight:700;font-size:14px;letter-spacing:0.5px">${d.title} ${ok?'✓':''}</div><div style="font-size:10px;opacity:0.6;margin-top:2px">"${d.q}"</div></div><div style="width:34px;height:34px;border:3px solid ${ok?'#D6FF57':'#000'};background:${ok?'#D6FF57':'#fff'};display:flex;align-items:center;justify-content:center;font-weight:900;color:#000">${ok?'✓':''}</div>`;
+el.className=isActive?'live':'';
+el.style.cssText=`border:${isActive?'2px solid #FF0F0F':'1px solid #222'};background:${isActive?'#2A0000': ok?'#000':'#0F0F0F'};padding:14px;margin-bottom:10px;display:flex;gap:12px;align-items:center;cursor:pointer;${isActive?'box-shadow:0 0 25px rgba(255,15,15,0.35), inset 0 0 15px rgba(255,15,15,0.15)':''};opacity:${ok&&!isActive?0.4:1}`;
+el.innerHTML=`<div style="min-width:88px;font-size:11px;color:${isActive?'#FF6B6B':'#666'};border-right:1px solid ${isActive?'#FF0F0F':'#222'};padding-right:10px">${d.t}<div style="margin-top:4px;font-size:9px;font-weight:800;color:${isActive?'#FF0F0F':'#333'}">${isActive?'● LIVE NOW': ok?'✓ DONE':'○ IDLE'}</div></div><div style="flex:1"><div style="font-weight:800;font-size:13px;color:#fff">${d.title}</div><div style="font-size:10px;color:${isActive?'#FFAAAA':'#555'}">"${d.q}"</div></div><div style="width:32px;height:32px;border:2px solid ${isActive?'#FF0F0F':'#333'};background:${ok?(isActive?'#FF0F0F':'#fff'):'transparent'};display:flex;align-items:center;justify-content:center;font-weight:900;color:${isActive?'#fff':'#000'}">${ok?'✓':''}</div>`;
 el.onclick=()=>{saved[i]=!saved[i];localStorage.setItem('tasks_'+mode,JSON.stringify(saved));render();};
 list.appendChild(el);
 });
-let extraList=document.getElementById('extra-list');extraList.innerHTML='';
-let extraSaved=JSON.parse(localStorage.getItem('extra_tasks')||'[]');
-EXTRA_DATA.forEach((d,i)=>{
-let ok=extraSaved[i];
+let eList=document.getElementById('extra-list');eList.innerHTML='';
+let eSaved=JSON.parse(localStorage.getItem('extra_tasks')||'[]');
+EXTRA.forEach((d,i)=>{
+let ok=eSaved[i];
 let el=document.createElement('div');
-el.style.cssText=`border:2px dashed #000;background:#fff;padding:10px 12px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;opacity:${ok?0.35:1}`;
-el.innerHTML=`<div><div style="font-weight:700;font-size:11px">${d.title} <span style="background:#000;color:#fff;padding:1px 5px;font-size:9px">+20</span></div><div style="font-size:9px;opacity:0.6">${d.q}</div></div><div style="width:26px;height:26px;border:2px solid #000;background:${ok?'#000':'#fff'};color:#fff;display:flex;align-items:center;justify-content:center">${ok?'✓':''}</div>`;
-el.onclick=()=>{extraSaved[i]=!extraSaved[i];localStorage.setItem('extra_tasks',JSON.stringify(extraSaved));render();};
-extraList.appendChild(el);
+el.style.cssText=`border:1px dashed #333;background:#0A0A0A;padding:10px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;opacity:${ok?0.3:1};cursor:pointer`;
+el.innerHTML=`<div><div style="font-weight:700;font-size:11px;color:#fff">${d.title}</div><div style="font-size:9px;color:#666">${d.q}</div></div><div style="width:24px;height:24px;border:1px solid #444;background:${ok?'#FF0F0F':''};display:flex;align-items:center;justify-content:center;color:#fff">${ok?'✓':''}</div>`;
+el.onclick=()=>{eSaved[i]=!eSaved[i];localStorage.setItem('extra_tasks',JSON.stringify(eSaved));render();};
+eList.appendChild(el);
 });
-let main=saved.filter(Boolean).length, extra=extraSaved.filter(Boolean).length;
+let main=saved.filter(Boolean).length, extra=eSaved.filter(Boolean).length;
 let total=(parseInt(localStorage.getItem('totalXP')||'0'))+main*12+extra*20;
 document.getElementById('count').innerText=`${main}/${DATA.length}`;
 document.getElementById('xp').innerText=total;
 document.getElementById('progress').style.width=(main/DATA.length*100)+'%';
 let lvl=Math.floor(total/100)+1;document.getElementById('level').innerText=lvl;
-document.getElementById('nextXp').innerText=(lvl*100-total)+' XP';
+document.getElementById('nextXp').innerText=(lvl*100-total)+' XP TO NEXT';
 document.getElementById('xpProgress').style.width=(total%100)+'%';
 let rank='E-RANK';if(lvl>=5)rank='D-RANK';if(lvl>=15)rank='C-RANK';if(lvl>=30)rank='B-RANK';if(lvl>=50)rank='A-RANK';if(lvl>=75)rank='S-RANK';
 document.getElementById('rank').innerText=rank;document.getElementById('rankTop').innerText=rank;
 }
+setInterval(()=>{let n=new Date();document.getElementById('liveTime').innerText=n.toLocaleTimeString();document.getElementById('fullTime').childNodes[0].textContent=n.toLocaleTimeString()+' '; render();},1000);
 document.getElementById('modeBtn').onclick=()=>{mode=mode==='SCHOOL'?'HOLIDAY':'SCHOOL';localStorage.setItem('v7_mode',mode);render();};
 document.getElementById('chuttiBtn').onclick=()=>{mode='HOLIDAY';localStorage.setItem('v7_mode',mode);render();};
 document.getElementById('lockBtn').onclick=()=>{
@@ -146,13 +156,13 @@ let m=JSON.parse(localStorage.getItem('tasks_'+mode)||'[]').filter(Boolean).leng
 let e=JSON.parse(localStorage.getItem('extra_tasks')||'[]').filter(Boolean).length;
 let today=m*12+e*20;let total=parseInt(localStorage.getItem('totalXP')||'0')+today;
 localStorage.setItem('totalXP',total);localStorage.removeItem('tasks_'+mode);localStorage.removeItem('extra_tasks');
-alert('PROTOCOL LOCKED +'+today+' XP | TOTAL '+total);render();
+alert('DAY LOCKED: +'+today+' XP | TOTAL: '+total);render();
 };
 document.getElementById('cheatBtn').onclick=()=>{let t=parseInt(localStorage.getItem('totalXP')||'0');localStorage.setItem('totalXP',Math.max(0,t-200));render();};
 document.getElementById('restartBtn').onclick=()=>{localStorage.removeItem('tasks_'+mode);localStorage.removeItem('extra_tasks');render();};
-document.getElementById('resetAllBtn').onclick=()=>{if(confirm('WIPE ALL DATA?')){localStorage.clear();location.reload();}};
-setInterval(()=>{document.getElementById('liveTime').innerText=new Date().toLocaleTimeString();},1000);
+document.getElementById('resetAllBtn').onclick=()=>{if(confirm('Pura zero karna hai?')){localStorage.clear();location.reload();}};
 document.getElementById('log1').value=localStorage.getItem('log1')||'';document.getElementById('log1').oninput=e=>localStorage.setItem('log1',e.target.value);
+document.getElementById('log2').value=localStorage.getItem('log2')||'';document.getElementById('log2').oninput=e=>localStorage.setItem('log2',e.target.value);
 render();
 </script>
 </body>
