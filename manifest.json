@@ -1,0 +1,21 @@
+{
+  "name": "White Room V7 - ARISE",
+  "short_name": "White Room",
+  "description": "ARISE White Room System V7 - 10 Task Focus",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
