@@ -152,15 +152,26 @@ el.onclick=()=>{eSaved[i]=!eSaved[i];localStorage.setItem('extra_tasks',JSON.str
 eList.appendChild(el);
 });
 let main=saved.filter(Boolean).length, extra=eSaved.filter(Boolean).length;
-let total=(parseInt(localStorage.getItem('totalXP')||'0'))+main*12+extra*20;
-document.getElementById('count').innerText=`${main}/${DATA.length}`;
+let total=(parseInt(localStorage.getItem('totalXP'))||'0')+main*12+extra*20;
+
+function getNeed(lvl){
+  return 100 + (lvl-1)*150; // LVL1=100, LVL2=250, LVL3=400...
+}
+let lvl=1, rem=total;
+while(rem >= getNeed(lvl)){
+  rem -= getNeed(lvl);
+  lvl++;
+}
+let need = getNeed(lvl);
+
+document.getElementById('count').innerText=`${(main)}/${DATA.length}`;
 document.getElementById('xp').innerText=total;
-document.getElementById('progress').style.width=(main/DATA.length*100)+'%';
-let lvl=Math.floor(total/100)+1;document.getElementById('level').innerText=lvl;
-document.getElementById('nextXp').innerText=(lvl*100-total)+' XP TO NEXT';
-document.getElementById('xpProgress').style.width=(total%100)+'%';
-let rank='E-RANK';if(lvl>=5)rank='D-RANK';if(lvl>=15)rank='C-RANK';if(lvl>=30)rank='B-RANK';if(lvl>=50)rank='A-RANK';if(lvl>=75)rank='S-RANK';
-document.getElementById('rank').innerText=rank;document.getElementById('rankTop').innerText=rank;
+document.getElementById('progress').style.width=(rem/need*100)+'%';
+document.getElementById('level').innerText=lvl;
+document.getElementById('nextXp').innerText=(need-rem)+' XP TO NEXT';
+document.getElementById('totalProgress').style.width=(rem/need*100)+'%';
+let rank='E-RANK';if(lvl>5)rank='D-RANK';if(lvl>15)rank='C-RANK';if(lvl>30)rank='B-RANK';if(lvl>50)rank='A-RANK';if(lvl>75)rank='S-RANK';
+document.getElementById('rank').innerText=rank;document.getElementById('rank2').innerText=rank;
 }
 setInterval(()=>{let n=new Date();document.getElementById('liveTime').innerText=n.toLocaleTimeString();document.getElementById('fullTime').childNodes[0].textContent=n.toLocaleTimeString()+' '; render();},1000);
 document.getElementById('modeBtn').onclick=()=>{mode=mode==='SCHOOL'?'HOLIDAY':'SCHOOL';localStorage.setItem('v7_mode',mode);render();};
