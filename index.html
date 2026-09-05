@@ -151,28 +151,25 @@ el.innerHTML=`<div><div style="font-weight:700;font-size:11px;color:#fff">${d.ti
 el.onclick=()=>{eSaved[i]=!eSaved[i];localStorage.setItem('extra_tasks',JSON.stringify(eSaved));render();};
 eList.appendChild(el);
 });
-let main=saved.filter(Boolean).length, extra=eSaved.filter(Boolean).length;
-let total=(parseInt(localStorage.getItem('totalXP'))||'0')+main*12+extra*20;
+let main=saved.filter(Boolean).length;
+let extra=eSaved.filter(Boolean).length;
+let baseXP=parseInt(localStorage.getItem('totalXP')||'0');
+let todayXP = main*12 + extra*5; // 1 task = 12 XP fix
+let total = baseXP + todayXP;
 
-function getNeed(lvl){
-  return 100 + (lvl-1)*150; // LVL1=100, LVL2=250, LVL3=400...
-}
+function getNeed(lvl){ return 100 + (lvl-1)*150; }
 let lvl=1, rem=total;
-while(rem >= getNeed(lvl)){
-  rem -= getNeed(lvl);
-  lvl++;
-}
+while(rem >= getNeed(lvl)){ rem -= getNeed(lvl); lvl++; }
 let need = getNeed(lvl);
 
-document.getElementById('count').innerText=`${(main)}/${DATA.length}`;
-document.getElementById('xp').innerText=total;
+document.getElementById('count').innerText=`${main}/${DATA.length}`;
+document.getElementById('xp').innerText=String(total).padStart(3,'0');
 document.getElementById('progress').style.width=(rem/need*100)+'%';
 document.getElementById('level').innerText=lvl;
 document.getElementById('nextXp').innerText=(need-rem)+' XP TO NEXT';
 document.getElementById('totalProgress').style.width=(rem/need*100)+'%';
 let rank='E-RANK';if(lvl>5)rank='D-RANK';if(lvl>15)rank='C-RANK';if(lvl>30)rank='B-RANK';if(lvl>50)rank='A-RANK';if(lvl>75)rank='S-RANK';
 document.getElementById('rank').innerText=rank;document.getElementById('rank2').innerText=rank;
-}
 setInterval(()=>{let n=new Date();document.getElementById('liveTime').innerText=n.toLocaleTimeString();document.getElementById('fullTime').childNodes[0].textContent=n.toLocaleTimeString()+' '; render();},1000);
 document.getElementById('modeBtn').onclick=()=>{mode=mode==='SCHOOL'?'HOLIDAY':'SCHOOL';localStorage.setItem('v7_mode',mode);render();};
 document.getElementById('chuttiBtn').onclick=()=>{mode='HOLIDAY';localStorage.setItem('v7_mode',mode);render();};
