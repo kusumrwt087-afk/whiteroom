@@ -29,6 +29,18 @@ body{background:var(--bg);color:#EAEAEA}
 .btn.red{background:var(--red);color:#000;border-color:var(--red)}
 .label{margin:26px 0 10px 0;font-size:11px;letter-spacing:3px;color:var(--red);font-weight:800;display:flex;gap:8px;align-items:center}
 .label::before{content:'';width:8px;height:8px;background:var(--red);box-shadow:0 0 10px var(--red)}
+body::before{
+content:'';
+position:fixed;
+top:0;left:0;right:0;bottom:0;
+background: url('ayanokoji_silhouette_watermark.webp') no-repeat center bottom;
+background-size: 85%;
+opacity:0.12;
+pointer-events:none;
+z-index:-1;
+filter: drop-shadow(0 0 20px rgba(255,15,15,0.3));
+}
+.wrap{position:relative; z-index:1;}
 </style>
 </head>
 <body>
