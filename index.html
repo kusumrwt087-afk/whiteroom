@@ -5,7 +5,7 @@
 <link rel="icon" href="icon-192.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WHITE ROOM V12 // BLOOD PROTOCOL</title>
+<title>WHITE ROOM V13 // BLOOD PROTOCOL</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#060606;--card:#0F0F0F;--line:#222;--red:#FF0F0F;--blood:#3A0000}
@@ -35,12 +35,11 @@ body::before{
 content:'';
 position:fixed;
 top:0;left:0;right:0;bottom:0;
-background: url('ayanokoji_silhouette_watermark.webp') no-repeat center bottom;
-background-size: 85%;
-opacity:0.12;
+background: linear-gradient(180deg, rgba(6,6,6,0.85) 0%, rgba(6,6,6,0.95) 100%), url('ayanokoji_dark_portrait.webp') no-repeat center top;
+background-size: cover;
+opacity:0.65;
 pointer-events:none;
 z-index:-1;
-filter: drop-shadow(0 0 20px rgba(255,15,15,0.3));
 }
 .wrap{position:relative; z-index:1;}
 </style>
@@ -53,8 +52,8 @@ filter: drop-shadow(0 0 20px rgba(255,15,15,0.3));
 <div class="clock"><span id="fullTime">00:00:00</span><b id="currentBlockText">SYSTEM STANDBY</b></div>
 <div class="meta">
 <div class="mbox red"><div class="m-l">RANK / LEVEL</div><div class="m-v" id="rank">E-RANK</div><div style="font-size:9px">LVL <span id="level">1</span></div></div>
-<div class="mbox"><div class="m-l">PROGRESS</div><div class="m-v" id="count">0/10</div><div style="font-size:8px" id="nextXp">XP TO NEXT</div></div>
-<div class="mbox"><div class="m-l">TOTAL XP</div><div class="m-v" id="xp">0</div></div>
+<div class="mbox"><div class="m-l">PROGRESS</div><div class="m-v" id="count">0/10</div><div style="font-size:8px" id="nextXp">100 XP TO NEXT</div></div>
+<div class="mbox"><div class="m-l">TOTAL XP</div><div class="m-v" id="xp">000</div></div>
 </div>
 <div class="bar"><div class="fill" id="progress"></div></div>
 <div class="bar" style="height:6px"><div class="fill" id="xpProgress" style="background:#fff;box-shadow:none"></div></div>
@@ -64,7 +63,6 @@ filter: drop-shadow(0 0 20px rgba(255,15,15,0.3));
 <div id="task-list"></div>
 <div class="label" style="color:#fff">EXTRA PROTOCOLS <span style="background:var(--red);color:#000;padding:1px 6px;margin-left:6px">+20 XP EACH</span></div>
 <div id="extra-list"></div>
-
 <div style="margin-top:28px;border:1px solid #222;background:#0A0A0A;padding:12px">
 <div style="font-size:10px;letter-spacing:2px;color:var(--red);font-weight:800">PRIVATE LOG // BLOOD-LOCKED [AUTO SAVE]</div>
 <textarea id="log1" placeholder="Aaj kya conquer kiya?" style="width:100%;background:#000;border:1px solid #222;color:#fff;padding:10px;margin-top:10px;outline:none;min-height:60px"></textarea>
@@ -122,6 +120,8 @@ let now=new Date();let cur=now.getHours()*60+now.getMinutes();
 for(let i=0;i<DATA.length;i++){let s=toMin(DATA[i].st), e=toMin(DATA[i].en);
 if(e < s){if(cur>=s || cur<=e) return i;} else {if(cur>=s && cur<=e) return i;}} return -1;
 }
+function getNeed(lvl){ return 100 + (lvl-1)*150; } // LVL1=100, LVL2=250, LVL3=400
+
 function render(){
 let DATA=mode==='SCHOOL'?SCHOOL:HOLIDAY;
 let active=getActive(DATA);
@@ -154,23 +154,29 @@ eList.appendChild(el);
 let main=saved.filter(Boolean).length;
 let extra=eSaved.filter(Boolean).length;
 let baseXP=parseInt(localStorage.getItem('totalXP')||'0');
-let todayXP = main*12 + extra*5; // 1 task = 12 XP fix
+let todayXP = main*12 + extra*20; // FIXED: 12 XP per task
 let total = baseXP + todayXP;
-
-function getNeed(lvl){ return 100 + (lvl-1)*150; }
 let lvl=1, rem=total;
 while(rem >= getNeed(lvl)){ rem -= getNeed(lvl); lvl++; }
 let need = getNeed(lvl);
-
 document.getElementById('count').innerText=`${main}/${DATA.length}`;
 document.getElementById('xp').innerText=String(total).padStart(3,'0');
 document.getElementById('progress').style.width=(rem/need*100)+'%';
+document.getElementById('xpProgress').style.width=(rem/need*100)+'%';
 document.getElementById('level').innerText=lvl;
 document.getElementById('nextXp').innerText=(need-rem)+' XP TO NEXT';
-document.getElementById('totalProgress').style.width=(rem/need*100)+'%';
 let rank='E-RANK';if(lvl>5)rank='D-RANK';if(lvl>15)rank='C-RANK';if(lvl>30)rank='B-RANK';if(lvl>50)rank='A-RANK';if(lvl>75)rank='S-RANK';
-document.getElementById('rank').innerText=rank;document.getElementById('rank2').innerText=rank;
-setInterval(()=>{let n=new Date();document.getElementById('liveTime').innerText=n.toLocaleTimeString();document.getElementById('fullTime').childNodes[0].textContent=n.toLocaleTimeString()+' '; render();},1000);
+document.getElementById('rank').innerText=rank;
+document.getElementById('rankTop').innerText=rank;
+}
+
+// CLOCK + RENDER LOOP - BAHAR NIKAL DIYA
+setInterval(()=>{
+let n=new Date();
+document.getElementById('liveTime').innerText=n.toLocaleTimeString();
+document.getElementById('fullTime').innerText=n.toLocaleTimeString();
+},1000);
+
 document.getElementById('modeBtn').onclick=()=>{mode=mode==='SCHOOL'?'HOLIDAY':'SCHOOL';localStorage.setItem('v7_mode',mode);render();};
 document.getElementById('chuttiBtn').onclick=()=>{mode='HOLIDAY';localStorage.setItem('v7_mode',mode);render();};
 document.getElementById('lockBtn').onclick=()=>{
