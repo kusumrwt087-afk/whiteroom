@@ -31,16 +31,7 @@ body{background:var(--bg);color:#EAEAEA}
 .btn.red{background:var(--red);color:#000;border-color:var(--red)}
 .label{margin:26px 0 10px 0;font-size:11px;letter-spacing:3px;color:var(--red);font-weight:800;display:flex;gap:8px;align-items:center}
 .label::before{content:'';width:8px;height:8px;background:var(--red);box-shadow:0 0 10px var(--red)}
-body::before{
-content:'';
-position:fixed;
-top:0;left:0;right:0;bottom:0;
-background: linear-gradient(180deg, rgba(6,6,6,0.85) 0%, rgba(6,6,6,0.95) 100%), url('ayanokoji_dark_portrait.webp') no-repeat center top;
-background-size: cover;
-opacity:0.65;
-pointer-events:none;
-z-index:-1;
-}
+body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background: linear-gradient(180deg, rgba(6,6,6,0.85) 0%, rgba(6,6,6,0.95) 100%), url('ayanokoji_dark_portrait.webp') no-repeat center top;background-size: cover;opacity:0.65;pointer-events:none;z-index:-1;}
 .wrap{position:relative; z-index:1;}
 </style>
 </head>
@@ -77,7 +68,7 @@ z-index:-1;
 </div>
 <script>
 const SCHOOL=[
-{st:"05:20",en:"05:20",t:"05:20 AM",title:"UTHNA",q:"Winners don't wait."},
+{st:"05:20",en:"05:21",t:"05:20 AM",title:"UTHNA",q:"Winners don't wait."},
 {st:"05:20",en:"06:30",t:"05:20-06:30",title:"MORNING REVISION",q:"While they dream, you sharpen."},
 {st:"06:30",en:"13:10",t:"06:30-01:10",title:"SCHOOL",q:"Don't attend. Dominate."},
 {st:"13:10",en:"14:00",t:"01:10-02:00",title:"POWER NAP + LUNCH",q:"Rest is strategy, not escape."},
@@ -89,17 +80,17 @@ const SCHOOL=[
 {st:"22:00",en:"05:19",t:"10:00 PM",title:"SLEEP",q:"Preparation for next war."}
 ];
 const HOLIDAY=[
-{st:"05:20",en:"07:00",t:"05:20 AM",title:"WAKE UP",q:"Discipline starts when others sleep."},
-{st:"07:00",en:"08:30",t:"05:20-07:00",title:"REVISION",q:"First revision is real power."},
-{st:"08:30",en:"09:00",t:"07:00-08:30",title:"STUDY",q:"Attack your weakness."},
-{st:"09:00",en:"11:00",t:"08:30-09:00",title:"BREAKFAST",q:"Fuel like a warrior."},
-{st:"11:00",en:"13:00",t:"09:00-11:00",title:"STUDY",q:"Silence + Focus = Fear."},
-{st:"13:00",en:"14:00",t:"11:00-01:00",title:"CODING AND CHESS",q:"Control the board, control the world."},
-{st:"14:00",en:"16:15",t:"01:00-02:00",title:"REST AND LUNCH",q:"Rest is strategy, not escape."},
-{st:"16:15",en:"18:30",t:"02:00-04:15",title:"STUDY",q:"Revision is domination."},
-{st:"18:30",en:"19:30",t:"04:15-06:30",title:"WORKOUT",q:"Strong mind in strong body."},
-{st:"19:30",en:"21:30",t:"06:30-07:30",title:"REST AND FRESH",q:"Reset. Rebuild."},
-{st:"21:30",en:"05:19",t:"07:30-09:30",title:"HOMEWORK AND DINNER",q:"End day with zero debt."}
+{st:"05:20",en:"05:21",t:"05:20 AM",title:"WAKE UP",q:"Discipline starts when others sleep."},
+{st:"05:20",en:"07:00",t:"05:20-07:00",title:"REVISION",q:"First revision is real power."},
+{st:"07:00",en:"08:30",t:"07:00-08:30",title:"STUDY",q:"Attack your weakness."},
+{st:"08:30",en:"09:00",t:"08:30-09:00",title:"BREAKFAST",q:"Fuel like a warrior."},
+{st:"09:00",en:"11:00",t:"09:00-11:00",title:"STUDY",q:"Silence + Focus = Fear."},
+{st:"11:00",en:"13:00",t:"11:00-01:00",title:"CODING AND CHESS",q:"Control the board, control the world."},
+{st:"13:00",en:"14:00",t:"01:00-02:00",title:"REST AND LUNCH",q:"Rest is strategy, not escape."},
+{st:"14:00",en:"16:15",t:"02:00-04:15",title:"STUDY",q:"Revision is domination."},
+{st:"16:15",en:"18:30",t:"04:15-06:30",title:"WORKOUT",q:"Strong mind in strong body."},
+{st:"18:30",en:"19:30",t:"06:30-07:30",title:"REST AND FRESH",q:"Reset. Rebuild."},
+{st:"19:30",en:"21:30",t:"07:30-09:30",title:"HOMEWORK AND DINNER",q:"End day with zero debt."}
 ];
 const EXTRA=[
 {title:"NO PHONE / SOCIAL MEDIA",q:"Dopamine detox +20"},
@@ -115,23 +106,46 @@ const EXTRA=[
 let mode=localStorage.getItem('v7_mode')||'SCHOOL';
 if(!localStorage.getItem('v7_mode') && new Date().getDay()===0) mode='HOLIDAY';
 function toMin(t){let [h,m]=t.split(':').map(Number);return h*60+m;}
-function getActive(DATA){
-let now=new Date();let cur=now.getHours()*60+now.getMinutes();
-for(let i=0;i<DATA.length;i++){let s=toMin(DATA[i].st), e=toMin(DATA[i].en);
-if(e < s){if(cur>=s || cur<=e) return i;} else {if(cur>=s && cur<=e) return i;}} return -1;
+function isTimeInside(cur,s,e){
+  if(e === s) return cur === s;
+  if(e < s){ return cur >= s || cur < e; }
+  return cur >= s && cur < e;
 }
-function getNeed(lvl){ return 100 + (lvl-1)*150; } // LVL1=100, LVL2=250, LVL3=400
-
+function getActive(DATA, saved){
+  let now=new Date();let cur=now.getHours()*60+now.getMinutes();
+  for(let i=0;i<DATA.length;i++){
+    let s=toMin(DATA[i].st), e=toMin(DATA[i].en);
+    if(isTimeInside(cur,s,e) &&!saved[i]) return i;
+  }
+  for(let i=0;i<DATA.length;i++){
+    let s=toMin(DATA[i].st), e=toMin(DATA[i].en);
+    if(isTimeInside(cur,s,e)) return i;
+  }
+  return -1;
+}
+function getNeed(lvl){ return 100 + (lvl-1)*150; }
 function render(){
 let DATA=mode==='SCHOOL'?SCHOOL:HOLIDAY;
-let active=getActive(DATA);
+let saved=JSON.parse(localStorage.getItem('tasks_'+mode)||'[]');
+let active=getActive(DATA, saved);
 document.getElementById('modeTitle').innerText=mode;
 document.getElementById('dateNow').innerText=new Date().toDateString();
 let blockTxt=document.getElementById('currentBlockText');
-if(active>=0){blockTxt.innerText='● LIVE NOW: '+DATA[active].title+' ['+DATA[active].t+']'; blockTxt.style.color='#FF0F0F';}
-else {blockTxt.innerText='○ STANDBY - NO ACTIVE PROTOCOL'; blockTxt.style.color='#666';}
+if(active>=0){
+  let activeSaved = saved[active];
+  if(activeSaved){
+    blockTxt.innerText='○ ALL CLEAR - PROTOCOLS DONE';
+    blockTxt.style.color='#00FF88';
+    active = -1;
+  } else {
+    blockTxt.innerText='● LIVE NOW: '+DATA[active].title+' ['+DATA[active].t+']';
+    blockTxt.style.color='#FF0F0F';
+  }
+} else {
+  blockTxt.innerText='○ STANDBY - NO ACTIVE PROTOCOL';
+  blockTxt.style.color='#666';
+}
 let list=document.getElementById('task-list');list.innerHTML='';
-let saved=JSON.parse(localStorage.getItem('tasks_'+mode)||'[]');
 DATA.forEach((d,i)=>{
 let ok=saved[i];let isActive=i===active;
 let el=document.createElement('div');
@@ -154,7 +168,7 @@ eList.appendChild(el);
 let main=saved.filter(Boolean).length;
 let extra=eSaved.filter(Boolean).length;
 let baseXP=parseInt(localStorage.getItem('totalXP')||'0');
-let todayXP = main*12 + extra*20; // FIXED: 12 XP per task
+let todayXP = main*12 + extra*20;
 let total = baseXP + todayXP;
 let lvl=1, rem=total;
 while(rem >= getNeed(lvl)){ rem -= getNeed(lvl); lvl++; }
@@ -169,14 +183,23 @@ let rank='E-RANK';if(lvl>5)rank='D-RANK';if(lvl>15)rank='C-RANK';if(lvl>30)rank=
 document.getElementById('rank').innerText=rank;
 document.getElementById('rankTop').innerText=rank;
 }
-
-// CLOCK + RENDER LOOP - BAHAR NIKAL DIYA
 setInterval(()=>{
 let n=new Date();
 document.getElementById('liveTime').innerText=n.toLocaleTimeString();
 document.getElementById('fullTime').innerText=n.toLocaleTimeString();
+let DATA=mode==='SCHOOL'?SCHOOL:HOLIDAY;
+let saved=JSON.parse(localStorage.getItem('tasks_'+mode)||'[]');
+let newActive=getActive(DATA,saved);
+let blockTxt=document.getElementById('currentBlockText');
+if(newActive>=0 &&!saved[newActive]){
+  blockTxt.innerText='● LIVE NOW: '+DATA[newActive].title+' ['+DATA[newActive].t+']';
+  blockTxt.style.color='#FF0F0F';
+  let currentLiveEl = document.querySelector('.live');
+  if(!currentLiveEl) render();
+} else if(newActive>=0 && saved[newActive]){
+  render();
+}
 },1000);
-
 document.getElementById('modeBtn').onclick=()=>{mode=mode==='SCHOOL'?'HOLIDAY':'SCHOOL';localStorage.setItem('v7_mode',mode);render();};
 document.getElementById('chuttiBtn').onclick=()=>{mode='HOLIDAY';localStorage.setItem('v7_mode',mode);render();};
 document.getElementById('lockBtn').onclick=()=>{
