@@ -1,220 +1,650 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="manifest" href="manifest.json">
-<link rel="icon" href="icon-192.png">
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WHITE ROOM V13 // BLOOD PROTOCOL</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Second Brain Vault</title>
+<script src="https://cdn.tailwindcss.com"></script>
 <style>
-:root{--bg:#060606;--card:#0F0F0F;--line:#222;--red:#FF0F0F;--blood:#3A0000}
-*{margin:0;padding:0;box-sizing:border-box;font-family:'JetBrains Mono',monospace}
-body{background:var(--bg);color:#EAEAEA}
-.top{position:sticky;top:0;z-index:99;background:#000;border-bottom:2px solid var(--red);padding:12px 14px;display:flex;justify-content:space-between;font-size:10px;letter-spacing:2px}
-.wrap{max-width:520px;margin:0 auto;padding:14px}
-.hero{border:1px solid #1A1A1A;background:#0A0A0A;padding:16px;position:relative}
-.hero::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--red);box-shadow:0 0 15px var(--red)}
-.title{font-family:'Space Grotesk';font-size:46px;line-height:0.85;font-weight:700}
-.title span{color:var(--red);text-shadow:0 0 20px var(--red)}
-.clock{font-size:32px;font-weight:800;margin-top:12px}
-.clock b{color:var(--red);font-size:11px;letter-spacing:3px;display:block;margin-top:4px}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,15,15,0.7)}70%{box-shadow:0 0 0 15px rgba(255,15,15,0)}100%{box-shadow:0 0 0 0 rgba(255,15,15,0)}}
-.live{animation:pulse 2s infinite;border-color:var(--red)!important;background:#2A0000!important}
-.meta{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px}
-.mbox{border:1px solid var(--line);background:#0E0E0E;padding:10px}
-.mbox.red{border-color:var(--red);background:#1A0000}
-.m-l{font-size:8px;color:#666}.m-v{font-size:16px;font-weight:800;color:#fff}
-.bar{height:12px;background:#111;border:1px solid #222;margin-top:10px}.fill{height:100%;background:var(--red);width:0%;box-shadow:0 0 15px var(--red);transition:0.6s}
-.btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
-.btn{border:1px solid #333;background:#111;color:#fff;padding:12px;font-weight:800;font-size:11px;text-align:center;cursor:pointer}
-.btn.red{background:var(--red);color:#000;border-color:var(--red)}
-.label{margin:26px 0 10px 0;font-size:11px;letter-spacing:3px;color:var(--red);font-weight:800;display:flex;gap:8px;align-items:center}
-.label::before{content:'';width:8px;height:8px;background:var(--red);box-shadow:0 0 10px var(--red)}
-body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background: linear-gradient(180deg, rgba(6,6,6,0.85) 0%, rgba(6,6,6,0.95) 100%), url('ayanokoji_dark_portrait.webp') no-repeat center top;background-size: cover;opacity:0.65;pointer-events:none;z-index:-1;}
-.wrap{position:relative; z-index:1;}
+*{box-sizing:border-box}
+body{margin:0;background:#0a0a0a;color:#eee;font-family:Inter,system-ui,sans-serif}
+body:before{content:"";position:fixed;inset:0;z-index:-1;opacity:.35;background-image:linear-gradient(#fff1 1px,transparent 1px),linear-gradient(90deg,#fff1 1px,transparent 1px);background-size:40px 40px}
+::-webkit-scrollbar{width:7px}
+::-webkit-scrollbar-track{background:#0a0a0a}
+::-webkit-scrollbar-thumb{background:#333;border-radius:20px}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.card{transition:.2s}
+.card:hover{transform:translateY(-2px);border-color:#444;box-shadow:0 12px 30px #0008}
+.dragging{opacity:.35;transform:scale(.98)}
+.column.dragover{border-color:#666;background:#ffffff04}
+.high{border-left:3px solid #f87171}
+.medium{border-left:3px solid #fbbf24}
+.low{border-left:3px solid #60a5fa}
+.modal{opacity:0;pointer-events:none;transition:.2s}
+.modal.show{opacity:1;pointer-events:auto}
+.modal-box{transform:translateY(15px) scale(.98);transition:.2s}
+.modal.show .modal-box{transform:none}
+.toast{opacity:0;transform:translate(-50%,20px);transition:.25s}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@keyframes enter{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
+.enter{animation:enter .25s ease}
 </style>
 </head>
 <body>
-<div class="top"><span style="color:var(--red);font-weight:800">CLASSIFIED // WR-01</span><span id="liveTime">00:00:00</span><span id="rankTop">E-RANK</span></div>
-<div class="wrap">
-<div class="hero">
-<div class="title">WHITE<br>ROOM <span id="modeTitle">SCHOOL</span></div>
-<div class="clock"><span id="fullTime">00:00:00</span><b id="currentBlockText">SYSTEM STANDBY</b></div>
-<div class="meta">
-<div class="mbox red"><div class="m-l">RANK / LEVEL</div><div class="m-v" id="rank">E-RANK</div><div style="font-size:9px">LVL <span id="level">1</span></div></div>
-<div class="mbox"><div class="m-l">PROGRESS</div><div class="m-v" id="count">0/10</div><div style="font-size:8px" id="nextXp">100 XP TO NEXT</div></div>
-<div class="mbox"><div class="m-l">TOTAL XP</div><div class="m-v" id="xp">000</div></div>
+
+<div class="min-h-screen">
+<header class="sticky top-0 z-40 bg-[#0a0a0acc] backdrop-blur-xl border-b border-white/5">
+<div class="max-w-[1500px] mx-auto px-4 sm:px-6">
+<div class="h-16 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-xl bg-white text-black flex items-center justify-center font-black text-xs">SB</div>
+<div>
+<h1 class="font-semibold tracking-tight">Second Brain Vault</h1>
+<p class="text-[9px] uppercase tracking-[.25em] text-neutral-600">External Memory</p>
 </div>
-<div class="bar"><div class="fill" id="progress"></div></div>
-<div class="bar" style="height:6px"><div class="fill" id="xpProgress" style="background:#fff;box-shadow:none"></div></div>
-<div class="btns"><div class="btn red" id="modeBtn">SWITCH MODE</div><div class="btn" id="chuttiBtn">HOLIDAY</div></div>
 </div>
-<div class="label">DAY PROTOCOL - <span id="dateNow" style="color:#fff"></span></div>
-<div id="task-list"></div>
-<div class="label" style="color:#fff">EXTRA PROTOCOLS <span style="background:var(--red);color:#000;padding:1px 6px;margin-left:6px">+20 XP EACH</span></div>
-<div id="extra-list"></div>
-<div style="margin-top:28px;border:1px solid #222;background:#0A0A0A;padding:12px">
-<div style="font-size:10px;letter-spacing:2px;color:var(--red);font-weight:800">PRIVATE LOG // BLOOD-LOCKED [AUTO SAVE]</div>
-<textarea id="log1" placeholder="Aaj kya conquer kiya?" style="width:100%;background:#000;border:1px solid #222;color:#fff;padding:10px;margin-top:10px;outline:none;min-height:60px"></textarea>
-<textarea id="log2" placeholder="Kal kya improve karna hai?" style="width:100%;background:#000;border:1px solid #222;color:#fff;padding:10px;margin-top:8px;outline:none;min-height:60px"></textarea>
-<div style="display:grid;grid-template-columns:1.3fr 0.7fr;gap:8px;margin-top:10px">
-<div class="btn red" id="lockBtn">LOCK DAY → NEXT DAY</div><div class="btn" id="cheatBtn" style="color:var(--red)">-200 XP CHEAT</div>
-</div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
-<div class="btn" id="restartBtn" style="font-size:10px">RESTART TODAY</div><div class="btn" id="resetAllBtn" style="font-size:10px;background:#1A0000;color:var(--red);border-color:var(--red)">RESET ALL - PURA ZERO</div>
+<div class="flex gap-2">
+<button id="exportBtn" class="hidden sm:block px-3 py-2 rounded-lg border border-white/10 text-xs text-neutral-400 hover:text-white hover:bg-white/5">↓ Export</button>
+<button id="clearBtn" class="hidden sm:block px-3 py-2 rounded-lg border border-white/10 text-xs text-neutral-400 hover:text-red-400">Clear</button>
+<div class="w-9 h-9 rounded-xl border border-white/10 flex items-center justify-center text-xs text-neutral-500">●</div>
 </div>
 </div>
 </div>
+</header>
+
+<main class="max-w-[1500px] mx-auto px-4 sm:px-6 py-6">
+
+<section class="mb-5">
+<div class="bg-[#111] border border-white/10 rounded-2xl p-3 sm:p-4">
+<div class="flex gap-3 items-center">
+<div class="hidden sm:flex w-10 h-10 rounded-xl bg-white/5 items-center justify-center text-neutral-400 text-xl">+</div>
+<input id="quickAdd" class="flex-1 bg-transparent outline-none text-base sm:text-lg placeholder:text-neutral-600" placeholder="What do you need to build/make right now?" autocomplete="off">
+<button id="addBtn" class="px-5 py-3 rounded-xl bg-white text-black text-sm font-semibold hover:bg-neutral-200 active:scale-95 transition">Add</button>
+</div>
+<div class="flex justify-between mt-2 px-1 text-[10px] text-neutral-600">
+<span>Press Enter to capture instantly</span>
+<span class="hidden sm:block">Stored locally on this device</span>
+</div>
+</div>
+</section>
+
+<section id="focus" class="mb-5"></section>
+
+<section class="grid grid-cols-3 gap-3 mb-5">
+<div class="bg-[#111] border border-white/10 rounded-2xl p-4">
+<p class="text-[10px] uppercase tracking-widest text-neutral-600">Total Ideas</p>
+<p id="total" class="text-2xl sm:text-3xl font-semibold mt-1">0</p>
+</div>
+<div class="bg-[#111] border border-white/10 rounded-2xl p-4">
+<p class="text-[10px] uppercase tracking-widest text-neutral-600">To-Build</p>
+<p id="todo" class="text-2xl sm:text-3xl font-semibold mt-1">0</p>
+</div>
+<div class="bg-[#111] border border-white/10 rounded-2xl p-4">
+<p class="text-[10px] uppercase tracking-widest text-neutral-600">Built</p>
+<p id="built" class="text-2xl sm:text-3xl font-semibold mt-1">0</p>
+</div>
+</section>
+
+<section class="mb-5">
+<div class="relative bg-[#111] border border-white/10 rounded-xl">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-600">⌕</span>
+<input id="search" class="w-full bg-transparent outline-none py-3.5 pl-11 pr-4 text-sm placeholder:text-neutral-600" placeholder="Search your entire second brain..." autocomplete="off">
+</div>
+</section>
+
+<section id="board" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4"></section>
+
+</main>
+
+<footer class="text-center py-8">
+<p class="text-[10px] text-neutral-700 tracking-widest">SECOND BRAIN VAULT · THINK LESS. BUILD MORE.</p>
+</footer>
+</div>
+
+<div id="modal" class="modal fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+<div class="modal-box w-full max-w-lg bg-[#111] border border-white/10 rounded-2xl shadow-2xl">
+<div class="px-5 py-4 border-b border-white/5 flex justify-between items-center">
+<div>
+<h2 class="font-semibold">Edit Item</h2>
+<p class="text-xs text-neutral-600 mt-1">Update your stored thought.</p>
+</div>
+<button id="closeModal" class="w-8 h-8 rounded-lg text-neutral-500 hover:bg-white/5 hover:text-white">×</button>
+</div>
+
+<form id="editForm" class="p-5 space-y-4">
+<input type="hidden" id="editId">
+
+<div>
+<label class="block text-xs text-neutral-500 mb-2">Title</label>
+<input id="editTitle" required maxlength="120" class="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 outline-none text-sm focus:border-white/30" placeholder="What are you building?">
+</div>
+
+<div>
+<label class="block text-xs text-neutral-500 mb-2">Description</label>
+<textarea id="editDesc" maxlength="500" rows="3" class="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 outline-none text-sm resize-none focus:border-white/30" placeholder="A little context..."></textarea>
+</div>
+
+<div>
+<label class="block text-xs text-neutral-500 mb-2">Tags</label>
+<input id="editTags" maxlength="200" class="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 outline-none text-sm focus:border-white/30" placeholder="#AI, #Python, #Website">
+</div>
+
+<div class="grid grid-cols-2 gap-3">
+<div>
+<label class="block text-xs text-neutral-500 mb-2">Priority</label>
+<select id="editPriority" class="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 outline-none text-sm">
+<option value="low">Low</option>
+<option value="medium" selected>Medium</option>
+<option value="high">High</option>
+</select>
+</div>
+
+<div>
+<label class="block text-xs text-neutral-500 mb-2">Vault</label>
+<select id="editVault" class="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 outline-none text-sm">
+<option value="idea">Idea Vault</option>
+<option value="todo">To-Build</option>
+<option value="progress">In-Progress</option>
+<option value="built">Built</option>
+</select>
+</div>
+</div>
+
+<div class="flex gap-3 pt-1">
+<button type="button" id="cancelEdit" class="flex-1 py-3 rounded-xl border border-white/10 text-sm text-neutral-400 hover:bg-white/5">Cancel</button>
+<button class="flex-1 py-3 rounded-xl bg-white text-black text-sm font-semibold hover:bg-neutral-200">Save Changes</button>
+</div>
+</form>
+</div>
+</div>
+
+<div id="toast" class="toast fixed bottom-5 left-1/2 z-[60] bg-[#171717] border border-white/10 rounded-xl px-4 py-3 text-sm shadow-2xl"></div>
+
+<!-- PART 2: JAVASCRIPT YAHAN SE PASTE KARNA HAI -->
 <script>
-const SCHOOL=[
-{st:"05:20",en:"05:21",t:"05:20 AM",title:"UTHNA",q:"Winners don't wait."},
-{st:"05:20",en:"06:30",t:"05:20-06:30",title:"MORNING REVISION",q:"While they dream, you sharpen."},
-{st:"06:30",en:"13:10",t:"06:30-01:10",title:"SCHOOL",q:"Don't attend. Dominate."},
-{st:"13:10",en:"14:00",t:"01:10-02:00",title:"POWER NAP + LUNCH",q:"Rest is strategy, not escape."},
-{st:"14:00",en:"16:50",t:"02:00-04:50",title:"DEEP STUDY",q:"Distraction is a choice you make."},
-{st:"16:50",en:"18:15",t:"04:50-06:15",title:"WORKOUT",q:"Pain is just data entering the body."},
-{st:"18:15",en:"19:30",t:"06:15-07:30",title:"CODING & CHESS",q:"The world is a chessboard."},
-{st:"19:30",en:"20:00",t:"07:30-08:00",title:"FRESH RESET",q:"Wash emotions away."},
-{st:"20:00",en:"22:00",t:"08:00-10:00",title:"HOMEWORK & DINNER",q:"Leave nothing for tomorrow."},
-{st:"22:00",en:"05:19",t:"10:00 PM",title:"SLEEP",q:"Preparation for next war."}
-];
-const HOLIDAY=[
-{st:"05:20",en:"05:21",t:"05:20 AM",title:"WAKE UP",q:"Discipline starts when others sleep."},
-{st:"05:20",en:"07:00",t:"05:20-07:00",title:"REVISION",q:"First revision is real power."},
-{st:"07:00",en:"08:30",t:"07:00-08:30",title:"STUDY",q:"Attack your weakness."},
-{st:"08:30",en:"09:00",t:"08:30-09:00",title:"BREAKFAST",q:"Fuel like a warrior."},
-{st:"09:00",en:"11:00",t:"09:00-11:00",title:"STUDY",q:"Silence + Focus = Fear."},
-{st:"11:00",en:"13:00",t:"11:00-01:00",title:"CODING AND CHESS",q:"Control the board, control the world."},
-{st:"13:00",en:"14:00",t:"01:00-02:00",title:"REST AND LUNCH",q:"Rest is strategy, not escape."},
-{st:"14:00",en:"16:15",t:"02:00-04:15",title:"STUDY",q:"Revision is domination."},
-{st:"16:15",en:"18:30",t:"04:15-06:30",title:"WORKOUT",q:"Strong mind in strong body."},
-{st:"18:30",en:"19:30",t:"06:30-07:30",title:"REST AND FRESH",q:"Reset. Rebuild."},
-{st:"19:30",en:"21:30",t:"07:30-09:30",title:"HOMEWORK AND DINNER",q:"End day with zero debt."}
-];
-const EXTRA=[
-{title:"NO PHONE / SOCIAL MEDIA",q:"Dopamine detox +20"},
-{title:"NO SUGAR",q:"No poison +20"},
-{title:"NO JUNK FOOD",q:"Clean fuel +20"},
-{title:"2L WATER",q:"Hydration +20"},
-{title:"NO FAP / NO DISTRACTION",q:"Absolute control +25"},
-{title:"MEDITATION 10 MIN",q:"Mind sharpen +20"},
-{title:"READING 20 PAGES",q:"Knowledge +20"},
-{title:"COLD SHOWER",q:"Pain = Power +20"},
-{title:"EARLY SLEEP BEFORE 11",q:"Discipline +20"}
-];
-let mode=localStorage.getItem('v7_mode')||'SCHOOL';
-if(!localStorage.getItem('v7_mode') && new Date().getDay()===0) mode='HOLIDAY';
-function toMin(t){let [h,m]=t.split(':').map(Number);return h*60+m;}
-function isTimeInside(cur,s,e){
-  if(e === s) return cur === s;
-  if(e < s){ return cur >= s || cur < e; }
-  return cur >= s && cur < e;
-}
-function getActive(DATA, saved){
-  let now=new Date();let cur=now.getHours()*60+now.getMinutes();
-  for(let i=0;i<DATA.length;i++){
-    let s=toMin(DATA[i].st), e=toMin(DATA[i].en);
-    if(isTimeInside(cur,s,e) &&!saved[i]) return i;
-  }
-  for(let i=0;i<DATA.length;i++){
-    let s=toMin(DATA[i].st), e=toMin(DATA[i].en);
-    if(isTimeInside(cur,s,e)) return i;
-  }
-  return -1;
-}
-function getNeed(lvl){ return 100 + (lvl-1)*150; }
-function render(){
-let DATA=mode==='SCHOOL'?SCHOOL:HOLIDAY;
-let saved=JSON.parse(localStorage.getItem('tasks_'+mode)||'[]');
-let active=getActive(DATA, saved);
-document.getElementById('modeTitle').innerText=mode;
-document.getElementById('dateNow').innerText=new Date().toDateString();
-let blockTxt=document.getElementById('currentBlockText');
-if(active>=0){
-  let activeSaved = saved[active];
-  if(activeSaved){
-    blockTxt.innerText='○ ALL CLEAR - PROTOCOLS DONE';
-    blockTxt.style.color='#00FF88';
-    active = -1;
-  } else {
-    blockTxt.innerText='● LIVE NOW: '+DATA[active].title+' ['+DATA[active].t+']';
-    blockTxt.style.color='#FF0F0F';
-  }
-} else {
-  blockTxt.innerText='○ STANDBY - NO ACTIVE PROTOCOL';
-  blockTxt.style.color='#666';
-}
-let list=document.getElementById('task-list');list.innerHTML='';
-DATA.forEach((d,i)=>{
-let ok=saved[i];let isActive=i===active;
-let el=document.createElement('div');
-el.className=isActive?'live':'';
-el.style.cssText=`border:${isActive?'2px solid #FF0F0F':'1px solid #222'};background:${isActive?'#2A0000': ok?'#000':'#0F0F0F'};padding:14px;margin-bottom:10px;display:flex;gap:12px;align-items:center;cursor:pointer;${isActive?'box-shadow:0 0 25px rgba(255,15,15,0.35), inset 0 0 15px rgba(255,15,15,0.15)':''};opacity:${ok&&!isActive?0.4:1}`;
-el.innerHTML=`<div style="min-width:88px;font-size:11px;color:${isActive?'#FF6B6B':'#666'};border-right:1px solid ${isActive?'#FF0F0F':'#222'};padding-right:10px">${d.t}<div style="margin-top:4px;font-size:9px;font-weight:800;color:${isActive?'#FF0F0F':'#333'}">${isActive?'● LIVE NOW': ok?'✓ DONE':'○ IDLE'}</div></div><div style="flex:1"><div style="font-weight:800;font-size:13px;color:#fff">${d.title}</div><div style="font-size:10px;color:${isActive?'#FFAAAA':'#555'}">"${d.q}"</div></div><div style="width:32px;height:32px;border:2px solid ${isActive?'#FF0F0F':'#333'};background:${ok?(isActive?'#FF0F0F':'#fff'):'transparent'};display:flex;align-items:center;justify-content:center;font-weight:900;color:${isActive?'#fff':'#000'}">${ok?'✓':''}</div>`;
-el.onclick=()=>{saved[i]=!saved[i];localStorage.setItem('tasks_'+mode,JSON.stringify(saved));render();};
-list.appendChild(el);
-});
-let eList=document.getElementById('extra-list');eList.innerHTML='';
-let eSaved=JSON.parse(localStorage.getItem('extra_tasks')||'[]');
-EXTRA.forEach((d,i)=>{
-let ok=eSaved[i];
-let el=document.createElement('div');
-el.style.cssText=`border:1px dashed #333;background:#0A0A0A;padding:10px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;opacity:${ok?0.3:1};cursor:pointer`;
-el.innerHTML=`<div><div style="font-weight:700;font-size:11px;color:#fff">${d.title}</div><div style="font-size:9px;color:#666">${d.q}</div></div><div style="width:24px;height:24px;border:1px solid #444;background:${ok?'#FF0F0F':''};display:flex;align-items:center;justify-content:center;color:#fff">${ok?'✓':''}</div>`;
-el.onclick=()=>{eSaved[i]=!eSaved[i];localStorage.setItem('extra_tasks',JSON.stringify(eSaved));render();};
-eList.appendChild(el);
-});
-let main=saved.filter(Boolean).length;
-let extra=eSaved.filter(Boolean).length;
-let baseXP=parseInt(localStorage.getItem('totalXP')||'0');
-let todayXP = main*12 + extra*20;
-let total = baseXP + todayXP;
-let lvl=1, rem=total;
-while(rem >= getNeed(lvl)){ rem -= getNeed(lvl); lvl++; }
-let need = getNeed(lvl);
-document.getElementById('count').innerText=`${main}/${DATA.length}`;
-document.getElementById('xp').innerText=String(total).padStart(3,'0');
-document.getElementById('progress').style.width=(rem/need*100)+'%';
-document.getElementById('xpProgress').style.width=(rem/need*100)+'%';
-document.getElementById('level').innerText=lvl;
-document.getElementById('nextXp').innerText=(need-rem)+' XP TO NEXT';
-let rank='E-RANK';if(lvl>5)rank='D-RANK';if(lvl>15)rank='C-RANK';if(lvl>30)rank='B-RANK';if(lvl>50)rank='A-RANK';if(lvl>75)rank='S-RANK';
-document.getElementById('rank').innerText=rank;
-document.getElementById('rankTop').innerText=rank;
-}
-setInterval(()=>{
-let n=new Date();
-document.getElementById('liveTime').innerText=n.toLocaleTimeString();
-document.getElementById('fullTime').innerText=n.toLocaleTimeString();
-let DATA=mode==='SCHOOL'?SCHOOL:HOLIDAY;
-let saved=JSON.parse(localStorage.getItem('tasks_'+mode)||'[]');
-let newActive=getActive(DATA,saved);
-let blockTxt=document.getElementById('currentBlockText');
-if(newActive>=0 &&!saved[newActive]){
-  blockTxt.innerText='● LIVE NOW: '+DATA[newActive].title+' ['+DATA[newActive].t+']';
-  blockTxt.style.color='#FF0F0F';
-  let currentLiveEl = document.querySelector('.live');
-  if(!currentLiveEl) render();
-} else if(newActive>=0 && saved[newActive]){
-  render();
-}
-},1000);
-document.getElementById('modeBtn').onclick=()=>{mode=mode==='SCHOOL'?'HOLIDAY':'SCHOOL';localStorage.setItem('v7_mode',mode);render();};
-document.getElementById('chuttiBtn').onclick=()=>{mode='HOLIDAY';localStorage.setItem('v7_mode',mode);render();};
-document.getElementById('lockBtn').onclick=()=>{
-let m=JSON.parse(localStorage.getItem('tasks_'+mode)||'[]').filter(Boolean).length;
-let e=JSON.parse(localStorage.getItem('extra_tasks')||'[]').filter(Boolean).length;
-let today=m*12+e*20;let total=parseInt(localStorage.getItem('totalXP')||'0')+today;
-localStorage.setItem('totalXP',total);localStorage.removeItem('tasks_'+mode);localStorage.removeItem('extra_tasks');
-alert('DAY LOCKED: +'+today+' XP | TOTAL: '+total);render();
+const KEY="secondBrainVault_v2";
+
+const VAULTS={
+  idea:{name:"Idea Vault",sub:"Raw thoughts",icon:"✦"},
+  todo:{name:"To-Build",sub:"Ready to execute",icon:"→"},
+  progress:{name:"In-Progress",sub:"Currently building",icon:"◐"},
+  built:{name:"Built",sub:"Completed",icon:"✓"}
 };
-document.getElementById('cheatBtn').onclick=()=>{let t=parseInt(localStorage.getItem('totalXP')||'0');localStorage.setItem('totalXP',Math.max(0,t-200));render();};
-document.getElementById('restartBtn').onclick=()=>{localStorage.removeItem('tasks_'+mode);localStorage.removeItem('extra_tasks');render();};
-document.getElementById('resetAllBtn').onclick=()=>{if(confirm('Pura zero karna hai?')){localStorage.clear();location.reload();}};
-document.getElementById('log1').value=localStorage.getItem('log1')||'';document.getElementById('log1').oninput=e=>localStorage.setItem('log1',e.target.value);
-document.getElementById('log2').value=localStorage.getItem('log2')||'';document.getElementById('log2').oninput=e=>localStorage.setItem('log2',e.target.value);
+
+let items=JSON.parse(localStorage.getItem(KEY)||"[]");
+let searchText="";
+let draggedId=null;
+let focusId=null;
+
+const $=id=>document.getElementById(id);
+
+function save(){
+  localStorage.setItem(KEY,JSON.stringify(items));
+}
+
+function id(){
+  return Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+}
+
+function esc(x){
+  const d=document.createElement("div");
+  d.textContent=x??"";
+  return d.innerHTML;
+}
+
+function tags(value){
+  return value.split(/[,\s]+/)
+    .map(x=>x.trim())
+    .filter(Boolean)
+    .map(x=>x.startsWith("#")?x:"#"+x)
+    .slice(0,12);
+}
+
+function toast(msg){
+  const t=$("toast");
+  t.textContent=msg;
+  t.classList.add("show");
+  clearTimeout(window.toastTimer);
+  window.toastTimer=setTimeout(()=>t.classList.remove("show"),1800);
+}
+
+function date(t){
+  return new Date(t).toLocaleDateString(undefined,{
+    month:"short",day:"numeric"
+  });
+}
+
+function addIdea(){
+  const input=$("quickAdd");
+  const title=input.value.trim();
+  if(!title)return;
+
+  const now=Date.now();
+
+  items.unshift({
+    id:id(),
+    title:title.slice(0,120),
+    description:"",
+    tags:[],
+    priority:"medium",
+    vault:"idea",
+    createdAt:now,
+    updatedAt:now
+  });
+
+  save();
+  input.value="";
+  render();
+  toast("Idea captured ✓");
+  input.focus();
+}
+
+function matches(item){
+  if(!searchText)return true;
+
+  const text=[
+    item.title,
+    item.description,
+    ...(item.tags||[]),
+    item.priority,
+    VAULTS[item.vault]?.name||""
+  ].join(" ").toLowerCase();
+
+  return text.includes(searchText);
+}
+
+function card(item){
+  const tagHTML=(item.tags||[]).map(t=>
+    `<span class="px-2 py-1 rounded-md bg-white/5 text-[10px] text-neutral-500">${esc(t)}</span>`
+  ).join("");
+
+  return `
+  <article draggable="true"
+    data-id="${esc(item.id)}"
+    class="card enter ${esc(item.priority)} bg-[#141414] border border-white/10 rounded-xl p-4 cursor-grab">
+
+    <div class="flex justify-between gap-3">
+      <h3 class="font-medium text-sm leading-5 break-words">
+        ${esc(item.title)}
+      </h3>
+
+      <button data-action="menu" data-id="${esc(item.id)}"
+        class="w-7 h-7 shrink-0 rounded-lg text-neutral-600 hover:text-white hover:bg-white/5">
+        ⋮
+      </button>
+    </div>
+
+    ${
+      item.description
+      ? `<p class="mt-2 text-xs leading-5 text-neutral-500 break-words">${esc(item.description)}</p>`
+      : `<p class="mt-2 text-[11px] text-neutral-700 italic">No description yet.</p>`
+    }
+
+    ${
+      tagHTML
+      ? `<div class="flex flex-wrap gap-1.5 mt-3">${tagHTML}</div>`
+      : ""
+    }
+
+    <div class="flex justify-between items-center mt-4 pt-3 border-t border-white/5">
+      <div class="text-[10px] text-neutral-600">
+        ${item.priority} · ${date(item.updatedAt)}
+      </div>
+
+      <div class="actions hidden gap-1">
+        <button data-action="edit" data-id="${esc(item.id)}"
+          class="px-2 py-1 rounded-md text-[10px] text-neutral-500 hover:text-white hover:bg-white/5">
+          Edit
+        </button>
+
+        <button data-action="delete" data-id="${esc(item.id)}"
+          class="px-2 py-1 rounded-md text-[10px] text-neutral-500 hover:text-red-400 hover:bg-red-400/5">
+          Delete
+        </button>
+      </div>
+    </div>
+  </article>`;
+}
+
+function column(key){
+  const v=VAULTS[key];
+
+  const list=items.filter(x=>
+    x.vault===key && matches(x)
+  );
+
+  return `
+  <section data-vault="${key}"
+    class="column bg-[#0f0f0f] border border-white/10 rounded-2xl min-h-[300px] flex flex-col transition">
+
+    <div class="p-4 border-b border-white/5 flex justify-between items-center">
+      <div class="flex gap-3 items-center">
+        <div class="w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center text-sm text-neutral-400">
+          ${v.icon}
+        </div>
+        <div>
+          <h2 class="text-sm font-semibold">${v.name}</h2>
+          <p class="text-[10px] text-neutral-600">${v.sub}</p>
+        </div>
+      </div>
+
+      <span class="px-2 h-6 min-w-6 rounded-lg bg-white/5 flex items-center justify-center text-[10px] text-neutral-500">
+        ${list.length}
+      </span>
+    </div>
+
+    <div class="p-3 space-y-3 flex-1">
+      ${
+        list.length
+        ? list.map(card).join("")
+        : `<div class="border border-dashed border-white/10 rounded-xl p-6 text-center text-xs text-neutral-700">
+             ${searchText?"No matching items.":"Nothing here yet."}
+           </div>`
+      }
+    </div>
+  </section>`;
+}
+
+function renderBoard(){
+  $("board").innerHTML=
+    Object.keys(VAULTS).map(column).join("");
+
+  document.querySelectorAll(".card").forEach(c=>{
+    c.addEventListener("dragstart",dragStart);
+    c.addEventListener("dragend",dragEnd);
+
+    c.addEventListener("mouseenter",()=>{
+      const a=c.querySelector(".actions");
+      if(a){a.classList.remove("hidden");a.classList.add("flex")}
+    });
+
+    c.addEventListener("mouseleave",()=>{
+      const a=c.querySelector(".actions");
+      if(a){a.classList.add("hidden");a.classList.remove("flex")}
+    });
+
+    c.addEventListener("dblclick",()=>{
+      edit(c.dataset.id);
+    });
+  });
+
+  document.querySelectorAll(".column").forEach(col=>{
+    col.addEventListener("dragover",dragOver);
+    col.addEventListener("dragleave",dragLeave);
+    col.addEventListener("drop",drop);
+  });
+}
+
+function dragStart(e){
+  draggedId=e.currentTarget.dataset.id;
+  e.currentTarget.classList.add("dragging");
+  e.dataTransfer.effectAllowed="move";
+  e.dataTransfer.setData("text/plain",draggedId);
+}
+
+function dragEnd(e){
+  e.currentTarget.classList.remove("dragging");
+  document.querySelectorAll(".column")
+    .forEach(x=>x.classList.remove("dragover"));
+  draggedId=null;
+}
+
+function dragOver(e){
+  e.preventDefault();
+  const col=e.currentTarget;
+  col.classList.add("dragover");
+}
+
+function dragLeave(e){
+  const col=e.currentTarget;
+  if(!col.contains(e.relatedTarget))
+    col.classList.remove("dragover");
+}
+
+function drop(e){
+  e.preventDefault();
+
+  const col=e.currentTarget;
+  col.classList.remove("dragover");
+
+  const itemId=e.dataTransfer.getData("text/plain")||draggedId;
+  const target=col.dataset.vault;
+
+  const item=items.find(x=>x.id===itemId);
+
+  if(!item||item.vault===target)return;
+
+  item.vault=target;
+  item.updatedAt=Date.now();
+
+  save();
+  render();
+  toast(`Moved to ${VAULTS[target].name}`);
+}
+
+function renderFocus(){
+  const candidates=items.filter(x=>x.vault==="todo");
+
+  if(!candidates.length){
+    focusId=null;
+    $("focus").innerHTML=`
+      <div class="bg-[#111] border border-dashed border-white/10 rounded-2xl p-5">
+        <div class="flex gap-3 items-center">
+          <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-neutral-600">◌</div>
+          <div>
+            <p class="text-[10px] uppercase tracking-[.25em] text-neutral-600">Daily Focus</p>
+            <p class="text-sm text-neutral-500 mt-1">Move something into To-Build and your mission appears here.</p>
+          </div>
+        </div>
+      </div>`;
+    return;
+  }
+
+  let item=candidates.find(x=>x.id===focusId);
+
+  if(!item){
+    item=candidates[Math.floor(Math.random()*candidates.length)];
+    focusId=item.id;
+  }
+
+  $("focus").innerHTML=`
+    <div class="relative overflow-hidden bg-[#111] border border-white/10 rounded-2xl p-5 sm:p-6">
+      <div class="absolute right-0 top-0 w-40 h-40 bg-white/[.025] rounded-full blur-3xl"></div>
+
+      <div class="relative flex flex-col sm:flex-row justify-between gap-5 sm:items-center">
+        <div>
+          <div class="flex items-center gap-2 mb-3">
+            <span class="w-2 h-2 bg-white rounded-full"></span>
+            <span class="text-[10px] uppercase tracking-[.25em] text-neutral-500">Daily Focus</span>
+          </div>
+
+          <h2 class="text-xl sm:text-2xl font-semibold tracking-tight break-words">
+            ${esc(item.title)}
+          </h2>
+
+          ${
+            item.description
+            ? `<p class="text-sm text-neutral-500 mt-2">${esc(item.description)}</p>`
+            :""
+          }
+        </div>
+
+        <button data-focus="${esc(item.id)}"
+          class="shrink-0 px-5 py-3 rounded-xl bg-white text-black text-sm font-semibold hover:bg-neutral-200 active:scale-95 transition">
+          Build this today →
+        </button>
+      </div>
+    </div>`;
+}
+
+function stats(){
+  $("total").textContent=items.length;
+  $("todo").textContent=items.filter(x=>x.vault==="todo").length;
+  $("built").textContent=items.filter(x=>x.vault==="built").length;
+}
+
+function render(){
+  renderFocus();
+  stats();
+  renderBoard();
+}
+
+function edit(id){
+  const item=items.find(x=>x.id===id);
+  if(!item)return;
+
+  $("editId").value=item.id;
+  $("editTitle").value=item.title;
+  $("editDesc").value=item.description||"";
+  $("editTags").value=(item.tags||[]).join(" ");
+  $("editPriority").value=item.priority||"medium";
+  $("editVault").value=item.vault||"idea";
+
+  $("modal").classList.add("show");
+
+  setTimeout(()=>$("editTitle").focus(),100);
+}
+
+function closeModal(){
+  $("modal").classList.remove("show");
+  $("editForm").reset();
+}
+
+function saveEdit(e){
+  e.preventDefault();
+
+  const item=items.find(x=>x.id===$("editId").value);
+  if(!item)return;
+
+  item.title=$("editTitle").value.trim().slice(0,120);
+  item.description=$("editDesc").value.trim().slice(0,500);
+  item.tags=tags($("editTags").value);
+  item.priority=$("editPriority").value;
+  item.vault=$("editVault").value;
+  item.updatedAt=Date.now();
+
+  save();
+  closeModal();
+  render();
+  toast("Changes saved ✓");
+}
+
+function deleteItem(id){
+  const item=document.querySelector(`[data-id="${CSS.escape(id)}"]`);
+
+  if(item){
+    item.style.opacity="0";
+    item.style.transform="scale(.94)";
+  }
+
+  setTimeout(()=>{
+    items=items.filter(x=>x.id!==id);
+
+    if(focusId===id)focusId=null;
+
+    save();
+    render();
+    toast("Item deleted");
+  },180);
+}
+
+$("addBtn").addEventListener("click",addIdea);
+
+$("quickAdd").addEventListener("keydown",e=>{
+  if(e.key==="Enter"){
+    e.preventDefault();
+    addIdea();
+  }
+});
+
+$("search").addEventListener("input",e=>{
+  searchText=e.target.value.trim().toLowerCase();
+  renderBoard();
+});
+
+$("board").addEventListener("click",e=>{
+  const btn=e.target.closest("[data-action]");
+  if(!btn)return;
+
+  const id=btn.dataset.id;
+
+  if(btn.dataset.action==="edit")edit(id);
+  if(btn.dataset.action==="delete")deleteItem(id);
+
+  if(btn.dataset.action==="menu"){
+    const a=btn.closest(".card").querySelector(".actions");
+    a.classList.toggle("hidden");
+    a.classList.toggle("flex");
+  }
+});
+
+$("focus").addEventListener("click",e=>{
+  const btn=e.target.closest("[data-focus]");
+  if(btn)edit(btn.dataset.focus);
+});
+
+$("editForm").addEventListener("submit",saveEdit);
+$("closeModal").addEventListener("click",closeModal);
+$("cancelEdit").addEventListener("click",closeModal);
+
+$("modal").addEventListener("click",e=>{
+  if(e.target===$("modal"))closeModal();
+});
+
+$("exportBtn").addEventListener("click",()=>{
+  const blob=new Blob(
+    [JSON.stringify(items,null,2)],
+    {type:"application/json"}
+  );
+
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+
+  a.href=url;
+  a.download="second-brain-vault.json";
+  a.click();
+
+  URL.revokeObjectURL(url);
+  toast("Vault exported ✓");
+});
+
+$("clearBtn").addEventListener("click",()=>{
+  if(!items.length){
+    toast("Vault is already empty");
+    return;
+  }
+
+  if(confirm("Delete all items from your Second Brain Vault?")){
+    items=[];
+    focusId=null;
+    save();
+    render();
+    toast("Vault cleared");
+  }
+});
+
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"&&$("modal").classList.contains("show"))
+    closeModal();
+
+  if(e.key==="/"&&
+     !["INPUT","TEXTAREA","SELECT"].includes(document.activeElement.tagName)){
+    e.preventDefault();
+    $("search").focus();
+  }
+
+  if(e.key.toLowerCase()==="n"&&
+     !["INPUT","TEXTAREA","SELECT"].includes(document.activeElement.tagName)){
+    e.preventDefault();
+    $("quickAdd").focus();
+  }
+});
+
 render();
+
+setTimeout(()=>$("quickAdd").focus(),300);
 </script>
+
 </body>
 </html>
