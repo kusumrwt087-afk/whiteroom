@@ -3,592 +3,3220 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#05070a">
-<title>CHARACTER // 30 DAY</title>
+<meta name="theme-color" content="#00eaff">
+<title>EVOLUTION // 100 DAYS</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+
 <style>
-*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
-:root{--bg:#05070a;--p:#0b1015;--p2:#10171d;--c:#00e5ff;--g:#00ff9d;--r:#ff3b5c;--m:#7f929a;--b:rgba(0,229,255,.18)}
-body{background:radial-gradient(circle at 15% 10%,#00e5ff12,transparent 28%),radial-gradient(circle at 85% 80%,#00e5ff0b,transparent 25%),var(--bg);color:#eefcff;font-family:Rajdhani,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(#00e5ff06 1px,transparent 1px),linear-gradient(90deg,#00e5ff06 1px,transparent 1px);background-size:45px 45px;z-index:-1}
-body:after{content:"";position:fixed;left:0;right:0;height:2px;background:#00e5ff12;animation:scan 7s linear infinite;pointer-events:none;z-index:100}
-@keyframes scan{from{top:-5px}to{top:100%}}
-@keyframes pulse{50%{opacity:.5}}
-@keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-@keyframes float{from{transform:translateY(100vh)}to{transform:translateY(-20px)}}
-
-#loader{position:fixed;inset:0;background:#030507;display:flex;align-items:center;justify-content:center;flex-direction:column;z-index:9999;transition:.7s}
-.lt{font:800 clamp(28px,7vw,65px) Orbitron,sans-serif;letter-spacing:8px;color:var(--c);text-shadow:0 0 25px #00e5ff99;animation:pulse 1.5s infinite}
-.ls{margin-top:15px;color:var(--m);letter-spacing:4px}
-.lb{margin-top:30px;width:260px;height:3px;background:#172027}.lb span{display:block;height:100%;width:0;background:var(--c);box-shadow:0 0 15px var(--c);animation:load 1.8s forwards}
-@keyframes load{to{width:100%}}
-
-header{position:sticky;top:0;z-index:50;background:#05070acc;backdrop-filter:blur(18px);border-bottom:1px solid var(--b)}
-nav,.hero,.hud,.main,footer{max-width:1250px;margin:auto}
-nav{padding:16px 20px;display:flex;justify-content:space-between;align-items:center}
-.logo{font:800 19px Orbitron;letter-spacing:3px}.logo span,.eyebrow,.dn,.info-icon{color:var(--c)}
-.nr{display:flex;align-items:center;gap:14px}.lv{font:11px Orbitron;color:var(--c);border:1px solid var(--b);padding:7px 10px;border-radius:5px}
-
-.btn{border:1px solid var(--c);background:#00e5ff12;color:#eefcff;padding:12px 20px;font:11px Orbitron;letter-spacing:1px;cursor:pointer;border-radius:4px;transition:.25s}
-.btn:hover{background:var(--c);color:#001015;box-shadow:0 0 25px #00e5ff59;transform:translateY(-2px)}
-.danger{border-color:#ff3b5c80;color:#ff8296}.danger:hover{background:var(--r);color:white}
-
-.hero{padding:75px 20px 45px;min-height:580px;display:flex;align-items:center}
-.hero>div{width:100%;animation:up .9s}
-.eyebrow{font:12px Orbitron;letter-spacing:5px;margin-bottom:20px}
-h1{font:800 clamp(38px,8vw,86px) Orbitron;line-height:.98;letter-spacing:-2px}
-h1 span{color:transparent;-webkit-text-stroke:1px var(--c);text-shadow:0 0 30px #00e5ff33}
-.hero p{max-width:720px;color:var(--m);font-size:18px;line-height:1.6;margin-top:25px}
-.buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
-
-.hud{padding:0 20px 35px}.hg{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.card,.panel,.info{background:linear-gradient(145deg,#10171de6,#070a0de6);border:1px solid var(--b);box-shadow:0 0 35px #00e5ff0d}
-.card{padding:22px;min-height:125px;position:relative;overflow:hidden;transition:.3s}
-.card:hover{border-color:#00e5ff80;transform:translateY(-3px)}
-.card:after{content:"";position:absolute;width:80px;height:80px;right:-30px;bottom:-35px;border-radius:50%;background:#00e5ff0d}
-.label{color:var(--m);font-size:12px;letter-spacing:2px}.val{font:29px Orbitron;color:var(--c);margin-top:12px}
-.xp{margin-top:10px;height:6px;background:#172027;border-radius:10px;overflow:hidden}.fill{height:100%;width:0;background:linear-gradient(90deg,#00a8bd,var(--c));box-shadow:0 0 12px #00e5ff99;transition:1s}
-
-.main{padding:20px}.title{font:20px Orbitron;letter-spacing:2px;margin-bottom:18px}.title span{color:var(--c)}
-.days{display:grid;grid-template-columns:repeat(10,1fr);gap:8px;margin-bottom:35px}
-.daybtn{height:48px;background:#0b1116;color:var(--m);border:1px solid #1b2930;cursor:pointer;font:11px Orbitron;transition:.2s;position:relative}
-.daybtn:hover{border-color:var(--c);color:#fff}.daybtn.active{color:#001015;background:var(--c);border-color:var(--c);box-shadow:0 0 18px #00e5ff4d}
-.daybtn.done:after{content:"✓";position:absolute;top:2px;right:4px;color:var(--g);font-size:10px}
-.daybtn.active.done:after{color:#001015}
-
-.panel{padding:30px;animation:up .45s}
-.dhead{display:flex;justify-content:space-between;gap:20px;border-bottom:1px solid #1b2930;padding-bottom:25px;margin-bottom:25px}
-.dn{font:12px Orbitron;letter-spacing:3px}.dt{font:34px Orbitron;margin-top:8px}.ds{color:var(--m);margin-top:8px;font-size:16px}
-.badge{border:1px solid #00e5ff4d;padding:9px 13px;color:var(--c);font:11px Orbitron;white-space:nowrap}
-
-.mission{background:#0b1115;border:1px solid #17262d;margin:12px 0;padding:17px;display:flex;gap:14px;align-items:flex-start;transition:.25s;cursor:pointer}
-.mission:hover{border-color:#00e5ff66;transform:translateX(3px)}.mission.done{background:#00ff9d09;border-color:#00ff9d4d}
-.mission input{appearance:none;width:21px;height:21px;min-width:21px;border:1px solid #38505a;margin-top:2px;cursor:pointer;position:relative}
-.mission input:checked{background:var(--g);border-color:var(--g)}
-.mission input:checked:after{content:"✓";color:#00150d;font-weight:bold;position:absolute;left:4px;top:0}
-.mt{font-size:17px;font-weight:700}.md{color:var(--m);font-size:14px;margin-top:3px;line-height:1.45}
-
-.review{margin-top:28px;border-top:1px solid #1b2930;padding-top:25px}.review textarea{width:100%;min-height:130px;resize:vertical;background:#070b0e;border:1px solid #1b2930;color:#fff;padding:15px;font:16px Rajdhani;outline:0}
-.review textarea:focus{border-color:var(--c);box-shadow:0 0 15px #00e5ff14}
-.rg{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:15px}.rc{border:1px solid #1b2930;padding:16px;background:#080d10}.rc label{color:var(--m);font-size:12px;display:block;margin-bottom:10px}.rc input{width:100%;background:0;border:0;border-bottom:1px solid #283840;color:var(--c);font:22px Orbitron;outline:0}
-.complete{margin-top:20px;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;color:var(--m)}
-
-.phase{margin:55px 0 18px;display:flex;align-items:center;gap:15px}.line{height:1px;flex:1;background:linear-gradient(90deg,var(--c),transparent)}
-.ig{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.info{padding:22px;background:#0b1115;box-shadow:none}.info h3{font:15px Orbitron;margin:10px 0 8px}.info p{color:var(--m);line-height:1.5}
-
-.toast{position:fixed;bottom:25px;right:25px;background:#071116;border:1px solid var(--c);padding:14px 20px;transform:translateY(100px);opacity:0;transition:.35s;z-index:200;box-shadow:0 0 25px #00e5ff33}.toast.show{transform:none;opacity:1}
-footer{margin-top:70px;padding:30px 20px 50px;border-top:1px solid #18262c;color:#4e6068;font-size:13px;display:flex;justify-content:space-between}
-
-.p{position:fixed;width:2px;height:2px;background:var(--c);opacity:.35;pointer-events:none;animation:float linear infinite;z-index:-1}
-
-@media(max-width:850px){
-.hg{grid-template-columns:repeat(2,1fr)}.days{grid-template-columns:repeat(6,1fr)}.ig{grid-template-columns:1fr}.rg{grid-template-columns:1fr}.hero{min-height:500px;padding-top:55px}.dhead{flex-direction:column}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+ background:#03070a;color:#e9fbff;
+ font-family:Rajdhani,sans-serif;
+ overflow-x:hidden;
 }
-@media(max-width:520px){
-nav{padding:13px 14px}.logo{font-size:14px}.lv{font-size:9px}.hero{padding:55px 15px 35px}.hero h1{font-size:38px}.hero p{font-size:16px}.hud{padding:0 15px 25px}.card{padding:15px;min-height:105px}.val{font-size:22px}.main{padding:15px}.days{grid-template-columns:repeat(5,1fr)}.daybtn{height:42px;font-size:9px}.panel{padding:18px}.mission{padding:14px}.mt{font-size:15px}.md{font-size:13px}footer{flex-direction:column;gap:10px}
+body:before{
+ content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
+ background:
+ radial-gradient(circle at 50% 10%,#00384455,transparent 35%),
+ linear-gradient(#ffffff05 1px,transparent 1px),
+ linear-gradient(90deg,#ffffff05 1px,transparent 1px);
+ background-size:auto,40px 40px,40px 40px;
+}
+h1,h2,h3,.logo,.level,.dayNum{font-family:Orbitron,sans-serif}
+button{font:inherit}
+
+/* LOADER */
+#loader{
+ position:fixed;inset:0;background:#020507;
+ display:grid;place-items:center;z-index:9999;
+ transition:.7s;
+}
+.loaderBox{text-align:center}
+.loaderTitle{
+ font:900 30px Orbitron;color:#00eaff;
+ letter-spacing:5px;
+ text-shadow:0 0 25px #00eaff;
+}
+.loaderLine{
+ width:220px;height:3px;background:#10242a;
+ margin:20px auto;overflow:hidden;
+}
+.loaderLine:after{
+ content:"";display:block;width:40%;height:100%;
+ background:#00eaff;animation:load 1.2s infinite;
+}
+@keyframes load{to{transform:translateX(350%)}}
+
+/* HEADER */
+header{
+ position:sticky;top:0;z-index:100;
+ display:flex;justify-content:space-between;align-items:center;
+ padding:14px 5%;
+ background:#03070add;
+ backdrop-filter:blur(12px);
+ border-bottom:1px solid #00eaff22;
+}
+.logo{color:#00eaff;font-size:20px;letter-spacing:3px}
+.status{font-size:13px;color:#6affc9}
+.level{
+ border:1px solid #00eaff55;
+ padding:7px 13px;border-radius:6px;
+ color:#00eaff;
+}
+
+/* HERO */
+.hero{
+ min-height:78vh;display:grid;place-items:center;
+ text-align:center;padding:70px 20px;
+}
+.hero h1{
+ font-size:clamp(38px,8vw,82px);
+ line-height:1;color:white;
+ text-shadow:0 0 35px #00eaff55;
+}
+.hero h1 span{color:#00eaff}
+.hero p{
+ margin:22px auto;max-width:650px;
+ color:#8ca9b0;font-size:18px;
+}
+.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{
+ border:1px solid #00eaff66;background:#00eaff0d;
+ color:#dffcff;padding:12px 20px;
+ border-radius:6px;cursor:pointer;
+ transition:.25s;
+}
+.btn:hover{
+ background:#00eaff;color:#001014;
+ box-shadow:0 0 25px #00eaff66;
+}
+
+/* CORE */
+.core{
+ width:180px;height:180px;margin:45px auto 0;
+ border:2px solid #00eaff55;border-radius:50%;
+ display:grid;place-items:center;
+ position:relative;
+ box-shadow:0 0 45px #00eaff18;
+ animation:pulse 3s infinite;
+}
+.core:before,.core:after{
+ content:"";position:absolute;border:1px solid #00eaff33;
+ border-radius:50%;
+}
+.core:before{inset:15px}
+.core:after{inset:32px}
+@keyframes pulse{
+ 50%{box-shadow:0 0 70px #00eaff33}
+}
+.dayNum{font-size:42px;color:#00eaff}
+.dayLabel{color:#75949b}
+
+/* GENERAL */
+.section{padding:70px 5%;max-width:1250px;margin:auto}
+.sectionTitle{
+ text-align:center;margin-bottom:35px;
+}
+.sectionTitle h2{font-size:30px}
+.sectionTitle p{color:#76939a;margin-top:8px}
+
+/* DASHBOARD */
+.grid{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:15px;
+}
+.card{
+ background:#071116cc;
+ border:1px solid #00eaff1c;
+ border-radius:10px;
+ padding:20px;
+ transition:.25s;
+}
+.card:hover{
+ border-color:#00eaff55;
+ transform:translateY(-3px);
+}
+.card small{color:#69858c}
+.big{
+ font:700 30px Orbitron;
+ color:#00eaff;
+ margin-top:8px;
+}
+
+/* ARC */
+.arcMain{
+ display:grid;grid-template-columns:1.3fr .7fr;gap:15px;
+}
+.arcName{font-size:27px;color:#00eaff}
+.arcDesc{color:#8ca9b0;margin:10px 0 20px}
+.progress{
+ height:7px;background:#102126;border-radius:10px;overflow:hidden;
+}
+.progress i{
+ display:block;height:100%;width:0;
+ background:#00eaff;box-shadow:0 0 12px #00eaff;
+ transition:1s;
+}
+.arcMeta{
+ display:flex;justify-content:space-between;
+ color:#75949b;margin-top:9px;
+}
+
+/* SKILLS */
+.skills{display:grid;gap:14px}
+.skillHead{display:flex;justify-content:space-between}
+.skillBar{
+ height:6px;background:#102126;margin-top:6px;border-radius:5px;
+}
+.skillBar i{
+ display:block;height:100%;width:0;background:#00eaff;
+ transition:1s;
+}
+
+/* ROADMAP */
+.arcs{
+ display:grid;grid-template-columns:repeat(2,1fr);gap:14px;
+}
+.arcCard{
+ padding:18px;border:1px solid #00eaff20;
+ background:#071116;
+ border-radius:9px;cursor:pointer;
+ transition:.25s;
+}
+.arcCard:hover,.arcCard.active{
+ border-color:#00eaff;
+ box-shadow:0 0 20px #00eaff18;
+}
+.arcTop{
+ display:flex;justify-content:space-between;
+ color:#00eaff;
+}
+.arcCard h3{margin:10px 0 5px}
+.arcCard p{color:#77949a}
+
+/* 100 DAYS */
+.dayGrid{
+ display:grid;grid-template-columns:repeat(10,1fr);gap:7px;
+}
+.dayNode{
+ aspect-ratio:1;border:1px solid #00eaff25;
+ background:#071116;color:#8ba5ab;
+ display:grid;place-items:center;
+ border-radius:5px;cursor:pointer;
+ font-weight:bold;
+ transition:.2s;
+}
+.dayNode:hover,.dayNode.active{
+ color:#00eaff;border-color:#00eaff;
+ box-shadow:0 0 12px #00eaff33;
+}
+.dayNode.test{
+ border-color:#ffcf4a;color:#ffcf4a;
+}
+.dayNode.done{
+ background:#00eaff;color:#001014;
+}
+
+/* PRINCIPLES */
+.principles{
+ display:grid;grid-template-columns:repeat(3,1fr);gap:14px;
+}
+.principles .card h3{color:#00eaff;margin-bottom:7px}
+.principles .card p{color:#829da4}
+
+/* TOAST */
+#toast{
+ position:fixed;right:20px;bottom:20px;
+ background:#071116;border:1px solid #00eaff55;
+ padding:15px 18px;border-radius:8px;
+ transform:translateY(130px);transition:.35s;
+ z-index:500;
+}
+#toast.show{transform:translateY(0)}
+#toast b{display:block;color:#00eaff}
+
+/* OVERLAYS */
+.overlay{
+ position:fixed;inset:0;background:#020507eF;
+ display:none;place-items:center;z-index:1000;
+ backdrop-filter:blur(8px);
+}
+.overlay.show{display:grid}
+.overlayBox{
+ width:min(600px,90%);
+ padding:35px;
+ text-align:center;
+ background:#071116;
+ border:1px solid #00eaff55;
+ border-radius:12px;
+ box-shadow:0 0 60px #00eaff20;
+ animation:pop .35s;
+}
+@keyframes pop{
+ from{transform:scale(.8);opacity:0}
+ to{transform:scale(1);opacity:1}
+}
+.overlayBox h2{color:#00eaff;margin-bottom:12px}
+.overlayBox p{color:#91abb2;margin:12px 0}
+.close{
+ margin-top:15px;padding:9px 20px;
+ background:transparent;color:#00eaff;
+ border:1px solid #00eaff55;border-radius:5px;cursor:pointer;
+}
+
+/* REVEAL */
+.reveal{
+ opacity:0;transform:translateY(25px);transition:.7s;
+}
+.reveal.visible{opacity:1;transform:none}
+
+/* RESPONSIVE */
+@media(max-width:800px){
+ .grid{grid-template-columns:repeat(2,1fr)}
+ .arcMain{grid-template-columns:1fr}
+ .arcs{grid-template-columns:1fr}
+ .principles{grid-template-columns:1fr}
+ .dayGrid{grid-template-columns:repeat(10,1fr)}
+}
+@media(max-width:500px){
+ .grid{grid-template-columns:1fr 1fr}
+ .section{padding:50px 4%}
+ .dayNode{font-size:11px}
 }
 </style>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
+<!-- LOADER -->
 <div id="loader">
-  <div class="lt">CHARACTER</div>
-  <div class="ls">INITIALIZING SYSTEM...</div>
-  <div class="lb"><span></span></div>
+ <div class="loaderBox">
+  <div class="loaderTitle">EVOLUTION SYSTEM</div>
+  <div class="loaderLine"></div>
+  <div style="color:#718b91">INITIALIZING...</div>
+ </div>
 </div>
 
 <header>
-<nav>
-  <div class="logo">CHARACTER<span>//30</span></div>
-  <div class="nr">
-    <div class="lv">LEVEL <span id="levelTop">1</span></div>
-    <button class="btn danger" onclick="resetSystem()">RESET</button>
-  </div>
-</nav>
+ <div class="logo">EVOLUTION // 100</div>
+ <div class="status">● SYSTEM ONLINE</div>
+ <div class="level">LV <span id="level">1</span></div>
 </header>
 
+<!-- HERO -->
 <section class="hero">
-<div>
-  <div class="eyebrow">30 DAY PERSONAL DEVELOPMENT SYSTEM</div>
-  <h1>BUILD THE<br><span>CHARACTER.</span></h1>
-  <p>Calm under pressure. Sharp observation. Strategic thinking. Controlled communication. Consistent discipline. Fictional traits ko real-life skills mein convert karo.</p>
-  <div class="buttons">
-    <button class="btn" onclick="scrollToSystem()">ENTER SYSTEM</button>
-    <button class="btn" onclick="selectToday()">TODAY'S MISSION</button>
+ <div>
+  <h1>BUILD YOUR<br><span>OWN SYSTEM</span></h1>
+  <p>
+   100 days of discipline, observation, focus,
+   strategy, communication and confidence.
+  </p>
+
+  <div class="btns">
+   <button class="btn" onclick="startSystem()">START EVOLUTION</button>
+   <button class="btn" onclick="scrollToRoadmap()">VIEW ROADMAP</button>
   </div>
-</div>
+
+  <div class="core">
+   <div>
+    <div class="dayNum" id="heroDay">01</div>
+    <div class="dayLabel">CURRENT DAY</div>
+   </div>
+  </div>
+ </div>
 </section>
 
-<section class="hud">
-<div class="hg">
-  <div class="card"><div class="label">CURRENT LEVEL</div><div class="val" id="level">1</div></div>
-  <div class="card"><div class="label">TOTAL XP</div><div class="val"><span id="xp">0</span></div><div class="xp"><div class="fill" id="xpFill"></div></div></div>
-  <div class="card"><div class="label">DAYS COMPLETE</div><div class="val"><span id="completedDays">0</span>/30</div></div>
-  <div class="card"><div class="label">STREAK</div><div class="val"><span id="streak">0</span></div></div>
-</div>
+<!-- DASHBOARD -->
+<section class="section reveal">
+ <div class="sectionTitle">
+  <h2>SYSTEM DASHBOARD</h2>
+  <p>Current evolution status</p>
+ </div>
+
+ <div class="grid">
+  <div class="card">
+   <small>LEVEL</small>
+   <div class="big" id="dashLevel">01</div>
+  </div>
+
+  <div class="card">
+   <small>TOTAL XP</small>
+   <div class="big" id="totalXP">0000</div>
+  </div>
+
+  <div class="card">
+   <small>STREAK</small>
+   <div class="big" id="streak">00</div>
+  </div>
+
+  <div class="card">
+   <small>MISSIONS</small>
+   <div class="big" id="missions">00</div>
+  </div>
+ </div>
 </section>
 
-<main class="main" id="system">
+<!-- CURRENT ARC -->
+<section class="section reveal">
+ <div class="arcMain">
 
-<div class="title"><span>01 //</span> SELECT DAY</div>
-<div class="days" id="daySelector"></div>
-<div id="dayContainer"></div>
+  <div class="card">
+   <div class="arcName" id="currentArcName">THE RESET</div>
+   <div class="arcDesc" id="currentArcDesc">
+    Build the foundation: awareness, discipline and controlled action.
+   </div>
 
-<div class="phase">
-  <div class="line"></div>
-  <div class="title" style="margin:0">SYSTEM PRINCIPLES</div>
-  <div class="line"></div>
-</div>
+   <div class="progress">
+    <i id="arcProgress"></i>
+   </div>
 
-<div class="ig">
-  <div class="info"><div class="info-icon">01 / CONTROL</div><h3>React Less. Respond Better.</h3><p>Emotion ko destroy nahi karna. Observe karke response choose karna hai.</p></div>
-  <div class="info"><div class="info-icon">02 / OBSERVE</div><h3>Facts Before Assumptions.</h3><p>Jo pata hai aur jo assume kar rahe ho, dono ko separate rakho.</p></div>
-  <div class="info"><div class="info-icon">03 / DISCIPLINE</div><h3>Action Before Motivation.</h3><p>Motivation ka wait mat karo. Small action start karo.</p></div>
-  <div class="info"><div class="info-icon">04 / STRATEGY</div><h3>Goal → Options → Consequences.</h3><p>Important decision se pehle options aur consequences dekho.</p></div>
-  <div class="info"><div class="info-icon">05 / SOCIAL</div><h3>Understand. Don't Manipulate.</h3><p>People ko samjho, unki boundaries aur autonomy respect karo.</p></div>
-  <div class="info"><div class="info-icon">06 / IDENTITY</div><h3>Become Your Own Version.</h3><p>Characters reference hain. Final personality tumhari apni honi chahiye.</p></div>
-</div>
+   <div class="arcMeta">
+    <span id="arcDays">DAYS 01–10</span>
+    <span id="arcPercent">0%</span>
+   </div>
+  </div>
 
-</main>
+  <div class="card">
+   <small>GLOBAL PROGRESS</small>
+   <div class="big"><span id="globalPercent">0</span>%</div>
+   <div class="progress" style="margin-top:15px">
+    <i id="globalProgress"></i>
+   </div>
+  </div>
 
-<footer>
-<div>CHARACTER // 30 DAY SYSTEM</div>
-<div>LOCAL DATA • PRIVATE • OFFLINE</div>
+ </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section reveal">
+ <div class="sectionTitle">
+  <h2>SKILL MATRIX</h2>
+  <p>Six core attributes</p>
+ </div>
+
+ <div class="card skills">
+
+  <div>
+   <div class="skillHead">
+    <span>CONTROL</span><b id="skillControlText">0%</b>
+   </div>
+   <div class="skillBar"><i id="skillControl"></i></div>
+  </div>
+
+  <div>
+   <div class="skillHead">
+    <span>OBSERVATION</span><b id="skillObservationText">0%</b>
+   </div>
+   <div class="skillBar"><i id="skillObservation"></i></div>
+  </div>
+
+  <div>
+   <div class="skillHead">
+    <span>DISCIPLINE</span><b id="skillDisciplineText">0%</b>
+   </div>
+   <div class="skillBar"><i id="skillDiscipline"></i></div>
+  </div>
+
+  <div>
+   <div class="skillHead">
+    <span>STRATEGY</span><b id="skillStrategyText">0%</b>
+   </div>
+   <div class="skillBar"><i id="skillStrategy"></i></div>
+  </div>
+
+  <div>
+   <div class="skillHead">
+    <span>COMMUNICATION</span><b id="skillCommunicationText">0%</b>
+   </div>
+   <div class="skillBar"><i id="skillCommunication"></i></div>
+  </div>
+
+  <div>
+   <div class="skillHead">
+    <span>CONFIDENCE</span><b id="skillConfidenceText">0%</b>
+   </div>
+   <div class="skillBar"><i id="skillConfidence"></i></div>
+  </div>
+
+ </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="section reveal" id="roadmap">
+ <div class="sectionTitle">
+  <h2>100 DAY ROADMAP</h2>
+  <p>10 arcs × 10 days</p>
+ </div>
+
+ <div class="arcs">
+
+  <div class="arcCard active" data-arc="1" onclick="selectArc(1)">
+   <div class="arcTop"><span>ARC 01</span><span>01–10</span></div>
+   <h3>THE RESET</h3>
+   <p>Self-control + Discipline</p>
+  </div>
+
+  <div class="arcCard" data-arc="2" onclick="selectArc(2)">
+   <div class="arcTop"><span>ARC 02</span><span>11–20</span></div>
+   <h3>CONTROL ROOM</h3>
+   <p>Emotions + Body Language + Speech</p>
+  </div>
+
+  <div class="arcCard" data-arc="3" onclick="selectArc(3)">
+   <div class="arcTop"><span>ARC 03</span><span>21–30</span></div>
+   <h3>OBSERVER</h3>
+   <p>Observation + Memory + Attention</p>
+  </div>
+
+  <div class="arcCard" data-arc="4" onclick="selectArc(4)">
+   <div class="arcTop"><span>ARC 04</span><span>31–40</span></div>
+   <h3>MENTAL ENGINE</h3>
+   <p>Critical Thinking + Problem Solving</p>
+  </div>
+
+  <div class="arcCard" data-arc="5" onclick="selectArc(5)">
+   <div class="arcTop"><span>ARC 05</span><span>41–50</span></div>
+   <h3>STRATEGIST</h3>
+   <p>Planning + Decisions + Adaptability</p>
+  </div>
+
+  <div class="arcCard" data-arc="6" onclick="selectArc(6)">
+   <div class="arcTop"><span>ARC 06</span><span>51–60</span></div>
+   <h3>SOCIAL INTELLIGENCE</h3>
+   <p>Communication + Empathy + Boundaries</p>
+  </div>
+
+  <div class="arcCard" data-arc="7" onclick="selectArc(7)">
+   <div class="arcTop"><span>ARC 07</span><span>61–70</span></div>
+   <h3>LEADERSHIP</h3>
+   <p>Responsibility + Teamwork + Confidence</p>
+  </div>
+
+  <div class="arcCard" data-arc="8" onclick="selectArc(8)">
+   <div class="arcTop"><span>ARC 08</span><span>71–80</span></div>
+   <h3>PRESSURE</h3>
+   <p>Focus + Composure + Difficult Situations</p>
+  </div>
+
+  <div class="arcCard" data-arc="9" onclick="selectArc(9)">
+   <div class="arcTop"><span>ARC 09</span><span>81–90</span></div>
+   <h3>INTEGRATION</h3>
+   <p>All Skills Combined</p>
+  </div>
+
+  <div class="arcCard" data-arc="10" onclick="selectArc(10)">
+   <div class="arcTop"><span>ARC 10</span><span>91–100</span></div>
+   <h3>FINAL EVOLUTION</h3>
+   <p>Final Tests + Personal System</p>
+  </div>
+
+ </div>
+</section>
+
+<!-- 100 DAY MAP -->
+<section class="section reveal">
+ <div class="sectionTitle">
+  <h2>DAY MAP</h2>
+  <p>Complete each node to progress</p>
+ </div>
+
+ <div class="dayGrid" id="dayGrid"></div>
+</section>
+
+<!-- PRINCIPLES -->
+<section class="section reveal">
+ <div class="sectionTitle">
+  <h2>SYSTEM PRINCIPLES</h2>
+ </div>
+
+ <div class="principles">
+  <div class="card">
+   <h3>CONTROL</h3>
+   <p>Pause before reacting. Choose your response.</p>
+  </div>
+
+  <div class="card">
+   <h3>OBSERVE</h3>
+   <p>Notice details before forming conclusions.</p>
+  </div>
+
+  <div class="card">
+   <h3>DISCIPLINE</h3>
+   <p>Action first. Motivation comes second.</p>
+  </div>
+
+  <div class="card">
+   <h3>THINK</h3>
+   <p>Break problems into facts, options and consequences.</p>
+  </div>
+
+  <div class="card">
+   <h3>COMMUNICATE</h3>
+   <p>Listen clearly, speak calmly and respect boundaries.</p>
+  </div>
+
+  <div class="card">
+   <h3>ADAPT</h3>
+   <p>When the situation changes, adjust without losing your values.</p>
+  </div>
+ </div>
+</section>
+
+<footer style="text-align:center;padding:40px;color:#506b72">
+ EVOLUTION SYSTEM // 100 DAYS
 </footer>
 
-<div class="toast" id="toast"></div>
+<!-- TOAST -->
+<div id="toast">
+ <b id="toastTitle">SYSTEM</b>
+ <span id="toastMsg">Ready.</span>
+</div>
+
+<!-- ARC OVERLAY -->
+<div class="overlay" id="arcOverlay">
+ <div class="overlayBox">
+  <h2 id="arcOverlayTitle">ARC UNLOCKED</h2>
+  <p id="arcOverlayText"></p>
+  <button class="close" onclick="closeOverlay('arcOverlay')">CONTINUE</button>
+ </div>
+</div>
+
+<!-- LEVEL OVERLAY -->
+<div class="overlay" id="levelOverlay">
+ <div class="overlayBox">
+  <h2>LEVEL UP</h2>
+  <p id="levelOverlayText">SYSTEM CAPACITY INCREASED</p>
+  <button class="close" onclick="closeOverlay('levelOverlay')">CONTINUE</button>
+ </div>
+</div>
+
+<!-- FINAL -->
+<div class="overlay" id="finalOverlay">
+ <div class="overlayBox">
+  <h2>FINAL EVOLUTION</h2>
+  <p>100 DAYS COMPLETE.<br>THE SYSTEM IS NOW YOURS.</p>
+  <button class="close" onclick="closeOverlay('finalOverlay')">CLOSE</button>
+ </div>
+</div>
 
 <script>
-/* PART 2 YAHAN PASTE KARNA HAI */
-const days=[
-{day:1,title:"SELF CONTROL",phase:"FOUNDATION",subtitle:"Automatic reaction ko controlled response mein convert karo.",xp:100,m:[
-["2-SECOND PAUSE","Important response se pehle 2 seconds rukna."],
-["REACTION LOG","Aaj ke 3 impulsive moments identify karo."],
-["BREATH CONTROL","5 min quietly baithkar breathing observe karo."],
-["BETTER RESPONSE","Ek old situation ka better response likho."]],r:"Aaj maine kitni baar reaction control ki?"},
 
-{day:2,title:"FACE + BODY CONTROL",phase:"FOUNDATION",subtitle:"Relaxed aur controlled presence develop karo.",xp:100,m:[
-["NEUTRAL FACE","Mirror mein 3 min relaxed expression practice karo."],
-["POSTURE","Shoulders relaxed aur back naturally straight rakho."],
-["CONTROLLED MOVEMENT","Fidgeting notice karke reduce karo."],
-["EYE CONTACT","Normal eye contact practice karo; stare nahi."]],r:"Kya meri body language aaj zyada controlled thi?"},
+/* ================= SYSTEM STATE ================= */
 
-{day:3,title:"OBSERVATION MODE",phase:"FOUNDATION",subtitle:"Bolne se pehle environment aur details notice karo.",xp:110,m:[
-["5 DETAILS","Environment ki 5 neutral details yaad karo."],
-["MEMORY TEST","Place chhodne ke baad details bina dekhe likho."],
-["FACT VS ASSUMPTION","Ek situation ko FACT / ASSUMPTION / UNKNOWN mein divide karo."],
-["LISTEN","Ek conversation mein words aur facts par focus karo."]],r:"Aaj maine kya notice kiya jo normally miss kar deta?"},
+const savedDay = +localStorage.getItem("evolutionCurrentDay") || 1;
+const savedXP = +localStorage.getItem("evolutionXP") || 0;
+const savedStreak = +localStorage.getItem("evolutionStreak") || 0;
+const savedMissions = +localStorage.getItem("evolutionMissions") || 0;
 
-{day:4,title:"SPEECH CONTROL",phase:"FOUNDATION",subtitle:"Kam words. Clear words. Purposeful words.",xp:110,m:[
-["NO INTERRUPT","Aaj kisi ko unnecessarily interrupt mat karo."],
-["LISTEN FIRST","Complete listening ke baad reply karo."],
-["FILLER REDUCTION","Unnecessary filler words notice karo."],
-["PURPOSE CHECK","Bolne se pehle pucho: Kya ye zaroori hai?"]],r:"Aaj maine unnecessary kya bola?"},
+let currentDay = savedDay;
+let totalXP = savedXP;
+let streak = savedStreak;
+let missions = savedMissions;
 
-{day:5,title:"EMOTIONAL CONTROL",phase:"FOUNDATION",subtitle:"Emotion ko suppress nahi — understand aur regulate karo.",xp:120,m:[
-["NOTICE","Strong emotion aaye to uska naam identify karo."],
-["PAUSE","Anger mein immediate reply avoid karo."],
-["BREATH","Pressure mein breathing slow aur normal karo."],
-["NIGHT LOG","3 emotions aur unke triggers likho."]],r:"Aaj kis emotion ne mujhe sabse zyada influence kiya?"},
 
-{day:6,title:"DISCIPLINE TEST",phase:"FOUNDATION",subtitle:"Motivation ke bina bhi important task complete karo.",xp:120,m:[
-["CHOOSE TASK","Ek important study/work task select karo."],
-["START 5","Bas 5 minutes start karne ka rule use karo."],
-["FOCUS","30–45 min distraction-free kaam karo."],
-["FINISH","Mood ka wait kiye bina task complete karo."]],r:"Maine motivation ke bina kya complete kiya?"},
+/* ================= 100 DAY MAP ================= */
 
-{day:7,title:"SILENCE + AWARENESS",phase:"FOUNDATION",subtitle:"Unnecessary talking reduce karo, awareness increase karo.",xp:120,m:[
-["NO GOSSIP","Entertainment ke liye gossip avoid karo."],
-["NO ATTENTION SEEKING","Sirf attention ke liye baat mat karo."],
-["OBSERVE CONVERSATION","Words, tone aur context notice karo."],
-["RESPECTFUL SILENCE","Silence ko rudeness mat banao."]],r:"Kahan silence better tha aur kahan bolna zaroori tha?"},
+const grid = document.getElementById("dayGrid");
 
-{day:8,title:"THINK BEFORE ACTION",phase:"FOUNDATION",subtitle:"Goal → options → consequences se decision process karo.",xp:130,m:[
-["DEFINE GOAL","Important decision ka goal one sentence mein likho."],
-["3 OPTIONS","At least 3 realistic options likho."],
-["RISKS","Har option ka major risk identify karo."],
-["NEXT ACTION","Ek practical next step choose karo."]],r:"Kya maine aaj kisi decision ko better process kiya?"},
+for(let i=1;i<=100;i++){
+ const n=document.createElement("div");
+ n.className="dayNode";
+ n.dataset.day=i;
+ n.textContent=String(i).padStart(2,"0");
 
-{day:9,title:"PRESSURE CONTROL",phase:"FOUNDATION",subtitle:"Pressure mein panic ke bajay problem-solving.",xp:130,m:[
-["25 MIN FOCUS","25-min difficult task without phone complete karo."],
-["BREATHE","Difficulty par pause + breathing reset karo."],
-["BREAK TASK","Large problem ko smaller actions mein divide karo."],
-["CONTINUE","Frustration ke baad task continue karo."]],r:"Pressure mein meri sabse common reaction kya thi?"},
+ if(i%10===0)n.classList.add("test");
 
-{day:10,title:"FOUNDATION TEST",phase:"FOUNDATION",subtitle:"First 9 days ke skills ko ek situation mein combine karo.",xp:150,m:[
-["PAUSE","React karne se pehle pause."],
-["OBSERVE","Situation ke facts identify karo."],
-["THINK","2 possible responses socho."],
-["RESPOND","Useful respectful response choose karo."],
-["REVIEW","Old response vs new response likho."]],r:"Days 1–10 mein meri biggest improvement kya hai?"},
+ n.onclick=()=>openDay(i);
+ grid.appendChild(n);
+}
 
-{day:11,title:"DEEP OBSERVATION",phase:"DEVELOPMENT",subtitle:"Surface ke beyond context notice karo.",xp:130,m:[
-["ENVIRONMENT SCAN","Ek location ko 60 sec calmly observe karo."],
-["SEQUENCE","Events ka exact order yaad karo."],
-["CHANGE DETECTION","Environment mein 3 changes notice karo."],
-["VERIFY","Apni observation ko reality se compare karo."]],r:"Meri observation mein kya error tha?"},
 
-{day:12,title:"MEMORY TRAINING",phase:"DEVELOPMENT",subtitle:"Observation ko usable memory mein convert karo.",xp:130,m:[
-["10 DETAILS","10 neutral details remember karo."],
-["RECALL","10 min baad bina dekhe reproduce karo."],
-["SEQUENCE","Events ko correct order mein likho."],
-["ERROR LOG","Wrong memories ko mark karo."]],r:"Meri memory accuracy kaisi rahi?"},
-
-{day:13,title:"QUESTION QUALITY",phase:"DEVELOPMENT",subtitle:"Better questions = better information.",xp:130,m:[
-["OPEN QUESTION","Ek genuine open-ended question pucho."],
-["CLARIFY","Assume karne ke bajay clarification maango."],
-["WHY NOT FIRST","Instantly 'why' assume mat karo."],
-["LISTEN","Question ke baad answer genuinely suno."]],r:"Aaj ka best question kya tha?"},
-
-{day:14,title:"WEEK 2 CHECK",phase:"DEVELOPMENT",subtitle:"Observation + communication + self-control review.",xp:160,m:[
-["OBSERVATION SCORE","Observation ko 10 mein rate karo."],
-["SPEECH SCORE","Speech control ko 10 mein rate karo."],
-["CONTROL SCORE","Emotional control ko 10 mein rate karo."],
-["ONE FIX","Next week ke liye one weakness choose karo."]],r:"Ab mujhe kis skill par sabse zyada kaam karna hai?"},
-
-{day:15,title:"STRATEGIC THINKING",phase:"STRATEGY",subtitle:"Long-term consequences ko consider karna seekho.",xp:140,m:[
-["GOAL","Ek real goal choose karo."],
-["OPTIONS","3 possible approaches likho."],
-["SECOND EFFECT","Har option ka next consequence socho."],
-["ACTION","Smallest useful next action choose karo."]],r:"Maine immediate result ke beyond kya dekha?"},
-
-{day:16,title:"DECISION MAKING",phase:"STRATEGY",subtitle:"Fast nahi — clear decisions.",xp:140,m:[
-["FACTS","Available facts list karo."],
-["UNKNOWN","Missing information identify karo."],
-["TRADEOFF","Kya gain aur kya sacrifice hoga?"],
-["DECIDE","Evidence ke basis par action choose karo."]],r:"Kya mera decision evidence based tha?"},
-
-{day:17,title:"PROBLEM SOLVING",phase:"STRATEGY",subtitle:"Problem ko smaller solvable pieces mein todo.",xp:140,m:[
-["DEFINE","Problem exactly one sentence mein likho."],
-["BREAK","Problem ko 3 smaller parts mein divide karo."],
-["SOLVE","Ek part solve karo."],
-["REVIEW","Kya solution actual problem solve karta hai?"]],r:"Aaj maine kis problem ko simplify kiya?"},
-
-{day:18,title:"ADAPTABILITY",phase:"STRATEGY",subtitle:"Plan fail ho to strategy adjust karo.",xp:140,m:[
-["NOTICE FAILURE","Plan ke failure ko objectively identify karo."],
-["NO EXCUSES","Blame ke bajay cause identify karo."],
-["BACKUP","Alternative plan banao."],
-["CONTINUE","New approach se continue karo."]],r:"Plan fail hone par mera response kya tha?"},
-
-{day:19,title:"SOCIAL AWARENESS",phase:"STRATEGY",subtitle:"People ko understand karo bina manipulate kiye.",xp:150,m:[
-["LISTEN","Conversation mein complete attention do."],
-["BOUNDARIES","Dusre ki boundary respect karo."],
-["CONTEXT","Person ki situation consider karo."],
-["NO MANIPULATION","Information ko leverage mat banao."]],r:"Aaj maine kisi ko better samjha kaise?"},
-
-{day:20,title:"STRATEGY TEST",phase:"STRATEGY",subtitle:"Observation + emotion + communication + strategy combine karo.",xp:180,m:[
-["OBSERVE","Situation ke facts identify karo."],
-["CONTROL","Immediate emotional reaction delay karo."],
-["OPTIONS","3 responses create karo."],
-["CONSEQUENCES","Short + long-term effects dekho."],
-["ACT","Respectful useful response choose karo."]],r:"Pressure mein mera decision process kaisa raha?"},
-
-{day:21,title:"CONFIDENCE",phase:"INTEGRATION",subtitle:"Quiet confidence without superiority.",xp:150,m:[
-["POSTURE","Relaxed confident posture maintain karo."],
-["OWN MISTAKE","Ek mistake openly accept karo."],
-["NO APPROVAL","Har action ke liye validation mat seekho."],
-["CLEAR SPEECH","Apni baat clearly bolo."]],r:"Confidence aur arrogance ke beech difference kya samjha?"},
-
-{day:22,title:"FOCUS MODE",phase:"INTEGRATION",subtitle:"Distraction resistance build karo.",xp:150,m:[
-["PHONE AWAY","Deep work ke waqt phone physically door rakho."],
-["ONE TASK","Ek waqt mein ek priority."],
-["25–45 MIN","Focused session complete karo."],
-["FINISH","Unnecessary switching avoid karo."]],r:"Mera biggest distraction kya tha?"},
-
-{day:23,title:"DISCIPLINE UNDER FATIGUE",phase:"INTEGRATION",subtitle:"Energy low ho tab bhi reasonable consistency.",xp:150,m:[
-["MINIMUM STANDARD","Low-energy version of task define karo."],
-["START","5-minute start rule use karo."],
-["QUALITY","Speed ke bajay clean execution."],
-["RECOVER","Recovery ko ignore mat karo."]],r:"Maine discipline aur overdoing ke beech balance rakha?"},
-
-{day:24,title:"COMMUNICATION MASTERY",phase:"INTEGRATION",subtitle:"Clear, calm aur respectful communication.",xp:150,m:[
-["LISTEN","Conversation ka main point identify karo."],
-["CLARIFY","Unclear point par question pucho."],
-["SHORT ANSWER","Jitna required ho utna bolo."],
-["RESPECT","Disagreement ko personal attack mat banao."]],r:"Aaj meri communication mein kya improve hua?"},
-
-{day:25,title:"EMOTIONAL STABILITY",phase:"INTEGRATION",subtitle:"External situation ko internal control decide na karne do.",xp:160,m:[
-["TRIGGER","Aaj ka strongest trigger identify karo."],
-["PAUSE","Automatic response delay karo."],
-["CHOOSE","Intentional response select karo."],
-["RESET","Situation ke baad mind ko reset karo."]],r:"Kya main apna response control kar saka?"},
-
-{day:26,title:"HIGH QUALITY ROUTINE",phase:"INTEGRATION",subtitle:"Character ko routine mein embed karo.",xp:160,m:[
-["MORNING","Day ka #1 priority set karo."],
-["STUDY","Focused academic block complete karo."],
-["BODY","Planned movement/training complete karo."],
-["NIGHT","Review + tomorrow preparation."]],r:"Mera routine kitna automatic ho raha hai?"},
-
-{day:27,title:"PRESSURE SIMULATION",phase:"INTEGRATION",subtitle:"Controlled pressure mein complete system use karo.",xp:170,m:[
-["TIMED TASK","Ek difficult task timer ke saath complete karo."],
-["NO PANIC","Difficulty par breathing reset."],
-["STRATEGY","Task ko smaller steps mein divide karo."],
-["FINISH","Completion ke baad review."]],r:"Pressure ke under sabse strong skill kaunsi thi?"},
-
-{day:28,title:"IDENTITY SHIFT",phase:"INTEGRATION",subtitle:"System ko acting se identity habit mein convert karo.",xp:170,m:[
-["CALM","Aaj deliberate calmness maintain karo."],
-["OBSERVE","Important situations mein facts notice karo."],
-["DISCIPLINE","One difficult task complete karo."],
-["SPEAK","Purposeful communication maintain karo."]],r:"Mere behaviour mein kya genuinely natural hone laga?"},
-
-{day:29,title:"FINAL PREPARATION",phase:"FINAL",subtitle:"Last test se pehle complete system revise karo.",xp:180,m:[
-["REVIEW","Days 1–28 ke notes review karo."],
-["WEAKNESS","Top 3 weaknesses identify karo."],
-["STRENGTH","Top 3 strengths identify karo."],
-["PLAN","Next 30 days ke liye 3 permanent habits choose karo."]],r:"Main ab kis version se alag hoon?"},
-
-{day:30,title:"FINAL CHARACTER TEST",phase:"FINAL",subtitle:"30 days ke skills ko complete protocol mein combine karo.",xp:250,m:[
-["OBSERVE","Situation ko facts ke saath analyse karo."],
-["CONTROL","Emotional reaction ko pause karo."],
-["THINK","Multiple options create karo."],
-["STRATEGY","Consequences evaluate karo."],
-["COMMUNICATE","Clear aur respectful response do."],
-["ACT","Decision ko execute karo."],
-["REVIEW","Result se learn karo."]],r:"30 days ke baad mera strongest transformation kya hai?"}
-];
-let state=JSON.parse(localStorage.getItem("character30"))||{
- xp:0,completed:{},missions:{},reviews:{},scores:{}
-};
-let currentDay=1;
+/* ================= LOADER ================= */
 
 window.addEventListener("load",()=>{
  setTimeout(()=>{
   document.getElementById("loader").style.opacity="0";
-  setTimeout(()=>document.getElementById("loader").style.display="none",700)
- },1900);
- createParticles();
- renderDaySelector();
- renderDay(1);
- updateHUD();
+  setTimeout(()=>document.getElementById("loader").remove(),700);
+ },800);
+
+ document.querySelectorAll(".reveal").forEach(x=>{
+  setTimeout(()=>x.classList.add("visible"),300);
+ });
+
+ updateDashboard();
 });
 
-function createParticles(){
- for(let i=0;i<35;i++){
-  let p=document.createElement("div");
-  p.className="p";
-  p.style.left=Math.random()*100+"%";
-  p.style.animationDuration=8+Math.random()*15+"s";
-  p.style.animationDelay=Math.random()*10+"s";
-  document.body.appendChild(p);
- }
+
+/* ================= START ================= */
+
+function startSystem(){
+ document.getElementById("roadmap")
+ .scrollIntoView({behavior:"smooth"});
+
+ showToast(
+  "SYSTEM INITIALIZED",
+  "Day "+String(currentDay).padStart(2,"0")+" is ready."
+ );
 }
 
-function renderDaySelector(){
- let box=document.getElementById("daySelector");
- box.innerHTML="";
- days.forEach(d=>{
-  let b=document.createElement("button");
-  b.className="daybtn"+(d.day==currentDay?" active ":"")+(state.completed[d.day]?" done":"");
-  b.textContent=d.day;
-  b.onclick=()=>{
-   currentDay=d.day;
-   renderDaySelector();
-   renderDay(d.day);
-   document.getElementById("dayContainer").scrollIntoView({
-    behavior:"smooth",block:"start"
-   });
-  };
-  box.appendChild(b);
- });
+function scrollToRoadmap(){
+ document.getElementById("roadmap")
+ .scrollIntoView({behavior:"smooth"});
 }
 
-function renderDay(n){
- let d=days.find(x=>x.day==n);
- let count=d.m.filter((_,i)=>state.missions[`${n}-${i}`]).length;
- let all=count==d.m.length;
 
- document.getElementById("dayContainer").innerHTML=`
- <section class="panel">
-  <div class="dhead">
-   <div>
-    <div class="dn">DAY ${String(d.day).padStart(2,"0")} // ${d.phase}</div>
-    <div class="dt">${d.title}</div>
-    <div class="ds">${d.subtitle}</div>
-   </div>
-   <div class="badge">+${d.xp} XP</div>
-  </div>
+/* ================= ARC ================= */
 
-  <div>
-   ${d.m.map((m,i)=>{
-    let k=`${n}-${i}`,c=!!state.missions[k];
-    return `
-    <label class="mission ${c?"done":""}">
-     <input type="checkbox" ${c?"checked":""}
-      onchange="toggleMission(${n},${i})">
-     <div>
-      <div class="mt">${m[0]}</div>
-      <div class="md">${m[1]}</div>
-     </div>
-    </label>`;
-   }).join("")}
-  </div>
+function selectArc(arc){
 
-  <div class="review">
-   <div class="title" style="font-size:15px">NIGHT REVIEW</div>
-   <p style="color:var(--m);margin-bottom:10px">${d.r}</p>
+ const start=(arc-1)*10+1;
 
-   <textarea id="reviewText"
-    placeholder="Write your thoughts here..."
-    oninput="saveReview(${n})">${state.reviews[n]||""}</textarea>
-
-   <div class="rg">
-    ${["COMPOSURE","OBSERVATION","DISCIPLINE"].map(s=>`
-     <div class="rc">
-      <label>${s} / 10</label>
-      <input type="number" min="0" max="10"
-       value="${state.scores[`${n}-${s}`]||""}"
-       onchange="saveScore(${n},'${s}',this.value)">
-     </div>
-    `).join("")}
-   </div>
-
-   <div class="complete">
-    <div>
-     Missions:
-     <strong style="color:var(--c)">
-      ${count}/${d.m.length}
-     </strong>
-    </div>
-    <button class="btn" onclick="completeDay(${n})">
-     ${all?"DAY COMPLETED":"COMPLETE DAY"}
-    </button>
-   </div>
-  </div>
- </section>`;
-}
-
-function toggleMission(d,i){
- let k=`${d}-${i}`;
- state.missions[k]=!state.missions[k];
- save();
- renderDay(d);
- renderDaySelector();
- updateHUD();
-
- if(state.missions[k]) showToast("+ MISSION XP");
-}
-
-function completeDay(n){
- let d=days.find(x=>x.day==n);
- let ok=d.m.every((_,i)=>state.missions[`${n}-${i}`]);
-
- if(!ok){
-  showToast("Complete all missions first.");
+ if(start>currentDay){
+  showToast("ARC LOCKED","Complete previous arcs first.");
   return;
  }
 
- if(!state.completed[n]){
-  state.completed[n]=true;
-  state.xp+=d.xp;
-  save();
-  renderDaySelector();
-  renderDay(n);
-  updateHUD();
-  showToast(`DAY ${n} COMPLETE // +${d.xp} XP`);
- }else{
-  showToast("DAY ALREADY COMPLETED");
- }
+ document.querySelectorAll(".arcCard")
+ .forEach(x=>x.classList.remove("active"));
+
+ const card=document.querySelector(`[data-arc="${arc}"]`);
+ if(card)card.classList.add("active");
+
+ showToast(
+  "ARC SELECTED",
+  "Arc "+String(arc).padStart(2,"0")+" loaded."
+ );
 }
 
-function saveReview(d){
- state.reviews[d]=document.getElementById("reviewText").value;
- save();
-}
 
-function saveScore(d,s,v){
- v=Math.max(0,Math.min(10,parseInt(v)||0));
- state.scores[`${d}-${s}`]=v;
- save();
-}
+/* ================= DAY ================= */
 
-function updateHUD(){
- let xp=state.xp;
- let l=Math.floor(xp/500)+1;
+function openDay(day){
 
- document.getElementById("xp").textContent=xp;
- document.getElementById("level").textContent=l;
- document.getElementById("levelTop").textContent=l;
- document.getElementById("completedDays").textContent=
-  Object.keys(state.completed).length;
-
- document.getElementById("xpFill").style.width=
-  (xp%500/500*100)+"%";
-
- calculateStreak();
-}
-
-function calculateStreak(){
- let s=0;
- for(let i=30;i>=1;i--){
-  if(state.completed[i])s++;
-  else break;
- }
- document.getElementById("streak").textContent=s;
-}
-
-function selectToday(){
- let n=30;
- for(let i=1;i<=30;i++){
-  if(!state.completed[i]){
-   n=i;
-   break;
-  }
+ if(day>currentDay){
+  showToast("DAY LOCKED","Complete the current day first.");
+  return;
  }
 
- currentDay=n;
- renderDaySelector();
- renderDay(n);
+ document.querySelectorAll(".dayNode")
+ .forEach(x=>x.classList.remove("active"));
 
- document.getElementById("system").scrollIntoView({
-  behavior:"smooth"
+ document.querySelector(`[data-day="${day}"]`)
+ ?.classList.add("active");
+
+ showToast(
+  "DAY "+String(day).padStart(2,"0"),
+  day%10===0 ? "ARC TEST" : "Training node activated."
+ );
+}
+
+
+/* ================= DASHBOARD ================= */
+
+function updateDashboard(){
+
+ const level=Math.floor(totalXP/500)+1;
+
+ document.getElementById("level").textContent=level;
+ document.getElementById("dashLevel").textContent=
+  String(level).padStart(2,"0");
+
+ document.getElementById("totalXP").textContent=
+  String(totalXP).padStart(4,"0");
+
+ document.getElementById("streak").textContent=
+  String(streak).padStart(2,"0");
+
+ document.getElementById("missions").textContent=
+  String(missions).padStart(2,"0");
+
+ document.getElementById("heroDay").textContent=
+  String(Math.min(currentDay,100)).padStart(2,"0");
+
+ const percent=Math.min(100,((currentDay-1)/100)*100);
+
+ document.getElementById("globalPercent").textContent=
+  Math.floor(percent);
+
+ document.getElementById("globalProgress").style.width=
+  percent+"%";
+
+ document.querySelectorAll(".dayNode").forEach(x=>{
+  const d=+x.dataset.day;
+  x.classList.toggle("done",d<currentDay);
+  x.classList.toggle("active",d===currentDay);
  });
+
+ localStorage.setItem("evolutionCurrentDay",currentDay);
+ localStorage.setItem("evolutionXP",totalXP);
+ localStorage.setItem("evolutionStreak",streak);
+ localStorage.setItem("evolutionMissions",missions);
 }
 
-function scrollToSystem(){
- document.getElementById("system").scrollIntoView({
-  behavior:"smooth"
- });
-}
 
-function resetSystem(){
- if(!confirm(
-  "WARNING: All 30-day progress, XP, reviews and scores will be deleted."
- ))return;
-
- localStorage.removeItem("character30");
-
- state={
-  xp:0,
-  completed:{},
-  missions:{},
-  reviews:{},
-  scores:{}
- };
-
- currentDay=1;
- renderDaySelector();
- renderDay(1);
- updateHUD();
- showToast("SYSTEM RESET");
-}
-
-function save(){
- localStorage.setItem("character30",JSON.stringify(state));
-}
+/* ================= TOAST ================= */
 
 let toastTimer;
 
-function showToast(m){
- let t=document.getElementById("toast");
- t.textContent=m;
+function showToast(title,msg){
+
+ const t=document.getElementById("toast");
+
+ document.getElementById("toastTitle").textContent=title;
+ document.getElementById("toastMsg").textContent=msg;
+
  t.classList.add("show");
+
  clearTimeout(toastTimer);
 
  toastTimer=setTimeout(()=>{
   t.classList.remove("show");
- },2200);
+ },2500);
 }
+
+
+/* ================= OVERLAY ================= */
+
+function closeOverlay(id){
+ document.getElementById(id).classList.remove("show");
+}
+
 </script>
+
+<!-- ================= PART 2 : ARC 01–02 ================= -->
+
+<script>
+
+/* ================= ARC DATA ================= */
+
+const ARC_DATA = {
+
+1:{
+ name:"THE RESET",
+ days:"01–10",
+ skill:"DISCIPLINE + CONTROL",
+ desc:"Build the foundation: awareness, discipline and controlled action.",
+ stages:[
+  ["01–02","AWARENESS"],
+  ["03–04","REACTION CONTROL"],
+  ["05–06","DISCIPLINE LOOP"],
+  ["07–08","FOCUS"],
+  ["09","INTEGRATION"],
+  ["10","ARC TEST"]
+ ],
+ challenges:[3,5,7,9,10],
+ reward:500
+},
+
+2:{
+ name:"CONTROL ROOM",
+ days:"11–20",
+ skill:"EMOTIONAL CONTROL + COMMUNICATION",
+ desc:"Learn to pause, regulate reactions, control speech and communicate clearly.",
+ stages:[
+  ["11–12","EMOTION AWARENESS"],
+  ["13–14","THE PAUSE"],
+  ["15–16","BODY LANGUAGE"],
+  ["17–18","SPEECH CONTROL"],
+  ["19","COMPOSURE"],
+  ["20","ARC TEST"]
+ ],
+ challenges:[13,15,17,19,20],
+ reward:650
+}
+
+};
+
+
+/* ================= DAY DATA ================= */
+
+const DAY_STRUCTURE={
+
+1:{
+ type:"START",
+ title:"SYSTEM INITIALIZATION",
+ focus:"Awareness",
+ xp:40
+},
+
+2:{
+ type:"TRAINING",
+ title:"PATTERN RECOGNITION",
+ focus:"Notice your habits before changing them.",
+ xp:45
+},
+
+3:{
+ type:"CHALLENGE",
+ title:"THE PAUSE",
+ focus:"Pause before reacting.",
+ xp:60
+},
+
+4:{
+ type:"TRAINING",
+ title:"DELIBERATE ACTION",
+ focus:"Do important actions consciously instead of automatically.",
+ xp:45
+},
+
+5:{
+ type:"CHALLENGE",
+ title:"DISCIPLINE CHECK",
+ focus:"Complete one planned task without unnecessary delay.",
+ xp:65
+},
+
+6:{
+ type:"TRAINING",
+ title:"ROUTINE STABILITY",
+ focus:"Build consistency through a simple repeatable routine.",
+ xp:45
+},
+
+7:{
+ type:"CHALLENGE",
+ title:"FOCUS LOCK",
+ focus:"Single-task without unnecessary switching.",
+ xp:65
+},
+
+8:{
+ type:"TRAINING",
+ title:"SINGLE-TASK MODE",
+ focus:"Give full attention to one activity.",
+ xp:45
+},
+
+9:{
+ type:"INTEGRATION",
+ title:"FOUNDATION INTEGRATION",
+ focus:"Combine awareness, discipline and controlled action.",
+ xp:80
+},
+
+10:{
+ type:"ARC TEST",
+ title:"THE RESET TEST",
+ focus:"Demonstrate the complete Arc 01 skill set.",
+ xp:150
+},
+
+11:{
+ type:"START",
+ title:"CONTROL ROOM INITIALIZATION",
+ focus:"Understand your emotional triggers and reactions.",
+ xp:50
+},
+
+12:{
+ type:"TRAINING",
+ title:"EMOTION MAPPING",
+ focus:"Identify what situations create different reactions.",
+ xp:50
+},
+
+13:{
+ type:"CHALLENGE",
+ title:"RESPONSE GAP",
+ focus:"Create a short pause between stimulus and response.",
+ xp:70
+},
+
+14:{
+ type:"TRAINING",
+ title:"COMPOSURE PRACTICE",
+ focus:"Return to a calm state before continuing an activity.",
+ xp:50
+},
+
+15:{
+ type:"CHALLENGE",
+ title:"BODY LANGUAGE CHECK",
+ focus:"Use relaxed posture, eye contact and controlled movement.",
+ xp:70
+},
+
+16:{
+ type:"TRAINING",
+ title:"ACTIVE LISTENING",
+ focus:"Listen completely before preparing your response.",
+ xp:50
+},
+
+17:{
+ type:"CHALLENGE",
+ title:"SPEECH CONTROL",
+ focus:"Speak clearly, calmly and only as much as necessary.",
+ xp:70
+},
+
+18:{
+ type:"TRAINING",
+ title:"LISTEN BEFORE RESPONSE",
+ focus:"Understand the message before answering.",
+ xp:50
+},
+
+19:{
+ type:"INTEGRATION",
+ title:"COMPOSURE INTEGRATION",
+ focus:"Combine emotional control, body language and communication.",
+ xp:90
+},
+
+20:{
+ type:"ARC TEST",
+ title:"CONTROL ROOM TEST",
+ focus:"Demonstrate calm communication and controlled responses.",
+ xp:175
+}
+
+};
+
+
+/* ================= DAY DESCRIPTIONS ================= */
+
+const DAY_DESCRIPTION={
+
+1:
+"Begin the system. Observe your normal routine and identify one behaviour you want to improve.",
+
+2:
+"Notice repeated habits during the day. Do not judge them—simply identify the pattern.",
+
+3:
+"When something triggers an immediate reaction, create a deliberate pause before responding.",
+
+4:
+"Choose one normal activity and perform it with full awareness instead of autopilot.",
+
+5:
+"Pick one useful task and finish it without repeatedly delaying or negotiating with yourself.",
+
+6:
+"Create a small routine that is realistic enough to repeat consistently.",
+
+7:
+"Choose one important activity and protect it from unnecessary distractions.",
+
+8:
+"Practice single-tasking. Finish one meaningful task before moving to another.",
+
+9:
+"Combine awareness, controlled reactions, disciplined action and focused work.",
+
+10:
+"ARC TEST: Complete a controlled sequence involving awareness, focus, discipline and response control.",
+
+11:
+"Begin Arc 02 by identifying how emotions influence your thoughts, actions and communication.",
+
+12:
+"Map common situations that produce excitement, irritation, nervousness or distraction.",
+
+13:
+"Practice creating a short response gap instead of reacting instantly.",
+
+14:
+"When you notice tension or frustration, deliberately return to a calmer state before continuing.",
+
+15:
+"Check your posture, facial expression, movement and eye contact during normal conversations.",
+
+16:
+"Listen to the complete message before deciding what you want to say.",
+
+17:
+"Practice clear and measured speech. Avoid unnecessary rushing, interrupting or over-explaining.",
+
+18:
+"Before answering someone, make sure you understood what they actually said.",
+
+19:
+"Combine calm emotion regulation, relaxed body language and clear communication.",
+
+20:
+"ARC TEST: Demonstrate controlled reactions, attentive listening, composed body language and clear speech."
+
+};
+
+
+/* ================= ARC UI ================= */
+
+function loadArcData(arcNumber){
+
+ const arc=ARC_DATA[arcNumber];
+
+ if(!arc)return;
+
+ document.getElementById("currentArcName").textContent=
+  arc.name;
+
+ document.getElementById("currentArcDesc").textContent=
+  arc.desc;
+
+ document.getElementById("arcDays").textContent=
+  "DAYS "+arc.days;
+
+ updateArcProgress(arcNumber);
+
+}
+
+
+/* ================= ARC PROGRESS ================= */
+
+function updateArcProgress(arcNumber){
+
+ const start=(arcNumber-1)*10+1;
+ const end=start+9;
+
+ let progress=0;
+
+ if(currentDay>end){
+  progress=100;
+ }else if(currentDay>=start){
+  progress=((currentDay-start)/10)*100;
+ }
+
+ progress=Math.max(0,Math.min(100,progress));
+
+ document.getElementById("arcProgress").style.width=
+  progress+"%";
+
+ document.getElementById("arcPercent").textContent=
+  Math.floor(progress)+"%";
+}
+
+
+/* ================= DAY OVERLAY ================= */
+
+function showDay(day){
+
+ const data=DAY_STRUCTURE[day];
+
+ if(!data)return;
+
+ let old=document.getElementById("dayOverlay");
+
+ if(old)old.remove();
+
+ const overlay=document.createElement("div");
+
+ overlay.className="overlay show";
+ overlay.id="dayOverlay";
+
+ overlay.innerHTML=`
+ <div class="overlayBox">
+
+  <div style="
+   color:#00eaff;
+   font-size:12px;
+   letter-spacing:2px;
+   margin-bottom:10px;
+  ">
+   DAY ${String(day).padStart(2,"0")}
+  </div>
+
+  <h2>${data.title}</h2>
+
+  <p style="color:#00eaff">
+   ${data.type}
+  </p>
+
+  <p>
+   <b>FOCUS</b><br>
+   ${data.focus}
+  </p>
+
+  <p>
+   ${DAY_DESCRIPTION[day]}
+  </p>
+
+  <p style="
+   color:#ffcf4a;
+   font-family:Orbitron;
+  ">
+   +${data.xp} XP
+  </p>
+
+  <button class="close"
+   onclick="document.getElementById('dayOverlay').remove()">
+   CLOSE
+  </button>
+
+ </div>
+ `;
+
+ document.body.appendChild(overlay);
+}
+
+
+/* ================= OPEN DAY OVERRIDE ================= */
+
+function openDay(day){
+
+ if(day>currentDay){
+
+  showToast(
+   "DAY LOCKED",
+   "Complete Day "+String(currentDay).padStart(2,"0")+" first."
+  );
+
+  return;
+ }
+
+ document.querySelectorAll(".dayNode")
+ .forEach(x=>x.classList.remove("active"));
+
+ const node=document.querySelector(
+  `[data-day="${day}"]`
+ );
+
+ if(node)node.classList.add("active");
+
+ showDay(day);
+}
+
+
+/* ================= ARC SELECTION ================= */
+
+function selectArc(arc){
+
+ const start=(arc-1)*10+1;
+
+ if(start>currentDay){
+
+  showToast(
+   "ARC LOCKED",
+   "Complete the previous arc first."
+  );
+
+  return;
+ }
+
+ document.querySelectorAll(".arcCard")
+ .forEach(x=>x.classList.remove("active"));
+
+ const card=document.querySelector(
+  `[data-arc="${arc}"]`
+ );
+
+ if(card)card.classList.add("active");
+
+ loadArcData(arc);
+
+ document.getElementById("roadmap")
+ .scrollIntoView({behavior:"smooth"});
+
+ showToast(
+  "ARC LOADED",
+  ARC_DATA[arc].name
+ );
+}
+
+
+/* ================= COMPLETE DAY ================= */
+
+function completeDay(){
+
+ const data=DAY_STRUCTURE[currentDay];
+
+ if(!data)return;
+
+ totalXP+=data.xp;
+ missions++;
+ streak++;
+
+ const completed=currentDay;
+
+ currentDay++;
+
+ /* ARC TEST BONUS */
+
+ if(completed%10===0){
+
+  const arc=Math.ceil(completed/10);
+  totalXP+=ARC_DATA[arc]?.reward || 0;
+
+  showToast(
+   "ARC COMPLETE",
+   "Arc "+String(arc).padStart(2,"0")+" cleared."
+  );
+
+ }else{
+
+  showToast(
+   "MISSION COMPLETE",
+   "+"+data.xp+" XP"
+  );
+ }
+
+ if(currentDay>100){
+
+  currentDay=100;
+
+  document.getElementById("finalOverlay")
+  .classList.add("show");
+
+ }else{
+
+  const newArc=Math.ceil(currentDay/10);
+
+  loadArcData(newArc);
+
+ }
+
+ updateDashboard();
+
+}
+
+
+/* ================= DAY OVERLAY COMPLETE BUTTON ================= */
+
+document.addEventListener("click",e=>{
+
+ if(e.target.id==="completeDayBtn"){
+  completeDay();
+ }
+
+});
+
+
+/* ================= UPGRADE DAY OVERLAY ================= */
+
+const oldOpenDay=openDay;
+
+openDay=function(day){
+
+ if(day>currentDay){
+
+  showToast(
+   "DAY LOCKED",
+   "Complete the current mission first."
+  );
+
+  return;
+ }
+
+ document.querySelectorAll(".dayNode")
+ .forEach(x=>x.classList.remove("active"));
+
+ document.querySelector(
+  `[data-day="${day}"]`
+ )?.classList.add("active");
+
+ const data=DAY_STRUCTURE[day];
+
+ if(!data)return;
+
+ let old=document.getElementById("dayOverlay");
+ if(old)old.remove();
+
+ const overlay=document.createElement("div");
+
+ overlay.className="overlay show";
+ overlay.id="dayOverlay";
+
+ overlay.innerHTML=`
+ <div class="overlayBox">
+
+  <div style="
+   color:#00eaff;
+   font-size:12px;
+   letter-spacing:2px;
+  ">
+   DAY ${String(day).padStart(2,"0")}
+  </div>
+
+  <h2 style="margin-top:10px">
+   ${data.title}
+  </h2>
+
+  <p style="color:#00eaff">
+   ${data.type}
+  </p>
+
+  <p>
+   <b>FOCUS</b><br>
+   ${data.focus}
+  </p>
+
+  <p>${DAY_DESCRIPTION[day]}</p>
+
+  <p style="
+   color:#ffcf4a;
+   font-family:Orbitron;
+  ">
+   +${data.xp} XP
+  </p>
+
+  <button
+   id="completeDayBtn"
+   class="btn"
+   style="margin-top:10px">
+   COMPLETE MISSION
+  </button>
+
+  <br>
+
+  <button
+   class="close"
+   onclick="document.getElementById('dayOverlay').remove()">
+   CLOSE
+  </button>
+
+ </div>
+ `;
+
+ document.body.appendChild(overlay);
+};
+
+
+/* ================= INITIAL ARC ================= */
+
+loadArcData(Math.ceil(currentDay/10));
+updateDashboard();
+
+          </script>
+<!-- ================= PART 3 : ARC 03–05 ================= -->
+
+<script>
+
+/* =========================================================
+   ARC 03 — OBSERVER
+   DAY 21–30
+========================================================= */
+
+ARC_DATA[3]={
+ name:"OBSERVER",
+ days:"21–30",
+ skill:"OBSERVATION + MEMORY + ATTENTION",
+ desc:"Train attention, notice useful details and improve recall without jumping to conclusions.",
+ stages:[
+  ["21–22","ATTENTION RESET"],
+  ["23–24","DETAIL DETECTION"],
+  ["25–26","MEMORY TRAINING"],
+  ["27–28","ENVIRONMENT SCAN"],
+  ["29","INTEGRATION"],
+  ["30","ARC TEST"]
+ ],
+ challenges:[23,25,27,29,30],
+ reward:800
+};
+
+
+/* =========================================================
+   ARC 04 — MENTAL ENGINE
+   DAY 31–40
+========================================================= */
+
+ARC_DATA[4]={
+ name:"MENTAL ENGINE",
+ days:"31–40",
+ skill:"CRITICAL THINKING + PROBLEM SOLVING",
+ desc:"Learn to separate facts from assumptions, break problems down and build logical solutions.",
+ stages:[
+  ["31–32","FACT VS ASSUMPTION"],
+  ["33–34","PROBLEM BREAKDOWN"],
+  ["35–36","LOGICAL OPTIONS"],
+  ["37–38","ERROR DETECTION"],
+  ["39","INTEGRATION"],
+  ["40","ARC TEST"]
+ ],
+ challenges:[33,35,37,39,40],
+ reward:950
+};
+
+
+/* =========================================================
+   ARC 05 — STRATEGIST
+   DAY 41–50
+========================================================= */
+
+ARC_DATA[5]={
+ name:"STRATEGIST",
+ days:"41–50",
+ skill:"PLANNING + DECISION + ADAPTABILITY",
+ desc:"Build practical planning skills, compare options and adapt when circumstances change.",
+ stages:[
+  ["41–42","OBJECTIVE SETTING"],
+  ["43–44","PLANNING"],
+  ["45–46","DECISION MAKING"],
+  ["47–48","ADAPTABILITY"],
+  ["49","INTEGRATION"],
+  ["50","ARC TEST"]
+ ],
+ challenges:[43,45,47,49,50],
+ reward:1100
+};
+
+
+/* =========================================================
+   DAY 21–30
+========================================================= */
+
+Object.assign(DAY_STRUCTURE,{
+
+21:{
+ type:"START",
+ title:"OBSERVER INITIALIZATION",
+ focus:"Attention",
+ xp:55
+},
+
+22:{
+ type:"TRAINING",
+ title:"ATTENTION RESET",
+ focus:"Bring your attention back whenever it drifts.",
+ xp:55
+},
+
+23:{
+ type:"CHALLENGE",
+ title:"DETAIL DETECTION",
+ focus:"Notice useful details in your surroundings.",
+ xp:75
+},
+
+24:{
+ type:"TRAINING",
+ title:"LISTENING DEPTH",
+ focus:"Listen for the complete meaning instead of only key words.",
+ xp:55
+},
+
+25:{
+ type:"CHALLENGE",
+ title:"MEMORY LOCK",
+ focus:"Observe a short set of information and recall it later.",
+ xp:80
+},
+
+26:{
+ type:"TRAINING",
+ title:"RECALL PRACTICE",
+ focus:"Recall information without immediately checking the source.",
+ xp:55
+},
+
+27:{
+ type:"CHALLENGE",
+ title:"ENVIRONMENT SCAN",
+ focus:"Observe your environment and identify relevant changes or patterns.",
+ xp:80
+},
+
+28:{
+ type:"TRAINING",
+ title:"FOCUS FILTER",
+ focus:"Separate useful information from background distractions.",
+ xp:60
+},
+
+29:{
+ type:"INTEGRATION",
+ title:"OBSERVER INTEGRATION",
+ focus:"Combine attention, observation, memory and accurate recall.",
+ xp:100
+},
+
+30:{
+ type:"ARC TEST",
+ title:"OBSERVER TEST",
+ focus:"Demonstrate focused observation, memory and accurate reporting.",
+ xp:200
+},
+
+
+/* =========================================================
+   DAY 31–40
+========================================================= */
+
+31:{
+ type:"START",
+ title:"MENTAL ENGINE INITIALIZATION",
+ focus:"Critical thinking",
+ xp:60
+},
+
+32:{
+ type:"TRAINING",
+ title:"FACT CHECK",
+ focus:"Separate what you know from what you assume.",
+ xp:60
+},
+
+33:{
+ type:"CHALLENGE",
+ title:"FACT VS ASSUMPTION",
+ focus:"Break a situation into facts, assumptions and unknowns.",
+ xp:85
+},
+
+34:{
+ type:"TRAINING",
+ title:"PROBLEM BREAKDOWN",
+ focus:"Turn a large problem into smaller manageable parts.",
+ xp:60
+},
+
+35:{
+ type:"CHALLENGE",
+ title:"PROBLEM ARCHITECT",
+ focus:"Break one real problem into clear steps.",
+ xp:90
+},
+
+36:{
+ type:"TRAINING",
+ title:"OPTION BUILDER",
+ focus:"Generate multiple reasonable solutions before choosing one.",
+ xp:65
+},
+
+37:{
+ type:"CHALLENGE",
+ title:"LOGIC CHECK",
+ focus:"Find weak assumptions or errors in a simple argument.",
+ xp:90
+},
+
+38:{
+ type:"TRAINING",
+ title:"CONSEQUENCE MAP",
+ focus:"Think about short-term and longer-term consequences.",
+ xp:65
+},
+
+39:{
+ type:"INTEGRATION",
+ title:"MENTAL ENGINE INTEGRATION",
+ focus:"Combine facts, logic, problem breakdown and consequences.",
+ xp:110
+},
+
+40:{
+ type:"ARC TEST",
+ title:"MENTAL ENGINE TEST",
+ focus:"Solve a structured problem using a clear logical process.",
+ xp:225
+},
+
+
+/* =========================================================
+   DAY 41–50
+========================================================= */
+
+41:{
+ type:"START",
+ title:"STRATEGIST INITIALIZATION",
+ focus:"Planning",
+ xp:65
+},
+
+42:{
+ type:"TRAINING",
+ title:"OBJECTIVE LOCK",
+ focus:"Define exactly what you want to accomplish.",
+ xp:65
+},
+
+43:{
+ type:"CHALLENGE",
+ title:"MISSION PLAN",
+ focus:"Create a practical step-by-step plan for a real task.",
+ xp:95
+},
+
+44:{
+ type:"TRAINING",
+ title:"PRIORITY ORDER",
+ focus:"Separate important tasks from less important tasks.",
+ xp:65
+},
+
+45:{
+ type:"CHALLENGE",
+ title:"DECISION MATRIX",
+ focus:"Compare options using evidence, effort and consequences.",
+ xp:100
+},
+
+46:{
+ type:"TRAINING",
+ title:"SECOND PLAN",
+ focus:"Create an alternative when the original plan may fail.",
+ xp:70
+},
+
+47:{
+ type:"CHALLENGE",
+ title:"ADAPTATION TEST",
+ focus:"Adjust your plan when one condition changes.",
+ xp:100
+},
+
+48:{
+ type:"TRAINING",
+ title:"RESOURCE CONTROL",
+ focus:"Use available time, attention and resources efficiently.",
+ xp:70
+},
+
+49:{
+ type:"INTEGRATION",
+ title:"STRATEGY INTEGRATION",
+ focus:"Combine planning, priorities, decisions and adaptability.",
+ xp:120
+},
+
+50:{
+ type:"ARC TEST",
+ title:"STRATEGIST TEST",
+ focus:"Plan, execute, evaluate and adapt a complete task.",
+ xp:250
+}
+
+});
+
+
+/* =========================================================
+   DAY DESCRIPTIONS 21–50
+========================================================= */
+
+Object.assign(DAY_DESCRIPTION,{
+
+21:
+"Begin the Observer arc. Your goal is not to notice everything, but to notice what is actually useful.",
+
+22:
+"Whenever your attention drifts during a task, calmly bring it back to the task.",
+
+23:
+"Observe a familiar environment and identify several useful details you normally overlook.",
+
+24:
+"During a conversation or explanation, focus on understanding the complete message before responding.",
+
+25:
+"Study a small amount of information, put it away, then try to recall the important points.",
+
+26:
+"Practice recalling information from memory before checking whether your recall was correct.",
+
+27:
+"Perform a short environment scan. Look for changes, unusual details and relevant information.",
+
+28:
+"Practice filtering background noise and distractions so that your attention stays on the important signal.",
+
+29:
+"Combine focused attention, observation, memory and accurate recall into one controlled session.",
+
+30:
+"ARC TEST: Observe, remember and report information accurately without adding assumptions.",
+
+
+31:
+"Begin the Mental Engine arc by training yourself to examine information before accepting a conclusion.",
+
+32:
+"For one situation, write down what is directly known and what you are only assuming.",
+
+33:
+"Take a simple claim or situation and divide it into facts, assumptions and information that is still unknown.",
+
+34:
+"Choose a problem and divide it into smaller components so the actual source becomes easier to understand.",
+
+35:
+"Select a real but manageable problem and build a step-by-step breakdown before solving it.",
+
+36:
+"Generate multiple possible solutions before selecting one. Avoid locking onto the first idea.",
+
+37:
+"Examine an argument or explanation and identify unsupported assumptions or logical gaps.",
+
+38:
+"Before taking an action, consider what could happen immediately and what could happen later.",
+
+39:
+"Combine fact checking, problem breakdown, solution generation and consequence analysis.",
+
+40:
+"ARC TEST: Solve a structured problem and explain your reasoning using facts, assumptions, options and consequences.",
+
+
+41:
+"Begin the Strategist arc by learning to turn vague intentions into clear objectives.",
+
+42:
+"Choose one goal and define what completion actually looks like.",
+
+43:
+"Create a practical mission plan with a clear objective, steps and a realistic order.",
+
+44:
+"Sort your tasks by importance and urgency instead of treating everything as equally important.",
+
+45:
+"Compare multiple options using evidence, effort, risks and likely consequences.",
+
+46:
+"Create a backup approach for an important task in case your first plan becomes impossible.",
+
+47:
+"Change one condition in your plan and adapt without abandoning the overall objective.",
+
+48:
+"Practice managing limited time, attention and available resources instead of trying to do everything.",
+
+49:
+"Combine objective setting, planning, prioritization, decision making and adaptation.",
+
+50:
+"ARC TEST: Plan a complete task, execute the plan, review the result and identify how you would adapt it next time."
+
+});
+
+
+/* =========================================================
+   ARC STAGE VIEW
+========================================================= */
+
+function renderArcStages(arcNumber){
+
+ const arc=ARC_DATA[arcNumber];
+
+ if(!arc)return;
+
+ let box=document.getElementById("arcStages");
+
+ if(!box){
+
+  box=document.createElement("div");
+
+  box.id="arcStages";
+
+  box.className="card";
+
+  box.style.marginTop="15px";
+
+  document
+   .querySelector(".arcMain")
+   ?.parentElement
+   ?.appendChild(box);
+ }
+
+ box.innerHTML=`
+  <div style="
+   color:#00eaff;
+   font-family:Orbitron;
+   margin-bottom:15px;
+  ">
+   ARC STRUCTURE
+  </div>
+
+  <div style="
+   display:grid;
+   gap:8px;
+  ">
+   ${arc.stages.map((s,i)=>`
+
+    <div style="
+     display:flex;
+     justify-content:space-between;
+     align-items:center;
+     padding:11px;
+     background:#071a20;
+     border:1px solid #00eaff18;
+     border-radius:6px;
+    ">
+     <span style="color:#00eaff">
+      ${s[0]}
+     </span>
+
+     <span style="color:#91abb2">
+      ${s[1]}
+     </span>
+    </div>
+
+   `).join("")}
+  </div>
+ `;
+
+}
+
+
+/* =========================================================
+   ENHANCED ARC LOADING
+========================================================= */
+
+const originalLoadArcData=loadArcData;
+
+loadArcData=function(arcNumber){
+
+ originalLoadArcData(arcNumber);
+
+ renderArcStages(arcNumber);
+
+};
+
+
+/* =========================================================
+   CHALLENGE MARKERS
+========================================================= */
+
+function markChallengeDays(){
+
+ document.querySelectorAll(".dayNode")
+ .forEach(node=>{
+
+  const day=+node.dataset.day;
+  const arc=Math.ceil(day/10);
+  const data=ARC_DATA[arc];
+
+  if(data?.challenges?.includes(day)){
+   node.style.boxShadow="inset 0 0 0 1px #ffcf4a";
+  }
+
+ });
+
+}
+
+
+/* =========================================================
+   SKILL PROGRESS
+========================================================= */
+
+function updateSkills(){
+
+ const progress=Math.min(
+  100,
+  Math.floor(((currentDay-1)/100)*100)
+ );
+
+ const values={
+
+  skillControl:Math.min(100,progress+5),
+
+  skillObservation:
+   Math.max(0,Math.min(100,(currentDay-20)*2)),
+
+  skillDiscipline:
+   Math.min(100,progress+10),
+
+  skillStrategy:
+   Math.max(0,Math.min(100,(currentDay-40)*2)),
+
+  skillCommunication:
+   Math.max(0,Math.min(100,(currentDay-10)*1.4)),
+
+  skillConfidence:
+   Math.min(100,Math.floor(progress*.8))
+
+ };
+
+ Object.entries(values).forEach(([id,value])=>{
+
+  const bar=document.getElementById(id);
+  const text=document.getElementById(id+"Text");
+
+  if(bar)bar.style.width=value+"%";
+  if(text)text.textContent=Math.floor(value)+"%";
+
+ });
+
+}
+
+
+/* =========================================================
+   DASHBOARD UPGRADE
+========================================================= */
+
+const baseUpdateDashboard=updateDashboard;
+
+updateDashboard=function(){
+
+ baseUpdateDashboard();
+
+ const arc=Math.ceil(currentDay/10);
+
+ loadArcData(arc);
+
+ updateSkills();
+
+ markChallengeDays();
+
+};
+
+
+/* =========================================================
+   INITIALIZE PART 3
+========================================================= */
+
+loadArcData(Math.ceil(currentDay/10));
+updateSkills();
+markChallengeDays();
+
+  </script>
+<!-- ================= PART 4 : ARC 06–08 ================= -->
+
+<script>
+
+/* =========================================================
+   ARC 06 — SOCIAL INTELLIGENCE
+   DAY 51–60
+========================================================= */
+
+ARC_DATA[6]={
+ name:"SOCIAL INTELLIGENCE",
+ days:"51–60",
+ skill:"COMMUNICATION + EMPATHY + BOUNDARIES",
+ desc:"Understand people better while communicating clearly, listening actively and respecting boundaries.",
+ stages:[
+  ["51–52","SOCIAL AWARENESS"],
+  ["53–54","ACTIVE LISTENING"],
+  ["55–56","EMPATHY"],
+  ["57–58","BOUNDARIES"],
+  ["59","INTEGRATION"],
+  ["60","ARC TEST"]
+ ],
+ challenges:[53,55,57,59,60],
+ reward:1250
+};
+
+
+/* =========================================================
+   ARC 07 — LEADERSHIP
+   DAY 61–70
+========================================================= */
+
+ARC_DATA[7]={
+ name:"LEADERSHIP",
+ days:"61–70",
+ skill:"RESPONSIBILITY + TEAMWORK + CONFIDENCE",
+ desc:"Develop responsibility, reliable communication, teamwork and calm leadership.",
+ stages:[
+  ["61–62","RESPONSIBILITY"],
+  ["63–64","INITIATIVE"],
+  ["65–66","TEAMWORK"],
+  ["67–68","CONFIDENCE"],
+  ["69","INTEGRATION"],
+  ["70","ARC TEST"]
+ ],
+ challenges:[63,65,67,69,70],
+ reward:1450
+};
+
+
+/* =========================================================
+   ARC 08 — PRESSURE
+   DAY 71–80
+========================================================= */
+
+ARC_DATA[8]={
+ name:"PRESSURE",
+ days:"71–80",
+ skill:"FOCUS + COMPOSURE + RESILIENCE",
+ desc:"Train yourself to stay focused, organized and composed when situations become difficult.",
+ stages:[
+  ["71–72","PRESSURE AWARENESS"],
+  ["73–74","FOCUS UNDER PRESSURE"],
+  ["75–76","COMPOSURE"],
+  ["77–78","RECOVERY"],
+  ["79","INTEGRATION"],
+  ["80","ARC TEST"]
+ ],
+ challenges:[73,75,77,79,80],
+ reward:1650
+};
+
+
+/* =========================================================
+   DAY 51–60
+========================================================= */
+
+Object.assign(DAY_STRUCTURE,{
+
+51:{
+ type:"START",
+ title:"SOCIAL INTELLIGENCE INITIALIZATION",
+ focus:"Social awareness",
+ xp:70
+},
+
+52:{
+ type:"TRAINING",
+ title:"SOCIAL SIGNALS",
+ focus:"Notice tone, context and conversational cues without jumping to conclusions.",
+ xp:70
+},
+
+53:{
+ type:"CHALLENGE",
+ title:"LISTENING TEST",
+ focus:"Listen completely before preparing your response.",
+ xp:100
+},
+
+54:{
+ type:"TRAINING",
+ title:"CLEAR COMMUNICATION",
+ focus:"Express your thoughts simply and respectfully.",
+ xp:70
+},
+
+55:{
+ type:"CHALLENGE",
+ title:"EMPATHY SHIFT",
+ focus:"Consider another person's perspective before responding.",
+ xp:105
+},
+
+56:{
+ type:"TRAINING",
+ title:"PERSPECTIVE CHECK",
+ focus:"Separate your interpretation from what the other person actually said.",
+ xp:75
+},
+
+57:{
+ type:"CHALLENGE",
+ title:"BOUNDARY CHECK",
+ focus:"Practice saying what you can and cannot reasonably do.",
+ xp:105
+},
+
+58:{
+ type:"TRAINING",
+ title:"RESPECTFUL DISAGREEMENT",
+ focus:"Disagree with an idea without attacking the person.",
+ xp:75
+},
+
+59:{
+ type:"INTEGRATION",
+ title:"SOCIAL INTEGRATION",
+ focus:"Combine listening, empathy, communication and boundaries.",
+ xp:130
+},
+
+60:{
+ type:"ARC TEST",
+ title:"SOCIAL INTELLIGENCE TEST",
+ focus:"Demonstrate clear communication, active listening and respectful boundaries.",
+ xp:275
+},
+
+
+/* =========================================================
+   DAY 61–70
+========================================================= */
+
+61:{
+ type:"START",
+ title:"LEADERSHIP INITIALIZATION",
+ focus:"Responsibility",
+ xp:75
+},
+
+62:{
+ type:"TRAINING",
+ title:"OWN THE TASK",
+ focus:"Take responsibility for a task instead of waiting for reminders.",
+ xp:75
+},
+
+63:{
+ type:"CHALLENGE",
+ title:"INITIATIVE",
+ focus:"Identify one useful action and begin it without unnecessary prompting.",
+ xp:110
+},
+
+64:{
+ type:"TRAINING",
+ title:"RELIABILITY",
+ focus:"Do what you said you would do within the agreed time.",
+ xp:75
+},
+
+65:{
+ type:"CHALLENGE",
+ title:"TEAMWORK TEST",
+ focus:"Contribute constructively to a shared task.",
+ xp:115
+},
+
+66:{
+ type:"TRAINING",
+ title:"DELEGATION BASICS",
+ focus:"When working with others, match tasks to people's available strengths and time.",
+ xp:80
+},
+
+67:{
+ type:"CHALLENGE",
+ title:"CALM CONFIDENCE",
+ focus:"Speak clearly and contribute an idea without unnecessarily seeking approval.",
+ xp:115
+},
+
+68:{
+ type:"TRAINING",
+ title:"DECISION OWNERSHIP",
+ focus:"Make reasonable decisions and accept responsibility for the result.",
+ xp:80
+},
+
+69:{
+ type:"INTEGRATION",
+ title:"LEADERSHIP INTEGRATION",
+ focus:"Combine responsibility, initiative, teamwork and confidence.",
+ xp:140
+},
+
+70:{
+ type:"ARC TEST",
+ title:"LEADERSHIP TEST",
+ focus:"Complete a shared task through responsibility, communication and reliable action.",
+ xp:300
+},
+
+
+/* =========================================================
+   DAY 71–80
+========================================================= */
+
+71:{
+ type:"START",
+ title:"PRESSURE INITIALIZATION",
+ focus:"Pressure awareness",
+ xp:80
+},
+
+72:{
+ type:"TRAINING",
+ title:"PRESSURE MAP",
+ focus:"Identify what normally reduces your focus when situations become difficult.",
+ xp:80
+},
+
+73:{
+ type:"CHALLENGE",
+ title:"FOCUS UNDER PRESSURE",
+ focus:"Complete a planned task while managing normal distractions.",
+ xp:120
+},
+
+74:{
+ type:"TRAINING",
+ title:"PRIORITY RESET",
+ focus:"When several things compete for attention, identify the most important next action.",
+ xp:80
+},
+
+75:{
+ type:"CHALLENGE",
+ title:"COMPOSURE TEST",
+ focus:"Use a pause, controlled breathing and clear thinking before responding to a difficult situation.",
+ xp:125
+},
+
+76:{
+ type:"TRAINING",
+ title:"ERROR RESPONSE",
+ focus:"Treat mistakes as information and identify the next useful action.",
+ xp:85
+},
+
+77:{
+ type:"CHALLENGE",
+ title:"RECOVERY MODE",
+ focus:"After a setback, reset your attention and return to the task.",
+ xp:125
+},
+
+78:{
+ type:"TRAINING",
+ title:"SUSTAINED FOCUS",
+ focus:"Maintain attention through a longer uninterrupted work period.",
+ xp:85
+},
+
+79:{
+ type:"INTEGRATION",
+ title:"PRESSURE INTEGRATION",
+ focus:"Combine focus, composure, recovery and prioritization.",
+ xp:150
+},
+
+80:{
+ type:"ARC TEST",
+ title:"PRESSURE TEST",
+ focus:"Handle a structured difficult task while maintaining focus and controlled responses.",
+ xp:325
+}
+
+});
+
+
+/* =========================================================
+   DAY DESCRIPTIONS 51–80
+========================================================= */
+
+Object.assign(DAY_DESCRIPTION,{
+
+51:
+"Begin Social Intelligence. The objective is better understanding and clearer communication—not controlling other people.",
+
+52:
+"During normal conversations, notice tone, context and conversational flow. Do not assume you know someone's thoughts.",
+
+53:
+"Give another person your complete attention. Wait until they finish before forming your response.",
+
+54:
+"Take one thought and communicate it using simple, direct and respectful language.",
+
+55:
+"Before responding to another person's situation, briefly consider how the situation may look from their perspective.",
+
+56:
+"Separate what someone actually said from the meaning you personally interpreted from it.",
+
+57:
+"Practice a respectful boundary. Clearly communicate what you can do and what you cannot do.",
+
+58:
+"If you disagree, address the idea rather than attacking or insulting the person.",
+
+59:
+"Combine listening, perspective-taking, clear speech and healthy boundaries.",
+
+60:
+"ARC TEST: Demonstrate attentive listening, respectful communication, perspective-taking and clear boundaries.",
+
+
+61:
+"Leadership begins with responsibility. Choose useful actions instead of waiting for someone else to manage everything.",
+
+62:
+"Take ownership of one reasonable task and make sure it is completed properly.",
+
+63:
+"Identify a useful action that needs to be done and begin it without unnecessary prompting.",
+
+64:
+"Build reliability by completing a commitment you made within the agreed time.",
+
+65:
+"Contribute meaningfully to a shared task. Listen to others and focus on the common objective.",
+
+66:
+"When working together, distribute tasks according to availability, strengths and the actual requirements of the task.",
+
+67:
+"Practice confident communication: speak clearly, contribute your idea and remain open to feedback.",
+
+68:
+"Make a reasonable decision within your responsibility and evaluate the result honestly.",
+
+69:
+"Combine responsibility, initiative, teamwork and confidence into one practical session.",
+
+70:
+"ARC TEST: Complete a shared task while demonstrating responsibility, communication, cooperation and dependable execution.",
+
+
+71:
+"Pressure training begins by understanding your own focus patterns when circumstances become difficult.",
+
+72:
+"Identify situations that commonly disrupt your concentration and write down a practical response for each.",
+
+73:
+"Choose a manageable task and complete it despite ordinary distractions. Keep your attention on the next action.",
+
+74:
+"When several tasks compete for attention, choose the most important next step instead of reacting to everything.",
+
+75:
+"During a difficult but normal situation, pause, regulate your breathing and think before responding.",
+
+76:
+"When you make an error, avoid spiraling into frustration. Identify what happened and the next useful action.",
+
+77:
+"After a setback, deliberately reset your attention and return to the task instead of abandoning the whole plan.",
+
+78:
+"Practice sustained focus for a longer work session while keeping unnecessary distractions away.",
+
+79:
+"Combine focus, composure, recovery and prioritization into one controlled challenge.",
+
+80:
+"ARC TEST: Complete a structured difficult task while maintaining focus, composure and adaptive thinking."
+
+});
+
+
+/* =========================================================
+   ARC 06–08 SPECIAL COLORS
+========================================================= */
+
+function updateArcTheme(arc){
+
+ const card=document.querySelector(
+  `[data-arc="${arc}"]`
+ );
+
+ if(!card)return;
+
+ document.querySelectorAll(".arcCard")
+ .forEach(x=>x.style.borderColor="");
+
+ card.style.borderColor="#00eaff";
+
+}
+
+
+/* =========================================================
+   ARC TEST VISUAL
+========================================================= */
+
+function markArcTests(){
+
+ document.querySelectorAll(".dayNode")
+ .forEach(node=>{
+
+  const day=+node.dataset.day;
+
+  if(day%10===0){
+
+   node.style.borderColor="#ffcf4a";
+   node.style.color="#ffcf4a";
+
+   node.title="ARC TEST";
+  }
+
+ });
+
+}
+
+
+/* =========================================================
+   CHALLENGE VISUAL
+========================================================= */
+
+function markAllChallenges(){
+
+ document.querySelectorAll(".dayNode")
+ .forEach(node=>{
+
+  const day=+node.dataset.day;
+  const arc=Math.ceil(day/10);
+
+  if(ARC_DATA[arc]?.challenges?.includes(day)){
+
+   node.style.boxShadow=
+    "0 0 10px #ffcf4a33";
+
+  }
+
+ });
+
+}
+
+
+/* =========================================================
+   ARC STAGE STATUS
+========================================================= */
+
+function updateStageStatus(){
+
+ const arc=Math.ceil(currentDay/10);
+ const data=ARC_DATA[arc];
+
+ if(!data)return;
+
+ const start=(arc-1)*10+1;
+
+ document.querySelectorAll("#arcStages > div > div")
+ .forEach((row,index)=>{
+
+  const stage=data.stages[index];
+
+  if(!stage)return;
+
+  const range=stage[0];
+
+  const first=parseInt(range);
+
+  if(currentDay>first){
+
+   row.style.borderColor="#00eaff33";
+   row.style.background="#062127";
+
+  }
+
+ });
+
+}
+
+
+/* =========================================================
+   DASHBOARD EXTENSION
+========================================================= */
+
+const previousDashboard=updateDashboard;
+
+updateDashboard=function(){
+
+ previousDashboard();
+
+ const arc=Math.ceil(currentDay/10);
+
+ updateArcTheme(arc);
+ markArcTests();
+ markAllChallenges();
+ updateStageStatus();
+
+};
+
+
+/* =========================================================
+   INITIALIZE PART 4
+========================================================= */
+
+updateDashboard();
+
+  </script>
+<!-- ================= PART 5 : ARC 09–10 + FINAL ENGINE ================= -->
+
+<script>
+
+/* =========================================================
+   ARC 09 — INTEGRATION
+   DAY 81–90
+========================================================= */
+
+ARC_DATA[9]={
+ name:"INTEGRATION",
+ days:"81–90",
+ skill:"ALL SKILLS COMBINED",
+ desc:"Combine control, observation, discipline, thinking, strategy and communication into one system.",
+ stages:[
+  ["81–82","SYSTEM RECALL"],
+  ["83–84","MULTI-SKILL"],
+  ["85–86","REAL WORLD"],
+  ["87–88","ADAPTIVE THINKING"],
+  ["89","INTEGRATION"],
+  ["90","ARC TEST"]
+ ],
+ challenges:[83,85,87,89,90],
+ reward:1900
+};
+
+
+/* =========================================================
+   ARC 10 — FINAL EVOLUTION
+   DAY 91–100
+========================================================= */
+
+ARC_DATA[10]={
+ name:"FINAL EVOLUTION",
+ days:"91–100",
+ skill:"PERSONAL SYSTEM",
+ desc:"Build a sustainable personal operating system from everything learned during the 100-day evolution.",
+ stages:[
+  ["91–92","SYSTEM DESIGN"],
+  ["93–94","WEAKNESS AUDIT"],
+  ["95–96","EXECUTION"],
+  ["97–98","FINAL PREPARATION"],
+  ["99","FINAL INTEGRATION"],
+  ["100","FINAL EVOLUTION"]
+ ],
+ challenges:[93,95,97,99,100],
+ reward:3000
+};
+
+
+/* =========================================================
+   DAY 81–100
+========================================================= */
+
+Object.assign(DAY_STRUCTURE,{
+
+81:{
+ type:"START",
+ title:"INTEGRATION INITIALIZATION",
+ focus:"System recall",
+ xp:90
+},
+
+82:{
+ type:"TRAINING",
+ title:"SKILL RECALL",
+ focus:"Review the core skills developed during the previous arcs.",
+ xp:90
+},
+
+83:{
+ type:"CHALLENGE",
+ title:"MULTI-SKILL MISSION",
+ focus:"Use several skills together during one structured task.",
+ xp:130
+},
+
+84:{
+ type:"TRAINING",
+ title:"SWITCH CONTROL",
+ focus:"Move between tasks without losing awareness or priorities.",
+ xp:90
+},
+
+85:{
+ type:"CHALLENGE",
+ title:"REAL WORLD APPLICATION",
+ focus:"Apply observation, communication, discipline and strategy to a normal real-life task.",
+ xp:135
+},
+
+86:{
+ type:"TRAINING",
+ title:"SYSTEM ADAPTATION",
+ focus:"Adjust your approach when the situation changes.",
+ xp:95
+},
+
+87:{
+ type:"CHALLENGE",
+ title:"ADAPTIVE THINKING",
+ focus:"Create a new plan when your original approach stops working.",
+ xp:140
+},
+
+88:{
+ type:"TRAINING",
+ title:"FULL CONTROL",
+ focus:"Combine calm reactions, focused attention and deliberate action.",
+ xp:95
+},
+
+89:{
+ type:"INTEGRATION",
+ title:"TOTAL SYSTEM INTEGRATION",
+ focus:"Combine all major skills into one complete session.",
+ xp:175
+},
+
+90:{
+ type:"ARC TEST",
+ title:"INTEGRATION TEST",
+ focus:"Demonstrate multiple skills during one complex but manageable challenge.",
+ xp:375
+},
+
+
+/* =========================================================
+   DAY 91–100
+========================================================= */
+
+91:{
+ type:"START",
+ title:"FINAL EVOLUTION INITIALIZATION",
+ focus:"System design",
+ xp:100
+},
+
+92:{
+ type:"TRAINING",
+ title:"PERSONAL OPERATING SYSTEM",
+ focus:"Define the habits, routines and principles you want to maintain.",
+ xp:100
+},
+
+93:{
+ type:"CHALLENGE",
+ title:"WEAKNESS AUDIT",
+ focus:"Identify areas that still require improvement.",
+ xp:150
+},
+
+94:{
+ type:"TRAINING",
+ title:"SYSTEM REFINEMENT",
+ focus:"Remove unnecessary complexity from your routine.",
+ xp:100
+},
+
+95:{
+ type:"CHALLENGE",
+ title:"EXECUTION TEST",
+ focus:"Follow your planned system consistently through a complete task cycle.",
+ xp:155
+},
+
+96:{
+ type:"TRAINING",
+ title:"LONG-TERM DESIGN",
+ focus:"Create routines that can realistically continue after Day 100.",
+ xp:105
+},
+
+97:{
+ type:"CHALLENGE",
+ title:"FINAL PRESSURE TEST",
+ focus:"Maintain your process when distractions or unexpected changes appear.",
+ xp:160
+},
+
+98:{
+ type:"TRAINING",
+ title:"IDENTITY & VALUES",
+ focus:"Define the principles that should guide your decisions.",
+ xp:105
+},
+
+99:{
+ type:"INTEGRATION",
+ title:"FINAL INTEGRATION",
+ focus:"Review the complete 100-day system and prepare for the final test.",
+ xp:200
+},
+
+100:{
+ type:"FINAL TEST",
+ title:"FINAL EVOLUTION",
+ focus:"Demonstrate the complete system and create your personal continuation plan.",
+ xp:500
+}
+
+});
+
+
+/* =========================================================
+   DAY DESCRIPTIONS 81–100
+========================================================= */
+
+Object.assign(DAY_DESCRIPTION,{
+
+81:
+"Begin Integration. The goal is no longer learning one skill at a time, but combining the skills you already developed.",
+
+82:
+"Review control, observation, discipline, thinking, strategy, communication and confidence.",
+
+83:
+"Complete one structured task that requires multiple skills instead of relying on only one ability.",
+
+84:
+"Practice moving between tasks while maintaining awareness of priorities and avoiding unnecessary distraction.",
+
+85:
+"Apply several skills to a normal real-world responsibility such as study, planning, communication or problem solving.",
+
+86:
+"Change your approach when a situation changes while keeping the overall objective clear.",
+
+87:
+"Create an alternative approach when your original plan becomes ineffective.",
+
+88:
+"Combine calm responses, focused attention and deliberate action during one complete task.",
+
+89:
+"Run a full integration session using observation, discipline, thinking, strategy and communication together.",
+
+90:
+"ARC TEST: Complete a complex but manageable challenge requiring multiple skills and explain what worked.",
+
+
+91:
+"Final Evolution begins. The objective is to turn the training into a sustainable personal system.",
+
+92:
+"Design your basic personal operating system: routines, study/work blocks, recovery, reflection and priorities.",
+
+93:
+"Perform an honest weakness audit. Identify specific behaviours or skills that still need development.",
+
+94:
+"Remove unnecessary complexity. A system that is simple enough to follow consistently is easier to maintain.",
+
+95:
+"Follow your planned system through a complete task cycle and evaluate your execution.",
+
+96:
+"Design habits that can continue after Day 100 instead of depending only on the challenge.",
+
+97:
+"Complete a final pressure challenge where distractions or changes require you to adapt while staying composed.",
+
+98:
+"Define the principles and values you want to use when making important decisions.",
+
+99:
+"Review the entire journey. Identify what changed, what remains unfinished and what your next system should be.",
+
+100:
+"FINAL EVOLUTION: Complete the final challenge, review your progress and create your personal continuation plan beyond Day 100."
+
+});
+
+
+/* =========================================================
+   FINAL SKILL SYSTEM
+========================================================= */
+
+const FINAL_SKILLS={
+ control:"skillControl",
+ observation:"skillObservation",
+ discipline:"skillDiscipline",
+ strategy:"skillStrategy",
+ communication:"skillCommunication",
+ confidence:"skillConfidence"
+};
+
+
+/* =========================================================
+   CALCULATE SKILLS FROM PROGRESS
+========================================================= */
+
+function calculateFinalSkills(){
+
+ const d=Math.max(0,currentDay-1);
+
+ return{
+
+  control:Math.min(100,Math.round(d*1.05)),
+
+  observation:Math.min(100,Math.round(d*1.0)),
+
+  discipline:Math.min(100,Math.round(d*1.1)),
+
+  strategy:Math.min(100,Math.max(0,Math.round((d-20)*1.25))),
+
+  communication:
+   Math.min(100,Math.max(0,Math.round((d-8)*1.08))),
+
+  confidence:
+   Math.min(100,Math.round(d*.92))
+
+ };
+
+}
+
+
+/* =========================================================
+   FINAL DASHBOARD ENGINE
+========================================================= */
+
+function updateFinalSkills(){
+
+ const skills=calculateFinalSkills();
+
+ Object.entries(skills).forEach(([name,value])=>{
+
+  const id=FINAL_SKILLS[name];
+
+  const bar=document.getElementById(id);
+  const text=document.getElementById(id+"Text");
+
+  if(bar)bar.style.width=value+"%";
+  if(text)text.textContent=value+"%";
+
+ });
+
+}
+
+
+/* =========================================================
+   XP PARTICLE
+========================================================= */
+
+function createXPParticle(text){
+
+ const p=document.createElement("div");
+
+ p.textContent=text;
+
+ Object.assign(p.style,{
+  position:"fixed",
+  left:"50%",
+  top:"50%",
+  color:"#00eaff",
+  font:"900 22px Orbitron",
+  zIndex:"3000",
+  pointerEvents:"none",
+  textShadow:"0 0 15px #00eaff",
+  transition:"1s ease"
+ });
+
+ document.body.appendChild(p);
+
+ requestAnimationFrame(()=>{
+  p.style.transform=
+   "translate(-50%,-130px) scale(1.5)";
+  p.style.opacity="0";
+ });
+
+ setTimeout(()=>p.remove(),1000);
+}
+
+
+/* =========================================================
+   LEVEL UP
+========================================================= */
+
+let lastLevel=
+ Math.floor(totalXP/500)+1;
+
+function checkLevelUp(){
+
+ const level=Math.floor(totalXP/500)+1;
+
+ if(level>lastLevel){
+
+  document.getElementById("levelOverlayText")
+   .textContent=
+   "LEVEL "+level+" UNLOCKED";
+
+  document.getElementById("levelOverlay")
+   .classList.add("show");
+
+ }
+
+ lastLevel=level;
+}
+
+
+/* =========================================================
+   ARC COMPLETE ANIMATION
+========================================================= */
+
+function arcCompleteAnimation(arc){
+
+ const data=ARC_DATA[arc];
+
+ if(!data)return;
+
+ const overlay=document.getElementById("arcOverlay");
+
+ document.getElementById("arcOverlayTitle")
+  .textContent=
+  "ARC "+String(arc).padStart(2,"0")+" COMPLETE";
+
+ document.getElementById("arcOverlayText")
+  .textContent=
+  data.name+" // SYSTEM UPGRADED";
+
+ overlay.classList.add("show");
+
+}
+
+
+/* =========================================================
+   FINAL EVOLUTION ANIMATION
+========================================================= */
+
+function finalEvolution(){
+
+ document.getElementById("finalOverlay")
+  .classList.add("show");
+
+ document.getElementById("finalOverlay")
+  .querySelector("p").innerHTML=
+ `
+ <strong style="color:#00eaff">
+  100 DAYS COMPLETE
+ </strong>
+ <br><br>
+ CONTROL • OBSERVATION • DISCIPLINE
+ <br>
+ STRATEGY • COMMUNICATION • CONFIDENCE
+ <br><br>
+ <span style="color:#91abb2">
+ BUILD. ADAPT. CONTINUE.
+ </span>
+ `;
+
+}
+
+
+/* =========================================================
+   COMPLETE DAY — FINAL VERSION
+========================================================= */
+
+function completeDay(){
+
+ if(currentDay>100)return;
+
+ const data=DAY_STRUCTURE[currentDay];
+
+ if(!data)return;
+
+ const completedDay=currentDay;
+ const oldLevel=Math.floor(totalXP/500)+1;
+
+ totalXP+=data.xp;
+ missions++;
+ streak++;
+
+ /* ARC TEST BONUS */
+
+ if(completedDay%10===0){
+
+  const arc=Math.ceil(completedDay/10);
+
+  totalXP+=ARC_DATA[arc]?.reward || 0;
+
+  arcCompleteAnimation(arc);
+
+ }
+
+ /* NEXT DAY */
+
+ if(completedDay<100){
+
+  currentDay++;
+
+ }else{
+
+  currentDay=100;
+ }
+
+ localStorage.setItem(
+  "evolutionCurrentDay",currentDay
+ );
+
+ localStorage.setItem(
+  "evolutionXP",totalXP
+ );
+
+ localStorage.setItem(
+  "evolutionStreak",streak
+ );
+
+ localStorage.setItem(
+  "evolutionMissions",missions
+ );
+
+ createXPParticle("+"+data.xp+" XP");
+
+ updateDashboard();
+ updateFinalSkills();
+
+ const newLevel=Math.floor(totalXP/500)+1;
+
+ if(newLevel>oldLevel){
+
+  setTimeout(()=>{
+   document.getElementById("levelOverlayText")
+    .textContent=
+    "LEVEL "+newLevel+" UNLOCKED";
+
+   document.getElementById("levelOverlay")
+    .classList.add("show");
+  },500);
+
+ }
+
+ if(completedDay===100){
+
+  setTimeout(finalEvolution,900);
+
+ }else{
+
+  showToast(
+   "MISSION COMPLETE",
+   "+"+data.xp+" XP"
+  );
+
+ }
+
+ /* close day window */
+
+ const overlay=document.getElementById("dayOverlay");
+
+ if(overlay)overlay.remove();
+
+}
+
+
+/* =========================================================
+   FINAL DAY OVERLAY
+========================================================= */
+
+function openDay(day){
+
+ if(day>currentDay){
+
+  showToast(
+   "DAY LOCKED",
+   "Complete Day "+
+   String(currentDay).padStart(2,"0")+
+   " first."
+  );
+
+  return;
+ }
+
+ const data=DAY_STRUCTURE[day];
+
+ if(!data)return;
+
+ document.querySelectorAll(".dayNode")
+ .forEach(x=>x.classList.remove("active"));
+
+ document.querySelector(
+  `[data-day="${day}"]`
+ )?.classList.add("active");
+
+ let old=document.getElementById("dayOverlay");
+
+ if(old)old.remove();
+
+ const overlay=document.createElement("div");
+
+ overlay.className="overlay show";
+ overlay.id="dayOverlay";
+
+ const isFinal=day===100;
+
+ overlay.innerHTML=`
+
+ <div class="overlayBox">
+
+  <div style="
+   color:${isFinal?"#ffcf4a":"#00eaff"};
+   font-size:12px;
+   letter-spacing:3px;
+  ">
+   ${isFinal?"FINAL EVOLUTION":"DAY "+
+   String(day).padStart(2,"0")}
+  </div>
+
+  <h2 style="margin-top:12px">
+   ${data.title}
+  </h2>
+
+  <p style="color:#00eaff">
+   ${data.type}
+  </p>
+
+  <p>
+   <b>FOCUS</b><br>
+   ${data.focus}
+  </p>
+
+  <p>
+   ${DAY_DESCRIPTION[day]}
+  </p>
+
+  <p style="
+   color:#ffcf4a;
+   font-family:Orbitron;
+  ">
+   +${data.xp} XP
+  </p>
+
+  <button
+   class="btn"
+   onclick="completeDay()"
+   style="
+    margin-top:10px;
+    ${isFinal?"border-color:#ffcf4a;color:#ffcf4a":""}
+   ">
+   ${isFinal?"COMPLETE FINAL TEST":"COMPLETE MISSION"}
+  </button>
+
+  <br>
+
+  <button
+   class="close"
+   onclick="document.getElementById('dayOverlay').remove()">
+   CLOSE
+  </button>
+
+ </div>
+ `;
+
+ document.body.appendChild(overlay);
+
+}
+
+
+/* =========================================================
+   FINAL ROADMAP STATUS
+========================================================= */
+
+function updateArcCards(){
+
+ document.querySelectorAll(".arcCard")
+ .forEach(card=>{
+
+  const arc=+card.dataset.arc;
+
+  const start=(arc-1)*10+1;
+  const end=arc*10;
+
+  card.style.opacity=
+   start>currentDay ? ".45" : "1";
+
+  if(end<currentDay){
+
+   card.style.borderColor="#00eaff55";
+
+  }
+
+ });
+
+}
+
+
+/* =========================================================
+   FINAL DASHBOARD
+========================================================= */
+
+const finalDashboard=updateDashboard;
+
+updateDashboard=function(){
+
+ finalDashboard();
+
+ updateFinalSkills();
+
+ updateArcCards();
+
+ const percent=
+  Math.min(100,Math.floor(((currentDay-1)/100)*100));
+
+ document.getElementById("globalPercent")
+  .textContent=percent;
+
+ document.getElementById("globalProgress")
+  .style.width=percent+"%";
+
+};
+
+
+/* =========================================================
+   INITIALIZE COMPLETE SYSTEM
+========================================================= */
+
+updateDashboard();
+updateFinalSkills();
+updateArcCards();
+
+  </script>
 </body>
 </html>
