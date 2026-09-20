@@ -2,649 +2,593 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Second Brain Vault</title>
-<script src="https://cdn.tailwindcss.com"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#05070a">
+<title>CHARACTER // 30 DAY</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#0a0a0a;color:#eee;font-family:Inter,system-ui,sans-serif}
-body:before{content:"";position:fixed;inset:0;z-index:-1;opacity:.35;background-image:linear-gradient(#fff1 1px,transparent 1px),linear-gradient(90deg,#fff1 1px,transparent 1px);background-size:40px 40px}
-::-webkit-scrollbar{width:7px}
-::-webkit-scrollbar-track{background:#0a0a0a}
-::-webkit-scrollbar-thumb{background:#333;border-radius:20px}
-button,input,textarea,select{font:inherit}
-button{cursor:pointer}
-.card{transition:.2s}
-.card:hover{transform:translateY(-2px);border-color:#444;box-shadow:0 12px 30px #0008}
-.dragging{opacity:.35;transform:scale(.98)}
-.column.dragover{border-color:#666;background:#ffffff04}
-.high{border-left:3px solid #f87171}
-.medium{border-left:3px solid #fbbf24}
-.low{border-left:3px solid #60a5fa}
-.modal{opacity:0;pointer-events:none;transition:.2s}
-.modal.show{opacity:1;pointer-events:auto}
-.modal-box{transform:translateY(15px) scale(.98);transition:.2s}
-.modal.show .modal-box{transform:none}
-.toast{opacity:0;transform:translate(-50%,20px);transition:.25s}
-.toast.show{opacity:1;transform:translate(-50%,0)}
-@keyframes enter{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
-.enter{animation:enter .25s ease}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+:root{--bg:#05070a;--p:#0b1015;--p2:#10171d;--c:#00e5ff;--g:#00ff9d;--r:#ff3b5c;--m:#7f929a;--b:rgba(0,229,255,.18)}
+body{background:radial-gradient(circle at 15% 10%,#00e5ff12,transparent 28%),radial-gradient(circle at 85% 80%,#00e5ff0b,transparent 25%),var(--bg);color:#eefcff;font-family:Rajdhani,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(#00e5ff06 1px,transparent 1px),linear-gradient(90deg,#00e5ff06 1px,transparent 1px);background-size:45px 45px;z-index:-1}
+body:after{content:"";position:fixed;left:0;right:0;height:2px;background:#00e5ff12;animation:scan 7s linear infinite;pointer-events:none;z-index:100}
+@keyframes scan{from{top:-5px}to{top:100%}}
+@keyframes pulse{50%{opacity:.5}}
+@keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes float{from{transform:translateY(100vh)}to{transform:translateY(-20px)}}
+
+#loader{position:fixed;inset:0;background:#030507;display:flex;align-items:center;justify-content:center;flex-direction:column;z-index:9999;transition:.7s}
+.lt{font:800 clamp(28px,7vw,65px) Orbitron,sans-serif;letter-spacing:8px;color:var(--c);text-shadow:0 0 25px #00e5ff99;animation:pulse 1.5s infinite}
+.ls{margin-top:15px;color:var(--m);letter-spacing:4px}
+.lb{margin-top:30px;width:260px;height:3px;background:#172027}.lb span{display:block;height:100%;width:0;background:var(--c);box-shadow:0 0 15px var(--c);animation:load 1.8s forwards}
+@keyframes load{to{width:100%}}
+
+header{position:sticky;top:0;z-index:50;background:#05070acc;backdrop-filter:blur(18px);border-bottom:1px solid var(--b)}
+nav,.hero,.hud,.main,footer{max-width:1250px;margin:auto}
+nav{padding:16px 20px;display:flex;justify-content:space-between;align-items:center}
+.logo{font:800 19px Orbitron;letter-spacing:3px}.logo span,.eyebrow,.dn,.info-icon{color:var(--c)}
+.nr{display:flex;align-items:center;gap:14px}.lv{font:11px Orbitron;color:var(--c);border:1px solid var(--b);padding:7px 10px;border-radius:5px}
+
+.btn{border:1px solid var(--c);background:#00e5ff12;color:#eefcff;padding:12px 20px;font:11px Orbitron;letter-spacing:1px;cursor:pointer;border-radius:4px;transition:.25s}
+.btn:hover{background:var(--c);color:#001015;box-shadow:0 0 25px #00e5ff59;transform:translateY(-2px)}
+.danger{border-color:#ff3b5c80;color:#ff8296}.danger:hover{background:var(--r);color:white}
+
+.hero{padding:75px 20px 45px;min-height:580px;display:flex;align-items:center}
+.hero>div{width:100%;animation:up .9s}
+.eyebrow{font:12px Orbitron;letter-spacing:5px;margin-bottom:20px}
+h1{font:800 clamp(38px,8vw,86px) Orbitron;line-height:.98;letter-spacing:-2px}
+h1 span{color:transparent;-webkit-text-stroke:1px var(--c);text-shadow:0 0 30px #00e5ff33}
+.hero p{max-width:720px;color:var(--m);font-size:18px;line-height:1.6;margin-top:25px}
+.buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+
+.hud{padding:0 20px 35px}.hg{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.card,.panel,.info{background:linear-gradient(145deg,#10171de6,#070a0de6);border:1px solid var(--b);box-shadow:0 0 35px #00e5ff0d}
+.card{padding:22px;min-height:125px;position:relative;overflow:hidden;transition:.3s}
+.card:hover{border-color:#00e5ff80;transform:translateY(-3px)}
+.card:after{content:"";position:absolute;width:80px;height:80px;right:-30px;bottom:-35px;border-radius:50%;background:#00e5ff0d}
+.label{color:var(--m);font-size:12px;letter-spacing:2px}.val{font:29px Orbitron;color:var(--c);margin-top:12px}
+.xp{margin-top:10px;height:6px;background:#172027;border-radius:10px;overflow:hidden}.fill{height:100%;width:0;background:linear-gradient(90deg,#00a8bd,var(--c));box-shadow:0 0 12px #00e5ff99;transition:1s}
+
+.main{padding:20px}.title{font:20px Orbitron;letter-spacing:2px;margin-bottom:18px}.title span{color:var(--c)}
+.days{display:grid;grid-template-columns:repeat(10,1fr);gap:8px;margin-bottom:35px}
+.daybtn{height:48px;background:#0b1116;color:var(--m);border:1px solid #1b2930;cursor:pointer;font:11px Orbitron;transition:.2s;position:relative}
+.daybtn:hover{border-color:var(--c);color:#fff}.daybtn.active{color:#001015;background:var(--c);border-color:var(--c);box-shadow:0 0 18px #00e5ff4d}
+.daybtn.done:after{content:"✓";position:absolute;top:2px;right:4px;color:var(--g);font-size:10px}
+.daybtn.active.done:after{color:#001015}
+
+.panel{padding:30px;animation:up .45s}
+.dhead{display:flex;justify-content:space-between;gap:20px;border-bottom:1px solid #1b2930;padding-bottom:25px;margin-bottom:25px}
+.dn{font:12px Orbitron;letter-spacing:3px}.dt{font:34px Orbitron;margin-top:8px}.ds{color:var(--m);margin-top:8px;font-size:16px}
+.badge{border:1px solid #00e5ff4d;padding:9px 13px;color:var(--c);font:11px Orbitron;white-space:nowrap}
+
+.mission{background:#0b1115;border:1px solid #17262d;margin:12px 0;padding:17px;display:flex;gap:14px;align-items:flex-start;transition:.25s;cursor:pointer}
+.mission:hover{border-color:#00e5ff66;transform:translateX(3px)}.mission.done{background:#00ff9d09;border-color:#00ff9d4d}
+.mission input{appearance:none;width:21px;height:21px;min-width:21px;border:1px solid #38505a;margin-top:2px;cursor:pointer;position:relative}
+.mission input:checked{background:var(--g);border-color:var(--g)}
+.mission input:checked:after{content:"✓";color:#00150d;font-weight:bold;position:absolute;left:4px;top:0}
+.mt{font-size:17px;font-weight:700}.md{color:var(--m);font-size:14px;margin-top:3px;line-height:1.45}
+
+.review{margin-top:28px;border-top:1px solid #1b2930;padding-top:25px}.review textarea{width:100%;min-height:130px;resize:vertical;background:#070b0e;border:1px solid #1b2930;color:#fff;padding:15px;font:16px Rajdhani;outline:0}
+.review textarea:focus{border-color:var(--c);box-shadow:0 0 15px #00e5ff14}
+.rg{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:15px}.rc{border:1px solid #1b2930;padding:16px;background:#080d10}.rc label{color:var(--m);font-size:12px;display:block;margin-bottom:10px}.rc input{width:100%;background:0;border:0;border-bottom:1px solid #283840;color:var(--c);font:22px Orbitron;outline:0}
+.complete{margin-top:20px;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;color:var(--m)}
+
+.phase{margin:55px 0 18px;display:flex;align-items:center;gap:15px}.line{height:1px;flex:1;background:linear-gradient(90deg,var(--c),transparent)}
+.ig{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.info{padding:22px;background:#0b1115;box-shadow:none}.info h3{font:15px Orbitron;margin:10px 0 8px}.info p{color:var(--m);line-height:1.5}
+
+.toast{position:fixed;bottom:25px;right:25px;background:#071116;border:1px solid var(--c);padding:14px 20px;transform:translateY(100px);opacity:0;transition:.35s;z-index:200;box-shadow:0 0 25px #00e5ff33}.toast.show{transform:none;opacity:1}
+footer{margin-top:70px;padding:30px 20px 50px;border-top:1px solid #18262c;color:#4e6068;font-size:13px;display:flex;justify-content:space-between}
+
+.p{position:fixed;width:2px;height:2px;background:var(--c);opacity:.35;pointer-events:none;animation:float linear infinite;z-index:-1}
+
+@media(max-width:850px){
+.hg{grid-template-columns:repeat(2,1fr)}.days{grid-template-columns:repeat(6,1fr)}.ig{grid-template-columns:1fr}.rg{grid-template-columns:1fr}.hero{min-height:500px;padding-top:55px}.dhead{flex-direction:column}
+}
+@media(max-width:520px){
+nav{padding:13px 14px}.logo{font-size:14px}.lv{font-size:9px}.hero{padding:55px 15px 35px}.hero h1{font-size:38px}.hero p{font-size:16px}.hud{padding:0 15px 25px}.card{padding:15px;min-height:105px}.val{font-size:22px}.main{padding:15px}.days{grid-template-columns:repeat(5,1fr)}.daybtn{height:42px;font-size:9px}.panel{padding:18px}.mission{padding:14px}.mt{font-size:15px}.md{font-size:13px}footer{flex-direction:column;gap:10px}
+}
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-<div class="min-h-screen">
-<header class="sticky top-0 z-40 bg-[#0a0a0acc] backdrop-blur-xl border-b border-white/5">
-<div class="max-w-[1500px] mx-auto px-4 sm:px-6">
-<div class="h-16 flex items-center justify-between">
-<div class="flex items-center gap-3">
-<div class="w-9 h-9 rounded-xl bg-white text-black flex items-center justify-center font-black text-xs">SB</div>
-<div>
-<h1 class="font-semibold tracking-tight">Second Brain Vault</h1>
-<p class="text-[9px] uppercase tracking-[.25em] text-neutral-600">External Memory</p>
+<div id="loader">
+  <div class="lt">CHARACTER</div>
+  <div class="ls">INITIALIZING SYSTEM...</div>
+  <div class="lb"><span></span></div>
 </div>
-</div>
-<div class="flex gap-2">
-<button id="exportBtn" class="hidden sm:block px-3 py-2 rounded-lg border border-white/10 text-xs text-neutral-400 hover:text-white hover:bg-white/5">↓ Export</button>
-<button id="clearBtn" class="hidden sm:block px-3 py-2 rounded-lg border border-white/10 text-xs text-neutral-400 hover:text-red-400">Clear</button>
-<div class="w-9 h-9 rounded-xl border border-white/10 flex items-center justify-center text-xs text-neutral-500">●</div>
-</div>
-</div>
-</div>
+
+<header>
+<nav>
+  <div class="logo">CHARACTER<span>//30</span></div>
+  <div class="nr">
+    <div class="lv">LEVEL <span id="levelTop">1</span></div>
+    <button class="btn danger" onclick="resetSystem()">RESET</button>
+  </div>
+</nav>
 </header>
 
-<main class="max-w-[1500px] mx-auto px-4 sm:px-6 py-6">
-
-<section class="mb-5">
-<div class="bg-[#111] border border-white/10 rounded-2xl p-3 sm:p-4">
-<div class="flex gap-3 items-center">
-<div class="hidden sm:flex w-10 h-10 rounded-xl bg-white/5 items-center justify-center text-neutral-400 text-xl">+</div>
-<input id="quickAdd" class="flex-1 bg-transparent outline-none text-base sm:text-lg placeholder:text-neutral-600" placeholder="What do you need to build/make right now?" autocomplete="off">
-<button id="addBtn" class="px-5 py-3 rounded-xl bg-white text-black text-sm font-semibold hover:bg-neutral-200 active:scale-95 transition">Add</button>
-</div>
-<div class="flex justify-between mt-2 px-1 text-[10px] text-neutral-600">
-<span>Press Enter to capture instantly</span>
-<span class="hidden sm:block">Stored locally on this device</span>
-</div>
+<section class="hero">
+<div>
+  <div class="eyebrow">30 DAY PERSONAL DEVELOPMENT SYSTEM</div>
+  <h1>BUILD THE<br><span>CHARACTER.</span></h1>
+  <p>Calm under pressure. Sharp observation. Strategic thinking. Controlled communication. Consistent discipline. Fictional traits ko real-life skills mein convert karo.</p>
+  <div class="buttons">
+    <button class="btn" onclick="scrollToSystem()">ENTER SYSTEM</button>
+    <button class="btn" onclick="selectToday()">TODAY'S MISSION</button>
+  </div>
 </div>
 </section>
 
-<section id="focus" class="mb-5"></section>
-
-<section class="grid grid-cols-3 gap-3 mb-5">
-<div class="bg-[#111] border border-white/10 rounded-2xl p-4">
-<p class="text-[10px] uppercase tracking-widest text-neutral-600">Total Ideas</p>
-<p id="total" class="text-2xl sm:text-3xl font-semibold mt-1">0</p>
-</div>
-<div class="bg-[#111] border border-white/10 rounded-2xl p-4">
-<p class="text-[10px] uppercase tracking-widest text-neutral-600">To-Build</p>
-<p id="todo" class="text-2xl sm:text-3xl font-semibold mt-1">0</p>
-</div>
-<div class="bg-[#111] border border-white/10 rounded-2xl p-4">
-<p class="text-[10px] uppercase tracking-widest text-neutral-600">Built</p>
-<p id="built" class="text-2xl sm:text-3xl font-semibold mt-1">0</p>
+<section class="hud">
+<div class="hg">
+  <div class="card"><div class="label">CURRENT LEVEL</div><div class="val" id="level">1</div></div>
+  <div class="card"><div class="label">TOTAL XP</div><div class="val"><span id="xp">0</span></div><div class="xp"><div class="fill" id="xpFill"></div></div></div>
+  <div class="card"><div class="label">DAYS COMPLETE</div><div class="val"><span id="completedDays">0</span>/30</div></div>
+  <div class="card"><div class="label">STREAK</div><div class="val"><span id="streak">0</span></div></div>
 </div>
 </section>
 
-<section class="mb-5">
-<div class="relative bg-[#111] border border-white/10 rounded-xl">
-<span class="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-600">⌕</span>
-<input id="search" class="w-full bg-transparent outline-none py-3.5 pl-11 pr-4 text-sm placeholder:text-neutral-600" placeholder="Search your entire second brain..." autocomplete="off">
-</div>
-</section>
+<main class="main" id="system">
 
-<section id="board" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4"></section>
+<div class="title"><span>01 //</span> SELECT DAY</div>
+<div class="days" id="daySelector"></div>
+<div id="dayContainer"></div>
+
+<div class="phase">
+  <div class="line"></div>
+  <div class="title" style="margin:0">SYSTEM PRINCIPLES</div>
+  <div class="line"></div>
+</div>
+
+<div class="ig">
+  <div class="info"><div class="info-icon">01 / CONTROL</div><h3>React Less. Respond Better.</h3><p>Emotion ko destroy nahi karna. Observe karke response choose karna hai.</p></div>
+  <div class="info"><div class="info-icon">02 / OBSERVE</div><h3>Facts Before Assumptions.</h3><p>Jo pata hai aur jo assume kar rahe ho, dono ko separate rakho.</p></div>
+  <div class="info"><div class="info-icon">03 / DISCIPLINE</div><h3>Action Before Motivation.</h3><p>Motivation ka wait mat karo. Small action start karo.</p></div>
+  <div class="info"><div class="info-icon">04 / STRATEGY</div><h3>Goal → Options → Consequences.</h3><p>Important decision se pehle options aur consequences dekho.</p></div>
+  <div class="info"><div class="info-icon">05 / SOCIAL</div><h3>Understand. Don't Manipulate.</h3><p>People ko samjho, unki boundaries aur autonomy respect karo.</p></div>
+  <div class="info"><div class="info-icon">06 / IDENTITY</div><h3>Become Your Own Version.</h3><p>Characters reference hain. Final personality tumhari apni honi chahiye.</p></div>
+</div>
 
 </main>
 
-<footer class="text-center py-8">
-<p class="text-[10px] text-neutral-700 tracking-widest">SECOND BRAIN VAULT · THINK LESS. BUILD MORE.</p>
+<footer>
+<div>CHARACTER // 30 DAY SYSTEM</div>
+<div>LOCAL DATA • PRIVATE • OFFLINE</div>
 </footer>
-</div>
 
-<div id="modal" class="modal fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-<div class="modal-box w-full max-w-lg bg-[#111] border border-white/10 rounded-2xl shadow-2xl">
-<div class="px-5 py-4 border-b border-white/5 flex justify-between items-center">
-<div>
-<h2 class="font-semibold">Edit Item</h2>
-<p class="text-xs text-neutral-600 mt-1">Update your stored thought.</p>
-</div>
-<button id="closeModal" class="w-8 h-8 rounded-lg text-neutral-500 hover:bg-white/5 hover:text-white">×</button>
-</div>
+<div class="toast" id="toast"></div>
 
-<form id="editForm" class="p-5 space-y-4">
-<input type="hidden" id="editId">
-
-<div>
-<label class="block text-xs text-neutral-500 mb-2">Title</label>
-<input id="editTitle" required maxlength="120" class="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 outline-none text-sm focus:border-white/30" placeholder="What are you building?">
-</div>
-
-<div>
-<label class="block text-xs text-neutral-500 mb-2">Description</label>
-<textarea id="editDesc" maxlength="500" rows="3" class="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 outline-none text-sm resize-none focus:border-white/30" placeholder="A little context..."></textarea>
-</div>
-
-<div>
-<label class="block text-xs text-neutral-500 mb-2">Tags</label>
-<input id="editTags" maxlength="200" class="w-full bg-black/30 border border-white/10 rounded-xl px-4 py-3 outline-none text-sm focus:border-white/30" placeholder="#AI, #Python, #Website">
-</div>
-
-<div class="grid grid-cols-2 gap-3">
-<div>
-<label class="block text-xs text-neutral-500 mb-2">Priority</label>
-<select id="editPriority" class="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 outline-none text-sm">
-<option value="low">Low</option>
-<option value="medium" selected>Medium</option>
-<option value="high">High</option>
-</select>
-</div>
-
-<div>
-<label class="block text-xs text-neutral-500 mb-2">Vault</label>
-<select id="editVault" class="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-3 outline-none text-sm">
-<option value="idea">Idea Vault</option>
-<option value="todo">To-Build</option>
-<option value="progress">In-Progress</option>
-<option value="built">Built</option>
-</select>
-</div>
-</div>
-
-<div class="flex gap-3 pt-1">
-<button type="button" id="cancelEdit" class="flex-1 py-3 rounded-xl border border-white/10 text-sm text-neutral-400 hover:bg-white/5">Cancel</button>
-<button class="flex-1 py-3 rounded-xl bg-white text-black text-sm font-semibold hover:bg-neutral-200">Save Changes</button>
-</div>
-</form>
-</div>
-</div>
-
-<div id="toast" class="toast fixed bottom-5 left-1/2 z-[60] bg-[#171717] border border-white/10 rounded-xl px-4 py-3 text-sm shadow-2xl"></div>
-
-<!-- PART 2: JAVASCRIPT YAHAN SE PASTE KARNA HAI -->
 <script>
-const KEY="secondBrainVault_v2";
+/* PART 2 YAHAN PASTE KARNA HAI */
+const days=[
+{day:1,title:"SELF CONTROL",phase:"FOUNDATION",subtitle:"Automatic reaction ko controlled response mein convert karo.",xp:100,m:[
+["2-SECOND PAUSE","Important response se pehle 2 seconds rukna."],
+["REACTION LOG","Aaj ke 3 impulsive moments identify karo."],
+["BREATH CONTROL","5 min quietly baithkar breathing observe karo."],
+["BETTER RESPONSE","Ek old situation ka better response likho."]],r:"Aaj maine kitni baar reaction control ki?"},
 
-const VAULTS={
-  idea:{name:"Idea Vault",sub:"Raw thoughts",icon:"✦"},
-  todo:{name:"To-Build",sub:"Ready to execute",icon:"→"},
-  progress:{name:"In-Progress",sub:"Currently building",icon:"◐"},
-  built:{name:"Built",sub:"Completed",icon:"✓"}
+{day:2,title:"FACE + BODY CONTROL",phase:"FOUNDATION",subtitle:"Relaxed aur controlled presence develop karo.",xp:100,m:[
+["NEUTRAL FACE","Mirror mein 3 min relaxed expression practice karo."],
+["POSTURE","Shoulders relaxed aur back naturally straight rakho."],
+["CONTROLLED MOVEMENT","Fidgeting notice karke reduce karo."],
+["EYE CONTACT","Normal eye contact practice karo; stare nahi."]],r:"Kya meri body language aaj zyada controlled thi?"},
+
+{day:3,title:"OBSERVATION MODE",phase:"FOUNDATION",subtitle:"Bolne se pehle environment aur details notice karo.",xp:110,m:[
+["5 DETAILS","Environment ki 5 neutral details yaad karo."],
+["MEMORY TEST","Place chhodne ke baad details bina dekhe likho."],
+["FACT VS ASSUMPTION","Ek situation ko FACT / ASSUMPTION / UNKNOWN mein divide karo."],
+["LISTEN","Ek conversation mein words aur facts par focus karo."]],r:"Aaj maine kya notice kiya jo normally miss kar deta?"},
+
+{day:4,title:"SPEECH CONTROL",phase:"FOUNDATION",subtitle:"Kam words. Clear words. Purposeful words.",xp:110,m:[
+["NO INTERRUPT","Aaj kisi ko unnecessarily interrupt mat karo."],
+["LISTEN FIRST","Complete listening ke baad reply karo."],
+["FILLER REDUCTION","Unnecessary filler words notice karo."],
+["PURPOSE CHECK","Bolne se pehle pucho: Kya ye zaroori hai?"]],r:"Aaj maine unnecessary kya bola?"},
+
+{day:5,title:"EMOTIONAL CONTROL",phase:"FOUNDATION",subtitle:"Emotion ko suppress nahi — understand aur regulate karo.",xp:120,m:[
+["NOTICE","Strong emotion aaye to uska naam identify karo."],
+["PAUSE","Anger mein immediate reply avoid karo."],
+["BREATH","Pressure mein breathing slow aur normal karo."],
+["NIGHT LOG","3 emotions aur unke triggers likho."]],r:"Aaj kis emotion ne mujhe sabse zyada influence kiya?"},
+
+{day:6,title:"DISCIPLINE TEST",phase:"FOUNDATION",subtitle:"Motivation ke bina bhi important task complete karo.",xp:120,m:[
+["CHOOSE TASK","Ek important study/work task select karo."],
+["START 5","Bas 5 minutes start karne ka rule use karo."],
+["FOCUS","30–45 min distraction-free kaam karo."],
+["FINISH","Mood ka wait kiye bina task complete karo."]],r:"Maine motivation ke bina kya complete kiya?"},
+
+{day:7,title:"SILENCE + AWARENESS",phase:"FOUNDATION",subtitle:"Unnecessary talking reduce karo, awareness increase karo.",xp:120,m:[
+["NO GOSSIP","Entertainment ke liye gossip avoid karo."],
+["NO ATTENTION SEEKING","Sirf attention ke liye baat mat karo."],
+["OBSERVE CONVERSATION","Words, tone aur context notice karo."],
+["RESPECTFUL SILENCE","Silence ko rudeness mat banao."]],r:"Kahan silence better tha aur kahan bolna zaroori tha?"},
+
+{day:8,title:"THINK BEFORE ACTION",phase:"FOUNDATION",subtitle:"Goal → options → consequences se decision process karo.",xp:130,m:[
+["DEFINE GOAL","Important decision ka goal one sentence mein likho."],
+["3 OPTIONS","At least 3 realistic options likho."],
+["RISKS","Har option ka major risk identify karo."],
+["NEXT ACTION","Ek practical next step choose karo."]],r:"Kya maine aaj kisi decision ko better process kiya?"},
+
+{day:9,title:"PRESSURE CONTROL",phase:"FOUNDATION",subtitle:"Pressure mein panic ke bajay problem-solving.",xp:130,m:[
+["25 MIN FOCUS","25-min difficult task without phone complete karo."],
+["BREATHE","Difficulty par pause + breathing reset karo."],
+["BREAK TASK","Large problem ko smaller actions mein divide karo."],
+["CONTINUE","Frustration ke baad task continue karo."]],r:"Pressure mein meri sabse common reaction kya thi?"},
+
+{day:10,title:"FOUNDATION TEST",phase:"FOUNDATION",subtitle:"First 9 days ke skills ko ek situation mein combine karo.",xp:150,m:[
+["PAUSE","React karne se pehle pause."],
+["OBSERVE","Situation ke facts identify karo."],
+["THINK","2 possible responses socho."],
+["RESPOND","Useful respectful response choose karo."],
+["REVIEW","Old response vs new response likho."]],r:"Days 1–10 mein meri biggest improvement kya hai?"},
+
+{day:11,title:"DEEP OBSERVATION",phase:"DEVELOPMENT",subtitle:"Surface ke beyond context notice karo.",xp:130,m:[
+["ENVIRONMENT SCAN","Ek location ko 60 sec calmly observe karo."],
+["SEQUENCE","Events ka exact order yaad karo."],
+["CHANGE DETECTION","Environment mein 3 changes notice karo."],
+["VERIFY","Apni observation ko reality se compare karo."]],r:"Meri observation mein kya error tha?"},
+
+{day:12,title:"MEMORY TRAINING",phase:"DEVELOPMENT",subtitle:"Observation ko usable memory mein convert karo.",xp:130,m:[
+["10 DETAILS","10 neutral details remember karo."],
+["RECALL","10 min baad bina dekhe reproduce karo."],
+["SEQUENCE","Events ko correct order mein likho."],
+["ERROR LOG","Wrong memories ko mark karo."]],r:"Meri memory accuracy kaisi rahi?"},
+
+{day:13,title:"QUESTION QUALITY",phase:"DEVELOPMENT",subtitle:"Better questions = better information.",xp:130,m:[
+["OPEN QUESTION","Ek genuine open-ended question pucho."],
+["CLARIFY","Assume karne ke bajay clarification maango."],
+["WHY NOT FIRST","Instantly 'why' assume mat karo."],
+["LISTEN","Question ke baad answer genuinely suno."]],r:"Aaj ka best question kya tha?"},
+
+{day:14,title:"WEEK 2 CHECK",phase:"DEVELOPMENT",subtitle:"Observation + communication + self-control review.",xp:160,m:[
+["OBSERVATION SCORE","Observation ko 10 mein rate karo."],
+["SPEECH SCORE","Speech control ko 10 mein rate karo."],
+["CONTROL SCORE","Emotional control ko 10 mein rate karo."],
+["ONE FIX","Next week ke liye one weakness choose karo."]],r:"Ab mujhe kis skill par sabse zyada kaam karna hai?"},
+
+{day:15,title:"STRATEGIC THINKING",phase:"STRATEGY",subtitle:"Long-term consequences ko consider karna seekho.",xp:140,m:[
+["GOAL","Ek real goal choose karo."],
+["OPTIONS","3 possible approaches likho."],
+["SECOND EFFECT","Har option ka next consequence socho."],
+["ACTION","Smallest useful next action choose karo."]],r:"Maine immediate result ke beyond kya dekha?"},
+
+{day:16,title:"DECISION MAKING",phase:"STRATEGY",subtitle:"Fast nahi — clear decisions.",xp:140,m:[
+["FACTS","Available facts list karo."],
+["UNKNOWN","Missing information identify karo."],
+["TRADEOFF","Kya gain aur kya sacrifice hoga?"],
+["DECIDE","Evidence ke basis par action choose karo."]],r:"Kya mera decision evidence based tha?"},
+
+{day:17,title:"PROBLEM SOLVING",phase:"STRATEGY",subtitle:"Problem ko smaller solvable pieces mein todo.",xp:140,m:[
+["DEFINE","Problem exactly one sentence mein likho."],
+["BREAK","Problem ko 3 smaller parts mein divide karo."],
+["SOLVE","Ek part solve karo."],
+["REVIEW","Kya solution actual problem solve karta hai?"]],r:"Aaj maine kis problem ko simplify kiya?"},
+
+{day:18,title:"ADAPTABILITY",phase:"STRATEGY",subtitle:"Plan fail ho to strategy adjust karo.",xp:140,m:[
+["NOTICE FAILURE","Plan ke failure ko objectively identify karo."],
+["NO EXCUSES","Blame ke bajay cause identify karo."],
+["BACKUP","Alternative plan banao."],
+["CONTINUE","New approach se continue karo."]],r:"Plan fail hone par mera response kya tha?"},
+
+{day:19,title:"SOCIAL AWARENESS",phase:"STRATEGY",subtitle:"People ko understand karo bina manipulate kiye.",xp:150,m:[
+["LISTEN","Conversation mein complete attention do."],
+["BOUNDARIES","Dusre ki boundary respect karo."],
+["CONTEXT","Person ki situation consider karo."],
+["NO MANIPULATION","Information ko leverage mat banao."]],r:"Aaj maine kisi ko better samjha kaise?"},
+
+{day:20,title:"STRATEGY TEST",phase:"STRATEGY",subtitle:"Observation + emotion + communication + strategy combine karo.",xp:180,m:[
+["OBSERVE","Situation ke facts identify karo."],
+["CONTROL","Immediate emotional reaction delay karo."],
+["OPTIONS","3 responses create karo."],
+["CONSEQUENCES","Short + long-term effects dekho."],
+["ACT","Respectful useful response choose karo."]],r:"Pressure mein mera decision process kaisa raha?"},
+
+{day:21,title:"CONFIDENCE",phase:"INTEGRATION",subtitle:"Quiet confidence without superiority.",xp:150,m:[
+["POSTURE","Relaxed confident posture maintain karo."],
+["OWN MISTAKE","Ek mistake openly accept karo."],
+["NO APPROVAL","Har action ke liye validation mat seekho."],
+["CLEAR SPEECH","Apni baat clearly bolo."]],r:"Confidence aur arrogance ke beech difference kya samjha?"},
+
+{day:22,title:"FOCUS MODE",phase:"INTEGRATION",subtitle:"Distraction resistance build karo.",xp:150,m:[
+["PHONE AWAY","Deep work ke waqt phone physically door rakho."],
+["ONE TASK","Ek waqt mein ek priority."],
+["25–45 MIN","Focused session complete karo."],
+["FINISH","Unnecessary switching avoid karo."]],r:"Mera biggest distraction kya tha?"},
+
+{day:23,title:"DISCIPLINE UNDER FATIGUE",phase:"INTEGRATION",subtitle:"Energy low ho tab bhi reasonable consistency.",xp:150,m:[
+["MINIMUM STANDARD","Low-energy version of task define karo."],
+["START","5-minute start rule use karo."],
+["QUALITY","Speed ke bajay clean execution."],
+["RECOVER","Recovery ko ignore mat karo."]],r:"Maine discipline aur overdoing ke beech balance rakha?"},
+
+{day:24,title:"COMMUNICATION MASTERY",phase:"INTEGRATION",subtitle:"Clear, calm aur respectful communication.",xp:150,m:[
+["LISTEN","Conversation ka main point identify karo."],
+["CLARIFY","Unclear point par question pucho."],
+["SHORT ANSWER","Jitna required ho utna bolo."],
+["RESPECT","Disagreement ko personal attack mat banao."]],r:"Aaj meri communication mein kya improve hua?"},
+
+{day:25,title:"EMOTIONAL STABILITY",phase:"INTEGRATION",subtitle:"External situation ko internal control decide na karne do.",xp:160,m:[
+["TRIGGER","Aaj ka strongest trigger identify karo."],
+["PAUSE","Automatic response delay karo."],
+["CHOOSE","Intentional response select karo."],
+["RESET","Situation ke baad mind ko reset karo."]],r:"Kya main apna response control kar saka?"},
+
+{day:26,title:"HIGH QUALITY ROUTINE",phase:"INTEGRATION",subtitle:"Character ko routine mein embed karo.",xp:160,m:[
+["MORNING","Day ka #1 priority set karo."],
+["STUDY","Focused academic block complete karo."],
+["BODY","Planned movement/training complete karo."],
+["NIGHT","Review + tomorrow preparation."]],r:"Mera routine kitna automatic ho raha hai?"},
+
+{day:27,title:"PRESSURE SIMULATION",phase:"INTEGRATION",subtitle:"Controlled pressure mein complete system use karo.",xp:170,m:[
+["TIMED TASK","Ek difficult task timer ke saath complete karo."],
+["NO PANIC","Difficulty par breathing reset."],
+["STRATEGY","Task ko smaller steps mein divide karo."],
+["FINISH","Completion ke baad review."]],r:"Pressure ke under sabse strong skill kaunsi thi?"},
+
+{day:28,title:"IDENTITY SHIFT",phase:"INTEGRATION",subtitle:"System ko acting se identity habit mein convert karo.",xp:170,m:[
+["CALM","Aaj deliberate calmness maintain karo."],
+["OBSERVE","Important situations mein facts notice karo."],
+["DISCIPLINE","One difficult task complete karo."],
+["SPEAK","Purposeful communication maintain karo."]],r:"Mere behaviour mein kya genuinely natural hone laga?"},
+
+{day:29,title:"FINAL PREPARATION",phase:"FINAL",subtitle:"Last test se pehle complete system revise karo.",xp:180,m:[
+["REVIEW","Days 1–28 ke notes review karo."],
+["WEAKNESS","Top 3 weaknesses identify karo."],
+["STRENGTH","Top 3 strengths identify karo."],
+["PLAN","Next 30 days ke liye 3 permanent habits choose karo."]],r:"Main ab kis version se alag hoon?"},
+
+{day:30,title:"FINAL CHARACTER TEST",phase:"FINAL",subtitle:"30 days ke skills ko complete protocol mein combine karo.",xp:250,m:[
+["OBSERVE","Situation ko facts ke saath analyse karo."],
+["CONTROL","Emotional reaction ko pause karo."],
+["THINK","Multiple options create karo."],
+["STRATEGY","Consequences evaluate karo."],
+["COMMUNICATE","Clear aur respectful response do."],
+["ACT","Decision ko execute karo."],
+["REVIEW","Result se learn karo."]],r:"30 days ke baad mera strongest transformation kya hai?"}
+];
+let state=JSON.parse(localStorage.getItem("character30"))||{
+ xp:0,completed:{},missions:{},reviews:{},scores:{}
 };
+let currentDay=1;
 
-let items=JSON.parse(localStorage.getItem(KEY)||"[]");
-let searchText="";
-let draggedId=null;
-let focusId=null;
+window.addEventListener("load",()=>{
+ setTimeout(()=>{
+  document.getElementById("loader").style.opacity="0";
+  setTimeout(()=>document.getElementById("loader").style.display="none",700)
+ },1900);
+ createParticles();
+ renderDaySelector();
+ renderDay(1);
+ updateHUD();
+});
 
-const $=id=>document.getElementById(id);
+function createParticles(){
+ for(let i=0;i<35;i++){
+  let p=document.createElement("div");
+  p.className="p";
+  p.style.left=Math.random()*100+"%";
+  p.style.animationDuration=8+Math.random()*15+"s";
+  p.style.animationDelay=Math.random()*10+"s";
+  document.body.appendChild(p);
+ }
+}
+
+function renderDaySelector(){
+ let box=document.getElementById("daySelector");
+ box.innerHTML="";
+ days.forEach(d=>{
+  let b=document.createElement("button");
+  b.className="daybtn"+(d.day==currentDay?" active ":"")+(state.completed[d.day]?" done":"");
+  b.textContent=d.day;
+  b.onclick=()=>{
+   currentDay=d.day;
+   renderDaySelector();
+   renderDay(d.day);
+   document.getElementById("dayContainer").scrollIntoView({
+    behavior:"smooth",block:"start"
+   });
+  };
+  box.appendChild(b);
+ });
+}
+
+function renderDay(n){
+ let d=days.find(x=>x.day==n);
+ let count=d.m.filter((_,i)=>state.missions[`${n}-${i}`]).length;
+ let all=count==d.m.length;
+
+ document.getElementById("dayContainer").innerHTML=`
+ <section class="panel">
+  <div class="dhead">
+   <div>
+    <div class="dn">DAY ${String(d.day).padStart(2,"0")} // ${d.phase}</div>
+    <div class="dt">${d.title}</div>
+    <div class="ds">${d.subtitle}</div>
+   </div>
+   <div class="badge">+${d.xp} XP</div>
+  </div>
+
+  <div>
+   ${d.m.map((m,i)=>{
+    let k=`${n}-${i}`,c=!!state.missions[k];
+    return `
+    <label class="mission ${c?"done":""}">
+     <input type="checkbox" ${c?"checked":""}
+      onchange="toggleMission(${n},${i})">
+     <div>
+      <div class="mt">${m[0]}</div>
+      <div class="md">${m[1]}</div>
+     </div>
+    </label>`;
+   }).join("")}
+  </div>
+
+  <div class="review">
+   <div class="title" style="font-size:15px">NIGHT REVIEW</div>
+   <p style="color:var(--m);margin-bottom:10px">${d.r}</p>
+
+   <textarea id="reviewText"
+    placeholder="Write your thoughts here..."
+    oninput="saveReview(${n})">${state.reviews[n]||""}</textarea>
+
+   <div class="rg">
+    ${["COMPOSURE","OBSERVATION","DISCIPLINE"].map(s=>`
+     <div class="rc">
+      <label>${s} / 10</label>
+      <input type="number" min="0" max="10"
+       value="${state.scores[`${n}-${s}`]||""}"
+       onchange="saveScore(${n},'${s}',this.value)">
+     </div>
+    `).join("")}
+   </div>
+
+   <div class="complete">
+    <div>
+     Missions:
+     <strong style="color:var(--c)">
+      ${count}/${d.m.length}
+     </strong>
+    </div>
+    <button class="btn" onclick="completeDay(${n})">
+     ${all?"DAY COMPLETED":"COMPLETE DAY"}
+    </button>
+   </div>
+  </div>
+ </section>`;
+}
+
+function toggleMission(d,i){
+ let k=`${d}-${i}`;
+ state.missions[k]=!state.missions[k];
+ save();
+ renderDay(d);
+ renderDaySelector();
+ updateHUD();
+
+ if(state.missions[k]) showToast("+ MISSION XP");
+}
+
+function completeDay(n){
+ let d=days.find(x=>x.day==n);
+ let ok=d.m.every((_,i)=>state.missions[`${n}-${i}`]);
+
+ if(!ok){
+  showToast("Complete all missions first.");
+  return;
+ }
+
+ if(!state.completed[n]){
+  state.completed[n]=true;
+  state.xp+=d.xp;
+  save();
+  renderDaySelector();
+  renderDay(n);
+  updateHUD();
+  showToast(`DAY ${n} COMPLETE // +${d.xp} XP`);
+ }else{
+  showToast("DAY ALREADY COMPLETED");
+ }
+}
+
+function saveReview(d){
+ state.reviews[d]=document.getElementById("reviewText").value;
+ save();
+}
+
+function saveScore(d,s,v){
+ v=Math.max(0,Math.min(10,parseInt(v)||0));
+ state.scores[`${d}-${s}`]=v;
+ save();
+}
+
+function updateHUD(){
+ let xp=state.xp;
+ let l=Math.floor(xp/500)+1;
+
+ document.getElementById("xp").textContent=xp;
+ document.getElementById("level").textContent=l;
+ document.getElementById("levelTop").textContent=l;
+ document.getElementById("completedDays").textContent=
+  Object.keys(state.completed).length;
+
+ document.getElementById("xpFill").style.width=
+  (xp%500/500*100)+"%";
+
+ calculateStreak();
+}
+
+function calculateStreak(){
+ let s=0;
+ for(let i=30;i>=1;i--){
+  if(state.completed[i])s++;
+  else break;
+ }
+ document.getElementById("streak").textContent=s;
+}
+
+function selectToday(){
+ let n=30;
+ for(let i=1;i<=30;i++){
+  if(!state.completed[i]){
+   n=i;
+   break;
+  }
+ }
+
+ currentDay=n;
+ renderDaySelector();
+ renderDay(n);
+
+ document.getElementById("system").scrollIntoView({
+  behavior:"smooth"
+ });
+}
+
+function scrollToSystem(){
+ document.getElementById("system").scrollIntoView({
+  behavior:"smooth"
+ });
+}
+
+function resetSystem(){
+ if(!confirm(
+  "WARNING: All 30-day progress, XP, reviews and scores will be deleted."
+ ))return;
+
+ localStorage.removeItem("character30");
+
+ state={
+  xp:0,
+  completed:{},
+  missions:{},
+  reviews:{},
+  scores:{}
+ };
+
+ currentDay=1;
+ renderDaySelector();
+ renderDay(1);
+ updateHUD();
+ showToast("SYSTEM RESET");
+}
 
 function save(){
-  localStorage.setItem(KEY,JSON.stringify(items));
+ localStorage.setItem("character30",JSON.stringify(state));
 }
 
-function id(){
-  return Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+let toastTimer;
+
+function showToast(m){
+ let t=document.getElementById("toast");
+ t.textContent=m;
+ t.classList.add("show");
+ clearTimeout(toastTimer);
+
+ toastTimer=setTimeout(()=>{
+  t.classList.remove("show");
+ },2200);
 }
-
-function esc(x){
-  const d=document.createElement("div");
-  d.textContent=x??"";
-  return d.innerHTML;
-}
-
-function tags(value){
-  return value.split(/[,\s]+/)
-    .map(x=>x.trim())
-    .filter(Boolean)
-    .map(x=>x.startsWith("#")?x:"#"+x)
-    .slice(0,12);
-}
-
-function toast(msg){
-  const t=$("toast");
-  t.textContent=msg;
-  t.classList.add("show");
-  clearTimeout(window.toastTimer);
-  window.toastTimer=setTimeout(()=>t.classList.remove("show"),1800);
-}
-
-function date(t){
-  return new Date(t).toLocaleDateString(undefined,{
-    month:"short",day:"numeric"
-  });
-}
-
-function addIdea(){
-  const input=$("quickAdd");
-  const title=input.value.trim();
-  if(!title)return;
-
-  const now=Date.now();
-
-  items.unshift({
-    id:id(),
-    title:title.slice(0,120),
-    description:"",
-    tags:[],
-    priority:"medium",
-    vault:"idea",
-    createdAt:now,
-    updatedAt:now
-  });
-
-  save();
-  input.value="";
-  render();
-  toast("Idea captured ✓");
-  input.focus();
-}
-
-function matches(item){
-  if(!searchText)return true;
-
-  const text=[
-    item.title,
-    item.description,
-    ...(item.tags||[]),
-    item.priority,
-    VAULTS[item.vault]?.name||""
-  ].join(" ").toLowerCase();
-
-  return text.includes(searchText);
-}
-
-function card(item){
-  const tagHTML=(item.tags||[]).map(t=>
-    `<span class="px-2 py-1 rounded-md bg-white/5 text-[10px] text-neutral-500">${esc(t)}</span>`
-  ).join("");
-
-  return `
-  <article draggable="true"
-    data-id="${esc(item.id)}"
-    class="card enter ${esc(item.priority)} bg-[#141414] border border-white/10 rounded-xl p-4 cursor-grab">
-
-    <div class="flex justify-between gap-3">
-      <h3 class="font-medium text-sm leading-5 break-words">
-        ${esc(item.title)}
-      </h3>
-
-      <button data-action="menu" data-id="${esc(item.id)}"
-        class="w-7 h-7 shrink-0 rounded-lg text-neutral-600 hover:text-white hover:bg-white/5">
-        ⋮
-      </button>
-    </div>
-
-    ${
-      item.description
-      ? `<p class="mt-2 text-xs leading-5 text-neutral-500 break-words">${esc(item.description)}</p>`
-      : `<p class="mt-2 text-[11px] text-neutral-700 italic">No description yet.</p>`
-    }
-
-    ${
-      tagHTML
-      ? `<div class="flex flex-wrap gap-1.5 mt-3">${tagHTML}</div>`
-      : ""
-    }
-
-    <div class="flex justify-between items-center mt-4 pt-3 border-t border-white/5">
-      <div class="text-[10px] text-neutral-600">
-        ${item.priority} · ${date(item.updatedAt)}
-      </div>
-
-      <div class="actions hidden gap-1">
-        <button data-action="edit" data-id="${esc(item.id)}"
-          class="px-2 py-1 rounded-md text-[10px] text-neutral-500 hover:text-white hover:bg-white/5">
-          Edit
-        </button>
-
-        <button data-action="delete" data-id="${esc(item.id)}"
-          class="px-2 py-1 rounded-md text-[10px] text-neutral-500 hover:text-red-400 hover:bg-red-400/5">
-          Delete
-        </button>
-      </div>
-    </div>
-  </article>`;
-}
-
-function column(key){
-  const v=VAULTS[key];
-
-  const list=items.filter(x=>
-    x.vault===key && matches(x)
-  );
-
-  return `
-  <section data-vault="${key}"
-    class="column bg-[#0f0f0f] border border-white/10 rounded-2xl min-h-[300px] flex flex-col transition">
-
-    <div class="p-4 border-b border-white/5 flex justify-between items-center">
-      <div class="flex gap-3 items-center">
-        <div class="w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center text-sm text-neutral-400">
-          ${v.icon}
-        </div>
-        <div>
-          <h2 class="text-sm font-semibold">${v.name}</h2>
-          <p class="text-[10px] text-neutral-600">${v.sub}</p>
-        </div>
-      </div>
-
-      <span class="px-2 h-6 min-w-6 rounded-lg bg-white/5 flex items-center justify-center text-[10px] text-neutral-500">
-        ${list.length}
-      </span>
-    </div>
-
-    <div class="p-3 space-y-3 flex-1">
-      ${
-        list.length
-        ? list.map(card).join("")
-        : `<div class="border border-dashed border-white/10 rounded-xl p-6 text-center text-xs text-neutral-700">
-             ${searchText?"No matching items.":"Nothing here yet."}
-           </div>`
-      }
-    </div>
-  </section>`;
-}
-
-function renderBoard(){
-  $("board").innerHTML=
-    Object.keys(VAULTS).map(column).join("");
-
-  document.querySelectorAll(".card").forEach(c=>{
-    c.addEventListener("dragstart",dragStart);
-    c.addEventListener("dragend",dragEnd);
-
-    c.addEventListener("mouseenter",()=>{
-      const a=c.querySelector(".actions");
-      if(a){a.classList.remove("hidden");a.classList.add("flex")}
-    });
-
-    c.addEventListener("mouseleave",()=>{
-      const a=c.querySelector(".actions");
-      if(a){a.classList.add("hidden");a.classList.remove("flex")}
-    });
-
-    c.addEventListener("dblclick",()=>{
-      edit(c.dataset.id);
-    });
-  });
-
-  document.querySelectorAll(".column").forEach(col=>{
-    col.addEventListener("dragover",dragOver);
-    col.addEventListener("dragleave",dragLeave);
-    col.addEventListener("drop",drop);
-  });
-}
-
-function dragStart(e){
-  draggedId=e.currentTarget.dataset.id;
-  e.currentTarget.classList.add("dragging");
-  e.dataTransfer.effectAllowed="move";
-  e.dataTransfer.setData("text/plain",draggedId);
-}
-
-function dragEnd(e){
-  e.currentTarget.classList.remove("dragging");
-  document.querySelectorAll(".column")
-    .forEach(x=>x.classList.remove("dragover"));
-  draggedId=null;
-}
-
-function dragOver(e){
-  e.preventDefault();
-  const col=e.currentTarget;
-  col.classList.add("dragover");
-}
-
-function dragLeave(e){
-  const col=e.currentTarget;
-  if(!col.contains(e.relatedTarget))
-    col.classList.remove("dragover");
-}
-
-function drop(e){
-  e.preventDefault();
-
-  const col=e.currentTarget;
-  col.classList.remove("dragover");
-
-  const itemId=e.dataTransfer.getData("text/plain")||draggedId;
-  const target=col.dataset.vault;
-
-  const item=items.find(x=>x.id===itemId);
-
-  if(!item||item.vault===target)return;
-
-  item.vault=target;
-  item.updatedAt=Date.now();
-
-  save();
-  render();
-  toast(`Moved to ${VAULTS[target].name}`);
-}
-
-function renderFocus(){
-  const candidates=items.filter(x=>x.vault==="todo");
-
-  if(!candidates.length){
-    focusId=null;
-    $("focus").innerHTML=`
-      <div class="bg-[#111] border border-dashed border-white/10 rounded-2xl p-5">
-        <div class="flex gap-3 items-center">
-          <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-neutral-600">◌</div>
-          <div>
-            <p class="text-[10px] uppercase tracking-[.25em] text-neutral-600">Daily Focus</p>
-            <p class="text-sm text-neutral-500 mt-1">Move something into To-Build and your mission appears here.</p>
-          </div>
-        </div>
-      </div>`;
-    return;
-  }
-
-  let item=candidates.find(x=>x.id===focusId);
-
-  if(!item){
-    item=candidates[Math.floor(Math.random()*candidates.length)];
-    focusId=item.id;
-  }
-
-  $("focus").innerHTML=`
-    <div class="relative overflow-hidden bg-[#111] border border-white/10 rounded-2xl p-5 sm:p-6">
-      <div class="absolute right-0 top-0 w-40 h-40 bg-white/[.025] rounded-full blur-3xl"></div>
-
-      <div class="relative flex flex-col sm:flex-row justify-between gap-5 sm:items-center">
-        <div>
-          <div class="flex items-center gap-2 mb-3">
-            <span class="w-2 h-2 bg-white rounded-full"></span>
-            <span class="text-[10px] uppercase tracking-[.25em] text-neutral-500">Daily Focus</span>
-          </div>
-
-          <h2 class="text-xl sm:text-2xl font-semibold tracking-tight break-words">
-            ${esc(item.title)}
-          </h2>
-
-          ${
-            item.description
-            ? `<p class="text-sm text-neutral-500 mt-2">${esc(item.description)}</p>`
-            :""
-          }
-        </div>
-
-        <button data-focus="${esc(item.id)}"
-          class="shrink-0 px-5 py-3 rounded-xl bg-white text-black text-sm font-semibold hover:bg-neutral-200 active:scale-95 transition">
-          Build this today →
-        </button>
-      </div>
-    </div>`;
-}
-
-function stats(){
-  $("total").textContent=items.length;
-  $("todo").textContent=items.filter(x=>x.vault==="todo").length;
-  $("built").textContent=items.filter(x=>x.vault==="built").length;
-}
-
-function render(){
-  renderFocus();
-  stats();
-  renderBoard();
-}
-
-function edit(id){
-  const item=items.find(x=>x.id===id);
-  if(!item)return;
-
-  $("editId").value=item.id;
-  $("editTitle").value=item.title;
-  $("editDesc").value=item.description||"";
-  $("editTags").value=(item.tags||[]).join(" ");
-  $("editPriority").value=item.priority||"medium";
-  $("editVault").value=item.vault||"idea";
-
-  $("modal").classList.add("show");
-
-  setTimeout(()=>$("editTitle").focus(),100);
-}
-
-function closeModal(){
-  $("modal").classList.remove("show");
-  $("editForm").reset();
-}
-
-function saveEdit(e){
-  e.preventDefault();
-
-  const item=items.find(x=>x.id===$("editId").value);
-  if(!item)return;
-
-  item.title=$("editTitle").value.trim().slice(0,120);
-  item.description=$("editDesc").value.trim().slice(0,500);
-  item.tags=tags($("editTags").value);
-  item.priority=$("editPriority").value;
-  item.vault=$("editVault").value;
-  item.updatedAt=Date.now();
-
-  save();
-  closeModal();
-  render();
-  toast("Changes saved ✓");
-}
-
-function deleteItem(id){
-  const item=document.querySelector(`[data-id="${CSS.escape(id)}"]`);
-
-  if(item){
-    item.style.opacity="0";
-    item.style.transform="scale(.94)";
-  }
-
-  setTimeout(()=>{
-    items=items.filter(x=>x.id!==id);
-
-    if(focusId===id)focusId=null;
-
-    save();
-    render();
-    toast("Item deleted");
-  },180);
-}
-
-$("addBtn").addEventListener("click",addIdea);
-
-$("quickAdd").addEventListener("keydown",e=>{
-  if(e.key==="Enter"){
-    e.preventDefault();
-    addIdea();
-  }
-});
-
-$("search").addEventListener("input",e=>{
-  searchText=e.target.value.trim().toLowerCase();
-  renderBoard();
-});
-
-$("board").addEventListener("click",e=>{
-  const btn=e.target.closest("[data-action]");
-  if(!btn)return;
-
-  const id=btn.dataset.id;
-
-  if(btn.dataset.action==="edit")edit(id);
-  if(btn.dataset.action==="delete")deleteItem(id);
-
-  if(btn.dataset.action==="menu"){
-    const a=btn.closest(".card").querySelector(".actions");
-    a.classList.toggle("hidden");
-    a.classList.toggle("flex");
-  }
-});
-
-$("focus").addEventListener("click",e=>{
-  const btn=e.target.closest("[data-focus]");
-  if(btn)edit(btn.dataset.focus);
-});
-
-$("editForm").addEventListener("submit",saveEdit);
-$("closeModal").addEventListener("click",closeModal);
-$("cancelEdit").addEventListener("click",closeModal);
-
-$("modal").addEventListener("click",e=>{
-  if(e.target===$("modal"))closeModal();
-});
-
-$("exportBtn").addEventListener("click",()=>{
-  const blob=new Blob(
-    [JSON.stringify(items,null,2)],
-    {type:"application/json"}
-  );
-
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");
-
-  a.href=url;
-  a.download="second-brain-vault.json";
-  a.click();
-
-  URL.revokeObjectURL(url);
-  toast("Vault exported ✓");
-});
-
-$("clearBtn").addEventListener("click",()=>{
-  if(!items.length){
-    toast("Vault is already empty");
-    return;
-  }
-
-  if(confirm("Delete all items from your Second Brain Vault?")){
-    items=[];
-    focusId=null;
-    save();
-    render();
-    toast("Vault cleared");
-  }
-});
-
-document.addEventListener("keydown",e=>{
-  if(e.key==="Escape"&&$("modal").classList.contains("show"))
-    closeModal();
-
-  if(e.key==="/"&&
-     !["INPUT","TEXTAREA","SELECT"].includes(document.activeElement.tagName)){
-    e.preventDefault();
-    $("search").focus();
-  }
-
-  if(e.key.toLowerCase()==="n"&&
-     !["INPUT","TEXTAREA","SELECT"].includes(document.activeElement.tagName)){
-    e.preventDefault();
-    $("quickAdd").focus();
-  }
-});
-
-render();
-
-setTimeout(()=>$("quickAdd").focus(),300);
 </script>
-
 </body>
 </html>
