@@ -6,439 +6,150 @@
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#03030a">
 <title>MIND // ASCENSION SYSTEM</title>
-
 <style>
-/* ═══════════════════════════════════════
-   01 // CORE SYSTEM
-═══════════════════════════════════════ */
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
 body{background:#03030a;color:#fff;font-family:Arial,Helvetica,sans-serif;overflow-x:hidden}
-:root{
---bg:#03030a;--cyan:#00f6ff;--purple:#8b5cf6;
---pink:#ff2bd6;--green:#00ff9d;--blue:#168cff;
---text:#c8c9d5;--muted:#66697d;
-}
-body:before{content:"";position:fixed;inset:0;z-index:999;pointer-events:none;
-background:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
-linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
-background-size:45px 45px;mask-image:linear-gradient(to bottom,#000,transparent)}
-.orb{position:fixed;border-radius:50%;filter:blur(90px);opacity:.2;pointer-events:none;z-index:-1}
-.o1{width:400px;height:400px;background:var(--cyan);top:-150px;left:-150px}
-.o2{width:450px;height:450px;background:var(--purple);right:-180px;top:25%}
-.o3{width:350px;height:350px;background:var(--pink);left:-150px;bottom:5%}
-
-/* ═══════════════════════════════════════
-   02 // TOP BAR
-═══════════════════════════════════════ */
-.topbar{height:62px;padding:0 6%;display:flex;align-items:center;justify-content:space-between;
-position:sticky;top:0;z-index:50;background:rgba(3,3,10,.75);
-backdrop-filter:blur(15px);border-bottom:1px solid rgba(0,246,255,.25)}
-.logo{font-weight:900;letter-spacing:4px;color:var(--cyan);text-shadow:0 0 15px var(--cyan)}
-.status{font-size:10px;letter-spacing:2px;color:var(--green);display:flex;gap:8px;align-items:center}
-.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green)}
-
-/* ═══════════════════════════════════════
-   03 // HERO
-═══════════════════════════════════════ */
-.hero{height:75vh;min-height:500px;display:flex;align-items:center;justify-content:center;
-text-align:center;padding:50px 20px}
-.hero small{color:var(--cyan);font-size:11px;letter-spacing:6px}
-.hero h1{font-size:clamp(50px,10vw,110px);line-height:.88;margin:20px 0;font-weight:1000;
-background:linear-gradient(90deg,var(--cyan),#fff,var(--pink));
--webkit-background-clip:text;color:transparent}
-.hero p{color:#77798e;font-size:11px;letter-spacing:4px}
-
-/* ═══════════════════════════════════════
-   04 // COMMON SECTION
-═══════════════════════════════════════ */
-.section{width:92%;max-width:1450px;margin:0 auto 120px}
-.section-head{border-left:3px solid var(--cyan);padding-left:18px;margin-bottom:35px}
-.section-head .tag{color:var(--cyan);font-size:10px;letter-spacing:4px}
-.section-head h2{font-size:clamp(32px,5vw,55px);margin-top:8px}
-.section-head p{color:var(--muted);font-size:11px;letter-spacing:2px;margin-top:7px}
-
-/* ═══════════════════════════════════════
-   05 // MIND SLIDER
-═══════════════════════════════════════ */
-.phase-nav,.physical-nav{display:flex;justify-content:center;align-items:center;gap:16px;margin-bottom:25px}
-.phase-dot,.physical-dot{width:12px;height:12px;border:1px solid #555;border-radius:50%;cursor:pointer;transition:.3s}
-.phase-dot.active{background:var(--cyan);border-color:var(--cyan);box-shadow:0 0 18px var(--cyan)}
-.physical-dot.active{background:var(--pink);border-color:var(--pink);box-shadow:0 0 18px var(--pink)}
-.phase-label,.day-label{min-width:100px;text-align:center;color:#aaa;font-size:11px;letter-spacing:4px}
-.phase-viewport{width:100%;overflow:hidden;border-radius:22px;background:rgba(4,5,14,.6);
-border:1px solid rgba(0,246,255,.18);box-shadow:0 0 60px rgba(0,246,255,.04)}
-.phase-track,.physical-track{display:flex;width:300%;transition:transform .65s cubic-bezier(.22,.8,.25,1);touch-action:pan-y}
-.phase,.day{width:33.333333%;flex-shrink:0;padding:35px 30px 40px}
-.phase-title,.day-title{text-align:center;margin-bottom:30px}
-.phase-title span,.day-title span{font-size:10px;letter-spacing:5px;color:var(--cyan)}
-.phase-title h3,.day-title h3{font-size:30px;margin-top:8px}
-.phase:nth-child(2) .phase-title span{color:var(--purple)}
-.phase:nth-child(3) .phase-title span{color:var(--pink)}
-
-/* ═══════════════════════════════════════
-   06 // MIND CARDS
-═══════════════════════════════════════ */
-.category-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
-.category{position:relative;min-height:210px;padding:25px;border:1px solid rgba(139,92,246,.25);
-border-radius:18px;background:linear-gradient(145deg,rgba(17,16,35,.85),rgba(5,6,17,.8));
-overflow:hidden;transition:.4s;opacity:0;transform:translateY(25px)}
-.category.show{opacity:1;transform:translateY(0)}
-.category:hover{transform:translateY(-5px);border-color:var(--cyan);box-shadow:0 0 35px rgba(0,246,255,.09)}
-.category:before{content:"";position:absolute;top:0;left:0;width:70px;height:2px;background:var(--cyan);box-shadow:0 0 15px var(--cyan)}
-.category:nth-child(2):before{background:var(--pink);box-shadow:0 0 15px var(--pink)}
-.category:nth-child(3):before{background:var(--green);box-shadow:0 0 15px var(--green)}
-.category:nth-child(4):before{background:var(--purple);box-shadow:0 0 15px var(--purple)}
-.category .num{display:block;color:var(--cyan);font-size:10px;letter-spacing:3px;margin-bottom:8px}
-.category h4{font-size:17px;margin-bottom:18px}
-.tasks{list-style:none;display:grid;gap:10px}
-.tasks li{font-size:13px;line-height:1.5;color:var(--text);padding:9px 12px;
-border-left:2px solid rgba(255,255,255,.08);background:rgba(255,255,255,.018)}
-
-/* ═══════════════════════════════════════
-   07 // PHYSICAL SYSTEM
-═══════════════════════════════════════ */
-.special-divider{height:1px;width:80%;margin:0 auto 120px;
-background:linear-gradient(90deg,transparent,var(--pink),var(--cyan),transparent);
-box-shadow:0 0 20px rgba(0,246,255,.3)}
-#physical .section-head{border-color:var(--pink)}
-#physical .section-head .tag{color:var(--pink)}
-.physical-viewport{border-color:rgba(255,43,214,.2);box-shadow:0 0 70px rgba(255,43,214,.04)}
-.day-title span{color:var(--pink)}
-.day-title p{color:#707386;font-size:11px;letter-spacing:2px;margin-top:8px}
-.exercise-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-.exercise{position:relative;padding:23px;border:1px solid rgba(255,43,214,.2);border-radius:17px;
-background:linear-gradient(145deg,rgba(28,10,31,.78),rgba(7,7,17,.82));transition:.35s;overflow:hidden}
-.exercise:hover{border-color:var(--pink);box-shadow:0 0 30px rgba(255,43,214,.1);transform:translateY(-4px)}
-.exercise:after{content:"";position:absolute;right:-35px;top:-35px;width:100px;height:100px;
-border-radius:50%;border:1px solid rgba(255,43,214,.12);box-shadow:0 0 30px rgba(255,43,214,.08)}
-.ex-no{color:var(--pink);font-size:10px;letter-spacing:3px}
-.exercise h4{font-size:18px;margin:8px 0 10px}
-.exercise p{font-size:12px;line-height:1.6;color:#a9aaba}
-.exercise strong{color:#fff}
-
-/* ═══════════════════════════════════════
-   08 // FOOTER + MOBILE
-═══════════════════════════════════════ */
-.swipe-hint{text-align:center;margin-top:18px;color:#55586d;font-size:10px;letter-spacing:3px}
-footer{text-align:center;padding:60px 20px 80px;color:#424454;font-size:9px;letter-spacing:4px}
-@media(max-width:750px){
-.topbar{padding:0 4%}.status{font-size:8px}
-.category-grid,.exercise-grid{grid-template-columns:1fr}
-.phase,.day{padding:28px 16px 35px}
-.category{min-height:auto}.hero{height:65vh}
-.phase-title h3,.day-title h3{font-size:24px}
-}
+:root{--bg:#03030a;--cyan:#00f6ff;--purple:#8b5cf6;--pink:#ff2bd6;--green:#00ff9d;--blue:#168cff;--text:#c8c9d5;--muted:#66697d}
+body:before{content:"";position:fixed;inset:0;z-index:999;pointer-events:none;background:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:45px 45px;mask-image:linear-gradient(to bottom,#000,transparent)}
+.orb{position:fixed;border-radius:50%;filter:blur(90px);opacity:.2;pointer-events:none;z-index:-1}.o1{width:400px;height:400px;background:var(--cyan);top:-150px;left:-150px}.o2{width:450px;height:450px;background:var(--purple);right:-180px;top:25%}.o3{width:350px;height:350px;background:var(--pink);left:-150px;bottom:5%}
+.topbar{height:62px;padding:0 6%;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;background:rgba(3,3,10,.75);backdrop-filter:blur(15px);border-bottom:1px solid rgba(0,246,255,.25)}
+.logo{font-weight:900;letter-spacing:4px;color:var(--cyan);text-shadow:0 0 15px var(--cyan)}.status{font-size:10px;letter-spacing:2px;color:var(--green);display:flex;gap:8px;align-items:center}.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green)}
+.hero{height:75vh;min-height:500px;display:flex;align-items:center;justify-content:center;text-align:center;padding:50px 20px}.hero small{color:var(--cyan);font-size:11px;letter-spacing:6px}.hero h1{font-size:clamp(50px,10vw,110px);line-height:.88;margin:20px 0;font-weight:1000;background:linear-gradient(90deg,var(--cyan),#fff,var(--pink));-webkit-background-clip:text;color:transparent}.hero p{color:#77798e;font-size:11px;letter-spacing:4px}
+.section{width:92%;max-width:1450px;margin:0 auto 120px}.section-head{border-left:3px solid var(--cyan);padding-left:18px;margin-bottom:35px}.section-head .tag{color:var(--cyan);font-size:10px;letter-spacing:4px}.section-head h2{font-size:clamp(32px,5vw,55px);margin-top:8px}.section-head p{color:var(--muted);font-size:11px;letter-spacing:2px;margin-top:7px}
+.phase-nav,.physical-nav{display:flex;justify-content:center;align-items:center;gap:16px;margin-bottom:25px}.phase-dot,.physical-dot{width:12px;height:12px;border:1px solid #555;border-radius:50%;cursor:pointer;transition:.3s}.phase-dot.active{background:var(--cyan);border-color:var(--cyan);box-shadow:0 0 18px var(--cyan)}.physical-dot.active{background:var(--pink);border-color:var(--pink);box-shadow:0 0 18px var(--pink)}.phase-label,.day-label{min-width:100px;text-align:center;color:#aaa;font-size:11px;letter-spacing:4px}
+.phase-viewport{width:100%;overflow:hidden;border-radius:22px;background:rgba(4,5,14,.6);border:1px solid rgba(0,246,255,.18);box-shadow:0 0 60px rgba(0,246,255,.04)}.phase-track,.physical-track{display:flex;width:300%;transition:transform .65s cubic-bezier(.22,.8,.25,1);touch-action:pan-y}.phase,.day{width:33.333333%;flex-shrink:0;padding:35px 30px 40px}.phase-title,.day-title{text-align:center;margin-bottom:30px}.phase-title span,.day-title span{font-size:10px;letter-spacing:5px;color:var(--cyan)}.phase-title h3,.day-title h3{font-size:30px;margin-top:8px}.phase:nth-child(2) .phase-title span{color:var(--purple)}.phase:nth-child(3) .phase-title span{color:var(--pink)}
+.category-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.category{position:relative;min-height:210px;padding:25px;border:1px solid rgba(139,92,246,.25);border-radius:18px;background:linear-gradient(145deg,rgba(17,16,35,.85),rgba(5,6,17,.8));overflow:hidden;transition:.4s;opacity:0;transform:translateY(25px)}.category.show{opacity:1;transform:translateY(0)}.category:hover{transform:translateY(-5px);border-color:var(--cyan);box-shadow:0 0 35px rgba(0,246,255,.09)}.category:before{content:"";position:absolute;top:0;left:0;width:70px;height:2px;background:var(--cyan);box-shadow:0 0 15px var(--cyan)}.category:nth-child(2):before{background:var(--pink);box-shadow:0 0 15px var(--pink)}.category:nth-child(3):before{background:var(--green);box-shadow:0 0 15px var(--green)}.category:nth-child(4):before{background:var(--purple);box-shadow:0 0 15px var(--purple)}.category .num{display:block;color:var(--cyan);font-size:10px;letter-spacing:3px;margin-bottom:8px}.category h4{font-size:17px;margin-bottom:18px}.tasks{list-style:none;display:grid;gap:10px}.tasks li{font-size:13px;line-height:1.5;color:var(--text);padding:9px 12px;border-left:2px solid rgba(255,255,255,.08);background:rgba(255,255,255,.018)}
+.special-divider{height:1px;width:80%;margin:0 auto 120px;background:linear-gradient(90deg,transparent,var(--pink),var(--cyan),transparent);box-shadow:0 0 20px rgba(0,246,255,.3)}#physical .section-head{border-color:var(--pink)}#physical .section-head .tag{color:var(--pink)}.physical-viewport{border-color:rgba(255,43,214,.2);box-shadow:0 0 70px rgba(255,43,214,.04)}.day-title span{color:var(--pink)}.day-title p{color:#707386;font-size:11px;letter-spacing:2px;margin-top:8px}.exercise-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.exercise{position:relative;padding:23px;border:1px solid rgba(255,43,214,.2);border-radius:17px;background:linear-gradient(145deg,rgba(28,10,31,.78),rgba(7,7,17,.82));transition:.35s;overflow:hidden}.exercise:hover{border-color:var(--pink);box-shadow:0 0 30px rgba(255,43,214,.1);transform:translateY(-4px)}.exercise:after{content:"";position:absolute;right:-35px;top:-35px;width:100px;height:100px;border-radius:50%;border:1px solid rgba(255,43,214,.12);box-shadow:0 0 30px rgba(255,43,214,.08)}.ex-no{color:var(--pink);font-size:10px;letter-spacing:3px}.exercise h4{font-size:18px;margin:8px 0 10px}.exercise p{font-size:12px;line-height:1.6;color:#a9aaba}.exercise strong{color:#fff}
+.swipe-hint{text-align:center;margin-top:18px;color:#55586d;font-size:10px;letter-spacing:3px}footer{text-align:center;padding:60px 20px 80px;color:#424454;font-size:9px;letter-spacing:4px}
+button{font:inherit;cursor:pointer}.tracker-launch{display:block;margin:0 auto 120px;padding:17px 28px;border:1px solid var(--cyan);border-radius:12px;color:var(--cyan);background:linear-gradient(120deg,rgba(0,246,255,.1),rgba(139,92,246,.12));letter-spacing:3px;font-weight:800;box-shadow:0 0 28px rgba(0,246,255,.1);transition:.25s}.tracker-launch:hover{transform:translateY(-3px);box-shadow:0 0 35px rgba(0,246,255,.22)}
+.tracker{display:none;width:92%;max-width:1100px;margin:-70px auto 120px;border:1px solid rgba(0,246,255,.24);border-radius:20px;padding:clamp(16px,3vw,30px);background:rgba(4,5,14,.94);box-shadow:0 0 65px rgba(0,246,255,.06)}.tracker.open{display:block}.tracker-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:25px}.tracker h2{font-size:clamp(25px,4vw,38px)}.tracker h3{font-size:18px;color:var(--cyan);letter-spacing:1px;margin:26px 0 14px}.tracker h4{font-size:14px;margin:12px 0;color:#fff}.tracker-sub{font-size:11px;letter-spacing:2px;color:var(--muted);margin-top:7px}.small-btn,.save-btn,.backup-btn{border:1px solid rgba(0,246,255,.4);border-radius:8px;padding:10px 13px;color:var(--cyan);background:rgba(0,246,255,.06);font-size:11px;letter-spacing:1px}.save-btn{background:rgba(0,255,157,.09);color:var(--green);border-color:rgba(0,255,157,.5);font-weight:bold;padding:14px 20px}.tracker-actions{display:flex;gap:8px;flex-wrap:wrap}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field{display:flex;flex-direction:column;gap:7px;min-width:0}.field label,.label{font-size:11px;color:#a9aaba;letter-spacing:1px}.tracker input[type="text"],.tracker input[type="number"],.tracker input[type="date"],.tracker textarea,.tracker select{width:100%;min-width:0;background:#090a17;border:1px solid rgba(139,92,246,.35);border-radius:8px;padding:11px;color:#fff;font:13px Arial, sans-serif;outline:none}.tracker input:focus,.tracker textarea:focus,.tracker select:focus{border-color:var(--cyan)}.tracker textarea{min-height:75px;resize:vertical}.panel{padding:16px;margin-top:14px;border:1px solid rgba(139,92,246,.2);border-radius:14px;background:rgba(255,255,255,.018)}.subject-row{display:grid;grid-template-columns:minmax(0,1fr) 100px;gap:10px;margin:9px 0}.total-line{font-size:13px;color:var(--green);margin-top:12px}.exercise-log{padding:13px 0;border-bottom:1px solid rgba(255,255,255,.07)}.exercise-log:last-child{border-bottom:0}.set-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:10px}.set-item{padding:9px;background:rgba(255,255,255,.025);border:1px solid rgba(255,43,214,.15);border-radius:8px;min-width:0}.set-item label{display:block;font-size:10px;color:#a9aaba;margin-bottom:6px}.set-item input[type=number]{padding:8px;font-size:12px}.set-item.check-set{display:flex;align-items:center;gap:8px;color:#ccc;font-size:12px}.set-item input[type=checkbox]{accent-color:var(--green);width:17px;height:17px}.game-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.game-row{display:grid;grid-template-columns:minmax(0,1fr) 75px;align-items:center;gap:8px;padding:10px;border:1px solid rgba(0,246,255,.12);border-radius:9px;background:rgba(255,255,255,.018)}.game-row span{font-size:12px;color:var(--text)}.game-row small{display:block;color:var(--muted);font-size:10px;margin-top:4px}.game-total{color:var(--green);font-size:13px;margin-top:12px}.history-list{display:grid;gap:9px;margin-top:14px}.history-item{display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;width:100%;padding:14px;border:1px solid rgba(0,246,255,.2);border-radius:10px;background:rgba(0,246,255,.035);color:#fff}.history-item b{color:var(--cyan);font-size:13px}.history-item span{font-size:11px;color:#9b9daf}.history-detail{display:none;padding:18px;border:1px solid rgba(139,92,246,.25);border-radius:12px;background:rgba(139,92,246,.045);margin-top:10px}.history-detail.open{display:block}.history-detail p{font-size:12px;line-height:1.7;color:var(--text);margin:6px 0;overflow-wrap:anywhere}.notice{color:var(--muted);font-size:11px;line-height:1.6;margin-top:10px}.hidden{display:none!important}
+@media(max-width:750px){.topbar{padding:0 4%}.status{font-size:8px}.category-grid,.exercise-grid{grid-template-columns:1fr}.phase,.day{padding:28px 16px 35px}.category{min-height:auto}.hero{height:65vh}.phase-title h3,.day-title h3{font-size:24px}.tracker-launch{margin-bottom:90px}.tracker{margin-top:-45px}.set-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.game-grid,.form-grid{grid-template-columns:1fr}.subject-row{grid-template-columns:minmax(0,1fr) 85px}}
 </style>
 </head>
-
 <body>
 <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
-
-<header class="topbar">
-<div class="logo">MIND//CORE</div>
-<div class="status"><span class="dot"></span>SYSTEM ONLINE</div>
-</header>
-
+<header class="topbar"><div class="logo">MIND//CORE</div><div class="status"><span class="dot"></span>SYSTEM ONLINE</div></header>
 <main>
-<section class="hero">
-<div>
-<small>MENTAL EVOLUTION PROTOCOL</small>
-<h1>SUPER<br>MIND</h1>
-<p>DISCIPLINE • LEARNING • MEMORY • STRATEGY</p>
-</div>
-</section>
-
-<!-- ═══════════════ MIND ═══════════════ -->
+<section class="hero"><div><small>MENTAL EVOLUTION PROTOCOL</small><h1>SUPER<br>MIND</h1><p>DISCIPLINE • LEARNING • MEMORY • STRATEGY</p></div></section>
 <section class="section" id="mind">
-<div class="section-head">
-<div class="tag">MIND / MENTAL ASCENSION // 04 CORE SYSTEMS</div>
-<h2>MENTAL ASCENSION</h2>
-<p>BUILD THE MIND. CONTROL THE PROCESS.</p>
-</div>
-
-<div class="phase-nav">
-<span class="phase-dot active" data-phase="0"></span>
-<span class="phase-label" id="phaseLabel">PHASE 1</span>
-<span class="phase-dot" data-phase="1"></span>
-<span class="phase-dot" data-phase="2"></span>
-</div>
-
-<div class="phase-viewport" id="mindViewport">
-<div class="phase-track" id="mindTrack">
-
-<div class="phase">
-<div class="phase-title"><span>PHASE 01</span><h3>FOUNDATION</h3></div>
-<div class="category-grid">
-<div class="category"><span class="num">01 // CORE</span><h4>SUPER STRONG MIND & MINDSET</h4>
-<ul class="tasks">
-<li>01 — roj koi ek uncomfortable chij kroo</li>
-<li>02 — 5 min daily meditation</li>
-<li>03 — roj jabh bhi distract ho 5 min timer laga kr kux mat kroo</li>
-</ul></div>
-<div class="category"><span class="num">02 // CORE</span><h4>RAPID LEARNING</h4>
-<ul class="tasks"><li>01 — 25 min work 5 min rest</li><li>02 — active recall</li></ul></div>
-<div class="category"><span class="num">03 // CORE</span><h4>SUPER MEMORY</h4>
-<ul class="tasks"><li>01 — memory game 10 games pure</li><li>02 — memory palace practice</li></ul></div>
-<div class="category"><span class="num">04 // CORE</span><h4>SUPER PATTERN RECOGNITION, PLANNING AND STRATEGIC MIND</h4>
-<ul class="tasks"><li>01 — chess game</li><li>02 — daily ambient scan</li></ul></div>
+<div class="section-head"><div class="tag">MIND / MENTAL ASCENSION // 04 CORE SYSTEMS</div><h2>MENTAL ASCENSION</h2><p>BUILD THE MIND. CONTROL THE PROCESS.</p></div>
+<div class="phase-nav"><span class="phase-dot active" data-phase="0"></span><span class="phase-label" id="phaseLabel">PHASE 1</span><span class="phase-dot" data-phase="1"></span><span class="phase-dot" data-phase="2"></span></div>
+<div class="phase-viewport" id="mindViewport"><div class="phase-track" id="mindTrack">
+<div class="phase"><div class="phase-title"><span>PHASE 01</span><h3>FOUNDATION</h3></div><div class="category-grid">
+<div class="category"><span class="num">01 // CORE</span><h4>SUPER STRONG MIND & MINDSET</h4><ul class="tasks"><li>01 — roj koi ek uncomfortable chij kroo</li><li>02 — 5 min daily meditation</li><li>03 — roj jabh bhi distract ho 5 min timer laga kr kux mat kroo</li></ul></div>
+<div class="category"><span class="num">02 // CORE</span><h4>RAPID LEARNING</h4><ul class="tasks"><li>01 — 25 min work 5 min rest</li><li>02 — active recall</li></ul></div>
+<div class="category"><span class="num">03 // CORE</span><h4>SUPER MEMORY</h4><ul class="tasks"><li>01 — memory game 10 games pure</li><li>02 — memory palace practice</li></ul></div>
+<div class="category"><span class="num">04 // CORE</span><h4>SUPER PATTERN RECOGNITION, PLANNING AND STRATEGIC MIND</h4><ul class="tasks"><li>01 — chess game</li><li>02 — daily ambient scan</li></ul></div>
 </div></div>
-
-<div class="phase">
-<div class="phase-title"><span>PHASE 02</span><h3>ADAPTATION</h3></div>
-<div class="category-grid" id="phase2Content"></div>
-</div>
-
-<div class="phase">
-<div class="phase-title"><span>PHASE 03</span><h3>ASCENSION</h3></div>
-<div class="category-grid" id="phase3Content"></div>
-</div>
-
+<div class="phase"><div class="phase-title"><span>PHASE 02</span><h3>ADAPTATION</h3></div><div class="category-grid" id="phase2Content"></div></div>
+<div class="phase"><div class="phase-title"><span>PHASE 03</span><h3>ASCENSION</h3></div><div class="category-grid" id="phase3Content"></div></div>
+</div></div><div class="swipe-hint">← SWIPE / DRAG / USE ARROW KEYS →</div>
+</section>
+<div class="special-divider"></div>
+<section class="section" id="physical">
+<div class="section-head"><div class="tag">PHYSICAL / PERFORMANCE SYSTEM // 03 CYCLES</div><h2>PHYSICAL</h2><p>POWER • SPEED • ENDURANCE • AGILITY • TECHNICAL CONTROL</p></div>
+<div class="physical-nav"><span class="physical-dot active" data-day="0"></span><span class="day-label" id="dayLabel">DAY 1</span><span class="physical-dot" data-day="1"></span><span class="physical-dot" data-day="2"></span></div>
+<div class="phase-viewport physical-viewport"><div class="physical-track" id="physicalTrack">
+<div class="day"><div class="day-title"><span>DAY 01</span><h3>CYCLE 1 // POWER & SPEED</h3><p>EXPLOSIVE OUTPUT • MAXIMUM SPEED</p></div><div class="exercise-grid">
+<div class="exercise"><span class="ex-no">01</span><h4>60m Sprints</h4><p><strong>6 sets</strong><br>Distance: 60 metres per set. Tick each completed sprint; no time entry needed.</p></div>
+<div class="exercise"><span class="ex-no">02</span><h4>Jump Squats</h4><p><strong>4 sets × 8–10 reps</strong><br>Focus on controlled landings and good form.</p></div>
+<div class="exercise"><span class="ex-no">03</span><h4>Broad Jumps</h4><p><strong>4 sets × 6 reps</strong><br>Go for distance with a stable landing.</p></div>
+<div class="exercise"><span class="ex-no">04</span><h4>Push-ups (Explosive)</h4><p><strong>3 sets × 10–12 reps</strong><br>Clap at the top only if comfortable and controlled.</p></div>
+<div class="exercise"><span class="ex-no">05</span><h4>Wide Push-ups</h4><p><strong>3 sets × 15–20 reps</strong></p></div>
 </div></div>
-<div class="swipe-hint">← SWIPE / DRAG / USE ARROW KEYS →</div>
+<div class="day"><div class="day-title"><span>DAY 02</span><h3>CYCLE 2 // ENDURANCE & AGILITY</h3><p>STAMINA • RHYTHM • FAST MOVEMENT</p></div><div class="exercise-grid">
+<div class="exercise"><span class="ex-no">01</span><h4>Long-Distance Jogging/Running</h4><p><strong>1 set × 20–30 mins</strong><br>Record distance and time.</p></div>
+<div class="exercise"><span class="ex-no">02</span><h4>Shadow Boxing or Footwork Drills</h4><p><strong>4 sets × 1 minute</strong><br>Move lightly and maintain control.</p></div>
+<div class="exercise"><span class="ex-no">03</span><h4>Side-to-Side Shuttle Drills</h4><p><strong>4 sets × 10 reps</strong><br>Fast, controlled lateral movement.</p></div>
+<div class="exercise"><span class="ex-no">04</span><h4>Burpees</h4><p><strong>4 sets × 15–20 reps</strong><br>Keep good form; rest as needed.</p></div>
+<div class="exercise"><span class="ex-no">05</span><h4>Mountain Climbers</h4><p><strong>4 sets × 45 seconds</strong><br>Record time completed per set.</p></div>
+</div></div>
+<div class="day"><div class="day-title"><span>DAY 03</span><h3>CYCLE 3 // HYBRID AGILITY & TECHNICAL RECOVERY</h3><p>REACTION • DEFENSE • MOBILITY • FLOW</p></div><div class="exercise-grid">
+<div class="exercise"><span class="ex-no">01</span><h4>Intense Mobility/Flow</h4><p><strong>3 sets • non-stop flow</strong><br>Each set: Cat-Cow Stretch → World's Greatest Stretch / Spiderman Lunge → Inchworms → Deep Squat Hold & Thoracic Rotation. Move continuously from one exercise to the next.</p></div>
+<div class="exercise"><span class="ex-no">02</span><h4>Agility/Reaction Drill</h4><p><strong>3 sets total</strong><br><strong>Set 1 & 2:</strong> In-Place Fast Feet & Drops — move feet quickly in place, drop into a push-up position, then stand and restart fast feet.<br><strong>Set 3:</strong> Shadow Footwork — imagine a box on the floor and move rapidly forward, backward and side-to-side with controlled steps and small jumps.</p></div>
+<div class="exercise"><span class="ex-no">03</span><h4>Pull-ups</h4><p><strong>4 sets × 4–7 reps</strong><br>Controlled movement with full range of motion.</p></div>
+<div class="exercise"><span class="ex-no">04</span><h4>Technical Shadowing</h4><p><strong>4 sets × 2 minutes</strong><br>Combat-defense movement with high technical precision.</p></div>
+</div></div>
+</div></div><div class="swipe-hint">← SWIPE / DRAG / USE ARROW KEYS →</div>
 </section>
 
-<div class="special-divider"></div>
-
-<!-- ═══════════════ PHYSICAL ═══════════════ -->
-<section class="section" id="physical">
-<div class="section-head">
-<div class="tag">PHYSICAL / PERFORMANCE SYSTEM // 03 CYCLES</div>
-<h2>PHYSICAL</h2>
-<p>POWER • SPEED • ENDURANCE • AGILITY • TECHNICAL CONTROL</p>
-</div>
-
-<div class="physical-nav">
-<span class="physical-dot active" data-day="0"></span>
-<span class="day-label" id="dayLabel">DAY 1</span>
-<span class="physical-dot" data-day="1"></span>
-<span class="physical-dot" data-day="2"></span>
-</div>
-
-<div class="phase-viewport physical-viewport">
-<div class="physical-track" id="physicalTrack">
-
-<!-- DAY 1 / CYCLE 1 -->
-<div class="day">
-<div class="day-title"><span>DAY 01</span><h3>CYCLE 1 // POWER & SPEED</h3><p>EXPLOSIVE OUTPUT • MAXIMUM SPEED</p></div>
-<div class="exercise-grid">
-
-<div class="exercise"><span class="ex-no">01</span><h4>60m Sprints</h4><p><strong>6 sets</strong><br>Walk back slowly to recover completely between each sprint.</p></div>
-<div class="exercise"><span class="ex-no">02</span><h4>Jump Squats</h4><p><strong>4 sets × 8-10 reps</strong><br>Focus on maximum height.</p></div>
-<div class="exercise"><span class="ex-no">03</span><h4>Broad Jumps</h4><p><strong>4 sets × 6 reps</strong><br>Go for the longest distance.</p></div>
-<div class="exercise"><span class="ex-no">04</span><h4>Push-ups (Explosive)</h4><p><strong>3 sets × 10-12 reps</strong><br>Clap at the top if you can.</p></div>
-<div class="exercise"><span class="ex-no">05</span><h4>Wide Push-ups</h4><p><strong>3 sets × 15-20 reps</strong></p></div>
-
-</div></div>
-
-<!-- DAY 2 / CYCLE 2 -->
-<div class="day">
-<div class="day-title"><span>DAY 02</span><h3>CYCLE 2 // ENDURANCE & AGILITY</h3><p>STAMINA • RHYTHM • FAST MOVEMENT</p></div>
-<div class="exercise-grid">
-
-<div class="exercise"><span class="ex-no">01</span><h4>Long-Distance Jogging/Running</h4><p><strong>1 set × 20-30 mins</strong><br>Steady, rhythmic pace.</p></div>
-<div class="exercise"><span class="ex-no">02</span><h4>Shadow Boxing or Footwork Drills</h4><p><strong>4 sets × 1 minute</strong><br>Moving as light/fast as possible.</p></div>
-<div class="exercise"><span class="ex-no">03</span><h4>Side-to-Side Shuttle Drills</h4><p><strong>4 sets × 10 reps</strong><br>Fast lateral movements.</p></div>
-<div class="exercise"><span class="ex-no">04</span><h4>Burpees</h4><p><strong>4 sets × 15-20 reps</strong><br>Continuous, minimal rest.</p></div>
-<div class="exercise"><span class="ex-no">05</span><h4>Mountain Climbers</h4><p><strong>4 sets × 45 seconds</strong><br>Fast pace.</p></div>
-
-</div></div>
-
-<!-- DAY 3 / CYCLE 3 -->
-<div class="day">
-<div class="day-title"><span>DAY 03</span><h3>CYCLE 3 // HYBRID AGILITY & TECHNICAL RECOVERY</h3><p>REACTION • DEFENSE • MOBILITY • FLOW</p></div>
-<div class="exercise-grid">
-
-<div class="exercise"><span class="ex-no">01</span><h4>Agility/Reaction Drill</h4><p><strong>3 sets × 10 minutes of focus</strong><br>Reaction-catching/Obstacles.</p></div>
-<div class="exercise"><span class="ex-no">02</span><h4>Pull-ups</h4><p><strong>4 sets × 4-7 reps</strong><br>Controlled movement with full range of motion.</p></div>
-<div class="exercise"><span class="ex-no">03</span><h4>Technical Shadowing</h4><p><strong>4 sets × 2 minutes</strong><br>Combat defense movement • High technical precision.</p></div>
-<div class="exercise"><span class="ex-no">04</span><h4>Intense Mobility/Flow</h4><p><strong>3 sets × 15 minutes</strong><br>Fluid, non-stop movement.</p></div>
-
-</div></div>
-
-</div></div>
-<div class="swipe-hint">← SWIPE / DRAG / USE ARROW KEYS →</div>
-   </section>
+<button class="tracker-launch" id="openTracker">＋ OPEN PROGRESS TRACKER</button>
+<section class="tracker" id="tracker">
+<div class="tracker-top"><div><h2>PROGRESS TRACKER</h2><p class="tracker-sub">DAILY LOG • LOCAL SAVE • DATE-WISE HISTORY</p></div><div class="tracker-actions"><button class="small-btn" id="todayBtn">TODAY</button><button class="small-btn" id="closeTracker">CLOSE</button></div></div>
+<div class="form-grid"><div class="field"><label for="logDate">SELECT DATE</label><input type="date" id="logDate" min="2026-10-15" value="2026-10-15"></div><div class="field"><label>DAY TOTAL — CHAPTERS STUDIED</label><input type="text" id="chapterTotal" readonly value="0 chapters"></div></div>
+<h3>01 / STUDY PROGRESS</h3><div class="panel"><p class="notice">Subject ka naam aur us subject mein padhe hue chapters ki sankhya likh. Chapter names ya study time ki zarurat nahi. Total automatic calculate hoga.</p><div id="subjects"></div><div class="tracker-actions" style="margin-top:12px"><button class="small-btn" id="addSubject">＋ ADD SUBJECT</button><button class="small-btn" id="removeSubject">− REMOVE LAST</button></div><p class="total-line" id="chapterSummary">Total: 0 chapters</p></div>
+<h3>02 / TODAY'S WORKOUT</h3><div class="panel"><p class="notice">Har exercise mein set count fixed hai. Sirf apne reps/time fill kar; distance wali exercise mein distance aur time bhi fill kar sakta hai. Sprint mein bas har set complete hone par tick kar.</p><div id="workoutFields"></div></div>
+<h3>03 / MEDITATION & COURAGE</h3><div class="panel"><div class="form-grid"><div class="field"><label for="meditation">MEDITATION — MINUTES</label><input type="number" min="0" id="meditation" placeholder="e.g. 10"></div><div class="field"><label for="uncomfortable">TODAY'S UNCOMFORTABLE THING</label><textarea id="uncomfortable" placeholder="Aaj kaunsi uncomfortable chij ki?"></textarea></div></div></div>
+<h3>04 / MEMORY GAME SCORES</h3><div class="panel"><p class="notice">Har game ka score 0–10 ke beech likh. Har game 10 marks ka hai.</p><div class="game-grid" id="games"></div><p class="game-total" id="gameSummary">Total score: 0 / 100</p></div>
+<div class="tracker-actions" style="margin-top:22px"><button class="save-btn" id="saveLog">SAVE TODAY'S PROGRESS</button><button class="backup-btn" id="exportData">EXPORT BACKUP</button><button class="backup-btn" id="importData">IMPORT BACKUP</button><input class="hidden" type="file" id="importFile" accept=".json,application/json"></div>
+<p class="notice">Your entries save on this device/browser. Export a backup occasionally, especially before clearing browser data or changing devices.</p>
+<h3>05 / DATE-WISE HISTORY</h3><p class="notice">Kisi date par tap/click karne se us din ka poora saved progress khul jayega. History newest date first dikhegi.</p><div class="history-list" id="historyList"></div><div class="history-detail" id="historyDetail"></div>
+</section>
+<footer>MIND//CORE × PHYSICAL // ASCENSION SYSTEM • SYSTEM ACTIVE</footer>
+</main>
 <script>
-/* ═══════════════════════════════════════
-   09 // MIND DATA
-═══════════════════════════════════════ */
 const mindData=[
 ["SUPER STRONG MIND & MINDSET",["meditation 15 min","roj koi 3 uncomfortable yaa hard task kroo","jabh bhi distract ho seedha kaam pr yaa distract na hone do dimag ko"]],
 ["RAPID LEARNING",["50 min work 10 min rest","active recall"]],
 ["SUPER MEMORY",["working memory game","extreme memory palace","spaced revision"]],
-["SUPER PATTERN RECOGNITION, PLANNING & STRATEGIC MIND",["extreme level chess","extreme daily ambient scan"]]
-];
-
+["SUPER PATTERN RECOGNITION, PLANNING & STRATEGIC MIND",["extreme level chess","extreme daily ambient scan"]]];
 const mindData3=[
 ["SUPER STRONG MIND & MINDSET",["deep meditation 45 min","roj koi 5 uncomfortable/hard task","box breathing sirf sabse hard and uncomfortable chijo ke sath"]],
 ["RAPID LEARNING",["75 min work and 15 min rest","active recall","feyman technique"]],
 ["SUPER MEMORY",["semantic interleaving","chained imagery"]],
-["SUPER PATTERN RECOGNITION, PLANNING & STRATEGIC MIND",["grandmaster level chess","chaos game theory"]]
-];
-
-function makeCategories(data,target){
-document.getElementById(target).innerHTML=data.map((item,i)=>`
-<div class="category">
-<span class="num">0${i+1} // CORE</span>
-<h4>${item[0]}</h4>
-<ul class="tasks">${item[1].map((task,j)=>`
-<li>${String(j+1).padStart(2,"0")} — ${task}</li>`).join("")}</ul>
-</div>`).join("");
-}
-
-makeCategories(mindData,"phase2Content");
-makeCategories(mindData3,"phase3Content");
-
-
-/* ═══════════════════════════════════════
-   10 // MIND SLIDER
-═══════════════════════════════════════ */
-let mindPhase=0;
-const mindTrack=document.getElementById("mindTrack");
-const mindLabel=document.getElementById("phaseLabel");
-const mindDots=[...document.querySelectorAll(".phase-dot")];
-
-function updateMind(n){
-mindPhase=Math.max(0,Math.min(2,n));
-mindTrack.style.transform=`translateX(-${mindPhase*33.333333}%)`;
-mindLabel.textContent=`PHASE ${mindPhase+1}`;
-mindDots.forEach((dot,i)=>dot.classList.toggle("active",i===mindPhase));
-animateMindCards();
-}
-
-mindDots.forEach((dot,i)=>dot.onclick=()=>updateMind(i));
-
-function animateMindCards(){
-document.querySelectorAll(".category").forEach((card,i)=>{
-card.classList.remove("show");
-setTimeout(()=>card.classList.add("show"),i*90+100);
-});
-}
-
-
-/* ═══════════════════════════════════════
-   11 // MIND TOUCH / DRAG
-═══════════════════════════════════════ */
-const mindViewport=document.getElementById("mindViewport");
-let startX=0,startY=0;
-
-mindViewport.addEventListener("touchstart",e=>{
-startX=e.touches[0].clientX;
-startY=e.touches[0].clientY;
-},{passive:true});
-
-mindViewport.addEventListener("touchend",e=>{
-const dx=e.changedTouches[0].clientX-startX;
-const dy=e.changedTouches[0].clientY-startY;
-if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy))
-updateMind(mindPhase+(dx<0?1:-1));
-},{passive:true});
-
-let mindDragging=false,mindDragX=0;
-
-mindViewport.addEventListener("pointerdown",e=>{
-mindDragging=true;
-mindDragX=e.clientX;
-mindViewport.setPointerCapture(e.pointerId);
-});
-
-mindViewport.addEventListener("pointerup",e=>{
-if(!mindDragging)return;
-mindDragging=false;
-const dx=e.clientX-mindDragX;
-if(Math.abs(dx)>50)updateMind(mindPhase+(dx<0?1:-1));
-});
-
-document.addEventListener("keydown",e=>{
-if(e.key==="ArrowRight")updateMind(mindPhase+1);
-if(e.key==="ArrowLeft")updateMind(mindPhase-1);
-});
-
-
-/* ═══════════════════════════════════════
-   12 // PHYSICAL SLIDER
-═══════════════════════════════════════ */
-let physicalDay=0;
-const physicalTrack=document.getElementById("physicalTrack");
-const dayLabel=document.getElementById("dayLabel");
-const physicalDots=[...document.querySelectorAll(".physical-dot")];
-
-function updatePhysical(n){
-physicalDay=Math.max(0,Math.min(2,n));
-physicalTrack.style.transform=`translateX(-${physicalDay*33.333333}%)`;
-dayLabel.textContent=`DAY ${physicalDay+1}`;
-physicalDots.forEach((dot,i)=>dot.classList.toggle("active",i===physicalDay));
-animateExercises();
-}
-
-physicalDots.forEach((dot,i)=>dot.onclick=()=>updatePhysical(i));
-
-function animateExercises(){
-document.querySelectorAll(".exercise").forEach((card,i)=>{
-card.style.opacity="0";
-card.style.transform="translateY(18px)";
-setTimeout(()=>{
-card.style.opacity="1";
-card.style.transform="translateY(0)";
-},i*80+80);
-});
-}
-
-
-/* ═══════════════════════════════════════
-   13 // PHYSICAL TOUCH / DRAG
-═══════════════════════════════════════ */
-const physicalViewport=document.querySelector(".physical-viewport");
-let physicalStartX=0,physicalStartY=0;
-
-physicalViewport.addEventListener("touchstart",e=>{
-physicalStartX=e.touches[0].clientX;
-physicalStartY=e.touches[0].clientY;
-},{passive:true});
-
-physicalViewport.addEventListener("touchend",e=>{
-const dx=e.changedTouches[0].clientX-physicalStartX;
-const dy=e.changedTouches[0].clientY-physicalStartY;
-if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy))
-updatePhysical(physicalDay+(dx<0?1:-1));
-},{passive:true});
-
-let physicalDragging=false,physicalDragX=0;
-
-physicalViewport.addEventListener("pointerdown",e=>{
-physicalDragging=true;
-physicalDragX=e.clientX;
-physicalViewport.setPointerCapture(e.pointerId);
-});
-
-physicalViewport.addEventListener("pointerup",e=>{
-if(!physicalDragging)return;
-physicalDragging=false;
-const dx=e.clientX-physicalDragX;
-if(Math.abs(dx)>50)updatePhysical(physicalDay+(dx<0?1:-1));
-});
-
-
-/* ═══════════════════════════════════════
-   14 // CARD ANIMATION
-═══════════════════════════════════════ */
-const observer=new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting)entry.target.classList.add("show");
-});
-},{threshold:.15});
-
-document.querySelectorAll(".category").forEach(card=>observer.observe(card));
-
-animateMindCards();
-animateExercises();
+["SUPER PATTERN RECOGNITION, PLANNING & STRATEGIC MIND",["grandmaster level chess","chaos game theory"]]];
+function makeCategories(data,target){document.getElementById(target).innerHTML=data.map((item,i)=>`<div class="category"><span class="num">0${i+1} // CORE</span><h4>${item[0]}</h4><ul class="tasks">${item[1].map((task,j)=>`<li>${String(j+1).padStart(2,"0")} — ${task}</li>`).join("")}</ul></div>`).join("")}
+makeCategories(mindData,"phase2Content");makeCategories(mindData3,"phase3Content");
+let mindPhase=0;const mindTrack=document.getElementById("mindTrack"),mindLabel=document.getElementById("phaseLabel"),mindDots=[...document.querySelectorAll(".phase-dot")];
+function animateMindCards(){document.querySelectorAll(".category").forEach((c,i)=>{c.classList.remove("show");setTimeout(()=>c.classList.add("show"),i*90+100)})}
+function updateMind(n){mindPhase=Math.max(0,Math.min(2,n));mindTrack.style.transform=`translateX(-${mindPhase*33.333333}%)`;mindLabel.textContent=`PHASE ${mindPhase+1}`;mindDots.forEach((d,i)=>d.classList.toggle("active",i===mindPhase));animateMindCards()}
+mindDots.forEach((d,i)=>d.onclick=()=>updateMind(i));
+function setupSwipe(view,update,getIndex){let sx=0,sy=0,drag=false,dx0=0;view.addEventListener("touchstart",e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});view.addEventListener("touchend",e=>{let dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy))update(getIndex()+(dx<0?1:-1))},{passive:true});view.addEventListener("pointerdown",e=>{drag=true;dx0=e.clientX;try{view.setPointerCapture(e.pointerId)}catch(_){}});view.addEventListener("pointerup",e=>{if(!drag)return;drag=false;let dx=e.clientX-dx0;if(Math.abs(dx)>50)update(getIndex()+(dx<0?1:-1))})}
+setupSwipe(document.getElementById("mindViewport"),updateMind,()=>mindPhase);document.addEventListener("keydown",e=>{if(e.key==="ArrowRight")updateMind(mindPhase+1);if(e.key==="ArrowLeft")updateMind(mindPhase-1)});
+let physicalDay=0;const physicalTrack=document.getElementById("physicalTrack"),dayLabel=document.getElementById("dayLabel"),physicalDots=[...document.querySelectorAll(".physical-dot")];
+function updatePhysical(n){physicalDay=Math.max(0,Math.min(2,n));physicalTrack.style.transform=`translateX(-${physicalDay*33.333333}%)`;dayLabel.textContent=`DAY ${physicalDay+1}`;physicalDots.forEach((d,i)=>d.classList.toggle("active",i===physicalDay))}
+physicalDots.forEach((d,i)=>d.onclick=()=>updatePhysical(i));setupSwipe(document.querySelector(".physical-viewport"),updatePhysical,()=>physicalDay);
+const $=id=>document.getElementById(id);
+const startDate="2026-10-15",storeKey="mindCoreProgress_v1";
+const subjectDefaults=["Maths","Science","Social Science","English","Hindi"];
+const workoutDefs=[
+{name:"60m Sprints",sets:6,kind:"check",distance:"60 m"},
+{name:"Jump Squats",sets:4,kind:"reps",hint:"Target: 8–10 reps/set"},
+{name:"Broad Jumps",sets:4,kind:"reps",hint:"Target: 6 reps/set",distance:"Record jump distance if you want"},
+{name:"Explosive Push-ups",sets:3,kind:"reps",hint:"Target: 10–12 reps/set"},
+{name:"Wide Push-ups",sets:3,kind:"reps",hint:"Target: 15–20 reps/set"},
+{name:"Long-Distance Jogging/Running",sets:1,kind:"distanceTime",hint:"Record total distance and time"},
+{name:"Shadow Boxing / Footwork Drills",sets:4,kind:"time",hint:"Target: 1 minute/set"},
+{name:"Side-to-Side Shuttle Drills",sets:4,kind:"reps",hint:"Target: 10 reps/set"},
+{name:"Burpees",sets:4,kind:"reps",hint:"Target: 15–20 reps/set"},
+{name:"Mountain Climbers",sets:4,kind:"time",hint:"Target: 45 seconds/set"},
+{name:"Intense Mobility/Flow",sets:3,kind:"time",hint:"Non-stop flow per set; record minutes"},
+{name:"Agility/Reaction Drill",sets:3,kind:"mixed",hint:"Set 1–2: Fast Feet & Drops • Set 3: Shadow Footwork"},
+{name:"Pull-ups",sets:4,kind:"reps",hint:"Target: 4–7 reps/set"},
+{name:"Technical Shadowing",sets:4,kind:"time",hint:"Target: 2 minutes/set"}];
+const gameNames=["Math Chain","Emoji Hunt","Reflex Match","Letter Memory","Symbol Match","Emoji Search","Hidden Equation","Pattern Inverter","Banana Count","Moving Arrow"];
+function loadAll(){try{return JSON.parse(localStorage.getItem(storeKey)||"{}")}catch(e){return {}}}
+let allLogs=loadAll();
+function todayISO(){let d=new Date(),local=new Date(d.getTime()-d.getTimezoneOffset()*60000);return local.toISOString().slice(0,10)}
+function blankLog(){return {subjects:subjectDefaults.map(name=>({name,count:""})),workout:{},meditation:"",uncomfortable:"",games:Array(10).fill("")}}
+function ensureStartDate(){if($("logDate").value<startDate)$("logDate").value=startDate}
+function currentData(){let date=$("logDate").value;return JSON.parse(JSON.stringify(allLogs[date]||blankLog()))}
+function renderSubjects(data){$("subjects").innerHTML="";(data.subjects||blankLog().subjects).forEach((s,i)=>addSubjectRow(s.name,s.count,i))}
+function addSubjectRow(name="",count="",idx=null){let row=document.createElement("div");row.className="subject-row";row.innerHTML=`<input type="text" aria-label="Subject name" placeholder="Subject name" value="${esc(name)}"><input type="number" min="0" step="1" aria-label="Chapters studied" placeholder="Chapters" value="${esc(count)}">`;row.querySelectorAll("input").forEach(x=>x.addEventListener("input",updateChapterTotal));$("subjects").appendChild(row);updateChapterTotal()}
+function updateChapterTotal(){let total=0;document.querySelectorAll("#subjects .subject-row").forEach(r=>total+=Math.max(0,parseInt(r.children[1].value)||0));$("chapterTotal").value=total+" chapters";$("chapterSummary").textContent="Total: "+total+" chapters"}
+function renderWorkout(data){$("workoutFields").innerHTML=workoutDefs.map((ex,i)=>{let old=data.workout?.[ex.name]||{};let sets=Array.from({length:ex.sets},(_,j)=>{let val=old.sets?.[j]??"";if(ex.kind==="check")return `<label class="set-item check-set"><input type="checkbox" data-ex="${i}" data-set="${j}" ${val===true?"checked":""}> Set ${j+1} ✓</label>`;let label=ex.kind==="time"?"Time (sec)":ex.kind==="mixed"?"Reps / sec": "Reps";return `<div class="set-item"><label>SET ${j+1} · ${label}</label><input type="number" min="0" step="any" data-ex="${i}" data-set="${j}" placeholder="${ex.kind==="time"?"sec":ex.kind==="mixed"?"reps/sec":"reps"}" value="${esc(val)}"></div>`}).join("");return `<div class="exercise-log"><h4>${String(i+1).padStart(2,"0")} / ${ex.name} <span style="color:var(--muted);font-size:11px">(${ex.sets} sets)</span></h4><p class="notice">${ex.distance?ex.distance+" • ":""}${ex.hint||""}</p><div class="set-grid">${sets}</div>${ex.kind==="distanceTime"?`<div class="form-grid" style="margin-top:10px"><div class="field"><label>DISTANCE (KM OR METRES)</label><input type="text" data-extra="${i}" data-key="distance" placeholder="e.g. 3 km" value="${esc(old.distance||"")}"></div><div class="field"><label>TOTAL TIME (MIN:SEC)</label><input type="text" data-extra="${i}" data-key="time" placeholder="e.g. 20:30" value="${esc(old.time||"")}"></div></div>`:""}${ex.kind==="reps"&&ex.name==="Broad Jumps"?`<div class="field" style="margin-top:10px"><label>OPTIONAL DISTANCE PER JUMP / NOTES</label><input type="text" data-extra="${i}" data-key="distance" placeholder="e.g. approx. 1.8 m" value="${esc(old.distance||"")}"></div>`:""}</div>`}).join("")}
+function renderGames(data){$("games").innerHTML=gameNames.map((g,i)=>`<label class="game-row"><span>${String(i+1).padStart(2,"0")} / ${g}<small>MAXIMUM 10 MARKS</small></span><input aria-label="${g} score out of 10" type="number" min="0" max="10" step="1" data-game="${i}" placeholder="/10" value="${esc(data.games?.[i]??"")}" ></label>`).join("");$("games").querySelectorAll("input").forEach(x=>x.addEventListener("input",updateGameTotal));updateGameTotal()}
+function updateGameTotal(){let vals=[...document.querySelectorAll("[data-game]")].map(x=>Math.max(0,Math.min(10,Number(x.value)||0)));let total=vals.reduce((a,b)=>a+b,0);$("gameSummary").textContent=`Total score: ${total} / 100 (entered games: ${[...document.querySelectorAll("[data-game]")].filter(x=>x.value!=="").length}/10)`}
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function collectForm(){let subjects=[...document.querySelectorAll("#subjects .subject-row")].map(r=>({name:r.children[0].value.trim(),count:r.children[1].value})).filter(s=>s.name||s.count!=="");let workout={};workoutDefs.forEach((ex,i)=>{let sets=[];for(let j=0;j<ex.sets;j++){let el=document.querySelector(`[data-ex="${i}"][data-set="${j}"]`);sets.push(ex.kind==="check"?!!el?.checked:(el?.value??""))}workout[ex.name]={sets};document.querySelectorAll(`[data-extra="${i}"]`).forEach(el=>workout[ex.name][el.dataset.key]=el.value)});return {subjects,workout,meditation:$("meditation").value,uncomfortable:$("uncomfortable").value,games:[...document.querySelectorAll("[data-game]")].map(x=>x.value),updatedAt:new Date().toISOString()}}
+function saveCurrent(silent=false){ensureStartDate();let date=$("logDate").value;if(!date||date<startDate){alert("Progress tracking starts on 15 October 2026.");return}allLogs[date]=collectForm();try{localStorage.setItem(storeKey,JSON.stringify(allLogs))}catch(e){alert("Device storage full ho sakta hai. Export backup kar lo.");return}renderHistory();if(!silent)alert("Progress saved for "+date+" ✓")}
+function loadDate(date){if(date<startDate){alert("Progress tracking starts on 15 October 2026.");return}$("logDate").value=date;let data=allLogs[date]||blankLog();renderSubjects(data);renderWorkout(data);$("meditation").value=data.meditation||"";$("uncomfortable").value=data.uncomfortable||"";renderGames(data);updateChapterTotal();$("historyDetail").classList.remove("open");window.scrollTo({top:$("tracker").offsetTop-80,behavior:"smooth"})}
+function renderHistory(){let dates=Object.keys(allLogs).filter(d=>d>=startDate).sort((a,b)=>b.localeCompare(a));$("historyList").innerHTML=dates.length?dates.map(d=>{let l=allLogs[d],chap=(l.subjects||[]).reduce((t,s)=>t+(parseInt(s.count)||0),0),score=(l.games||[]).reduce((t,s)=>t+(Number(s)||0),0);return `<button class="history-item" data-history="${d}"><b>${formatDate(d)}</b><span>${chap} chapters • Memory ${score}/100</span></button>`}).join(""):`<p class="notice">Abhi koi saved progress nahi hai. 15 Oct 2026 se apna pehla log save kar.</p>`;$("historyList").querySelectorAll("[data-history]").forEach(b=>b.onclick=()=>showHistory(b.dataset.history))}
+function formatDate(d){return new Date(d+"T12:00:00").toLocaleDateString("en-IN",{day:"2-digit",month:"short",year:"numeric"})}
+function showHistory(date){let l=allLogs[date],html=`<h3 style="margin-top:0">${formatDate(date)} — SAVED PROGRESS</h3><p><b>Total chapters:</b> ${(l.subjects||[]).reduce((t,s)=>t+(parseInt(s.count)||0),0)}</p><p><b>Study:</b> ${(l.subjects||[]).filter(s=>s.name||s.count).map(s=>`${esc(s.name||"Subject")}: ${esc(s.count||0)} chapter(s)`).join(" • ")||"No subject entries"}</p><p><b>Meditation:</b> ${esc(l.meditation||"0")} minutes</p><p><b>Uncomfortable thing:</b> ${esc(l.uncomfortable||"Not entered")}</p><h4>Workout</h4>`;workoutDefs.forEach(ex=>{let w=l.workout?.[ex.name];if(!w)return;let vals=(w.sets||[]).map((v,i)=>ex.kind==="check"?`Set ${i+1}: ${v?"✓ Done":"Not checked"}`:`Set ${i+1}: ${v!==""&&v!=null?esc(v)+(ex.kind==="time"?" sec":ex.kind==="mixed"?" reps/sec":" reps"):"—"}`).join(" • ");html+=`<p><b>${esc(ex.name)}:</b> ${vals||"—"}${w.distance?` • Distance: ${esc(w.distance)}`:""}${w.time?` • Time: ${esc(w.time)}`:""}</p>`});html+=`<h4>Memory games</h4>`;gameNames.forEach((g,i)=>html+=`<p>${g}: ${l.games?.[i]!==""&&l.games?.[i]!=null?esc(l.games[i])+"/10":"Not entered"}</p>`);html+=`<p><b>Total score:</b> ${(l.games||[]).reduce((t,s)=>t+(Number(s)||0),0)}/100</p><div class="tracker-actions" style="margin-top:14px"><button class="small-btn" id="editHistory">EDIT THIS DATE</button></div>`;$("historyDetail").innerHTML=html;$("historyDetail").classList.add("open");$("editHistory").onclick=()=>loadDate(date);$("historyDetail").scrollIntoView({behavior:"smooth",block:"nearest"})}
+function initTracker(){let date=todayISO();if(date<startDate)date=startDate;$("logDate").value=date;let data=allLogs[date]||blankLog();renderSubjects(data);renderWorkout(data);$("meditation").value=data.meditation||"";$("uncomfortable").value=data.uncomfortable||"";renderGames(data);renderHistory()}
+$("openTracker").onclick=()=>{$("tracker").classList.add("open");initTracker();$("tracker").scrollIntoView({behavior:"smooth",block:"start"})};$("closeTracker").onclick=()=>$("tracker").classList.remove("open");$("todayBtn").onclick=()=>{let d=todayISO();loadDate(d<startDate?startDate:d)};$("logDate").addEventListener("change",()=>loadDate($("logDate").value));$("addSubject").onclick=()=>addSubjectRow();$("removeSubject").onclick=()=>{let rows=$("subjects").querySelectorAll(".subject-row");if(rows.length>1)rows[rows.length-1].remove();updateChapterTotal()};$("saveLog").onclick=()=>saveCurrent();$("exportData").onclick=()=>{saveCurrent(true);let blob=new Blob([JSON.stringify(allLogs,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="mind-core-progress-backup.json";a.click();URL.revokeObjectURL(a.href)};$("importData").onclick=()=>$("importFile").click();$("importFile").onchange=async e=>{let f=e.target.files[0];if(!f)return;try{let obj=JSON.parse(await f.text());if(!obj||typeof obj!=="object"||Array.isArray(obj))throw 0;allLogs={...allLogs,...obj};localStorage.setItem(storeKey,JSON.stringify(allLogs));initTracker();alert("Backup imported successfully ✓")}catch(_){alert("Backup file valid JSON nahi hai.")}e.target.value=""};
+const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("show")}),{threshold:.15});document.querySelectorAll(".category").forEach(c=>observer.observe(c));animateMindCards();updatePhysical(0);
 </script>
-
-<footer>
-MIND//CORE × PHYSICAL // ASCENSION SYSTEM • SYSTEM ACTIVE
-</footer>
-
-</main>
 </body>
 </html>
