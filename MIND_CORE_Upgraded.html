@@ -1,0 +1,1883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#090b12"><meta name="description" content="MIND//CORE: study system, adaptive revision, progress, local-first memory and optional AI assistant."><title>MIND//CORE — Personal Ascension System</title>
+<style>:root {
+  color-scheme:dark;
+  --bg:#090b12;
+  --surface:#10131e;
+  --surface2:#151a28;
+  --surface3:#1b2232;
+  --line:rgba(159,176,214,.15);
+  --text:#eef3ff;
+  --muted:#909bb5;
+  --cyan:#66e5ed;
+  --cyan2:#2bbfcf;
+  --purple:#a99aff;
+  --pink:#ff84c8;
+  --green:#77e0af;
+  --yellow:#ffd784;
+  --red:#ff8d9b;
+  --radius:18px;
+  --shadow:0 22px 70px rgba(0,0,0,.28)
+}
+* {
+  box-sizing:border-box
+}
+html {
+  scroll-behavior:smooth;
+  scroll-padding-top:100px
+}
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font:14px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif
+}
+button,input,select,textarea {
+  font:inherit
+}
+button {
+  cursor:pointer
+}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible {
+  outline:2px solid var(--cyan);
+  outline-offset:3px
+}
+.app {
+  min-height:100vh;
+  background:radial-gradient(ellipse at 7% 0%,rgba(58,118,158,.14),transparent 32%),radial-gradient(ellipse at 98% 15%,rgba(126,76,182,.12),transparent 28%),var(--bg)
+}
+.shell {
+  width:min(1240px,100%);
+  padding:22px 24px 64px;
+  margin:0 auto
+}
+.topbar {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  padding:7px 0 21px;
+  border-bottom:1px solid var(--line)
+}
+.brand {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:0
+}
+.brand-mark {
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  border-radius:13px;
+  border:1px solid rgba(102,229,237,.36);
+  background:linear-gradient(145deg,rgba(102,229,237,.14),rgba(169,154,255,.13));
+  color:var(--cyan);
+  font-weight:900;
+  letter-spacing:-2px
+}
+.brand h1 {
+  margin:0;
+  font-size:18px;
+  letter-spacing:.12em;
+  line-height:1.1
+}
+.brand p {
+  margin:5px 0 0;
+  font-size:10px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--muted)
+}
+.top-actions {
+  display:flex;
+  gap:8px;
+  align-items:center;
+  flex-wrap:wrap;
+  justify-content:flex-end
+}
+.status-dot {
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  font-size:11px;
+  color:var(--green);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  white-space:nowrap
+}
+.status-dot:before {
+  content:"";
+  width:7px;
+  height:7px;
+  background:var(--green);
+  border-radius:50%;
+  box-shadow:0 0 12px var(--green)
+}
+.btn {
+  border:1px solid var(--line);
+  color:var(--text);
+  background:var(--surface2);
+  border-radius:11px;
+  padding:9px 12px;
+  font-weight:650;
+  font-size:12px;
+  transition:transform .16s,border-color .16s,background .16s
+}
+.btn:hover {
+  transform:translateY(-1px);
+  border-color:rgba(102,229,237,.45);
+  background:var(--surface3)
+}
+.btn.primary {
+  background:var(--cyan);
+  color:#061115;
+  border-color:var(--cyan)
+}
+.btn.primary:hover {
+  background:#8ef2f5
+}
+.btn.subtle {
+  background:transparent
+}
+.btn.danger {
+  color:var(--red);
+  border-color:rgba(255,141,155,.25)
+}
+.btn.small {
+  padding:6px 9px;
+  font-size:11px;
+  border-radius:9px
+}
+.btn:disabled {
+  opacity:.4;
+  cursor:not-allowed;
+  transform:none
+}
+.hero {
+  padding:26px 0 18px;
+  display:grid;
+  grid-template-columns:minmax(0,1.5fr) minmax(250px,.8fr);
+  gap:18px
+}
+.hero-main,.hero-side {
+  border:1px solid var(--line);
+  background:linear-gradient(145deg,rgba(20,25,39,.96),rgba(13,16,26,.98));
+  border-radius:24px;
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden
+}
+.hero-main {
+  padding:26px
+}
+.hero-main:after {
+  content:"";
+  position:absolute;
+  width:250px;
+  height:250px;
+  right:-115px;
+  top:-140px;
+  border-radius:50%;
+  border:1px solid rgba(102,229,237,.22);
+  box-shadow:0 0 0 22px rgba(102,229,237,.025),0 0 0 48px rgba(169,154,255,.025);
+  pointer-events:none
+}
+.eyebrow,.section-kicker {
+  color:var(--cyan);
+  font-size:10px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  font-weight:800
+}
+.hero h2 {
+  margin:10px 0 8px;
+  font-size:clamp(27px,4vw,43px);
+  line-height:1.08;
+  letter-spacing:-.045em;
+  max-width:700px
+}
+.hero h2 span {
+  color:var(--cyan)
+}
+.hero-copy {
+  max-width:620px;
+  color:var(--muted);
+  font-size:13px;
+  margin:0 0 21px
+}
+.hero-bottom {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  flex-wrap:wrap
+}
+.date-tools {
+  display:flex;
+  gap:8px;
+  align-items:center;
+  flex-wrap:wrap
+}
+.date-input {
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:9px 10px;
+  color:var(--text);
+  background:var(--surface2);
+  max-width:155px
+}
+.pill {
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:5px 9px;
+  border-radius:99px;
+  border:1px solid var(--line);
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--muted);
+  white-space:nowrap
+}
+.pill.cyan {
+  color:var(--cyan);
+  background:rgba(102,229,237,.08);
+  border-color:rgba(102,229,237,.22)
+}
+.pill.purple {
+  color:var(--purple);
+  background:rgba(169,154,255,.08);
+  border-color:rgba(169,154,255,.23)
+}
+.pill.green {
+  color:var(--green);
+  background:rgba(119,224,175,.08);
+  border-color:rgba(119,224,175,.23)
+}
+.pill.yellow {
+  color:var(--yellow);
+  background:rgba(255,215,132,.08);
+  border-color:rgba(255,215,132,.23)
+}
+.hero-side {
+  padding:22px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:20px
+}
+.side-top {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px
+}
+.mini-label {
+  color:var(--muted);
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.15em;
+  font-weight:750
+}
+.big-stat {
+  font-size:36px;
+  font-weight:850;
+  letter-spacing:-.05em;
+  margin:5px 0 0
+}
+.big-stat span {
+  color:var(--cyan)
+}
+.stat-sub {
+  color:var(--muted);
+  font-size:11px
+}
+.mini-stats {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px
+}
+.mini-stat {
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:rgba(255,255,255,.018)
+}
+.mini-stat strong {
+  display:block;
+  font-size:20px;
+  letter-spacing:-.04em
+}
+.mini-stat span {
+  font-size:10px;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.09em
+}
+.week-strip {
+  display:grid;
+  grid-template-columns:repeat(7,minmax(0,1fr));
+  gap:7px;
+  padding:5px 0 18px
+}
+.day-chip {
+  text-align:center;
+  border:1px solid var(--line);
+  background:var(--surface);
+  border-radius:13px;
+  padding:10px 4px;
+  color:var(--muted);
+  min-width:0
+}
+.day-chip span {
+  display:block;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.08em
+}
+.day-chip strong {
+  display:block;
+  font-size:17px;
+  margin:3px 0;
+  color:var(--text)
+}
+.day-chip small {
+  display:block;
+  font-size:9px;
+  min-height:13px
+}
+.day-chip.active {
+  border-color:rgba(102,229,237,.58);
+  background:linear-gradient(180deg,rgba(102,229,237,.13),rgba(102,229,237,.035));
+  box-shadow:inset 0 0 0 1px rgba(102,229,237,.06)
+}
+.day-chip.active strong,.day-chip.active span {
+  color:var(--cyan)
+}
+.day-chip:hover {
+  border-color:rgba(169,154,255,.5)
+}
+.nav {
+  position:sticky;
+  top:0;
+  z-index:20;
+  display:flex;
+  align-items:center;
+  gap:5px;
+  overflow-x:auto;
+  padding:9px;
+  margin:0 0 22px;
+  border:1px solid var(--line);
+  border-radius:15px;
+  background:rgba(10,12,20,.88);
+  backdrop-filter:blur(18px);
+  scrollbar-width:thin
+}
+.nav a {
+  color:var(--muted);
+  text-decoration:none;
+  white-space:nowrap;
+  font-size:11px;
+  font-weight:750;
+  padding:9px 12px;
+  border-radius:10px
+}
+.nav a:hover,.nav a.active {
+  color:var(--text);
+  background:var(--surface3)
+}
+.nav a.active {
+  box-shadow:inset 0 -2px var(--cyan)
+}
+.section {
+  margin-top:26px;
+  scroll-margin-top:90px
+}
+.section-head {
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:15px;
+  margin:0 0 14px
+}
+.section-title {
+  font-size:23px;
+  letter-spacing:-.04em;
+  margin:4px 0 3px;
+  line-height:1.15
+}
+.section-desc {
+  color:var(--muted);
+  font-size:12px;
+  margin:0;
+  max-width:740px
+}
+.head-actions {
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:flex-end
+}
+.panel {
+  border:1px solid var(--line);
+  background:linear-gradient(150deg,rgba(17,21,33,.96),rgba(13,16,26,.98));
+  border-radius:var(--radius);
+  overflow:hidden
+}
+.panel-pad {
+  padding:18px
+}
+.schedule-layout {
+  display:grid;
+  grid-template-columns:minmax(0,1.6fr) minmax(260px,.8fr);
+  gap:14px
+}
+.schedule-list {
+  display:flex;
+  flex-direction:column
+}
+.schedule-item {
+  display:grid;
+  grid-template-columns:85px 20px minmax(0,1fr) 30px;
+  gap:10px;
+  padding:14px 17px;
+  border-bottom:1px solid var(--line);
+  align-items:start
+}
+.schedule-item:last-child {
+  border-bottom:0
+}
+.schedule-time {
+  font-size:11px;
+  font-weight:800;
+  color:var(--cyan);
+  white-space:nowrap;
+  padding-top:2px
+}
+.timeline-node {
+  position:relative;
+  display:flex;
+  justify-content:center;
+  padding-top:5px
+}
+.timeline-node:before {
+  content:"";
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  border:2px solid var(--cyan);
+  background:var(--surface);
+  z-index:1
+}
+.schedule-item:not(:last-child) .timeline-node:after {
+  content:"";
+  position:absolute;
+  top:17px;
+  bottom:-28px;
+  width:1px;
+  background:linear-gradient(var(--cyan),rgba(102,229,237,.07))
+}
+.schedule-content h4 {
+  margin:0 0 4px;
+  font-size:13px;
+  font-weight:800
+}
+.schedule-content p {
+  margin:0;
+  font-size:11px;
+  color:var(--muted);
+  line-height:1.5
+}
+.schedule-content .tag-row {
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:8px
+}
+.schedule-content .tag {
+  font-size:9px;
+  padding:3px 7px;
+  border-radius:6px;
+  color:var(--muted);
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.025)
+}
+.schedule-item.done .schedule-content h4 {
+  color:var(--muted);
+  text-decoration:line-through
+}
+.schedule-item.done .timeline-node:before {
+  background:var(--green);
+  border-color:var(--green)
+}
+.task-check {
+  appearance:none;
+  margin:1px 0 0;
+  width:19px;
+  height:19px;
+  border:1px solid rgba(144,155,181,.5);
+  border-radius:6px;
+  display:grid;
+  place-items:center;
+  background:transparent;
+  flex:0 0 auto
+}
+.task-check:checked {
+  background:var(--green);
+  border-color:var(--green)
+}
+.task-check:checked:after {
+  content:"✓";
+  font-size:13px;
+  font-weight:900;
+  color:#06150e
+}
+.task-check:disabled {
+  opacity:.3;
+  cursor:not-allowed
+}
+.side-stack {
+  display:flex;
+  flex-direction:column;
+  gap:14px
+}
+.focus-card {
+  padding:18px
+}
+.focus-card h3 {
+  margin:0;
+  font-size:15px;
+  letter-spacing:-.02em
+}
+.muted {
+  color:var(--muted);
+  font-size:11px
+}
+.focus-number-row {
+  display:flex;
+  align-items:baseline;
+  gap:7px;
+  margin:12px 0 5px
+}
+.focus-number-row strong {
+  font-size:28px;
+  letter-spacing:-.04em
+}
+.focus-number-row span {
+  font-size:11px;
+  color:var(--muted)
+}
+.progress-track {
+  height:7px;
+  background:#252b3b;
+  border-radius:99px;
+  overflow:hidden
+}
+.progress-fill {
+  height:100%;
+  border-radius:99px;
+  background:linear-gradient(90deg,var(--cyan2),var(--purple));
+  transition:width .2s
+}
+.focus-list {
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-top:14px
+}
+.focus-line {
+  display:flex;
+  gap:8px;
+  align-items:flex-start;
+  color:var(--muted);
+  font-size:11px
+}
+.focus-line:before {
+  content:"";
+  display:block;
+  flex:0 0 6px;
+  width:6px;
+  height:6px;
+  margin-top:5px;
+  border-radius:2px;
+  background:var(--purple)
+}
+.callout {
+  border-radius:13px;
+  border:1px solid rgba(255,215,132,.22);
+  background:rgba(255,215,132,.055);
+  padding:12px 13px;
+  color:#f3dca9;
+  font-size:11px
+}
+.callout.info {
+  border-color:rgba(102,229,237,.2);
+  background:rgba(102,229,237,.05);
+  color:#b8f1f3
+}
+.callout.good {
+  border-color:rgba(119,224,175,.2);
+  background:rgba(119,224,175,.05);
+  color:#b9f4d8
+}
+.grid-2 {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px
+}
+.grid-3 {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px
+}
+.module-card {
+  padding:18px;
+  position:relative
+}
+.module-top {
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px
+}
+.module-icon {
+  width:38px;
+  height:38px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  font-size:18px;
+  background:rgba(102,229,237,.09);
+  border:1px solid rgba(102,229,237,.17)
+}
+.module-icon.purple {
+  background:rgba(169,154,255,.09);
+  border-color:rgba(169,154,255,.18)
+}
+.module-icon.pink {
+  background:rgba(255,132,200,.08);
+  border-color:rgba(255,132,200,.17)
+}
+.module-icon.green {
+  background:rgba(119,224,175,.08);
+  border-color:rgba(119,224,175,.16)
+}
+.module-card h3 {
+  margin:13px 0 5px;
+  font-size:15px
+}
+.module-card p {
+  color:var(--muted);
+  font-size:11px;
+  margin:0
+}
+.module-card ul {
+  margin:12px 0 0;
+  padding-left:17px;
+  color:#c6cee0;
+  font-size:11px
+}
+.module-card li {
+  padding:3px 0
+}
+.module-meta {
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  margin-top:14px
+}
+.exercise-row {
+  display:flex;
+  gap:13px;
+  align-items:flex-start;
+  padding:14px 0;
+  border-bottom:1px solid var(--line)
+}
+.exercise-row:last-child {
+  border-bottom:0
+}
+.exercise-letters {
+  flex:0 0 30px;
+  height:30px;
+  border-radius:9px;
+  display:grid;
+  place-items:center;
+  font-weight:900;
+  color:var(--cyan);
+  background:rgba(102,229,237,.08);
+  border:1px solid rgba(102,229,237,.18)
+}
+.exercise-body {
+  flex:1;
+  min-width:0
+}
+.exercise-body h4 {
+  margin:0 0 4px;
+  font-size:13px
+}
+.exercise-body p {
+  margin:0;
+  font-size:11px;
+  color:var(--muted)
+}
+.exercise-body .mini-tag {
+  color:var(--purple);
+  margin-top:7px;
+  font-size:10px;
+  display:inline-block
+}
+.workout-day {
+  padding:17px
+}
+.workout-day h3 {
+  margin:0 0 4px;
+  font-size:15px
+}
+.workout-day .sub {
+  color:var(--muted);
+  font-size:11px;
+  margin-bottom:12px
+}
+.workout-ex {
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  border-top:1px solid var(--line);
+  padding:10px 0;
+  font-size:11px
+}
+.workout-ex span:first-child {
+  color:#dce4f8
+}
+.workout-ex span:last-child {
+  color:var(--cyan);
+  font-weight:750;
+  text-align:right
+}
+.table-wrap {
+  overflow:auto
+}
+table {
+  border-collapse:collapse;
+  width:100%;
+  min-width:620px
+}
+th,td {
+  text-align:left;
+  padding:12px 14px;
+  border-bottom:1px solid var(--line);
+  font-size:11px
+}
+th {
+  color:var(--muted);
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  background:rgba(255,255,255,.018)
+}
+td {
+  color:#d4dcef
+}
+tr:last-child td {
+  border-bottom:0
+}
+.form-row {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  align-items:center
+}
+.field {
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  min-width:0
+}
+.field label {
+  font-size:10px;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  font-weight:800
+}
+.input,.select,.textarea {
+  background:#0b0e17;
+  border:1px solid var(--line);
+  border-radius:10px;
+  color:var(--text);
+  padding:10px 11px;
+  width:100%;
+  min-width:0
+}
+.input::placeholder,.textarea::placeholder {
+  color:#69748e
+}
+.select {
+  cursor:pointer
+}
+.small-text {
+  font-size:10px;
+  color:var(--muted)
+}
+.revision-overview {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+  margin-bottom:14px
+}
+.kpi {
+  padding:14px;
+  border-radius:14px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.018)
+}
+.kpi strong {
+  display:block;
+  font-size:24px;
+  letter-spacing:-.05em
+}
+.kpi span {
+  color:var(--muted);
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.08em
+}
+.kpi .accent {
+  color:var(--cyan)
+}
+.due-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px
+}
+.chapter-card {
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.018);
+  border-radius:14px;
+  padding:14px;
+  min-width:0
+}
+.chapter-card.overdue {
+  border-color:rgba(255,141,155,.28)
+}
+.chapter-head {
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:9px
+}
+.chapter-subject {
+  color:var(--cyan);
+  font-size:9px;
+  font-weight:850;
+  text-transform:uppercase;
+  letter-spacing:.12em
+}
+.chapter-card h4 {
+  margin:4px 0 5px;
+  font-size:13px;
+  word-break:break-word
+}
+.chapter-card p {
+  margin:0;
+  color:var(--muted);
+  font-size:10px
+}
+.chapter-actions {
+  margin-top:12px;
+  display:flex;
+  gap:7px;
+  align-items:center;
+  flex-wrap:wrap
+}
+.rating-select {
+  border:1px solid var(--line);
+  background:#0b0e17;
+  color:var(--text);
+  padding:8px;
+  border-radius:9px
+}
+.chapter-card .note {
+  margin-top:7px;
+  color:var(--yellow);
+  font-size:10px
+}
+.subjects-list {
+  display:flex;
+  flex-direction:column;
+  gap:12px
+}
+.subject-panel {
+  border:1px solid var(--line);
+  background:linear-gradient(145deg,rgba(17,21,33,.92),rgba(12,15,24,.96));
+  border-radius:16px;
+  overflow:hidden
+}
+.subject-header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:15px 16px;
+  flex-wrap:wrap
+}
+.subject-title {
+  display:flex;
+  align-items:center;
+  gap:11px;
+  min-width:0
+}
+.subject-letter {
+  width:35px;
+  height:35px;
+  border-radius:11px;
+  display:grid;
+  place-items:center;
+  flex:0 0 auto;
+  color:var(--cyan);
+  background:rgba(102,229,237,.08);
+  border:1px solid rgba(102,229,237,.18);
+  font-weight:900
+}
+.subject-title h3 {
+  margin:0;
+  font-size:13px
+}
+.subject-title p {
+  margin:3px 0 0;
+  font-size:10px;
+  color:var(--muted)
+}
+.subject-actions {
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap
+}
+.subject-details {
+  border-top:1px solid var(--line)
+}
+.chapter-manager {
+  padding:12px 15px
+}
+.chapter-row {
+  display:grid;
+  grid-template-columns:minmax(0,1.4fr) 85px 105px 145px;
+  gap:8px;
+  align-items:center;
+  padding:10px 0;
+  border-bottom:1px solid rgba(159,176,214,.09)
+}
+.chapter-row:last-child {
+  border-bottom:0
+}
+.chapter-name {
+  font-size:11px;
+  font-weight:700;
+  overflow-wrap:anywhere
+}
+.chapter-note {
+  font-size:10px;
+  color:var(--muted);
+  margin-top:2px
+}
+.chapter-row .row-actions {
+  display:flex;
+  gap:5px;
+  justify-content:flex-end;
+  flex-wrap:wrap
+}
+.status-label {
+  display:inline-flex;
+  width:max-content;
+  align-items:center;
+  font-size:9px;
+  border-radius:6px;
+  padding:4px 6px;
+  border:1px solid var(--line);
+  color:var(--muted);
+  white-space:nowrap
+}
+.status-label.studied {
+  color:var(--green);
+  border-color:rgba(119,224,175,.22)
+}
+.status-label.new {
+  color:var(--purple);
+  border-color:rgba(169,154,255,.24)
+}
+.history-grid {
+  display:grid;
+  grid-template-columns:repeat(7,minmax(0,1fr));
+  gap:7px;
+  align-items:end;
+  height:128px;
+  margin-top:14px
+}
+.history-bar-wrap {
+  display:flex;
+  height:100%;
+  min-width:0;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-end;
+  gap:6px
+}
+.history-bar {
+  min-height:4px;
+  width:100%;
+  max-width:35px;
+  border-radius:8px 8px 3px 3px;
+  background:linear-gradient(180deg,var(--cyan),rgba(102,229,237,.23))
+}
+.history-bar-wrap span {
+  font-size:9px;
+  color:var(--muted)
+}
+.history-bar-wrap small {
+  font-size:9px;
+  color:#c8d5e8
+}
+.module-progress-list {
+  display:flex;
+  flex-direction:column;
+  gap:14px
+}
+.module-progress-item {
+  display:grid;
+  grid-template-columns:110px minmax(0,1fr) 42px;
+  align-items:center;
+  gap:10px
+}
+.module-progress-item .name {
+  color:#cbd5e9;
+  font-size:11px
+}
+.module-progress-item .value {
+  text-align:right;
+  color:var(--muted);
+  font-size:10px
+}
+.habit-list {
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-top:12px
+}
+.habit-item {
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:10px 11px;
+  background:rgba(255,255,255,.018);
+  border:1px solid var(--line);
+  border-radius:11px
+}
+.habit-item span {
+  flex:1;
+  min-width:0;
+  font-size:11px
+}
+.habit-item small {
+  display:block;
+  font-size:9px;
+  color:var(--muted)
+}
+.empty {
+  padding:24px 15px;
+  color:var(--muted);
+  font-size:12px;
+  text-align:center
+}
+.empty strong {
+  display:block;
+  color:var(--text);
+  margin-bottom:5px
+}
+.settings-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px
+}
+.setting-row {
+  padding:15px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  display:flex;
+  gap:12px;
+  justify-content:space-between;
+  align-items:center
+}
+.setting-row strong {
+  display:block;
+  font-size:12px
+}
+.setting-row p {
+  margin:4px 0 0;
+  font-size:10px;
+  color:var(--muted)
+}
+.setting-row .input,.setting-row .select {
+  max-width:120px
+}
+.footer {
+  margin-top:35px;
+  padding-top:18px;
+  border-top:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  color:var(--muted);
+  font-size:10px
+}
+.footer strong {
+  color:var(--cyan);
+  letter-spacing:.12em
+}
+.overlay {
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:rgba(2,4,10,.78);
+  backdrop-filter:blur(12px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px
+}
+.overlay.show {
+  display:flex
+}
+.modal {
+  width:min(520px,100%);
+  max-height:90vh;
+  overflow:auto;
+  border:1px solid rgba(102,229,237,.25);
+  background:#111622;
+  border-radius:20px;
+  padding:22px;
+  box-shadow:0 25px 100px rgba(0,0,0,.5)
+}
+.modal-head {
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:flex-start;
+  margin-bottom:17px
+}
+.modal-head h3 {
+  margin:0;
+  font-size:19px
+}
+.modal-head p {
+  margin:5px 0 0;
+  font-size:11px;
+  color:var(--muted)
+}
+.modal-fields {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px
+}
+.modal-fields .full {
+  grid-column:1/-1
+}
+.modal-actions {
+  display:flex;
+  gap:8px;
+  justify-content:flex-end;
+  margin-top:18px
+}
+.toast {
+  position:fixed;
+  z-index:120;
+  bottom:20px;
+  left:50%;
+  transform:translate(-50%,20px);
+  opacity:0;
+  pointer-events:none;
+  background:#eafcff;
+  color:#071217;
+  padding:11px 15px;
+  border-radius:12px;
+  font-size:12px;
+  font-weight:800;
+  box-shadow:0 15px 35px rgba(0,0,0,.35);
+  transition:.22s;
+  max-width:calc(100% - 28px);
+  text-align:center
+}
+.toast.show {
+  opacity:1;
+  transform:translate(-50%,0)
+}
+.light-mode {
+  --bg:#f1f5fa;
+  --surface:#fff;
+  --surface2:#f6f8fc;
+  --surface3:#edf2f8;
+  --line:rgba(28,43,74,.14);
+  --text:#101827;
+  --muted:#65728a;
+  --shadow:0 18px 55px rgba(30,52,82,.09)
+}
+.light-mode .app {
+  background:radial-gradient(ellipse at 7% 0%,rgba(58,118,158,.08),transparent 32%),#f1f5fa
+}
+.light-mode .hero-main,.light-mode .hero-side,.light-mode .panel,.light-mode .subject-panel {
+  background:linear-gradient(145deg,rgba(255,255,255,.98),rgba(247,249,253,.98))
+}
+.light-mode .nav {
+  background:rgba(255,255,255,.9)
+}
+.light-mode .input,.light-mode .select,.light-mode .textarea,.light-mode .rating-select {
+  background:#fff;
+  color:var(--text)
+}
+.light-mode .schedule-content p,.light-mode .module-card p,.light-mode .module-card ul,.light-mode td,.light-mode .chapter-row .chapter-name {
+  color:#364258
+}
+.light-mode .modal {
+  background:#fff
+}
+.light-mode .task-check {
+  border-color:#8a96ab
+}
+.light-mode .progress-track {
+  background:#e0e6ef
+}
+@media(max-width:900px) {
+  .hero {
+    grid-template-columns:1fr
+  }
+  .schedule-layout {
+    grid-template-columns:1fr
+  }
+  .grid-3 {
+    grid-template-columns:repeat(2,minmax(0,1fr))
+  }
+}
+@media(max-width:620px) {
+  .shell {
+    padding:14px 12px 40px
+  }
+  .topbar {
+    align-items:flex-start
+  }
+  .brand h1 {
+    font-size:15px
+  }
+  .brand-mark {
+    width:37px;
+    height:37px
+  }
+  .status-dot {
+    display:none
+  }
+  .top-actions {
+    gap:5px
+  }
+  .top-actions .btn {
+    padding:8px;
+    font-size:10px
+  }
+  .hero {
+    padding-top:15px;
+    gap:12px
+  }
+  .hero-main {
+    padding:20px 17px
+  }
+  .hero-side {
+    padding:17px
+  }
+  .hero h2 {
+    font-size:31px
+  }
+  .hero-copy {
+    font-size:12px
+  }
+  .section {
+    margin-top:22px
+  }
+  .section-title {
+    font-size:20px
+  }
+  .section-head {
+    align-items:flex-start;
+    flex-direction:column
+  }
+  .head-actions {
+    justify-content:flex-start
+  }
+  .week-strip {
+    gap:4px
+  }
+  .day-chip {
+    padding:8px 2px;
+    border-radius:10px
+  }
+  .day-chip strong {
+    font-size:15px
+  }
+  .day-chip span {
+    font-size:9px
+  }
+  .day-chip small {
+    font-size:8px
+  }
+  .nav {
+    margin-bottom:16px;
+    padding:6px
+  }
+  .nav a {
+    padding:8px 10px;
+    font-size:10px
+  }
+  .schedule-item {
+    grid-template-columns:69px 13px minmax(0,1fr) 24px;
+    gap:7px;
+    padding:12px 10px
+  }
+  .schedule-time {
+    font-size:10px
+  }
+  .schedule-content h4 {
+    font-size:12px
+  }
+  .schedule-content p {
+    font-size:10px
+  }
+  .task-check {
+    width:18px;
+    height:18px
+  }
+  .grid-2,.grid-3,.due-grid,.settings-grid {
+    grid-template-columns:1fr
+  }
+  .revision-overview {
+    grid-template-columns:repeat(2,minmax(0,1fr))
+  }
+  .kpi strong {
+    font-size:21px
+  }
+  .chapter-row {
+    grid-template-columns:minmax(0,1fr) 70px;
+    gap:7px
+  }
+  .chapter-row>:nth-child(3) {
+    grid-column:1
+  }
+  .chapter-row .row-actions {
+    grid-column:2;
+    grid-row:1/4;
+    align-self:center;
+    flex-direction:column
+  }
+  .chapter-row .status-label {
+    grid-column:2;
+    grid-row:1;
+    justify-self:end
+  }
+  .chapter-row .rating-small {
+    grid-column:1
+  }
+  .modal-fields {
+    grid-template-columns:1fr
+  }
+  .modal-fields .full {
+    grid-column:auto
+  }
+  .module-progress-item {
+    grid-template-columns:82px minmax(0,1fr) 32px
+  }
+  .mini-stats {
+    gap:7px
+  }
+  .mini-stat {
+    padding:10px
+  }
+  .date-tools {
+    width:100%
+  }
+  .date-input {
+    flex:1;
+    max-width:none
+  }
+}
+@media print {
+  body,.app {
+    background:#fff!important;
+    color:#111!important
+  }
+  .shell {
+    width:100%;
+    padding:0
+  }
+  .topbar,.nav,.top-actions,.head-actions,.week-strip,.btn,.overlay,.toast,.subject-actions,.row-actions {
+    display:none!important
+  }
+  .panel,.hero-main,.hero-side,.subject-panel {
+    background:#fff!important;
+    box-shadow:none;
+    border-color:#ccc;
+    break-inside:avoid
+  }
+  .hero {
+    grid-template-columns:1fr 1fr
+  }
+  .section {
+    break-inside:avoid
+  }
+  .schedule-content p,.section-desc,.muted,.hero-copy,.stat-sub {
+    color:#444!important
+  }
+}
+
+/* MIND//CORE page-based navigation and local memory engine */
+.nav { flex-wrap:nowrap; max-width:100%; }
+.nav a { flex:0 0 auto; }
+.page-view[hidden] { display:none!important; }
+#pageHost { min-height:45vh; }
+.page-toolbar { display:flex; justify-content:space-between; align-items:center; gap:12px; margin:3px 0 14px; padding:13px 15px; border:1px solid var(--line); border-radius:15px; background:rgba(16,19,30,.72); }
+.page-toolbar h2 { margin:3px 0 0; font-size:19px; letter-spacing:-.035em; }
+.page-toolbar .eyebrow { font-size:9px; }
+.page-toolbar-actions { display:flex; gap:7px; flex-wrap:wrap; justify-content:flex-end; }
+.page-shortcuts { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin:12px 0 20px; }
+.page-shortcut { text-align:left; padding:17px; min-height:118px; border:1px solid var(--line); border-radius:16px; background:linear-gradient(145deg,rgba(17,21,33,.96),rgba(13,16,26,.98)); color:var(--text); }
+.page-shortcut:hover { border-color:rgba(102,229,237,.45); transform:translateY(-1px); }
+.page-shortcut strong { display:block; margin:8px 0 4px; font-size:14px; }
+.page-shortcut span { display:block; color:var(--muted); font-size:11px; line-height:1.45; }
+.home-shortcut-icon { font-size:20px; color:var(--cyan); }
+.memory-layout { display:grid; grid-template-columns:minmax(260px,.82fr) minmax(0,1.35fr); gap:14px; align-items:start; }
+.memory-column { display:flex; flex-direction:column; gap:12px; min-width:0; }
+.memory-card { border:1px solid var(--line); border-radius:14px; background:rgba(255,255,255,.018); padding:12px; margin-top:8px; }
+.memory-card h4 { margin:0 0 5px; font-size:12px; overflow-wrap:anywhere; }
+.memory-card p { margin:0; font-size:11px; color:var(--muted); white-space:pre-wrap; overflow-wrap:anywhere; }
+.memory-card-meta { display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; margin-top:9px; color:var(--muted); font-size:9px; }
+.memory-card-actions { display:flex; gap:6px; flex-wrap:wrap; }
+.memory-list,.conversation-list { display:flex; flex-direction:column; gap:7px; margin-top:10px; max-height:300px; overflow:auto; }
+.conversation-item { width:100%; text-align:left; padding:10px 11px; border:1px solid var(--line); border-radius:11px; color:var(--text); background:rgba(255,255,255,.018); }
+.conversation-item.active { border-color:rgba(102,229,237,.48); background:rgba(102,229,237,.07); }
+.conversation-item strong { display:block; font-size:11px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.conversation-item span { display:block; margin-top:4px; font-size:9px; color:var(--muted); }
+.memory-chat { min-height:300px; max-height:55vh; overflow:auto; display:flex; flex-direction:column; gap:12px; padding:12px; border:1px solid var(--line); border-radius:14px; background:rgba(0,0,0,.12); }
+.mc-message { display:flex; flex-direction:column; max-width:95%; gap:5px; }
+.mc-message.user { align-self:flex-end; align-items:flex-end; }
+.mc-message.assistant { align-self:flex-start; }
+.mc-message .mc-role { font-size:9px; color:var(--muted); text-transform:uppercase; letter-spacing:.12em; }
+.mc-bubble { white-space:pre-wrap; overflow-wrap:anywhere; border:1px solid var(--line); border-radius:13px; padding:11px 12px; font-size:12px; line-height:1.55; background:var(--surface2); }
+.mc-message.user .mc-bubble { background:rgba(102,229,237,.09); border-color:rgba(102,229,237,.2); }
+.mc-actions-box { border:1px solid rgba(255,215,132,.27); background:rgba(255,215,132,.055); border-radius:12px; padding:11px; margin-top:4px; }
+.mc-actions-box strong { display:block; font-size:11px; margin-bottom:6px; }
+.mc-actions-box ul { margin:0 0 10px; padding-left:17px; font-size:10px; color:var(--muted); }
+.mc-actions-box li { margin:4px 0; overflow-wrap:anywhere; }
+.mc-chat-form { display:flex; flex-direction:column; gap:8px; margin-top:10px; }
+.mc-chat-form textarea { min-height:78px; resize:vertical; }
+.mc-chat-actions { display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap; }
+.mc-memory-composer { display:grid; gap:8px; margin-top:10px; }
+.mc-memory-status { display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap; margin-bottom:12px; }
+.mc-endpoint-grid { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,.8fr); gap:8px; }
+.mc-memory-count { font-size:10px; color:var(--muted); }
+.mc-settings-note { font-size:10px; color:var(--muted); line-height:1.5; margin:8px 0 0; }
+.mc-result { border-left:2px solid var(--purple); padding:8px 10px; margin-top:7px; background:rgba(169,154,255,.04); font-size:11px; white-space:pre-wrap; overflow-wrap:anywhere; }
+.light-mode .page-toolbar,.light-mode .page-shortcut,.light-mode .conversation-item,.light-mode .memory-card { background:rgba(255,255,255,.92); }
+.light-mode .memory-chat { background:rgba(20,30,48,.025); }
+@media(max-width:850px) { .memory-layout { display:flex; flex-direction:column; } .memory-layout > .memory-column:last-child { order:0; width:100%; } .memory-layout > .memory-column:first-child { order:1; width:100%; } .memory-chat { max-height:none; min-height:250px; } .memory-list,.conversation-list { max-height:240px; } }
+@media(max-width:620px) { .page-shortcuts { grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; } .page-shortcut { padding:12px; min-height:115px; } .page-toolbar { align-items:flex-start; flex-direction:column; } .page-toolbar-actions { justify-content:flex-start; } .mc-endpoint-grid { grid-template-columns:1fr; } .memory-chat { padding:9px; } }
+@media print { .page-toolbar,.page-shortcuts,.memory-layout { display:none!important; } .page-view[hidden] { display:none!important; } }
+
+</style>
+</head>
+<body><div class="app" id="appRoot"><div class="shell">
+<header class="topbar"><div class="brand"><div class="brand-mark">M//C</div><div><h1>MIND<span style="color:var(--cyan)">//</span>CORE</h1><p>Personal ascension system</p></div></div><div class="top-actions"><span class="status-dot">System online</span><button class="btn subtle" id="themeBtn" type="button">◐ Theme</button><button class="btn" id="exportBtn" type="button">⇧ Backup</button><button class="btn" id="importBtn" type="button">⇩ Restore</button><input type="file" id="importFile" accept="application/json,.json" hidden></div></header>
+<section class="hero" id="top"><div class="hero-main"><div class="eyebrow">Build the mind. Train the body. Own the day.</div><h2>Less chaos.<br><span>More control.</span></h2><p class="hero-copy">Ek connected system for study, memory, strategy, fitness aur recovery. Aaj ka kaam clear rahega; progress data se decide hogi, mood se nahi.</p><div class="hero-bottom"><div class="date-tools"><button class="btn small" id="prevDate" type="button">←</button><input class="date-input" type="date" id="scheduleDate" aria-label="Choose schedule date"><button class="btn small" id="nextDate" type="button">→</button><button class="btn small subtle" id="jumpToday" type="button">Launch date</button></div><div class="head-actions"><span class="pill cyan" id="modePill">School day</span><button class="btn small" id="holidayToggle" type="button">＋ Holiday mode</button></div></div><div id="launchNotice" class="callout info" style="margin-top:17px;display:none"></div></div><aside class="hero-side"><div><div class="side-top"><span class="mini-label">Daily execution</span><span class="pill green" id="completionPill">0% complete</span></div><div class="big-stat"><span id="completedCount">0</span><span style="color:var(--text);font-size:24px"> / </span><span id="totalTasks" style="color:var(--text);font-size:24px">0</span></div><div class="stat-sub">scheduled blocks completed</div><div class="progress-track" style="margin-top:14px"><div class="progress-fill" id="dailyProgressBar" style="width:0%"></div></div></div><div class="mini-stats"><div class="mini-stat"><strong id="dueMini">0</strong><span>Due chapters</span></div><div class="mini-stat"><strong id="studiedMini">0</strong><span>Studied chapters</span></div><div class="mini-stat"><strong id="mindMini">0%</strong><span>Mind habits</span></div><div class="mini-stat"><strong id="workoutMini">—</strong><span>Physical plan</span></div></div></aside></section>
+<div class="week-strip" id="weekStrip" aria-label="Choose day this week"></div>
+<nav class="nav" aria-label="Main navigation"><a class="active" href="#home" data-page="home">⌂ Home</a><a href="#planner" data-page="planner">01 · Planner</a><a href="#mind" data-page="mind">02 · Mind</a><a href="#training" data-page="training">03 · Physical</a><a href="#revision" data-page="revision">04 · Revision</a><a href="#subjects" data-page="subjects">05 · Subjects</a><a href="#progress" data-page="progress">06 · Progress</a><a href="#memory" data-page="memory">07 · AI + Memory</a><a href="#settings" data-page="settings">08 · Settings</a></nav>
+<section class="section" id="scheduleSection"><div class="section-head"><div><div class="section-kicker">Operating plan</div><h2 class="section-title" id="scheduleHeading">Today's schedule</h2><p class="section-desc" id="scheduleSubheading">Each day loads its own plan. Check off a block when completed.</p></div><div class="head-actions"><button class="btn" id="printBtn" type="button">⎙ Print plan</button><button class="btn primary" id="allDoneBtn" type="button">Complete all blocks</button></div></div><div class="schedule-layout"><div class="panel"><div class="schedule-list" id="scheduleList"></div></div><div class="side-stack"><div class="panel focus-card"><div class="side-top"><h3>Today's focus queue</h3><span class="pill cyan" id="focusLimitPill">Limit 5</span></div><div class="focus-number-row"><strong id="focusDueCount">0</strong><span>reviews due / overdue</span></div><div class="progress-track"><div class="progress-fill" id="focusBar" style="width:0%"></div></div><div class="focus-list" id="focusSubjectList"></div><div class="small-text" style="margin-top:12px">Oldest overdue items are prioritised. Anything beyond the daily limit remains visible in backlog.</div></div><div class="panel focus-card"><div class="side-top"><h3>Mission rules</h3><span class="pill purple">30-day trial</span></div><div class="focus-list"><div class="focus-line">Study for recall and understanding, not just time spent.</div><div class="focus-line">Ratings must be honest; weak recall means an earlier revisit.</div><div class="focus-line">Explosive workout reps stop when technique or speed drops.</div><div class="focus-line">Sleep and recovery are part of the programme, not optional tasks.</div></div></div>
+<div class="panel focus-card"><div class="side-top"><h3>Wake-up adjustment</h3><span class="pill cyan">Final target · 5:30 AM</span></div><p class="small-text" style="margin:4px 0 12px">Aaj 6:43 AM ke aas-paas uth rahe ho toh seedha 5:30 AM par jump karne ki zaroorat nahi. Pehle sleep timing stable karo, phir har 3 din mein 15 minute pehle uthne ki practice karo.</p><div class="focus-list"><div class="focus-line"><span style="flex:1">Days 1–3</span><strong style="color:var(--text)">6:30 AM</strong></div><div class="focus-line"><span style="flex:1">Days 4–6</span><strong style="color:var(--text)">6:15 AM</strong></div><div class="focus-line"><span style="flex:1">Days 7–9</span><strong style="color:var(--text)">6:00 AM</strong></div><div class="focus-line"><span style="flex:1">Days 10–12</span><strong style="color:var(--text)">5:45 AM</strong></div><div class="focus-line"><span style="flex:1">Final school-day target</span><strong style="color:var(--text)">5:30 AM</strong></div></div><p class="small-text" style="margin:12px 0 0">Sleep ko cut karke jaldi mat uthna. 9:15 PM ke aas-paas wind-down / sleep target rakho, aur agar neend poori nahi hui toh recovery ko priority do. Ek din miss ho toh next day se continue—punishment nahi.</p></div><div class="callout" id="recoveryCallout">Recovery check: note pain, unusual fatigue or poor sleep before deciding how hard to train.</div></div></div><div class="section" style="margin-top:15px"><div class="panel panel-pad"><div class="section-head" style="margin-bottom:8px"><div><div class="section-kicker">Personal checklist</div><h3 class="section-title" style="font-size:17px">Custom habits & practice</h3><p class="section-desc">Apni additional practice ya habit add kar; har date ki completion separately save hogi.</p></div><button class="btn small" id="addHabitBtn" type="button">＋ Add item</button></div><div class="habit-list" id="dailyHabits"></div></div></div></section>
+<section class="section" id="mindSection"><div class="section-head"><div><div class="section-kicker">Mental ascension</div><h2 class="section-title">Mind training lab</h2><p class="section-desc">Real skills ko short, deliberate practice se train kar. Roz sab kuch nahi—schedule aaj ke relevant drills choose karta hai.</p></div><span class="pill purple">Daily · 20 + 20 min</span></div><div class="grid-3">
+<article class="panel module-card"><div class="module-top"><div class="module-icon">◉</div><span class="pill cyan">Daily</span></div><h3>01. Focus & self-control</h3><p>Attention ko wapas laana, difficult tasks se bachna kam karna aur intentional responses choose karna.</p><ul><li>5–10 min breath meditation</li><li>One useful uncomfortable task</li><li>Notice distraction → return to task</li><li>Emotion identify karo, suppress nahi</li></ul><div class="module-meta"><span class="pill">Meditation</span><span class="pill">Response pause</span></div></article>
+<article class="panel module-card"><div class="module-top"><div class="module-icon purple">▧</div><span class="pill purple">Recall</span></div><h3>02. Memory & learning</h3><p>Active retrieval, memory palace aur explain-it-simply practice.</p><ul><li>5 familiar locations choose kar</li><li>Unusual image se 5 items link kar</li><li>Book band karke recall kar</li><li>Answer ko source se verify kar</li></ul><div class="module-meta"><span class="pill">Memory palace</span><span class="pill">Active recall</span></div></article>
+<article class="panel module-card"><div class="module-top"><div class="module-icon pink">⌘</div><span class="pill">Logic</span></div><h3>03. Problem-solving</h3><p>Problem ko parts mein todna, assumptions check karna aur mistakes se seekhna.</p><ul><li>Given facts aur target likh</li><li>Khud 5–10 min attempt kar</li><li>Atakne par hint use kar</li><li>Ek mistake aur next approach likh</li></ul><div class="module-meta"><span class="pill">Reasoning</span><span class="pill">Mistake log</span></div></article>
+<article class="panel module-card"><div class="module-top"><div class="module-icon green">⌖</div><span class="pill green">Awareness</span></div><h3>04. Observation & patterns</h3><p>Real surroundings ko carefully observe kar aur recall ko verify kar.</p><ul><li>30–60 sec observe kar</li><li>5 details memory se likh</li><li>Dubara dekh kar accuracy check kar</li><li>Missed detail notice kar</li></ul><div class="module-meta"><span class="pill">Attention</span><span class="pill">Accuracy</span></div></article>
+<article class="panel module-card"><div class="module-top"><div class="module-icon purple">♞</div><span class="pill purple">Strategy</span></div><h3>05. Chess & planning</h3><p>Move se pehle opponent ka best response soch, phir game ki mistake analyze kar.</p><ul><li>Ek tactical puzzle ya focused game</li><li>Candidate moves compare kar</li><li>Ek mistake ko samajh</li><li>Real problem ke 2 options soch</li></ul><div class="module-meta"><span class="pill">Chess</span><span class="pill">Decision making</span></div></article>
+<article class="panel module-card"><div class="module-top"><div class="module-icon">↗</div><span class="pill">Applied</span></div><h3>06. Feynman & transfer</h3><p>Concept ko beginner ko samjhane jaisa explain kar, phir use new example par apply kar.</p><ul><li>Simple explanation likh</li><li>Confusing point identify kar</li><li>Book se correct kar</li><li>Ek fresh example solve kar</li></ul><div class="module-meta"><span class="pill">Explain</span><span class="pill">Apply</span></div></article></div>
+<div class="panel panel-pad" style="margin-top:14px"><div class="section-head" style="margin-bottom:5px"><div><div class="section-kicker">How to execute</div><h3 class="section-title" style="font-size:17px">Exercise playbook</h3><p class="section-desc">Har drill ka step-by-step method. Aaj ka rotation daily schedule mein bhi show hota hai.</p></div></div>
+<div class="exercise-row"><div class="exercise-letters">A</div><div class="exercise-body"><h4>Meditation · 5–10 min</h4><p>Comfortably baith. Breathing ko observe kar. Thoughts aayein toh unhe notice karke attention wapas la. Success ka matlab thought-free hona nahi; baar-baar wapas aana hai.</p><span class="mini-tag">Metric: practice complete + focus return</span></div></div>
+<div class="exercise-row"><div class="exercise-letters">B</div><div class="exercise-body"><h4>Memory palace · 5–10 min</h4><p>Apne ghar ka familiar route imagine kar. 5 locations par memorable images place kar. List band kar, route mentally walk kar aur phir recall verify kar. Accuracy track kar, sirf speed nahi.</p><span class="mini-tag">Metric: correctly recalled items / 5</span></div></div>
+<div class="exercise-row"><div class="exercise-letters">C</div><div class="exercise-body"><h4>Problem-solving · 10 min</h4><p>Question ke facts aur target likh. Khud attempt kar. Zaroorat par hint use kar, phir solution ko explain kar. End mein ek mistake aur ek naya approach note kar.</p><span class="mini-tag">Metric: independent attempt + error understood</span></div></div>
+<div class="exercise-row"><div class="exercise-letters">D</div><div class="exercise-body"><h4>Observation · 5 min</h4><p>Normal surroundings ko 30–60 seconds observe kar. Nazar hata kar 5 details likh aur phir verify kar. Koi detail guess karne ki zaroorat nahi.</p><span class="mini-tag">Metric: verified accurate details / 5</span></div></div>
+<div class="exercise-row"><div class="exercise-letters">E</div><div class="exercise-body"><h4>Emotional regulation · real life</h4><p>Emotion ka naam do, facts aur assumptions alag karo aur phir useful next action choose karo. Face ko permanently expressionless banana target nahi; apna response choose karna target hai.</p><span class="mini-tag">Metric: pause taken + deliberate response</span></div></div></div></section>
+<section class="section" id="trainingSection"><div class="section-head"><div><div class="section-kicker">Physical performance</div><h2 class="section-title">Training cycles</h2><p class="section-desc">Power, endurance aur technique ko balance kar. Hard sets roz karna goal nahi; consistent form, gradual progress aur recovery goal hai.</p></div><span class="pill green">Evening only</span></div><div class="grid-3">
+<article class="panel workout-day"><div class="module-top"><span class="pill yellow">Cycle 1</span><span class="module-icon pink">↗</span></div><h3>Power & speed</h3><div class="sub">Monday · 5:10–6:10 PM</div><div class="workout-ex"><span>Warm-up</span><span>8–10 min</span></div><div class="workout-ex"><span>60 m sprints</span><span>4–6 reps · full recovery</span></div><div class="workout-ex"><span>Jump squats</span><span>3 × 6–8</span></div><div class="workout-ex"><span>Broad jumps</span><span>3 × 4</span></div><div class="workout-ex"><span>Explosive push-ups</span><span>3 × 5–8</span></div><div class="workout-ex"><span>Wide push-ups</span><span>2 × 10–15</span></div><div class="callout" style="margin-top:12px">Fast, clean reps. Stop the explosive work when landing, control or speed gets worse.</div></article>
+<article class="panel workout-day"><div class="module-top"><span class="pill cyan">Cycle 2</span><span class="module-icon">⇄</span></div><h3>Endurance & agility</h3><div class="sub">Wednesday · 5:10–6:10 PM</div><div class="workout-ex"><span>Warm-up</span><span>5 min</span></div><div class="workout-ex"><span>Comfortable run</span><span>20–25 min</span></div><div class="workout-ex"><span>Shadow boxing / footwork</span><span>3 × 1 min</span></div><div class="workout-ex"><span>Side shuttles</span><span>3 × 10 m</span></div><div class="workout-ex"><span>Mountain climbers</span><span>3 × 30 sec</span></div><div class="workout-ex"><span>Burpees</span><span>2 × 8–10, optional</span></div><div class="callout info" style="margin-top:12px">Comfortable running pace. If fatigue is high, skip optional conditioning.</div></article>
+<article class="panel workout-day"><div class="module-top"><span class="pill green">Cycle 3</span><span class="module-icon green">⌁</span></div><h3>Technique & mobility</h3><div class="sub">Friday · 5:10–6:10 PM</div><div class="workout-ex"><span>Mobility flow</span><span>8–10 min</span></div><div class="workout-ex"><span>Reaction / fast feet</span><span>3 × 30 sec</span></div><div class="workout-ex"><span>Controlled pull-ups</span><span>3 × 4–7</span></div><div class="workout-ex"><span>Technical shadow boxing</span><span>3 × 2 min</span></div><div class="workout-ex"><span>Cool-down</span><span>Remaining time</span></div><div class="callout good" style="margin-top:12px">This is a technique day, not a failure-training day. Keep reps controlled.</div></article></div>
+<div class="grid-2" style="margin-top:14px"><div class="panel panel-pad"><div class="section-kicker">When there is no workout</div><h3 style="margin:5px 0 7px;font-size:16px">Use the block, don't add fatigue</h3><p class="section-desc">Tuesday aur Thursday ke 5:10–6:10 PM block mein skill learning, chess analysis, coding practice ya guided mobility/recovery schedule ke mutabik hoga. Saturday ko light skill block; Sunday full recovery. Holiday par weekday cycle follow hoga, Sunday rest protected rahega.</p><div class="focus-list"><div class="focus-line">Tuesday: new skill / coding practice (35 min) + short break + notes.</div><div class="focus-line">Thursday: strategy practice or chess review (25 min) + mobility and reflection.</div><div class="focus-line">Saturday: chosen skill project, relaxed pace; stop before it affects sleep.</div><div class="focus-line">If sore, unwell or under-recovered: replace physical work with rest, not a harder alternative.</div></div></div><div class="panel panel-pad"><div class="section-kicker">Safety & progression</div><h3 style="font-size:16px;margin:5px 0 7px">Rules that keep training sustainable</h3><div class="focus-list"><div class="focus-line">Warm up before sprinting and jumping; use a safe, non-slippery surface.</div><div class="focus-line">Do not race to maximum reps every workout; stop with technique still clean.</div><div class="focus-line">Have rest/easy days between hard sessions. Eat enough, hydrate and sleep 8–10 hours for teens.</div><div class="focus-line">Stop for sharp pain, dizziness or unusual symptoms; ask a trusted adult/qualified coach when needed.</div></div><div class="callout" style="margin-top:14px">Your system measures quality and consistency, not how exhausted you can get.</div></div></div></section>
+<section class="section" id="revisionSection"><div class="section-head"><div><div class="section-kicker">Adaptive learning engine</div><h2 class="section-title">Spaced revision</h2><p class="section-desc">Understanding rating 0–10 se next review calculate hota hai. Low score par jaldi revisit, strong repeated recall par interval dheere-dheere 100 days tak grow kar sakta hai.</p></div><div class="head-actions"><button class="btn" id="manageSubjectsBtn" type="button">Manage subjects ↓</button><button class="btn primary" id="addChapterBtn" type="button">＋ Add chapter</button></div></div><div class="revision-overview"><div class="kpi"><strong id="revisionDueKpi" class="accent">0</strong><span>Due / overdue</span></div><div class="kpi"><strong id="revisionStudiedKpi">0</strong><span>In revision cycle</span></div><div class="kpi"><strong id="revisionNewKpi">0</strong><span>First-study queue</span></div><div class="kpi"><strong id="revisionCapacityKpi">5</strong><span>Daily target</span></div></div><div class="panel panel-pad" style="margin-bottom:14px"><div class="section-head" style="margin-bottom:10px"><div><h3 class="section-title" style="font-size:17px">Today's review focus</h3><p class="section-desc" id="dueDescription">Daily target is prioritised by earliest due date; outstanding chapters remain in backlog.</p></div><span class="pill cyan" id="dueDatePill">9 Nov 2026</span></div><div id="revisionNotice" class="callout info" style="margin-bottom:12px;display:none"></div><div class="due-grid" id="dueGrid"></div><div id="dueBacklogWrap" style="display:none;margin-top:13px"><div class="callout"><strong id="backlogCount">0</strong> additional chapters are due beyond today's focus limit. They stay overdue and will be prioritised on following days until reviewed.</div><div class="focus-list" id="backlogList"></div></div></div><div class="grid-2"><div class="panel panel-pad"><div class="section-head" style="margin-bottom:10px"><div><div class="section-kicker">First-study queue</div><h3 class="section-title" style="font-size:17px">New chapters</h3><p class="section-desc">Pehle chapter study kar, phir actual understanding rating enter kar. Uske baad revision date set hogi.</p></div></div><div id="newChapterQueue"></div></div><div class="panel panel-pad"><div class="section-kicker">Adaptive interval logic</div><h3 style="font-size:16px;margin:5px 0 12px">Rating → next review</h3><div class="table-wrap"><table style="min-width:0"><thead><tr><th>Rating</th><th>Initial interval</th><th>Behaviour</th></tr></thead><tbody><tr><td>0–2 / 10</td><td>1 day</td><td>Repeat soon</td></tr><tr><td>3–4 / 10</td><td>2–3 days</td><td>Rebuild weak recall</td></tr><tr><td>5–6 / 10</td><td>4–7 days</td><td>Consolidate</td></tr><tr><td>7–8 / 10</td><td>10–15 days</td><td>Growing confidence</td></tr><tr><td>9 / 10</td><td>20 days</td><td>Strong recall</td></tr><tr><td>10 / 10</td><td>25 days</td><td>Strong, accurate recall</td></tr></tbody></table></div><p class="small-text" style="margin-top:10px">Subsequent strong reviews multiply the previous interval; low scores shrink it. Intervals cap at 100 days. This is not a fixed 1/3/7/14 schedule.</p></div></div></section>
+<section class="section" id="subjectsSection"><div class="section-head"><div><div class="section-kicker">Curriculum management</div><h2 class="section-title">Subjects & chapters</h2><p class="section-desc">Known chapter counts preloaded hain; Hindi, English, Sanskrit, Computer/IT aur additional subjects ready hain, but unknown counts are not guessed. “Set count” creates editable placeholders.</p></div><div class="head-actions"><button class="btn" id="addSubjectBtn" type="button">＋ Add subject</button><button class="btn" id="showAllSubjectsBtn" type="button">Expand all</button></div></div><div class="form-row" style="margin-bottom:12px"><div class="field" style="min-width:220px;flex:1"><label for="subjectSearch">Find a subject or chapter</label><input class="input" id="subjectSearch" type="search" placeholder="Search chapters…"></div><div class="field" style="min-width:150px"><label for="subjectFilter">Filter</label><select class="select" id="subjectFilter"><option value="all">All subjects</option><option value="due">Has due chapters</option><option value="new">Has first-study chapters</option><option value="studied">Studied only</option></select></div></div><div id="subjectsList" class="subjects-list"></div></section>
+<section class="section" id="progressSection"><div class="section-head"><div><div class="section-kicker">Progress intelligence</div><h2 class="section-title">Progress tracker</h2><p class="section-desc">Study, mind training, body, daily habits aur recovery ek jagah. Apne additional measurable items add kar.</p></div><button class="btn primary" id="addProgressBtn" type="button">＋ Add progress item</button></div><div class="grid-2"><div class="panel panel-pad"><div class="side-top"><h3 style="margin:0;font-size:15px">Last 7 days</h3><span class="pill cyan">Execution</span></div><p class="section-desc" style="margin-top:5px">Completed scheduled blocks each day. Future or pre-launch days are not counted as missed.</p><div class="history-grid" id="historyChart"></div><div class="small-text" style="margin-top:12px" id="historyCaption">Progress will appear after the programme starts.</div></div><div class="panel panel-pad"><div class="side-top"><h3 style="margin:0;font-size:15px">System balance</h3><span class="pill purple">Modules</span></div><p class="section-desc" style="margin-top:5px">Completion rate for each module over the last 7 calendar days.</p><div class="module-progress-list" id="moduleProgressList" style="margin-top:18px"></div></div></div><div class="grid-2" style="margin-top:14px"><div class="panel panel-pad"><div class="section-kicker">Study status</div><h3 style="font-size:16px;margin:5px 0 15px">Chapter coverage</h3><div class="revision-overview" style="grid-template-columns:repeat(3,minmax(0,1fr));margin-bottom:0"><div class="kpi"><strong id="totalChaptersKpi">0</strong><span>Total</span></div><div class="kpi"><strong id="studiedChaptersKpi">0</strong><span>Studied</span></div><div class="kpi"><strong id="coveragePctKpi">0%</strong><span>Coverage</span></div></div><div class="progress-track" style="margin-top:15px"><div class="progress-fill" id="coverageBar" style="width:0%"></div></div><p class="small-text" style="margin-top:10px">Coverage means marked studied, not necessarily mastered. Use honest ratings and recall results to judge retention.</p></div><div class="panel panel-pad"><div class="section-kicker">Personal tracker</div><h3 style="font-size:16px;margin:5px 0 4px">Custom progress items</h3><p class="section-desc">Add a measurable habit (coding, reading, a skill or mobility). Check it each day and choose its module.</p><div class="habit-list" id="progressItemsList"></div><div class="small-text" id="progressItemsEmpty" style="margin-top:10px">No custom progress items yet.</div></div></div></section>
+<section class="section" id="settingsSection"><div class="section-head"><div><div class="section-kicker">Control room</div><h2 class="section-title">Settings & data</h2><p class="section-desc">Daily load aur personal setup yahan manage hoga. Browser mein data save hota hai; backup export karna recommended hai.</p></div></div><div class="settings-grid"><div class="panel panel-pad"><div class="setting-row" style="padding:0;border:0"><div><strong>Daily chapter target</strong><p>Default focus target for due chapter workload.</p></div><select class="select" id="dailyTargetSetting"><option value="4">4 chapters</option><option value="5" selected>5 chapters</option><option value="6">6 chapters</option></select></div><div class="setting-row" style="margin-top:14px"><div><strong>Maximum daily focus</strong><p>Overdue items beyond this limit remain visible in backlog.</p></div><select class="select" id="dailyMaxSetting"><option value="5">5 max</option><option value="6" selected>6 max</option></select></div></div><div class="panel panel-pad"><div class="setting-row" style="padding:0;border:0"><div><strong>Programme start date</strong><p>Routine and seeded revision plan start from Monday, 9 Nov 2026.</p></div><span class="pill cyan">09 NOV 2026</span></div><div class="setting-row" style="margin-top:14px"><div><strong>Dark / light theme</strong><p>Change appearance for your preference.</p></div><button class="btn small" id="themeBtn2" type="button">Toggle theme</button></div></div><div class="panel panel-pad"><div class="setting-row" style="padding:0;border:0"><div><strong>Export full backup</strong><p>Includes chapters, ratings, revision dates, task logs and settings.</p></div><button class="btn small primary" id="exportBtn2" type="button">Export JSON</button></div><div class="setting-row" style="margin-top:14px"><div><strong>Restore from backup</strong><p>Choose a previously exported JSON file.</p></div><button class="btn small" id="importBtn2" type="button">Restore</button></div></div><div class="panel panel-pad"><div class="setting-row" style="padding:0;border:0"><div><strong>Print / save PDF</strong><p>Print the current daily plan through your browser.</p></div><button class="btn small" id="printBtn2" type="button">Print</button></div><div class="setting-row" style="margin-top:14px"><div><strong>Reset schedule checkmarks</strong><p>Only clears routine completion logs. Chapter data is preserved.</p></div><button class="btn small danger" id="clearLogsBtn" type="button">Clear logs</button></div></div></div><div class="callout info" style="margin-top:13px">This standalone file stores data in this browser on this device. Export a JSON backup before clearing browser data or moving devices.</div></section>
+<footer class="footer"><div><strong>MIND//CORE</strong> · Personal Ascension System</div><div>Consistency over chaos · Recovery is training · Review the data, then adapt</div></footer></div></div>
+<div class="overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal"><div class="modal-head"><div><h3 id="modalTitle">Add item</h3><p id="modalDesc">Add to your personal system.</p></div><button class="btn small" id="modalClose" type="button" aria-label="Close">✕</button></div><form id="modalForm"><div id="modalFields" class="modal-fields"></div><div class="modal-actions"><button class="btn" id="modalCancel" type="button">Cancel</button><button class="btn primary" type="submit" id="modalSubmit">Save</button></div></form></div></div><div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>(()=>{
+  'use strict';
+  const START_DATE='2026-11-09',STORAGE_KEY='mindCoreAscension_v3',$=id=>document.getElementById(id);
+  const dateToday=()=>{
+    const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`
+  }
+  ;
+  const parseDate=s=>new Date(`${s}T12:00:00`),dateString=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  const addDays=(s,n)=>{
+    const d=parseDate(s);d.setDate(d.getDate()+n);return dateString(d)
+  }
+  ,dateDiff=(a,b)=>Math.round((parseDate(b)-parseDate(a))/86400000);
+  const fmtDate=(s,o={
+    day:'numeric',month:'short',year:'numeric'
+  }
+  )=>parseDate(s).toLocaleDateString('en-IN',o),dayName=s=>parseDate(s).toLocaleDateString('en-IN',{
+    weekday:'long'
+  }
+  ),shortDay=s=>parseDate(s).toLocaleDateString('en-IN',{
+    weekday:'short'
+  }
+  );
+  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),makeId=p=>`${p}_${Math.random().toString(36).slice(2,8)}_${Date.now().toString(36)}`;
+let toastTimer;function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2400)}
+function createSubject(id,name,category,total,studied,opts={}){const s={id,name,category,chapters:[]};for(let i=1;i<=total;i++){const status=i<=studied?'studied':'new';s.chapters.push({id:`${id}_ch_${i}`,name:opts.names?.[i-1]||`Chapter ${i}`,status,confidence:null,lastReviewed:null,nextReviewDate:null,lastInterval:0,note:opts.notes?.[i-1]||''})}return s}
+function initialData(){const subjects=[createSubject('maths','Maths','Core',14,14),createSubject('science','Science','Core',13,7),createSubject('sst_history','SST · Atit / History','SST',5,2,{notes:{2:'School mein padha hua; home-study / proper recall abhi baaki.'}}),createSubject('sst_civics','SST · Rajniti / Civics','SST',5,2),createSubject('sst_geo','SST · Bhoogol / Geography','SST',7,2,{notes:{2:'First-study needed before revision starts.',3:'First-study needed before revision starts.',4:'First-study needed before revision starts.'}}),createSubject('sst_disaster','SST · Apda / Disaster Management','SST',9,9),createSubject('hindi','Hindi','Language',0,0),createSubject('english','English','Language',0,0),createSubject('sanskrit','Sanskrit','Language',0,0),createSubject('computer','Computer / IT','Additional',0,0),createSubject('other','Additional subject','Additional',0,0)];const lists=subjects.map(s=>s.chapters.filter(c=>c.status==='studied')),queue=[];let r=0,any=true;while(any){any=false;for(const list of lists)if(list[r]){queue.push(list[r]);any=true}r++}queue.forEach((c,i)=>c.nextReviewDate=addDays(START_DATE,Math.floor(i/5)));return{version:3,startDate:START_DATE,subjects,selectedDate:START_DATE,holidays:{},taskLogs:{},habitLogs:{},habits:[],progressItems:[],settings:{dailyTarget:5,dailyMax:6,theme:'dark'}}}
+function loadData(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return initialData();const d=JSON.parse(raw);if(!d||!Array.isArray(d.subjects)||!d.settings)return initialData();return{...initialData(),...d,version:3,startDate:START_DATE,holidays:d.holidays||{},taskLogs:d.taskLogs||{},habitLogs:d.habitLogs||{},habits:d.habits||[],progressItems:d.progressItems||[],settings:{dailyTarget:5,dailyMax:6,theme:'dark',...d.settings}}}catch(e){console.warn(e);return initialData()}}
+let data=loadData(),selectedDate=(dateToday()>=START_DATE?dateToday():(data.selectedDate||START_DATE)),activeModalSubmit=null,showAllSubjects=false,currentSubjectFilter='all',searchText='';
+function saveData(){data.selectedDate=selectedDate;data.lastSavedAt=new Date().toISOString();try{localStorage.setItem(STORAGE_KEY,JSON.stringify(data))}catch(e){console.warn('Local storage unavailable',e)}}
+function allChapters(){return data.subjects.flatMap(s=>s.chapters.map(c=>({...c,subjectId:s.id,subjectName:s.name,category:s.category})))}
+function findSubject(id){return data.subjects.find(s=>s.id===id)}function findChapter(id){for(const s of data.subjects){const c=s.chapters.find(x=>x.id===id);if(c)return{subject:s,chapter:c}}return null}
+function dueChapters(date=selectedDate){return allChapters().filter(c=>c.status==='studied'&&c.nextReviewDate&&c.nextReviewDate<=date).sort((a,b)=>a.nextReviewDate.localeCompare(b.nextReviewDate)||((a.confidence??99)-(b.confidence??99))||a.subjectName.localeCompare(b.subjectName)||a.name.localeCompare(b.name))}
+function newChapters(){return allChapters().filter(c=>c.status!=='studied')}function totalCounts(){const a=allChapters();return{total:a.length,studied:a.filter(c=>c.status==='studied').length,new:a.filter(c=>c.status!=='studied').length,due:dueChapters(selectedDate).length}}
+function intervalFor(r,prev=0){r=Math.max(0,Math.min(10,Number(r)||0));const base=[1,1,1,2,3,4,7,10,15,20,25][r];if(!prev)return base;if(r<=2)return 1;const f={3:.5,4:.65,5:.8,6:1,7:1.2,8:1.4,9:1.6,10:1.8}[r];return Math.max(1,Math.min(100,Math.round(prev*f)))}
+function canCheckDate(d){return d>=START_DATE&&d<=dateToday()}function holidayOn(d){return!!data.holidays[d]}function planMode(d=selectedDate){return dayName(d)==='Sunday'?'sunday':holidayOn(d)?'holiday':'school'}
+const mindByDay={Monday:{morning:'Problem-solving drill',morningDesc:'Choose one reasoning or maths problem; attempt independently and note one mistake.',evening:'Memory palace',eveningDesc:'Link 5 facts to 5 familiar locations, then recall without looking.'},Tuesday:{morning:'Memory palace',morningDesc:'Use 5 vivid location-images and check exact recall.',evening:'Chess tactics',eveningDesc:'Solve a focused puzzle and explain why the best move works.'},Wednesday:{morning:'Observation drill',morningDesc:'Observe 5 details, write them from memory, then verify.',evening:'Logic problem',eveningDesc:'Try one logic problem; use a hint only after a real attempt.'},Thursday:{morning:'Chess tactics',morningDesc:'Check candidate moves and the opponent’s best response.',evening:'Feynman explanation',eveningDesc:'Explain a school concept simply and identify any confusing point.'},Friday:{morning:'Active recall',morningDesc:'Recall formulas, definitions or yesterday’s learning without notes.',evening:'Strategy review',eveningDesc:'Compare options for one problem and test your assumptions.'},Saturday:{morning:'Mixed reasoning',morningDesc:'A short logic or pattern challenge at a comfortable difficulty.',evening:'Skill learning',eveningDesc:'Work on one chosen skill or personal project; stop on time.'},Sunday:{morning:'Weekly reflection',morningDesc:'Review wins, mistakes and the next week’s most important priority.',evening:'Light recall',eveningDesc:'Short recall only; keep Sunday restorative.'}};
+const task=(id,time,title,desc,module='Routine',tags=[])=>({id,time,title,desc,module,tags});
+function schoolSchedule(d){const day=dayName(d),mind=mindByDay[day]||mindByDay.Monday,workout={Monday:'Cycle 1 · Power & speed',Wednesday:'Cycle 2 · Endurance & agility',Friday:'Cycle 3 · Technique & mobility'}[day];let alt=workout?`${workout}. Follow the session card below; keep technique clean and leave recovery time.`:day==='Tuesday'?'Skill block: coding / chosen new skill for 35 minutes, then short break and notes. No extra hard workout.':day==='Thursday'?'Strategy block: chess analysis or a small project, then 10–15 minutes of easy mobility if desired.':'Personal-skill block: one small project, reading or chosen skill at a relaxed pace; do not add fatigue.';const due=dueChapters(d).length;return[
+task('wake','05:30–05:40','Wake up + water','Final school-day target: 5:30 AM. If you are still adjusting, follow the Wake-up adjustment card; protect a full night of sleep rather than forcing an early alarm.'),task('meditate','05:40–05:50','Meditation','Sit comfortably; follow normal breathing and gently return attention when it wanders.','Mind',['Daily']),task('morningMind','05:50–06:10',mind.morning,mind.morningDesc,'Mind',['Daily rotation']),task('deepStudy','06:10–06:55','Deep study block','Work on the hardest / highest-priority chapter. End with closed-book recall and 2–3 questions.','Study',['Focus block']),task('breakfast','06:55–07:20','Breakfast + hydration','Eat properly and refill water; do not rush through food.','Recovery',['Fuel']),task('quickRecall','07:20–07:45','Quick recall + formulas','Short recall from memory or review one weak point; don’t start an oversized new task.','Study',['Recall']),task('schoolPrep','07:45–08:00','Bag check + school preparation','Check books and required items; from 8 AM onward get ready / leave for school.','Routine',['Transition']),task('school','08:00–15:15','School + travel','Attend school, focus on lessons and take normal food/water/rest breaks. Exact travel time may vary.','School',['School day']),task('freshen','15:15–15:30','Freshen up','Change and freshen up after reaching home.','Recovery',['Transition']),task('snack','15:30–15:50','Snack + water','Eat a suitable snack and hydrate after school.','Recovery',['Fuel']),task('reset','15:50–16:00','Short reset','Sit, breathe or relax briefly; avoid endless scrolling.','Recovery',['Reset']),task('homework','16:00–16:50','Homework + pending work','Finish school homework and urgent tasks. Keep a short mistake list when useful.','Study',['Priority']),task('prepWorkout','16:50–17:10','Transition / workout preparation','Change, prepare the safe space and do not start sprinting cold. On non-workout days, prepare the skill block.','Routine',['Prepare']),task('eveningMain','17:10–18:10',workout||'Skill practice / active recovery',alt,workout?'Physical':'Skill',['Evening block']),task('recovery','18:10–18:35','Cool-down, wash + recovery','Cool down, shower if needed, have water and recover before study.','Recovery',['Recovery']),task('dueStudy','18:35–19:35',`Revision engine · ${due} due / overdue`,'Open Spaced Revision below. Start with the focus queue; rate actual recall honestly. Carry-over chapters remain visible.','Study',['Adaptive revision']),task('break','19:35–19:45','Short break','Move away from the study desk, stretch lightly or drink water.','Recovery',['Break']),task('dinner','19:45–20:25','Dinner + family time','Eat, hydrate and give your mind a proper pause.','Recovery',['Fuel']),task('eveningMind','20:25–20:45',mind.evening,mind.eveningDesc,'Mind',['Daily rotation']),task('log','20:45–21:00','Progress check + bag prep','Check off actual work, record a useful note, prepare tomorrow’s bag and priority.','Progress',['Daily review']),task('winddown','21:00–21:15','Screens off + wind-down','Lower stimulation and get ready for sleep.','Recovery',['Sleep prep']),task('sleep','21:15 onward','Sleep','Protect the sleep window. Teens should aim for 8–10 hours each night.','Recovery',['Sleep'])]}
+function holidaySchedule(d){const day=dayName(d),mind=mindByDay[day]||mindByDay.Monday,w={Monday:'Cycle 1 · Power & speed',Wednesday:'Cycle 2 · Endurance & agility',Friday:'Cycle 3 · Technique & mobility'}[day],due=dueChapters(d).length;return[
+task('wake','06:00–06:10','Wake up + hydrate','Start a little later than a school day; wash up and drink water.'),task('meditate','06:10–06:20','Meditation','Breath attention; gently return when distracted.','Mind',['Daily']),task('morningMind','06:20–06:40',mind.morning,mind.morningDesc,'Mind',['Daily rotation']),task('breakfast','06:40–07:10','Breakfast','Eat properly before the main work block.','Recovery',['Fuel']),task('deepStudy','07:10–08:20','Deep study block','One important chapter; understanding, retrieval and a few questions.','Study',['Focus block']),task('break','08:20–08:40','Proper break','Step away from screens and desk.','Recovery',['Break']),task('skillAM','08:40–09:40','Personal skill / project','Learn one chosen skill or continue a small project; choose a concrete finish line.','Skill',['Project']),task('snack','09:40–10:00','Snack + reset','Drink water, eat if needed and reset.','Recovery',['Fuel']),task('dueStudy','10:00–11:00',`Revision engine · ${due} due / overdue`,'Work on earliest due chapters from the adaptive queue.','Study',['Adaptive revision']),task('freeAM','11:00–12:00','Outdoor time / hobby / family','Unstructured recreation or light outdoor time; no extra hard training.','Recovery',['Free time']),task('lunch','12:00–12:40','Lunch','Eat and hydrate.','Recovery',['Fuel']),task('rest','12:40–13:30','Rest / quiet time','Let the brain and body recover.','Recovery',['Recovery']),task('studyPM','13:30–14:15','Weak-topic or homework block','Choose one backlog item, not every pending task at once.','Study',['Priority']),task('skillPM','14:15–15:15','Skill practice / reading','Practice your chosen skill calmly or read.','Skill',['Personal growth']),task('snackPM','15:15–15:45','Snack + open time','Refuel and take unstructured time.','Recovery',['Reset']),task('freeAfternoon','15:45–16:50','Unstructured rest / family time','This hour stays flexible for outdoor time, family, reading or doing nothing. No extra hard workout.','Recovery',['Free time']),task('prepWorkout','16:50–17:10','Transition / prepare','Prepare for the evening activity only if scheduled.','Routine',['Prepare']),task('eveningMain','17:10–18:10',w||'Skill block / gentle recovery',w?`${w}. Keep it controlled; a holiday does not mean extra volume.`:'No hard workout today. Use this hour for coding, chess review, a chosen skill or easy mobility, then stop.',w?'Physical':'Skill',['Evening block']),task('recovery','18:10–18:35','Wash + recovery','Water, food if needed and downtime.','Recovery',['Recovery']),task('revisionPM','18:35–19:35','Revision / catch-up','Continue due chapters only if workload is manageable; don’t exceed the chosen cap to fill time.','Study',['Adaptive revision']),task('dinner','19:35–20:15','Dinner','Take a proper meal break.','Recovery',['Fuel']),task('eveningMind','20:15–20:35',mind.evening,mind.eveningDesc,'Mind',['Daily rotation']),task('log','20:35–20:50','Progress + weekly note','Mark real completions and name tomorrow’s top priority.','Progress',['Review']),task('winddown','20:50–21:15','Wind-down','Quiet time and prepare for sleep.','Recovery',['Sleep prep']),task('sleep','21:15 onward','Sleep','Protect a full night of sleep.','Recovery',['Sleep'])]}
+function sundaySchedule(d){const m=mindByDay.Sunday,due=dueChapters(d).length;return[
+task('wake','06:30–06:40','Wake up + hydrate','A little extra morning ease; wash and drink water.'),task('meditate','06:40–06:50','Meditation','Gentle breath awareness.','Mind',['Daily']),task('morningMind','06:50–07:10','Weekly reflection',m.morningDesc,'Mind',['Weekly']),task('breakfast','07:10–07:45','Breakfast','Eat properly and relax.','Recovery',['Fuel']),task('deepStudy','07:45–08:45','Priority study block','Study one key chapter or difficult topic. Keep it focused, not endless.','Study',['Focus block']),task('break','08:45–09:15','Break / recreation','Move away from the study desk.','Recovery',['Break']),task('weeklyReview','09:15–09:45','Weekly system review','Review recall, completed work, energy and what needs adjustment.','Progress',['Weekly review']),task('skillAM','09:45–10:45','Hobby / personal skill','A relaxed skill or creative project.','Skill',['Personal growth']),task('dueStudy','10:45–11:45',`Revision engine · ${due} due / overdue`,'Review due chapters within the daily target; leave capacity for rest.','Study',['Adaptive revision']),task('freeAM','11:45–12:30','Family / outdoor time','Enjoy unstructured time away from a screen if possible.','Recovery',['Free time']),task('lunch','12:30–13:10','Lunch','Eat and hydrate.','Recovery',['Fuel']),task('rest','13:10–14:30','Rest and recharge','Quiet time, hobby or a nap if useful. No hard workout.','Recovery',['Recovery']),task('studyPM','14:30–15:15','Light catch-up only if needed','If the week has a genuine urgent task, do one. Otherwise use this for reading or rest.','Study',['Optional']),task('freePM','15:15–16:45','Free time / family','Keep this flexible; don’t fill it with a punishment backlog.','Recovery',['Free time']),task('resetBeforeEvening','16:45–17:10','Light reset + hydration','Relax, hydrate and decide whether an easy walk or full rest feels better.','Recovery',['Reset']),task('recoveryWalk','17:10–17:40','Optional easy walk / mobility','No hard workout on Sunday. Easy movement only if it feels good.','Recovery',['Rest day']),task('prepWeek','17:40–18:10','Prepare for Monday','Bag, clothes and next week’s top priority.','Routine',['Prepare']),task('earlyEveningRest','18:10–18:35','Recovery / family time','No catch-up sprint; take a pause before optional light recall.','Recovery',['Recovery']),task('revisionPM','18:35–19:15','Light recall or finish review','Only if needed and manageable; don’t override the rest day.','Study',['Light']),task('dinner','19:15–20:00','Dinner + family time','Proper meal and relaxed pause.','Recovery',['Fuel']),task('eveningMind','20:00–20:20','Light recall / reading',m.eveningDesc,'Mind',['Light']),task('log','20:20–20:40','Weekly reflection + plan','Record a win, one lesson and one realistic priority for next week.','Progress',['Review']),task('winddown','20:40–21:15','Relax and wind down','Keep Sunday night calm to start Monday fresh.','Recovery',['Sleep prep']),task('sleep','21:15 onward','Sleep','Keep the sleep window protected.','Recovery',['Sleep'])]}
+function getSchedule(d=selectedDate){const m=planMode(d);return m==='sunday'?sundaySchedule(d):m==='holiday'?holidaySchedule(d):schoolSchedule(d)}
+function isCompleted(d,id){return!!(data.taskLogs[d]&&data.taskLogs[d][id])}function setTask(d,id,checked){data.taskLogs[d]=data.taskLogs[d]||{};if(checked)data.taskLogs[d][id]=true;else delete data.taskLogs[d][id];saveData();renderAll()}
+function renderHeader(){const mode=planMode(selectedDate),today=dateToday();$('scheduleDate').value=selectedDate;$('modePill').textContent=mode==='sunday'?'Sunday / Rest':mode==='holiday'?'Holiday plan':'School day';$('modePill').className='pill '+(mode==='sunday'?'green':mode==='holiday'?'yellow':'cyan');$('holidayToggle').textContent=holidayOn(selectedDate)?'✓ Holiday on':'＋ Holiday mode';$('holidayToggle').disabled=mode==='sunday';$('scheduleHeading').textContent=`${dayName(selectedDate)} · ${fmtDate(selectedDate)}`;$('scheduleSubheading').textContent=mode==='school'?'School-day flow · personal time until 8 AM · evening training and study.':mode==='holiday'?'Holiday mode · structured learning, skill time, meals, rest and weekday training cycle where applicable.':'Sunday plan · school off, weekly review and protected physical recovery.';if(today<START_DATE){$('launchNotice').style.display='block';$('launchNotice').textContent=`Launch mode: routine starts Monday, 9 November 2026 — ${dateDiff(today,START_DATE)} days to go. You can configure chapters now; routine check-off and revision ratings activate from launch date.`}else $('launchNotice').style.display='none';const start=parseDate(selectedDate);start.setDate(start.getDate()-((start.getDay()+6)%7));const wd=Array.from({length:7},(_,i)=>{const d=new Date(start);d.setDate(start.getDate()+i);return dateString(d)});$('weekStrip').innerHTML=wd.map(d=>`<button class="day-chip ${
+    d===selectedDate?'active':''
+  }
+  " type="button" data-date="${
+    d
+  }
+  "><span>${esc(shortDay(d))}</span><strong>${parseDate(d).getDate()}</strong><small>${dayName(d)==='Sunday'?'REST':holidayOn(d)?'OFF':d<START_DATE?'SETUP':''}</small></button>`).join('');$('weekStrip').querySelectorAll('[data-date]').forEach(b=>b.addEventListener('click',()=>setSelectedDate(b.dataset.date)))}
+function formatScheduleTime(value){
+  const to12h=(clock)=>{const [hh,mm]=clock.split(':').map(Number);const suffix=hh>=12?'PM':'AM';const hour=hh%12||12;return {clock:`${hour}:${String(mm).padStart(2,'0')}`,suffix};};
+  const range=String(value).match(/^(\d{2}:\d{2})\s*[–-]\s*(\d{2}:\d{2})(.*)$/);
+  if(range){const a=to12h(range[1]),b=to12h(range[2]),tail=range[3]||'';return a.suffix===b.suffix?`${a.clock}–${b.clock} ${b.suffix}${tail}`:`${a.clock} ${a.suffix}–${b.clock} ${b.suffix}${tail}`;}
+  const onward=String(value).match(/^(\d{2}:\d{2})(\s+onward.*)$/i);
+  if(onward){const t=to12h(onward[1]);return `${t.clock} ${t.suffix}${onward[2]}`;}
+  const single=String(value).match(/^(\d{2}:\d{2})$/);
+  if(single){const t=to12h(single[1]);return `${t.clock} ${t.suffix}`;}
+  return String(value);
+}
+function renderSchedule(){const tasks=getSchedule(selectedDate),allowed=canCheckDate(selectedDate),done=tasks.filter(t=>isCompleted(selectedDate,t.id)).length,pct=tasks.length?Math.round(done/tasks.length*100):0;$('completedCount').textContent=done;$('totalTasks').textContent=tasks.length;$('completionPill').textContent=`${pct}% complete`;$('dailyProgressBar').style.width=`${pct}%`;$('allDoneBtn').textContent=pct===100?'✓ All complete':'Complete all blocks';$('scheduleList').innerHTML=tasks.map(t=>`<div class="schedule-item ${
+    isCompleted(selectedDate,t.id)?'done':''
+  }
+  "><div class="schedule-time">${esc(formatScheduleTime(t.time))}</div><div class="timeline-node"></div><div class="schedule-content"><h4>${esc(t.title)}</h4><p>${esc(t.desc)}</p><div class="tag-row"><span class="tag">${esc(t.module)}</span>${t.tags.map(x=>`<span class="tag">${esc(x)}</span>`).join('')}</div></div><input class="task-check" type="checkbox" data-task="${
+    esc(t.id)
+  }
+  " aria-label="Mark ${
+    esc(t.title)
+  }
+  complete" ${isCompleted(selectedDate,t.id)?'checked':''} ${allowed?'':'disabled'}></div>`).join('');$('scheduleList').querySelectorAll('[data-task]').forEach(ch=>ch.addEventListener('change',()=>setTask(selectedDate,ch.dataset.task,ch.checked)));const due=dueChapters(selectedDate);$('focusDueCount').textContent=due.length;$('focusBar').style.width=`${Math.min(100,due.length/Math.max(1,Number(data.settings.dailyTarget))*100)}%`;$('focusLimitPill').textContent=`Target ${data.settings.dailyTarget}`;const mp={};due.forEach(c=>mp[c.subjectName]=(mp[c.subjectName]||0)+1);const top=Object.entries(mp).sort((a,b)=>b[1]-a[1]).slice(0,5);$('focusSubjectList').innerHTML=top.length?top.map(([n,c])=>`<div class="focus-line"><span style="flex:1">${esc(n)}</span><strong style="color:var(--text)">${c}</strong></div>`).join(''):'<div class="empty" style="padding:8px 0">No due chapters on this date.</div>';$('dueMini').textContent=due.length;$('studiedMini').textContent=totalCounts().studied;const mm=tasks.filter(t=>t.module==='Mind'),md=mm.filter(t=>isCompleted(selectedDate,t.id)).length;$('mindMini').textContent=`${mm.length?Math.round(md/mm.length*100):0}%`;$('workoutMini').textContent=tasks.some(t=>t.module==='Physical')?'Cycle active':planMode(selectedDate)==='sunday'?'Rest day':'Skill block';$('dailyHabits').innerHTML=data.habits.length?data.habits.map(h=>`<div class="habit-item"><input class="task-check" type="checkbox" data-habit="${
+    esc(h.id)
+  }
+  " ${data.habitLogs[selectedDate]?.[h.id]?'checked':''} ${allowed?'':'disabled'}><span>${esc(h.name)}<small>${esc(h.module||'Personal practice')}</small></span><button class="btn small subtle" type="button" data-del-habit="${
+    esc(h.id)
+  }
+  ">×</button></div>`).join(''):'<div class="empty" style="padding:10px"><strong>No custom habits yet</strong>Add a personal practice you want to measure separately.</div>';$('dailyHabits').querySelectorAll('[data-habit]').forEach(ch=>ch.addEventListener('change',()=>{data.habitLogs[selectedDate]=data.habitLogs[selectedDate]||{};if(ch.checked)data.habitLogs[selectedDate][ch.dataset.habit]=true;else delete data.habitLogs[selectedDate][ch.dataset.habit];saveData();renderStats()}));$('dailyHabits').querySelectorAll('[data-del-habit]').forEach(b=>b.addEventListener('click',()=>{data.habits=data.habits.filter(h=>h.id!==b.dataset.delHabit);saveData();renderAll();toast('Habit removed')}))}
+function renderDue(){const due=dueChapters(selectedDate),target=Number(data.settings.dailyTarget)||5,max=Number(data.settings.dailyMax)||6,limit=Math.min(max,Math.max(1,due.length>target?target+1:target)),focus=due.slice(0,limit),backlog=due.slice(limit);$('revisionDueKpi').textContent=due.length;$('revisionStudiedKpi').textContent=totalCounts().studied;$('revisionNewKpi').textContent=newChapters().length;$('revisionCapacityKpi').textContent=target;$('dueDatePill').textContent=fmtDate(selectedDate,{day:'numeric',month:'short'});$('dueDescription').textContent=`${due.length} due / overdue · show top ${limit} first. Oldest due dates and weaker confidence are prioritised.`;$('revisionNotice').style.display=(!canCheckDate(selectedDate)&&due.length)?'block':'none';$('revisionNotice').textContent='Preview only: configure chapters now. Review ratings activate from programme start date and only on current/past dates.';$('dueGrid').innerHTML=focus.length?focus.map(c=>{const late=dateDiff(c.nextReviewDate,selectedDate);return `<article class="chapter-card ${
+    late>0?'overdue':''
+  }
+  "><div class="chapter-head"><div><div class="chapter-subject">${esc(c.subjectName)}</div><h4>${esc(c.name)}</h4><p>${late>0?`Overdue by ${late} day${late===1?'':'s'}`:'Due today'} · scheduled ${esc(fmtDate(c.nextReviewDate,{day:'numeric',month:'short'}))}</p></div><span class="status-label studied">Review</span></div>${c.note?`<div class="note">${esc(c.note)}</div>`:''}<div class="chapter-actions"><label class="small-text" for="rating_${
+    esc(c.id)
+  }
+  ">Recall rating</label><select class="rating-select" id="rating_${
+    esc(c.id)
+  }
+  " data-rating="${
+    esc(c.id)
+  }
+  " ${canCheckDate(selectedDate)?'':'disabled'}><option value="">0–10</option>${Array.from({length:11},(_,i)=>`<option value="${
+    i
+  }
+  " ${c.confidence===i?'selected':''}>${i}/10</option>`).join('')}</select><button class="btn small primary" type="button" data-save-review="${
+    esc(c.id)
+  }
+  " ${canCheckDate(selectedDate)?'':'disabled'}>Save review</button></div><p style="margin-top:9px">${c.lastInterval?`Previous interval: ${c.lastInterval} days`:'First review — interval starts from your rating'}${c.confidence!==null?` · Last rating: ${c.confidence}/10`:''}</p></article>`}).join(''):'<div class="empty" style="grid-column:1/-1"><strong>No reviews due on this date.</strong>Due chapters appear automatically. Use First-study queue for new chapters.</div>';$('dueGrid').querySelectorAll('[data-save-review]').forEach(b=>b.addEventListener('click',()=>{const id=b.dataset.saveReview,sel=$(`rating_${CSS.escape(id)}`);if(!sel||sel.value===''){toast('Choose an honest 0–10 rating first');return}if(!canCheckDate(selectedDate)){toast('Review logging starts on 9 November 2026');return}const ref=findChapter(id);if(!ref)return;const c=ref.chapter,r=Number(sel.value),i=intervalFor(r,c.lastInterval||0);c.confidence=r;c.lastReviewed=selectedDate;c.lastInterval=i;c.nextReviewDate=addDays(selectedDate,i);c.status='studied';saveData();renderAll();toast(`Saved · next revision in ${i} day(s)`)}));$('dueBacklogWrap').style.display=backlog.length?'block':'none';$('backlogCount').textContent=backlog.length;$('backlogList').innerHTML=backlog.map(c=>`<div class="focus-line"><span style="flex:1">${esc(c.subjectName)} · ${esc(c.name)}</span><span style="color:var(--red)">${Math.max(0,dateDiff(c.nextReviewDate,selectedDate))}d late</span></div>`).join('');const fresh=newChapters().slice(0,12);$('newChapterQueue').innerHTML=fresh.length?fresh.map(c=>`<div class="exercise-row"><div class="exercise-letters">＋</div><div class="exercise-body"><h4>${esc(c.subjectName)} · ${esc(c.name)}</h4><p>${c.note?esc(c.note):'First-study needed. Study the chapter, use closed-book recall and check questions.'}</p><div class="chapter-actions"><button class="btn small primary" type="button" data-first-study="${
+    esc(c.id)
+  }
+  ">Mark first study done</button><button class="btn small" type="button" data-edit-chapter="${
+    esc(c.id)
+  }
+  ">Edit</button></div></div></div>`).join(''):'<div class="empty"><strong>First-study queue clear</strong>Add a chapter when a new chapter is assigned or studied at school.</div>';$('newChapterQueue').querySelectorAll('[data-first-study]').forEach(b=>b.addEventListener('click',()=>firstStudy(b.dataset.firstStudy)));$('newChapterQueue').querySelectorAll('[data-edit-chapter]').forEach(b=>b.addEventListener('click',()=>editChapter(b.dataset.editChapter)))}
+function renderSubjects(){const q=searchText.trim().toLowerCase(),filter=currentSubjectFilter;const ss=data.subjects.filter(s=>{const text=!q||s.name.toLowerCase().includes(q)||s.chapters.some(c=>c.name.toLowerCase().includes(q)||(c.note||'').toLowerCase().includes(q)),due=s.chapters.some(c=>c.status==='studied'&&c.nextReviewDate&&c.nextReviewDate<=selectedDate),fresh=s.chapters.some(c=>c.status!=='studied'),studied=s.chapters.length>0&&s.chapters.every(c=>c.status==='studied');return text&&(filter==='all'||filter==='due'&&due||filter==='new'&&fresh||filter==='studied'&&studied)});$('subjectsList').innerHTML=ss.length?ss.map(s=>{const studied=s.chapters.filter(c=>c.status==='studied').length,total=s.chapters.length,due=s.chapters.filter(c=>c.status==='studied'&&c.nextReviewDate&&c.nextReviewDate<=selectedDate).length,fresh=total-studied,open=showAllSubjects||!!q||!!data._openSubjects?.[s.id],letter=s.name.replace(/[^A-Za-z]/g,'').charAt(0)||'S';return `<article class="subject-panel"><div class="subject-header"><div class="subject-title"><div class="subject-letter">${esc(letter)}</div><div><h3>${esc(s.name)}</h3><p>${total} chapters · ${studied} studied · ${fresh} first-study · ${due} due</p><div class="progress-track" style="width:min(200px,50vw);height:4px;margin-top:7px"><div class="progress-fill" style="width:${
+    total?Math.round(studied/total*100):0
+  }
+  %"></div></div></div></div><div class="subject-actions"><button class="btn small" data-set-count="${
+    esc(s.id)
+  }
+  " type="button">Set count</button><button class="btn small" data-add-chapter-sub="${
+    esc(s.id)
+  }
+  " type="button">＋ Chapter</button><button class="btn small subtle" data-toggle-sub="${
+    esc(s.id)
+  }
+  " type="button">${open?'Collapse':'Open'}</button></div></div>${open?`<div class="subject-details"><div class="chapter-manager">${total?s.chapters.map(c=>`<div class="chapter-row"><div><div class="chapter-name">${esc(c.name)}</div>${c.note?`<div class="chapter-note">${esc(c.note)}</div>`:''}</div><span class="status-label ${
+    c.status==='studied'?'studied':'new'
+  }
+  ">${c.status==='studied'?'Studied':'First-study'}</span><div class="rating-small"><span class="small-text">${c.confidence===null?'Not rated':`Recall ${c.confidence}/10`}</span><div class="chapter-note">${c.status==='studied'&&c.nextReviewDate?`Next: ${esc(fmtDate(c.nextReviewDate,{day:'numeric',month:'short'}))}`:'No revision date yet'}</div></div><div class="row-actions"><button class="btn small" data-edit-chapter="${
+    esc(c.id)
+  }
+  " type="button">Edit</button>${c.status!=='studied'?`<button class="btn small primary" data-first-study="${
+    esc(c.id)
+  }
+  " type="button">Studied</button>`:`<button class="btn small" data-review-now="${
+    esc(c.id)
+  }
+  " type="button">Review</button>`}<button class="btn small danger" data-delete-chapter="${
+    esc(c.id)
+  }
+  " type="button">×</button></div></div>`).join(''):'<div class="empty"><strong>No chapters added yet</strong>Enter the subject’s chapter count to generate editable placeholders and rename later.</div>'}<div class="form-row" style="margin-top:12px"><span class="small-text">Bulk add placeholders</span><input class="input" style="max-width:105px" type="number" min="1" max="100" placeholder="Count" id="bulkCount_${
+    esc(s.id)
+  }
+  "><button class="btn small" data-bulk-add="${
+    esc(s.id)
+  }
+  " type="button">Generate</button><button class="btn small subtle" data-rename-subject="${
+    esc(s.id)
+  }
+  " type="button">Rename subject</button></div></div></div>`:''}</article>`}).join(''):'<div class="panel empty"><strong>No matching subjects</strong>Try another search or add a new subject.</div>';$('subjectsList').querySelectorAll('[data-set-count]').forEach(b=>b.addEventListener('click',()=>openCount(b.dataset.setCount)));$('subjectsList').querySelectorAll('[data-add-chapter-sub]').forEach(b=>b.addEventListener('click',()=>openChapter(b.dataset.addChapterSub)));$('subjectsList').querySelectorAll('[data-toggle-sub]').forEach(b=>b.addEventListener('click',()=>{data._openSubjects=data._openSubjects||{};data._openSubjects[b.dataset.toggleSub]=!data._openSubjects[b.dataset.toggleSub];saveData();renderSubjects()}));$('subjectsList').querySelectorAll('[data-edit-chapter]').forEach(b=>b.addEventListener('click',()=>editChapter(b.dataset.editChapter)));$('subjectsList').querySelectorAll('[data-first-study]').forEach(b=>b.addEventListener('click',()=>firstStudy(b.dataset.firstStudy)));$('subjectsList').querySelectorAll('[data-review-now]').forEach(b=>b.addEventListener('click',()=>jumpDue(b.dataset.reviewNow)));$('subjectsList').querySelectorAll('[data-delete-chapter]').forEach(b=>b.addEventListener('click',()=>deleteChapter(b.dataset.deleteChapter)));$('subjectsList').querySelectorAll('[data-bulk-add]').forEach(b=>b.addEventListener('click',()=>{const n=Number($(`bulkCount_${CSS.escape(b.dataset.bulkAdd)}`).value);if(!Number.isInteger(n)||n<1||n>100){toast('Enter a number between 1 and 100');return}bulkAdd(b.dataset.bulkAdd,n)}));$('subjectsList').querySelectorAll('[data-rename-subject]').forEach(b=>b.addEventListener('click',()=>renameSubject(b.dataset.renameSubject)))}
+function renderStats(){const c=totalCounts(),p=c.total?Math.round(c.studied/c.total*100):0;$('totalChaptersKpi').textContent=c.total;$('studiedChaptersKpi').textContent=c.studied;$('coveragePctKpi').textContent=`${p}%`;$('coverageBar').style.width=`${p}%`;const ds=Array.from({length:7},(_,i)=>addDays(selectedDate,i-6)).map(d=>{const t=getSchedule(d),done=t.filter(x=>isCompleted(d,x.id)).length;return{date:d,done,total:t.length,valid:d>=START_DATE&&d<=dateToday()}}),max=Math.max(1,...ds.map(e=>e.done));$('historyChart').innerHTML=ds.map(e=>`<div class="history-bar-wrap"><small>${e.valid?e.done:'—'}</small><div class="history-bar" title="${
+    esc(fmtDate(e.date))
+  }
+  : ${
+    e.done
+  }
+  /${
+    e.total
+  }
+  " style="height:${
+    e.valid?Math.max(4,Math.round(e.done/max*83)):4
+  }
+  px;opacity:${
+    e.valid?1:.22
+  }
+  "></div><span>${esc(shortDay(e.date))}</span></div>`).join('');const valid=ds.filter(e=>e.valid),sum=valid.reduce((a,e)=>a+e.done,0);$('historyCaption').textContent=valid.length?`${sum} scheduled blocks completed across ${valid.length} active day(s) in this view.`:`Progress history starts on ${fmtDate(START_DATE)}. Nothing before launch is counted as missed.`;const mods=['Study','Mind','Physical','Skill','Recovery','Routine','Progress','School'];$('moduleProgressList').innerHTML=mods.map(m=>{let tot=0,done=0;for(const e of valid){const t=getSchedule(e.date).filter(x=>x.module===m);tot+=t.length;done+=t.filter(x=>isCompleted(e.date,x.id)).length}const q=tot?Math.round(done/tot*100):0;return `<div class="module-progress-item"><span class="name">${m}</span><div class="progress-track"><div class="progress-fill" style="width:${
+    q
+  }
+  %"></div></div><span class="value">${q}%</span></div>`}).join('');$('progressItemsList').innerHTML=data.progressItems.length?data.progressItems.map(i=>`<div class="habit-item"><input class="task-check" type="checkbox" data-progress-check="${
+    esc(i.id)
+  }
+  " ${data.habitLogs[selectedDate]?.[i.id]?'checked':''} ${canCheckDate(selectedDate)?'':'disabled'}><span>${esc(i.name)}<small>${esc(i.module)}${i.target?` · Target: ${esc(i.target)}`:''}</small></span><button class="btn small subtle" type="button" data-progress-remove="${
+    esc(i.id)
+  }
+  ">×</button></div>`).join(''):'<div class="empty"><strong>No custom progress items</strong>Core daily tasks are tracked automatically. Add a measurable habit when needed.</div>';$('progressItemsList').querySelectorAll('[data-progress-check]').forEach(ch=>ch.addEventListener('change',()=>{data.habitLogs[selectedDate]=data.habitLogs[selectedDate]||{};if(ch.checked)data.habitLogs[selectedDate][ch.dataset.progressCheck]=true;else delete data.habitLogs[selectedDate][ch.dataset.progressCheck];saveData();renderStats()}));$('progressItemsList').querySelectorAll('[data-progress-remove]').forEach(b=>b.addEventListener('click',()=>{data.progressItems=data.progressItems.filter(i=>i.id!==b.dataset.progressRemove);saveData();renderStats();toast('Progress item removed')}));$('dailyTargetSetting').value=String(data.settings.dailyTarget||5);$('dailyMaxSetting').value=String(data.settings.dailyMax||6);$('revisionCapacityKpi').textContent=data.settings.dailyTarget||5;$('focusLimitPill').textContent=`Target ${data.settings.dailyTarget||5}`}
+function renderAll(){renderHeader();renderSchedule();renderDue();renderSubjects();renderStats()}function setSelectedDate(d){if(!/^\d{4}-\d{2}-\d{2}$/.test(d))return;selectedDate=d;saveData();renderAll()}
+function toggleTheme(){data.settings.theme=data.settings.theme==='light'?'dark':'light';document.body.classList.toggle('light-mode',data.settings.theme==='light');saveData()}
+function openModal(title,desc,fields,submit){activeModalSubmit=submit;$('modalTitle').textContent=title;$('modalDesc').textContent=desc;$('modalFields').innerHTML=fields;$('modalOverlay').classList.add('show');const f=$('modalFields').querySelector('input,select,textarea');if(f)setTimeout(()=>f.focus(),40)}function closeModal(){$('modalOverlay').classList.remove('show');$('modalFields').innerHTML='';activeModalSubmit=null}
+function fld(n,label,v='',type='text',extra=''){return `<div class="field full"><label for="mf_${
+    n
+  }
+  ">${esc(label)}</label><input class="input" id="mf_${
+    n
+  }
+  " name="${
+    n
+  }
+  " type="${
+    type
+  }
+  " value="${
+    esc(v)
+  }
+  " ${extra}></div>`}function sel(n,label,opts,value){return `<div class="field full"><label for="mf_${
+    n
+  }
+  ">${esc(label)}</label><select class="select" id="mf_${
+    n
+  }
+  " name="${
+    n
+  }
+  ">${opts.map(o=>`<option value="${
+    esc(o.value)
+  }
+  " ${o.value===value?'selected':''}>${esc(o.label)}</option>`).join('')}</select></div>`}
+function openHabit(progress=false){const opts=['Mind','Study','Physical','Skill','Recovery','Routine'].map(x=>({value:x,label:x}));openModal(progress?'Add progress item':'Add custom daily habit',progress?'Track another measurable personal goal.':'Add an extra task to the daily personal checklist.',fld('name','Item name','','text','required maxlength="70"')+sel('module','Module',opts,'Mind')+(progress?fld('target','Target / measurement','','text','maxlength="70" placeholder="e.g. 20 minutes"'):''),fd=>{const name=fd.get('name').trim();if(!name){toast('Enter an item name');return false}const x={id:makeId(progress?'progress':'habit'),name,module:fd.get('module')||'Mind'};if(progress){x.target=fd.get('target').trim();data.progressItems.push(x)}else data.habits.push(x);saveData();closeModal();renderAll();toast('Added to your system');return true})}
+function addSubjectModal(){openModal('Add subject','Create a subject. Generate chapter placeholders and rename them later.',fld('name','Subject name','','text','required maxlength="65"')+sel('category','Category',[{value:'Core',label:'Core subject'},{value:'Language',label:'Language'},{value:'SST',label:'Social studies'},{value:'Additional',label:'Additional'}],'Additional'),fd=>{const name=fd.get('name').trim();if(!name){toast('Enter a subject name');return false}const id=makeId('sub');data.subjects.push({id,name,category:fd.get('category')||'Additional',chapters:[]});data._openSubjects=data._openSubjects||{};data._openSubjects[id]=true;saveData();closeModal();renderAll();toast('Subject added');return true})}
+function openCount(id){const s=findSubject(id);if(!s)return;openModal('Set chapter count',`${s.name}: enter the total. Extra chapters are removed from the end only after confirmation.`,fld('count','Total chapters',String(s.chapters.length||''),'number','min="0" max="100" required'),fd=>{const n=Number(fd.get('count'));if(!Number.isInteger(n)||n<0||n>100){toast('Enter a whole number from 0 to 100');return false}if(n<s.chapters.length&&!confirm(`This will remove ${s.chapters.length-n} chapter(s) from the end of ${s.name}. Continue?`))return false;if(n<s.chapters.length)s.chapters=s.chapters.slice(0,n);while(s.chapters.length<n){const i=s.chapters.length+1;s.chapters.push({id:makeId('ch'),name:`Chapter ${i}`,status:'new',confidence:null,lastReviewed:null,nextReviewDate:null,lastInterval:0,note:''})}data._openSubjects=data._openSubjects||{};data._openSubjects[s.id]=true;saveData();closeModal();renderAll();toast('Chapter count updated');return true})}
+function openChapter(subjectId=null){const opts=data.subjects.map(s=>({value:s.id,label:s.name}));if(!opts.length){toast('Add a subject first');return}openModal('Add chapter','New chapters enter the first-study queue; their review schedule starts after you study them.',sel('subject','Subject',opts,subjectId||opts[0].value)+fld('name','Chapter name','','text','required maxlength="100"')+fld('note','Note (optional)','','text','maxlength="140"'),fd=>{const s=findSubject(fd.get('subject')),name=fd.get('name').trim();if(!s||!name){toast('Choose a subject and enter a name');return false}s.chapters.push({id:makeId('ch'),name,status:'new',confidence:null,lastReviewed:null,nextReviewDate:null,lastInterval:0,note:fd.get('note').trim()});data._openSubjects=data._openSubjects||{};data._openSubjects[s.id]=true;saveData();closeModal();renderAll();toast('Chapter added to first-study queue');return true})}
+function editChapter(id){const r=findChapter(id);if(!r)return;openModal('Edit chapter','Rename it or update its note. Revision history is preserved.',fld('name','Chapter name',r.chapter.name,'text','required maxlength="100"')+fld('note','Note',r.chapter.note||'','text','maxlength="180"'),fd=>{const n=fd.get('name').trim();if(!n){toast('Chapter name cannot be empty');return false}r.chapter.name=n;r.chapter.note=fd.get('note').trim();saveData();closeModal();renderAll();toast('Chapter updated');return true})}
+function renameSubject(id){const s=findSubject(id);if(!s)return;openModal('Rename subject','Chapter data remains attached.',fld('name','Subject name',s.name,'text','required maxlength="65"'),fd=>{const n=fd.get('name').trim();if(!n){toast('Subject name cannot be empty');return false}s.name=n;saveData();closeModal();renderAll();toast('Subject renamed');return true})}
+function bulkAdd(id,n){const s=findSubject(id);if(!s)return;const first=s.chapters.length+1;for(let i=0;i<n;i++)s.chapters.push({id:makeId('ch'),name:`Chapter ${first+i}`,status:'new',confidence:null,lastReviewed:null,nextReviewDate:null,lastInterval:0,note:''});data._openSubjects=data._openSubjects||{};data._openSubjects[id]=true;saveData();renderAll();toast(`${n} chapter placeholder(s) added`)}
+function deleteChapter(id){const r=findChapter(id);if(!r)return;if(!confirm(`Delete “${r.chapter.name}” from ${r.subject.name}? This also removes its review history.`))return;r.subject.chapters=r.subject.chapters.filter(c=>c.id!==id);saveData();renderAll();toast('Chapter deleted')}
+function firstStudy(id){const r=findChapter(id);if(!r)return;openModal('Finish first study',`${r.subject.name} · ${r.chapter.name}. After studying, rate what you can actually recall.`,sel('rating','Honest understanding / recall rating',Array.from({length:11},(_,i)=>({value:String(i),label:`${i} / 10`})),'5')+fld('note','Study note (optional)',r.chapter.note||'','text','maxlength="180"'),fd=>{const rating=Number(fd.get('rating'));if(!Number.isInteger(rating)||rating<0||rating>10){toast('Choose a rating from 0 to 10');return false}const day=dateToday()<START_DATE?START_DATE:dateToday(),interval=intervalFor(rating,0),c=r.chapter;c.status='studied';c.confidence=rating;c.lastReviewed=day;c.lastInterval=interval;c.nextReviewDate=addDays(day,interval);c.note=fd.get('note').trim();saveData();closeModal();renderAll();toast(`First study saved · next review in ${interval} day(s)`);return true})}
+function jumpDue(id){const r=findChapter(id);if(!r)return;if(!r.chapter.nextReviewDate){firstStudy(id);return}navigateToPage('revision',true);setTimeout(()=>{const s=$(`rating_${CSS.escape(id)}`);if(s)s.focus();else toast('This chapter is not due in the selected-date queue.')},350)}
+async function exportBackup(){try{const memoryArchive=await exportMemoryArchive();const b={...data,exportedAt:new Date().toISOString(),app:'MIND//CORE',version:4,memoryArchive};const blob=new Blob([JSON.stringify(b,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`mind-core-backup-${dateToday()}.json`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);toast(`Full backup exported · ${memoryArchive.conversations.length} chats · ${memoryArchive.memories.length} memories`)}catch(e){console.error(e);toast('Backup failed — open AI + Memory and check storage')}}
+function importBackup(file){if(!file)return;const rd=new FileReader();rd.onload=async()=>{try{const x=JSON.parse(String(rd.result));if(!x||!Array.isArray(x.subjects)||!x.settings)throw new Error('This does not look like a MIND//CORE backup.');if(!confirm('Restore this backup? Current browser data will be replaced. Export current data first if needed.'))return;data={...initialData(),...x,startDate:START_DATE,subjects:x.subjects.map(s=>({...s,chapters:Array.isArray(s.chapters)?s.chapters:[]})),settings:{dailyTarget:5,dailyMax:6,theme:'dark',...x.settings},holidays:x.holidays||{},taskLogs:x.taskLogs||{},habitLogs:x.habitLogs||{},habits:x.habits||[],progressItems:x.progressItems||[]};selectedDate=x.selectedDate||START_DATE;saveData();if(x.memoryArchive)await restoreMemoryArchive(x.memoryArchive);document.body.classList.toggle('light-mode',data.settings.theme==='light');renderAll();await renderMemoryUI();toast(x.memoryArchive?'Full backup restored, including AI memory':'Study backup restored')}catch(e){alert(`Unable to restore: ${e.message}`)}$('importFile').value=''};rd.readAsText(file)}
+$('scheduleDate').addEventListener('change',e=>setSelectedDate(e.target.value));$('prevDate').addEventListener('click',()=>setSelectedDate(addDays(selectedDate,-1)));$('nextDate').addEventListener('click',()=>setSelectedDate(addDays(selectedDate,1)));$('jumpToday').addEventListener('click',()=>setSelectedDate(dateToday()<START_DATE?START_DATE:dateToday()));$('holidayToggle').addEventListener('click',()=>{if(dayName(selectedDate)==='Sunday')return;data.holidays[selectedDate]=!data.holidays[selectedDate];if(!data.holidays[selectedDate])delete data.holidays[selectedDate];saveData();renderAll();toast(data.holidays[selectedDate]?'Holiday schedule enabled':'Holiday schedule disabled')});$('allDoneBtn').addEventListener('click',()=>{if(!canCheckDate(selectedDate)){toast('Daily check-off starts on 9 November 2026');return}const t=getSchedule(selectedDate),count=t.filter(x=>isCompleted(selectedDate,x.id)).length;data.taskLogs[selectedDate]=data.taskLogs[selectedDate]||{};if(count===t.length){data.taskLogs[selectedDate]={};toast('All block checkmarks cleared')}else{t.forEach(x=>data.taskLogs[selectedDate][x.id]=true);toast('Blocks marked complete — only use when actually done')}saveData();renderAll()});$('themeBtn').addEventListener('click',toggleTheme);$('themeBtn2').addEventListener('click',toggleTheme);$('exportBtn').addEventListener('click',exportBackup);$('exportBtn2').addEventListener('click',exportBackup);$('importBtn').addEventListener('click',()=>$('importFile').click());$('importBtn2').addEventListener('click',()=>$('importFile').click());$('importFile').addEventListener('change',e=>importBackup(e.target.files[0]));$('printBtn').addEventListener('click',()=>window.print());$('printBtn2').addEventListener('click',()=>window.print());$('addHabitBtn').addEventListener('click',()=>openHabit(false));$('addProgressBtn').addEventListener('click',()=>openHabit(true));$('addSubjectBtn').addEventListener('click',addSubjectModal);$('addChapterBtn').addEventListener('click',()=>openChapter());$('manageSubjectsBtn').addEventListener('click',()=>navigateToPage('subjects',true));$('showAllSubjectsBtn').addEventListener('click',()=>{showAllSubjects=!showAllSubjects;$('showAllSubjectsBtn').textContent=showAllSubjects?'Collapse all':'Expand all';renderSubjects()});$('subjectSearch').addEventListener('input',e=>{searchText=e.target.value;renderSubjects()});$('subjectFilter').addEventListener('change',e=>{currentSubjectFilter=e.target.value;renderSubjects()});$('dailyTargetSetting').addEventListener('change',e=>{data.settings.dailyTarget=Math.max(1,Math.min(6,Number(e.target.value)||5));if(data.settings.dailyMax<data.settings.dailyTarget)data.settings.dailyMax=data.settings.dailyTarget;saveData();renderAll();toast('Daily target updated')});$('dailyMaxSetting').addEventListener('change',e=>{data.settings.dailyMax=Math.max(Number(data.settings.dailyTarget)||5,Math.min(6,Number(e.target.value)||6));saveData();renderAll();toast('Daily maximum updated')});$('clearLogsBtn').addEventListener('click',()=>{if(!confirm('Clear routine and custom habit checkmarks for all dates? Chapter data, ratings and revision dates stay safe.'))return;data.taskLogs={};data.habitLogs={};saveData();renderAll();toast('Routine logs cleared')});$('modalClose').addEventListener('click',closeModal);$('modalCancel').addEventListener('click',closeModal);$('modalOverlay').addEventListener('click',e=>{if(e.target===$('modalOverlay'))closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});$('modalForm').addEventListener('submit',e=>{e.preventDefault();if(activeModalSubmit)activeModalSubmit(new FormData(e.target))});
+
+// --- Page navigation. All original sections remain mounted so their logic and IDs keep working. ---
+const MC_PAGES=[
+  {id:'home',title:'Home dashboard',section:null},
+  {id:'planner',title:'Daily planner',section:'scheduleSection'},
+  {id:'mind',title:'Mind training',section:'mindSection'},
+  {id:'training',title:'Physical training',section:'trainingSection'},
+  {id:'revision',title:'Spaced revision',section:'revisionSection'},
+  {id:'subjects',title:'Subjects & chapters',section:'subjectsSection'},
+  {id:'progress',title:'Progress tracker',section:'progressSection'},
+  {id:'memory',title:'AI + Memory Engine',section:null},
+  {id:'settings',title:'Settings & data',section:'settingsSection'}
+];
+let currentPage='home';
+function setupPageViews(){
+  const nav=document.querySelector('.nav');
+  const host=document.createElement('main');host.id='pageHost';nav.after(host);
+  const views={};
+  const home=document.createElement('div');home.className='page-view';home.id='page-home';home.dataset.page='home';host.append(home);views.home=home;
+  if($('top'))home.append($('top'));if($('weekStrip'))home.append($('weekStrip'));
+  home.insertAdjacentHTML('beforeend',`<div class="page-shortcuts" aria-label="MIND//CORE sections">
+    <button class="page-shortcut" type="button" data-page-open="planner"><span class="home-shortcut-icon">◷</span><strong>Daily Planner</strong><span>Aaj ka schedule, task completion aur holiday plan.</span></button>
+    <button class="page-shortcut" type="button" data-page-open="revision"><span class="home-shortcut-icon">⟳</span><strong>Revision Engine</strong><span>Due chapters, confidence ratings aur adaptive intervals.</span></button>
+    <button class="page-shortcut" type="button" data-page-open="subjects"><span class="home-shortcut-icon">▤</span><strong>Subjects & Chapters</strong><span>Chapter counts, notes, first-study aur review history.</span></button>
+    <button class="page-shortcut" type="button" data-page-open="mind"><span class="home-shortcut-icon">◉</span><strong>Mind Training</strong><span>Focus, memory, logic, observation aur strategy drills.</span></button>
+    <button class="page-shortcut" type="button" data-page-open="training"><span class="home-shortcut-icon">↗</span><strong>Physical Training</strong><span>Training cycles aur safe recovery-focused progression.</span></button>
+    <button class="page-shortcut" type="button" data-page-open="progress"><span class="home-shortcut-icon">▥</span><strong>Progress Tracker</strong><span>Study coverage, daily habits aur seven-day execution.</span></button>
+    <button class="page-shortcut" type="button" data-page-open="memory"><span class="home-shortcut-icon">✧</span><strong>AI + Memory</strong><span>Local chat history, searchable memory aur AI connection.</span></button>
+    <button class="page-shortcut" type="button" data-page-open="settings"><span class="home-shortcut-icon">⚙</span><strong>Settings & Backup</strong><span>Theme, revision target, full backup aur restore.</span></button>
+  </div><div class="callout info">Memory tip: AI chats and long-term memories are stored in this browser on this device. Export a backup regularly; browser storage is not an unlimited cloud drive.</div>`);
+  for(const p of MC_PAGES.filter(x=>x.id!=='home')){
+    const view=document.createElement('div');view.className='page-view';view.id=`page-${p.id}`;view.dataset.page=p.id;view.hidden=true;
+    const toolbar=document.createElement('div');toolbar.className='page-toolbar';
+    toolbar.innerHTML=`<div><div class="eyebrow">MIND//CORE · MODULE</div><h2>${esc(p.title)}</h2></div><div class="page-toolbar-actions"><button class="btn small" type="button" data-page-back>← Back</button><button class="btn small primary" type="button" data-page-home>⌂ Home</button></div>`;
+    view.append(toolbar);
+    if(p.section&&$(p.section)){view.append($(p.section));if(p.section==='settingsSection'&&document.querySelector('.footer'))view.append(document.querySelector('.footer'));}
+    host.append(view);views[p.id]=view;
+  }
+  const mem=document.createElement('section');mem.className='section';mem.id='memorySection';
+  mem.innerHTML=`<div class="section-head"><div><div class="section-kicker">Local-first memory</div><h2 class="section-title">AI + Memory Engine</h2><p class="section-desc">Chat history aur long-term memories phone ke browser mein save hote hain. Keyword-based recall offline kaam karta hai; open-ended AI ke liye compatible AI endpoint configure karna hoga.</p></div><span class="pill cyan" id="mcStorageBadge">Checking storage…</span></div>
+  <div class="memory-layout"><aside class="memory-column">
+    <div class="panel panel-pad"><div class="section-head" style="margin-bottom:7px"><div><h3 class="section-title" style="font-size:16px">Chat history</h3><p class="section-desc">Har message current conversation mein save hota hai.</p></div><button class="btn small primary" id="mcNewChatBtn" type="button">＋ New chat</button></div><input class="input" id="mcHistorySearch" type="search" placeholder="Search past chats…" aria-label="Search chat history"><div class="conversation-list" id="mcConversationList"></div><div class="mc-memory-count" id="mcConversationCount"></div><button class="btn small danger" id="mcDeleteChatsBtn" type="button" style="margin-top:10px">Delete all chats</button></div>
+    <div class="panel panel-pad"><div class="section-head" style="margin-bottom:7px"><div><h3 class="section-title" style="font-size:16px">Long-term memory</h3><p class="section-desc">Important instructions, preferences, goals aur project facts save kar.</p></div></div>
+      <div class="mc-memory-composer"><input class="input" id="mcMemoryTitle" maxlength="120" placeholder="Memory title"><select class="select" id="mcMemoryType"><option value="profile">Profile / preference</option><option value="instruction">Important instruction</option><option value="goal">Goal</option><option value="project">Project</option><option value="fact">Fact / context</option><option value="note">Other note</option></select><textarea class="textarea" id="mcMemoryContent" maxlength="12000" rows="3" placeholder="What should MIND//CORE remember long-term?"></textarea><div class="form-row"><button class="btn primary" id="mcSaveMemoryBtn" type="button">Save memory</button><button class="btn" id="mcCancelMemoryEditBtn" type="button" hidden>Cancel edit</button></div><span class="small-text" id="mcMemoryEditHint">Memories can be edited or deleted later.</span></div>
+      <input class="input" id="mcMemorySearch" type="search" placeholder="Search saved memories…" aria-label="Search saved memories" style="margin-top:12px"><div class="memory-list" id="mcMemoryList"></div><div class="mc-memory-count" id="mcMemoryCount"></div><div class="form-row" style="margin-top:10px"><button class="btn small" id="mcExportMemoryBtn" type="button">⇩ Export memory + chats</button><button class="btn small" id="mcImportMemoryBtn" type="button">⇧ Import archive</button><input type="file" id="mcMemoryImportFile" accept="application/json,.json" hidden></div>
+    </div>
+  </aside><div class="memory-column">
+    <div class="panel panel-pad"><div class="mc-memory-status"><div><h3 style="margin:0;font-size:15px" id="mcCurrentChatTitle">New conversation</h3><span class="mc-memory-count" id="mcChatStatus">Local memory mode</span></div><span class="pill purple" id="mcMessageCount">0 messages</span></div><div class="memory-chat" id="mcChatMessages" aria-live="polite"><div class="empty">Starting memory engine…</div></div><form class="mc-chat-form" id="mcChatForm"><textarea class="textarea" id="mcChatInput" maxlength="12000" placeholder="Hinglish mein likh… Example: ‘Yaad rakh: mujhe website changes se pehle preview chahiye.’" aria-label="Message to MIND CORE AI"></textarea><div class="mc-chat-actions"><span class="small-text">Enter = send · Shift+Enter = new line</span><button class="btn primary" id="mcSendBtn" type="submit">Send message ↑</button></div></form></div>
+    <div class="panel panel-pad"><div class="section-head" style="margin-bottom:8px"><div><div class="section-kicker">Optional connection</div><h3 class="section-title" style="font-size:16px">AI provider setup</h3><p class="section-desc">Online AI disabled by default. Endpoint/model sirf tab set kar jab tere liye permitted provider available ho.</p></div><span class="pill yellow">API key session-only</span></div>
+      <div class="mc-endpoint-grid"><div class="field"><label for="mcEndpoint">Compatible chat endpoint URL</label><input class="input" id="mcEndpoint" type="url" placeholder="https://your-approved-provider/.../chat/completions" autocomplete="off"></div><div class="field"><label for="mcModel">Model name</label><input class="input" id="mcModel" placeholder="provider model id" autocomplete="off"></div></div>
+      <div class="field" style="margin-top:9px"><label for="mcApiKey">API key (not saved; optional for local endpoints)</label><input class="input" id="mcApiKey" type="password" placeholder="Enter only for this browser session" autocomplete="new-password"></div>
+      <div class="form-row" style="margin-top:10px"><button class="btn primary" type="button" id="mcSaveAISettingsBtn">Save endpoint/model</button><button class="btn" type="button" id="mcConnectBtn">Connect / test AI</button><button class="btn" type="button" id="mcForgetKeyBtn">Forget session key</button></div>
+      <p class="mc-settings-note">Security: endpoint and model are saved with app settings; the API key stays only in memory until this page reloads or you clear it. When connected, recent chat messages and matching memories are sent to that provider. A browser-based API call can still expose the key in your browser/devtools and to the configured provider. Don't use a key you cannot safely manage, don't put it in a shared HTML file, and use only a service whose current rules permit your age and use. Free quotas can change and are not guaranteed forever. Browser connections can fail if the provider blocks cross-origin requests (CORS).</p>
+    </div>
+    <div class="panel panel-pad"><div class="section-head" style="margin-bottom:8px"><div><div class="section-kicker">Smart recall</div><h3 class="section-title" style="font-size:16px">Search your saved context</h3><p class="section-desc">Local search checks long-term memories and prior conversation text; no AI/API request needed.</p></div></div><div class="form-row"><input class="input" id="mcRecallQuery" placeholder="Search e.g. revision system, preferences, previous chats…" style="flex:1;min-width:180px"><button class="btn" id="mcRecallBtn" type="button">Recall</button></div><div id="mcRecallResults" class="small-text" style="margin-top:9px">Type a topic to search stored memories and chats.</div></div>
+  </div></div>`;
+  views.memory.append(mem);
+  const shortcuts=document.querySelectorAll('[data-page-open]');shortcuts.forEach(b=>b.addEventListener('click',()=>navigateToPage(b.dataset.pageOpen,true)));
+  document.querySelectorAll('[data-page-home]').forEach(b=>b.addEventListener('click',()=>navigateToPage('home',true)));
+  document.querySelectorAll('[data-page-back]').forEach(b=>b.addEventListener('click',()=>{if(Number(history.state?.mcDepth||0)>0)history.back();else navigateToPage('home',true)}));
+  window.addEventListener('popstate',e=>{const p=e.state?.mcPage||location.hash.slice(1)||'home';activatePage(MC_PAGES.some(x=>x.id===p)?p:'home')});
+  const hashPage=location.hash.slice(1);const initial=MC_PAGES.some(x=>x.id===hashPage)?hashPage:'home';currentPage=initial;
+  try{history.replaceState({mcPage:initial,mcDepth:0},'',location.href)}catch(e){}
+  activatePage(initial);
+}
+function activatePage(page){currentPage=page;document.querySelectorAll('.page-view').forEach(v=>{v.hidden=v.dataset.page!==page});document.querySelectorAll('.nav a[data-page]').forEach(a=>{const yes=a.dataset.page===page;a.classList.toggle('active',yes);if(yes)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});if(page!=='home')window.scrollTo({top:0,behavior:'auto'});}
+function navigateToPage(page,push=true){if(!MC_PAGES.some(x=>x.id===page))page='home';if(push&&page!==currentPage){const depth=Number(history.state?.mcDepth||0)+1;try{history.pushState({mcPage:page,mcDepth:depth},'',`#${page}`)}catch(e){location.hash=page}}activatePage(page);}
+
+// --- Local-first memory store. IndexedDB is preferred; a localStorage fallback is provided. ---
+const MC_DB_NAME='mindCoreMemoryDB_v1',MC_DB_VERSION=1,MC_FALLBACK_KEY='mindCoreMemoryFallback_v1',MC_ACTIVE_CHAT_KEY='mindCoreActiveChat_v1';
+let mcDb=null,mcStorageMode='Checking…',mcActiveChatId=null,mcEditingMemoryId=null,mcSessionApiKey='',mcMemoryReady=false,mcUsingVolatile=false;let mcVolatileStore={conversations:[],memories:[]};const MC_SEEDED_FLAG='mindCoreMemoryDefaultsSeeded_v1';
+function openMCDB(){return new Promise(resolve=>{if(!('indexedDB'in window)){resolve(false);return}try{const req=indexedDB.open(MC_DB_NAME,MC_DB_VERSION);req.onupgradeneeded=()=>{const db=req.result;if(!db.objectStoreNames.contains('conversations'))db.createObjectStore('conversations',{keyPath:'id'});if(!db.objectStoreNames.contains('memories'))db.createObjectStore('memories',{keyPath:'id'})};req.onsuccess=()=>{mcDb=req.result;mcDb.onversionchange=()=>mcDb.close();resolve(true)};req.onerror=()=>resolve(false);req.onblocked=()=>resolve(false)}catch(e){resolve(false)}})}
+function readMCFallback(){try{const x=JSON.parse(localStorage.getItem(MC_FALLBACK_KEY)||'{"conversations":[],"memories":[]}');return{conversations:Array.isArray(x.conversations)?x.conversations:[],memories:Array.isArray(x.memories)?x.memories:[]}}catch(e){return{conversations:[],memories:[]}}}
+function mcLocalStorageAvailable(){try{const k='mc_storage_probe_'+Date.now();localStorage.setItem(k,'1');localStorage.removeItem(k);return true}catch(e){return false}}
+async function mcGetAll(store){if(mcDb)return new Promise((resolve,reject)=>{try{const tx=mcDb.transaction(store,'readonly'),rq=tx.objectStore(store).getAll();rq.onsuccess=()=>resolve(rq.result||[]);rq.onerror=()=>reject(rq.error);tx.onerror=()=>reject(tx.error)}catch(e){reject(e)}});if(mcUsingVolatile)return mcVolatileStore[store].slice();return readMCFallback()[store]}
+async function mcPut(store,record){if(mcDb)return new Promise((resolve,reject)=>{try{const tx=mcDb.transaction(store,'readwrite');tx.objectStore(store).put(record);tx.oncomplete=()=>resolve(true);tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error||new Error('Storage transaction aborted'))}catch(e){reject(e)}});if(mcUsingVolatile){const a=mcVolatileStore[store],i=a.findIndex(x=>x.id===record.id);if(i>=0)a[i]=record;else a.push(record);return true}const bag=readMCFallback();const a=bag[store],i=a.findIndex(x=>x.id===record.id);if(i>=0)a[i]=record;else a.push(record);try{localStorage.setItem(MC_FALLBACK_KEY,JSON.stringify(bag));return true}catch(e){throw new Error('Browser storage is unavailable or full. Export a memory backup and remove some old data before saving more.')}}
+async function mcDelete(store,id){if(mcDb)return new Promise((resolve,reject)=>{try{const tx=mcDb.transaction(store,'readwrite');tx.objectStore(store).delete(id);tx.oncomplete=()=>resolve(true);tx.onerror=()=>reject(tx.error)}catch(e){reject(e)}});if(mcUsingVolatile){mcVolatileStore[store]=mcVolatileStore[store].filter(x=>x.id!==id);return true}const bag=readMCFallback();bag[store]=bag[store].filter(x=>x.id!==id);try{localStorage.setItem(MC_FALLBACK_KEY,JSON.stringify(bag));return true}catch(e){throw e}}
+async function mcClear(store){if(mcDb)return new Promise((resolve,reject)=>{try{const tx=mcDb.transaction(store,'readwrite');tx.objectStore(store).clear();tx.oncomplete=()=>resolve(true);tx.onerror=()=>reject(tx.error)}catch(e){reject(e)}});if(mcUsingVolatile){mcVolatileStore[store]=[];return true}const bag=readMCFallback();bag[store]=[];localStorage.setItem(MC_FALLBACK_KEY,JSON.stringify(bag));return true}
+async function exportMemoryArchive(){return{format:'MIND//CORE_MEMORY_V1',exportedAt:new Date().toISOString(),storage:mcStorageMode,conversations:await mcGetAll('conversations'),memories:await mcGetAll('memories')}}
+async function restoreMemoryArchive(archive){if(!archive||!Array.isArray(archive.conversations)||!Array.isArray(archive.memories))throw new Error('Memory archive format is invalid.');await mcClear('conversations');await mcClear('memories');for(const c of archive.conversations)if(c&&c.id&&Array.isArray(c.messages))await mcPut('conversations',c);for(const m of archive.memories)if(m&&m.id&&m.content)await mcPut('memories',m);mcActiveChatId=null;try{localStorage.removeItem(MC_ACTIVE_CHAT_KEY)}catch(e){} }
+function mcDefaultMemories(){const now=new Date().toISOString();return[
+ {id:'mc_seed_priority',type:'instruction',title:'Preserve existing MIND//CORE progress',content:'When upgrading MIND//CORE, preserve existing schedules, subjects, chapter status, confidence ratings, review dates, habits, and progress. Do not replace the system from scratch.',createdAt:now,updatedAt:now,source:'MIND//CORE default'},
+ {id:'mc_seed_memory',type:'instruction',title:'Memory is the highest priority',content:'Keep AI conversations and long-term memories locally, searchable and editable, with export/restore backup. Browser storage can have limits, so backups are important.',createdAt:now,updatedAt:now,source:'MIND//CORE default'},
+ {id:'mc_seed_navigation',type:'preference',title:'Separate pages and direct controls',content:'Use separate page views reachable by buttons, with Home/Back navigation and phone-friendly layouts. Do not make one enormous scrolling page.',createdAt:now,updatedAt:now,source:'MIND//CORE default'},
+ {id:'mc_seed_language',type:'preference',title:'Language and instruction preference',content:'The user commonly writes in Hindi/Hinglish. Follow explicit website-change instructions and show a preview/confirmation for actions that change app data.',createdAt:now,updatedAt:now,source:'MIND//CORE default'}
+]}
+async function initMemoryEngine(){try{const ok=await openMCDB();mcUsingVolatile=!ok&&!mcLocalStorageAvailable();mcStorageMode=ok?'IndexedDB':(mcUsingVolatile?'Session only · browser storage blocked':'localStorage fallback');if(navigator.storage?.persist){try{await navigator.storage.persist()}catch(e){}}
+  let memories=await mcGetAll('memories');let seeded=false;try{seeded=localStorage.getItem(MC_SEEDED_FLAG)==='1'}catch(e){}if(!memories.length&&!seeded){for(const m of mcDefaultMemories())await mcPut('memories',m);try{localStorage.setItem(MC_SEEDED_FLAG,'1')}catch(e){}}
+  let chats=await mcGetAll('conversations');if(!chats.length){const c={id:makeId('chat'),title:'New conversation',createdAt:new Date().toISOString(),updatedAt:new Date().toISOString(),messages:[]};await mcPut('conversations',c);mcActiveChatId=c.id}
+  try{const saved=localStorage.getItem(MC_ACTIVE_CHAT_KEY);if(saved&&chats.some(c=>c.id===saved))mcActiveChatId=saved}catch(e){}
+  if(!mcActiveChatId){chats=await mcGetAll('conversations');mcActiveChatId=[...chats].sort((a,b)=>(b.updatedAt||'').localeCompare(a.updatedAt||''))[0]?.id||null}
+  mcMemoryReady=true;await renderMemoryUI();updateMemoryStatus();
+ }catch(e){console.error('Memory initialization error',e);mcStorageMode='Storage unavailable';$('mcStorageBadge').textContent='Storage issue';$('mcChatStatus').textContent='Memory could not initialize: '+e.message;toast('Memory storage could not initialize. Try another browser or check storage.')}
+}
+function updateMemoryStatus(){if(!$('mcStorageBadge'))return;$('mcStorageBadge').textContent=mcStorageMode;$('mcChatStatus').textContent=mcUsingVolatile?'WARNING: memory is session-only here; export before closing this page.':(mcSessionApiKey?'AI key loaded for this session':($('mcEndpoint')?.value.trim()&&$('mcModel')?.value.trim()?'AI configured · key may be required by provider':'Local memory mode · AI not connected'))}
+async function getActiveConversation(){const chats=await mcGetAll('conversations');let c=chats.find(x=>x.id===mcActiveChatId);if(!c&&chats.length){c=[...chats].sort((a,b)=>(b.updatedAt||'').localeCompare(a.updatedAt||''))[0];mcActiveChatId=c.id}if(!c){c={id:makeId('chat'),title:'New conversation',createdAt:new Date().toISOString(),updatedAt:new Date().toISOString(),messages:[]};await mcPut('conversations',c);mcActiveChatId=c.id}return c}
+async function saveActiveConversation(c){c.updatedAt=new Date().toISOString();await mcPut('conversations',c);try{localStorage.setItem(MC_ACTIVE_CHAT_KEY,c.id)}catch(e){} }
+function safeMessageText(s){return esc(s).replace(/\n/g,'<br>')}
+function mcActionSummary(a){switch(a.type){case'navigate':return`Open page: ${a.page}`;case'setDailyTarget':return`Set daily chapter target to ${a.value}`;case'setDailyMax':return`Set maximum daily chapter focus to ${a.value}`;case'setTheme':return`Change theme to ${a.value}`;case'addMemory':return`Save memory: ${a.title}`;case'addSubject':return`Add subject: ${a.name}`;case'addChapter':return`Add chapter “${a.name}” to ${findSubject(a.subjectId)?.name||a.subjectId}`;case'setHoliday':return`${a.enabled?'Enable':'Disable'} holiday mode for ${a.date}`;case'addHabit':return`Add custom habit: ${a.name}`;case'addProgressItem':return`Add progress item: ${a.name}`;case'renameSubject':return`Rename subject to: ${a.name}`;case'editChapter':return`Rename/update chapter: ${a.name}`;default:return'Unknown action'}}
+function renderActionBox(msg){if(!Array.isArray(msg.actions)||!msg.actions.length)return'';const items=msg.actions.map(a=>`<li>${esc(mcActionSummary(a))}</li>`).join('');const status=msg.actionStatus||'pending';if(status==='applied')return`<div class="mc-actions-box"><strong>✓ Changes applied</strong><ul>${items}</ul></div>`;if(status==='rejected')return`<div class="mc-actions-box"><strong>Changes dismissed</strong><ul>${items}</ul></div>`;return`<div class="mc-actions-box"><strong>Review before applying</strong><ul>${items}</ul><div class="form-row"><button class="btn primary small" type="button" data-mc-approve="${esc(msg.id)}">Apply these changes</button><button class="btn small" type="button" data-mc-reject="${esc(msg.id)}">Reject</button></div></div>`}
+async function renderChat(){const c=await getActiveConversation();$('mcCurrentChatTitle').textContent=c.title||'New conversation';$('mcMessageCount').textContent=`${c.messages.length} message${c.messages.length===1?'':'s'}`;const box=$('mcChatMessages');if(!c.messages.length){box.innerHTML='<div class="empty"><strong>MIND//CORE Memory Assistant</strong>Messages in this chat are saved on this device. Try “Yaad rakh: …”, “Search memory: …” or configure an eligible AI endpoint below.</div>';return}box.innerHTML=c.messages.map(m=>`<div class="mc-message ${m.role==='user'?'user':'assistant'}"><div class="mc-role">${m.role==='user'?'You':'MIND//CORE'}</div><div class="mc-bubble">${safeMessageText(m.content||'')}</div>${m.role==='assistant'?renderActionBox(m):''}</div>`).join('');box.scrollTop=box.scrollHeight}
+async function renderConversationList(){const chats=(await mcGetAll('conversations')).sort((a,b)=>(b.updatedAt||'').localeCompare(a.updatedAt||''));const q=($('mcHistorySearch')?.value||'').trim().toLowerCase();const filtered=chats.filter(c=>!q||(c.title||'').toLowerCase().includes(q)||c.messages.some(m=>(m.content||'').toLowerCase().includes(q)));$('mcConversationList').innerHTML=filtered.map(c=>`<button type="button" class="conversation-item ${c.id===mcActiveChatId?'active':''}" data-mc-chat="${esc(c.id)}"><strong>${esc(c.title||'Untitled chat')}</strong><span>${esc((c.updatedAt||'').slice(0,16).replace('T',' '))} · ${c.messages.length} messages</span></button>`).join('')||'<div class="empty">No matching chats.</div>';$('mcConversationCount').textContent=`${chats.length} saved conversation(s) · ${chats.reduce((n,c)=>n+c.messages.length,0)} messages total`}
+async function renderMemoryList(){const mem=(await mcGetAll('memories')).sort((a,b)=>(b.updatedAt||'').localeCompare(a.updatedAt||''));const q=($('mcMemorySearch')?.value||'').trim().toLowerCase();const filtered=mem.filter(m=>!q||[m.title,m.content,m.type].join(' ').toLowerCase().includes(q));$('mcMemoryList').innerHTML=filtered.map(m=>`<div class="memory-card"><h4>${esc(m.title||'Untitled memory')}</h4><p>${esc(m.content||'')}</p><div class="memory-card-meta"><span>${esc(m.type||'note')} · ${esc((m.updatedAt||'').slice(0,10))}</span><div class="memory-card-actions"><button class="btn small" type="button" data-mc-edit-memory="${esc(m.id)}">Edit</button><button class="btn small danger" type="button" data-mc-delete-memory="${esc(m.id)}">Delete</button></div></div></div>`).join('')||'<div class="empty">No matching memories. Add one above or clear your search.</div>';$('mcMemoryCount').textContent=`${mem.length} saved long-term memories`}
+async function renderMemoryUI(){if(!$('mcChatMessages'))return;await Promise.all([renderChat(),renderConversationList(),renderMemoryList()]);updateMemoryStatus()}
+function resetMemoryComposer(){mcEditingMemoryId=null;$('mcMemoryTitle').value='';$('mcMemoryContent').value='';$('mcMemoryType').value='profile';$('mcSaveMemoryBtn').textContent='Save memory';$('mcCancelMemoryEditBtn').hidden=true;$('mcMemoryEditHint').textContent='Memories can be edited or deleted later.'}
+async function startNewConversation(){const c={id:makeId('chat'),title:'New conversation',createdAt:new Date().toISOString(),updatedAt:new Date().toISOString(),messages:[]};await mcPut('conversations',c);mcActiveChatId=c.id;try{localStorage.setItem(MC_ACTIVE_CHAT_KEY,c.id)}catch(e){};await renderMemoryUI();$('mcChatInput').focus()}
+function tokenize(q){return String(q||'').toLowerCase().match(/[a-z0-9]+|[\u0900-\u097f]+/g)||[]}
+async function searchMemoryContext(query,limit=8){const tokens=[...new Set(tokenize(query).filter(t=>t.length>1))];const mem=await mcGetAll('memories'),chats=await mcGetAll('conversations'),out=[];for(const m of mem){const text=`${m.title||''} ${m.content||''} ${m.type||''}`.toLowerCase();let score=tokens.reduce((n,t)=>n+(text.includes(t)?1:0),0);if(score)out.push({kind:'memory',id:m.id,title:m.title||'Memory',text:m.content||'',score,updatedAt:m.updatedAt||''})}for(const c of chats){for(const m of(c.messages||[])){if(!m.content)continue;const text=m.content.toLowerCase();let score=tokens.reduce((n,t)=>n+(text.includes(t)?1:0),0);if(score)out.push({kind:'chat',id:c.id,title:c.title||'Chat history',text:m.content,role:m.role,score,updatedAt:m.createdAt||c.updatedAt||''})}}return out.sort((a,b)=>b.score-a.score||(b.updatedAt||'').localeCompare(a.updatedAt||'')).slice(0,limit)}
+async function renderRecall(query){const q=String(query||'').trim();if(!q){$('mcRecallResults').textContent='Type a topic to search stored memories and chats.';return[]}const results=await searchMemoryContext(q,12);$('mcRecallResults').innerHTML=results.map(r=>`<div class="mc-result"><strong>${esc(r.kind==='memory'?'MEMORY':'CHAT')} · ${esc(r.title)}</strong><div>${esc((r.text||'').slice(0,500))}</div>${r.kind==='chat'?`<button class="btn small" style="margin-top:6px" type="button" data-mc-open-chat="${esc(r.id)}">Open conversation</button>`:`<span class="small-text">Updated ${esc((r.updatedAt||'').slice(0,10))}</span>`}</div>`).join('')||'<div class="empty">No matching saved context yet.</div>';return results}
+async function addLongTermMemory(title,content,type='note',source='user'){title=String(title||'').trim();content=String(content||'').trim();if(!title||!content)throw new Error('Memory title and content are required.');if(title.length>120||content.length>12000)throw new Error('Memory is too long.');const now=new Date().toISOString(),m={id:makeId('mem'),type,title,content,createdAt:now,updatedAt:now,source};await mcPut('memories',m);return m}
+function sanitizeActions(actions){if(!Array.isArray(actions))return[];const clean=[];for(const a of actions.slice(0,8)){if(!a||typeof a!=='object'||typeof a.type!=='string')continue;switch(a.type){case'navigate':if(MC_PAGES.some(p=>p.id===a.page))clean.push({type:'navigate',page:a.page});break;case'setDailyTarget':if([4,5,6].includes(Number(a.value)))clean.push({type:a.type,value:Number(a.value)});break;case'setDailyMax':if([5,6].includes(Number(a.value)))clean.push({type:a.type,value:Number(a.value)});break;case'setTheme':if(['dark','light'].includes(a.value))clean.push({type:a.type,value:a.value});break;case'addMemory':if(String(a.title||'').trim()&&String(a.content||'').trim())clean.push({type:a.type,title:String(a.title).slice(0,120),content:String(a.content).slice(0,12000),category:['profile','instruction','goal','project','fact','note'].includes(a.category)?a.category:'note'});break;case'addSubject':if(String(a.name||'').trim())clean.push({type:a.type,name:String(a.name).trim().slice(0,65),category:['Core','SST','Language','Additional'].includes(a.category)?a.category:'Additional'});break;case'addChapter':if(findSubject(String(a.subjectId||''))&&String(a.name||'').trim())clean.push({type:a.type,subjectId:String(a.subjectId),name:String(a.name).trim().slice(0,100),note:String(a.note||'').slice(0,180)});break;case'setHoliday':if(/^\d{4}-\d{2}-\d{2}$/.test(String(a.date||''))&&typeof a.enabled==='boolean')clean.push({type:a.type,date:a.date,enabled:a.enabled});break;case'addHabit':case'addProgressItem':if(String(a.name||'').trim())clean.push({type:a.type,name:String(a.name).trim().slice(0,100),module:String(a.module||'Personal').slice(0,40)});break;case'renameSubject':if(findSubject(String(a.subjectId||''))&&String(a.name||'').trim())clean.push({type:a.type,subjectId:String(a.subjectId),name:String(a.name).trim().slice(0,65)});break;case'editChapter':if(findChapter(String(a.chapterId||''))&&String(a.name||'').trim())clean.push({type:a.type,chapterId:String(a.chapterId),name:String(a.name).trim().slice(0,100),note:String(a.note||'').slice(0,180)});break;}}return clean}
+function parseAssistantPayload(content){const raw=String(content||'').trim();const cleaned=raw.replace(/^```(?:json)?\s*/i,'').replace(/\s*```$/,'');try{const o=JSON.parse(cleaned);if(o&&typeof o==='object')return{reply:String(o.reply||o.message||''),actions:sanitizeActions(o.actions)} }catch(e){}const start=cleaned.indexOf('{'),end=cleaned.lastIndexOf('}');if(start>=0&&end>start){try{const o=JSON.parse(cleaned.slice(start,end+1));if(o&&typeof o==='object'&&('reply'in o||'actions'in o))return{reply:String(o.reply||''),actions:sanitizeActions(o.actions)}}catch(e){}}return{reply:raw,actions:[]}}
+function localActionForPrompt(prompt){const p=prompt.toLowerCase();const target=p.match(/(?:daily\s*)?(?:chapter\s*)?target\s*(?:to|=|is)?\s*([456])|(?:target|daily target)\s*(?:4|5|6)/i)||p.match(/(?:daily target|target)\D{0,12}([456])/i);if(target)return[{type:'setDailyTarget',value:Number(target[1]||p.match(/[456]/)?.[0])}];const theme=p.match(/(?:theme|mode)\s*(?:to|=)?\s*(dark|light)/i);if(theme)return[{type:'setTheme',value:theme[1].toLowerCase()}];const pageMap=[['home','home'],['planner','planner'],['schedule','planner'],['revision','revision'],['subjects','subjects'],['chapter','subjects'],['progress','progress'],['physical','training'],['workout','training'],['mind','mind'],['memory','memory'],['setting','settings']];const go=p.match(/(?:open|go to|show|kholo|khol|dikha(?:o)?)\s+(?:the\s+)?(.+)/i);if(go){const k=go[1];const m=pageMap.find(x=>k.includes(x[0]));if(m)return[{type:'navigate',page:m[1]}]}return[]}
+async function localAssistantReply(prompt){const rm=prompt.match(/^(?:remember|yaad rakh|yaad rakhna|memory)\s*[:\-]?\s*(.+)$/i);if(rm){const content=rm[1].trim();const title=content.slice(0,65)+(content.length>65?'…':'');await addLongTermMemory(title,content,'instruction','chat command');await renderMemoryList();return{reply:'Saved to long-term memory on this device. Chat history also retains this message. You can edit or delete this memory in the left panel.',actions:[]}}
+ const sr=prompt.match(/^(?:search memory|find memory|memory search|yaad khoj)\s*[:\-]?\s*(.+)$/i);if(sr){const r=await searchMemoryContext(sr[1],8);return{reply:r.length?r.map((x,i)=>`${i+1}. [${x.kind}] ${x.title}: ${x.text.slice(0,260)}`).join('\n\n'):'I could not find matching saved memory or chat text. You can add it manually in Long-term memory.',actions:[]}}
+ if(/what do you remember|what.*memory|kya yaad hai|meri memories|remember about me/i.test(prompt)){const m=(await mcGetAll('memories')).sort((a,b)=>(b.updatedAt||'').localeCompare(a.updatedAt||'')).slice(0,10);return{reply:m.length?'Saved memory currently contains:\n'+m.map((x,i)=>`${i+1}. ${x.title}: ${x.content.slice(0,260)}`).join('\n\n'):'No long-term memories have been saved yet.',actions:[]}}
+ const actions=localActionForPrompt(prompt);if(actions.length)return{reply:'I found a supported MIND//CORE action. Review the proposed change below and apply it only if it is correct.',actions};
+ const matches=await searchMemoryContext(prompt,5);const contextual=matches.length?'\n\nClosest saved context:\n'+matches.map(m=>`• ${m.title}: ${m.text.slice(0,220)}`).join('\n'):'\n\nNo matching saved memory found.';
+ return{reply:'Local Memory Mode is active, but a full language model is not connected. I can store explicit “Yaad rakh: …” memories, search old chats/memories, open pages, and prepare a few basic setting changes for approval. For general reasoning or more complex website actions, configure an AI endpoint that is allowed for your age and use. Nothing has been changed automatically.'+contextual,actions:[]}}
+async function callConfiguredAI(conversation,prompt){const endpoint=$('mcEndpoint').value.trim(),model=$('mcModel').value.trim();if(!endpoint||!model)throw new Error('AI endpoint and model are required.');let u;try{u=new URL(endpoint)}catch(e){throw new Error('Endpoint URL is not valid.')}if(!['https:','http:'].includes(u.protocol)||u.protocol==='http:'&&!['localhost','127.0.0.1','[::1]'].includes(u.hostname))throw new Error('Use HTTPS; plain HTTP is allowed only for localhost.');const recalled=await searchMemoryContext(prompt,7);const memories=await mcGetAll('memories');const context=recalled.length?recalled.map(x=>`[${x.kind}] ${x.title}: ${x.text.slice(0,900)}`).join('\n'):'No close memory matches.';const snapshot=`Selected date: ${selectedDate}. Daily target: ${data.settings.dailyTarget}. Daily max: ${data.settings.dailyMax}. Subjects: ${data.subjects.map(s=>`${s.id} (${s.name}) chapters=${s.chapters.length}`).join('; ')}. App pages: ${MC_PAGES.map(p=>p.id).join(', ')}. Stored long-term memories: ${memories.length}.`;
+ const system=`You are the MIND//CORE assistant. Reply naturally in the user's language (usually Hindi/Hinglish). Follow user instructions precisely, admit uncertainty, and do not claim an action is done before user confirms it. You may suggest at most 8 structured app actions, but they will be previewed and require explicit user approval. Respond ONLY as a JSON object: {"reply":"your answer","actions":[...]} . Allowed action shapes: {"type":"navigate","page":"home|planner|mind|training|revision|subjects|progress|memory|settings"}; {"type":"setDailyTarget","value":4|5|6}; {"type":"setDailyMax","value":5|6}; {"type":"setTheme","value":"dark|light"}; {"type":"addMemory","title":"...","content":"...","category":"profile|instruction|goal|project|fact|note"}; {"type":"addSubject","name":"...","category":"Core|SST|Language|Additional"}; {"type":"addChapter","subjectId":"an existing ID from the app snapshot","name":"...","note":"optional"}; {"type":"setHoliday","date":"YYYY-MM-DD","enabled":true|false}; {"type":"addHabit","name":"...","module":"..."}; {"type":"addProgressItem","name":"...","module":"..."}; {"type":"renameSubject","subjectId":"existing subject ID","name":"..."}; {"type":"editChapter","chapterId":"existing chapter ID","name":"...","note":"optional"}. Use [] for no actions. Never generate unknown actions, HTML, JavaScript or arbitrary code to execute. Do not make bulk destructive edits. Do not add private/sensitive personal facts to long-term memory unless the user explicitly asked. If asked to change code/feature behavior not supported by these actions, explain that this embedded chat cannot rewrite its own HTML; that requires a separately reviewed file update.`;
+ const recent=conversation.messages.slice(0,-1).slice(-15).filter(m=>m.role==='user'||m.role==='assistant').map(m=>({role:m.role,content:m.content}));const messages=[{role:'system',content:system+'\n\nAPP STATE: '+snapshot+'\n\nRELEVANT SAVED CONTEXT:\n'+context},...recent,{role:'user',content:prompt}];const headers={'Content-Type':'application/json'};if(mcSessionApiKey)headers.Authorization=`Bearer ${mcSessionApiKey}`;const response=await fetch(endpoint,{method:'POST',headers,body:JSON.stringify({model,messages,temperature:.25,stream:false})});let j={};try{j=await response.json()}catch(e){}if(!response.ok)throw new Error(j.error?.message||`AI provider returned HTTP ${response.status}`);const content=j.choices?.[0]?.message?.content;if(!content)throw new Error('Provider response did not contain choices[0].message.content. Check that the endpoint uses a compatible chat-completions format.');return parseAssistantPayload(content)}
+async function sendMemoryMessage(e){if(e)e.preventDefault();const input=$('mcChatInput'),prompt=input.value.trim();if(!prompt)return;input.value='';const send=$('mcSendBtn');send.disabled=true;const conv=await getActiveConversation();const userMsg={id:makeId('msg'),role:'user',content:prompt,createdAt:new Date().toISOString()};conv.messages.push(userMsg);if(!conv.title||conv.title==='New conversation')conv.title=prompt.slice(0,54)+(prompt.length>54?'…':'');await saveActiveConversation(conv);await renderMemoryUI();let result;try{if($('mcEndpoint').value.trim()&&$('mcModel').value.trim()&&mcSessionApiKey){$('mcChatStatus').textContent='Thinking with configured AI…';result=await callConfiguredAI(conv,prompt)}else result=await localAssistantReply(prompt)}catch(err){result={reply:`AI connection failed: ${err.message}\n\nYour message is still saved locally. Check endpoint/model/key and provider rules. If the provider blocks browser CORS, a small secure backend proxy is required.`,actions:[]}}try{const again=await getActiveConversation();const assistantMsg={id:makeId('msg'),role:'assistant',content:result.reply||'I have no response to display.',actions:result.actions||[],actionStatus:(result.actions||[]).length?'pending':null,createdAt:new Date().toISOString()};again.messages.push(assistantMsg);await saveActiveConversation(again);await renderMemoryUI()}catch(err){console.error(err);toast('Response appeared, but could not be saved. Export memory if possible.')}finally{send.disabled=false;input.focus();updateMemoryStatus()}}
+function validateActionList(actions){const out=sanitizeActions(actions);if(!Array.isArray(actions)||out.length!==actions.length)return{ok:false,actions:out,error:'One or more proposed actions are invalid or unsupported. No changes were applied.'};for(const a of out){if(a.type==='addChapter'&&!findSubject(a.subjectId))return{ok:false,actions:out,error:'The selected subject no longer exists.'};if(a.type==='editChapter'&&!findChapter(a.chapterId))return{ok:false,actions:out,error:'The selected chapter no longer exists.'};if(a.type==='setDailyMax'&&a.value<Number(data.settings.dailyTarget))return{ok:false,actions:out,error:'Maximum daily focus cannot be lower than daily target.'}}return{ok:true,actions:out}}
+async function applyMCAction(a){switch(a.type){case'navigate':navigateToPage(a.page,true);break;case'setDailyTarget':data.settings.dailyTarget=a.value;if(data.settings.dailyMax<a.value)data.settings.dailyMax=a.value;saveData();renderAll();break;case'setDailyMax':data.settings.dailyMax=a.value;saveData();renderAll();break;case'setTheme':data.settings.theme=a.value;saveData();document.body.classList.toggle('light-mode',a.value==='light');renderAll();break;case'addMemory':await addLongTermMemory(a.title,a.content,a.category,'AI action approved by user');break;case'addSubject':data.subjects.push(createSubject(makeId('sub'),a.name,a.category,0,0));saveData();renderAll();break;case'addChapter':{const s=findSubject(a.subjectId);if(!s)throw new Error('Subject not found');s.chapters.push({id:makeId('ch'),name:a.name,status:'new',confidence:null,lastReviewed:null,nextReviewDate:null,lastInterval:0,note:a.note||''});data._openSubjects=data._openSubjects||{};data._openSubjects[s.id]=true;saveData();renderAll();break}case'setHoliday':if(a.enabled)data.holidays[a.date]=true;else delete data.holidays[a.date];saveData();renderAll();break;case'addHabit':data.habits=data.habits||[];data.habits.push({id:makeId('habit'),name:a.name,module:['Mind','Study','Physical','Skill','Recovery','Routine'].includes(a.module)?a.module:'Mind'});saveData();renderAll();break;case'addProgressItem':data.progressItems=data.progressItems||[];data.progressItems.push({id:makeId('progress'),name:a.name,module:a.module||'Personal',createdAt:new Date().toISOString()});saveData();renderAll();break;case'renameSubject':{const s=findSubject(a.subjectId);if(!s)throw new Error('Subject not found');s.name=a.name;saveData();renderAll();break}case'editChapter':{const r=findChapter(a.chapterId);if(!r)throw new Error('Chapter not found');r.chapter.name=a.name;r.chapter.note=a.note||'';saveData();renderAll();break}}}
+async function handleMCActionButton(button,approve){const id=button.getAttribute(approve?'data-mc-approve':'data-mc-reject'),c=await getActiveConversation(),m=c.messages.find(x=>x.id===id);if(!m||!m.actions||m.actionStatus!=='pending')return;if(!approve){m.actionStatus='rejected';await saveActiveConversation(c);await renderChat();toast('Proposed changes rejected');return}const check=validateActionList(m.actions);if(!check.ok){alert(check.error);return}if(!confirm('Apply these changes to MIND//CORE?\n\n'+m.actions.map(mcActionSummary).join('\n')+'\n\nNo arbitrary code will run.'))return;try{for(const a of check.actions)await applyMCAction(a);m.actionStatus='applied';await saveActiveConversation(c);await renderMemoryUI();toast('Approved changes applied')}catch(e){console.error(e);alert('Could not apply every action: '+e.message+'\nReview app data before retrying.')}}
+async function saveMemoryFromForm(){const title=$('mcMemoryTitle').value.trim(),content=$('mcMemoryContent').value.trim(),type=$('mcMemoryType').value;if(!title||!content){toast('Add both memory title and content');return}try{if(mcEditingMemoryId){const all=await mcGetAll('memories'),m=all.find(x=>x.id===mcEditingMemoryId);if(!m)throw new Error('Memory no longer exists');m.title=title;m.content=content;m.type=type;m.updatedAt=new Date().toISOString();m.source='user edited';await mcPut('memories',m);toast('Memory updated')}else{await addLongTermMemory(title,content,type,'user');toast('Long-term memory saved')}resetMemoryComposer();await renderMemoryList();updateMemoryStatus()}catch(e){alert(e.message)}}
+async function exportMemoryOnly(){try{const archive=await exportMemoryArchive();const blob=new Blob([JSON.stringify(archive,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`mind-core-memory-${dateToday()}.json`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('Memory + chat archive exported')}catch(e){alert('Unable to export memory: '+e.message)}}
+async function importMemoryArchiveFile(file){if(!file)return;const rd=new FileReader();rd.onload=async()=>{try{const archive=JSON.parse(String(rd.result));if(archive?.format!=='MIND//CORE_MEMORY_V1'||!Array.isArray(archive.conversations)||!Array.isArray(archive.memories))throw new Error('This is not a MIND//CORE memory archive.');if(!confirm(`Replace current AI chats and long-term memories with ${archive.conversations.length} chat(s) and ${archive.memories.length} memory item(s)? Study progress will remain unchanged. Export current memory first if needed.`))return;await restoreMemoryArchive(archive);try{localStorage.setItem(MC_SEEDED_FLAG,'1')}catch(e){}await renderMemoryUI();toast('Memory archive imported')}catch(e){alert('Unable to import memory archive: '+e.message)}$('mcMemoryImportFile').value=''};rd.readAsText(file)}
+function bindMemoryControls(){
+ $('mcNewChatBtn').addEventListener('click',startNewConversation);$('mcChatForm').addEventListener('submit',sendMemoryMessage);$('mcChatInput').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMemoryMessage(e)}});
+ $('mcSaveMemoryBtn').addEventListener('click',saveMemoryFromForm);$('mcCancelMemoryEditBtn').addEventListener('click',resetMemoryComposer);$('mcHistorySearch').addEventListener('input',renderConversationList);$('mcMemorySearch').addEventListener('input',renderMemoryList);$('mcRecallBtn').addEventListener('click',()=>renderRecall($('mcRecallQuery').value));$('mcRecallQuery').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();renderRecall($('mcRecallQuery').value)}});$('mcExportMemoryBtn').addEventListener('click',exportMemoryOnly);$('mcImportMemoryBtn').addEventListener('click',()=>$('mcMemoryImportFile').click());$('mcMemoryImportFile').addEventListener('change',e=>importMemoryArchiveFile(e.target.files[0]));
+ $('mcConversationList').addEventListener('click',async e=>{const b=e.target.closest('[data-mc-chat]');if(!b)return;mcActiveChatId=b.dataset.mcChat;try{localStorage.setItem(MC_ACTIVE_CHAT_KEY,mcActiveChatId)}catch(err){}await renderMemoryUI()});
+ $('mcMemoryList').addEventListener('click',async e=>{const edit=e.target.closest('[data-mc-edit-memory]'),del=e.target.closest('[data-mc-delete-memory]');if(edit){const m=(await mcGetAll('memories')).find(x=>x.id===edit.dataset.mcEditMemory);if(!m)return;mcEditingMemoryId=m.id;$('mcMemoryTitle').value=m.title;$('mcMemoryContent').value=m.content;$('mcMemoryType').value=m.type||'note';$('mcSaveMemoryBtn').textContent='Update memory';$('mcCancelMemoryEditBtn').hidden=false;$('mcMemoryEditHint').textContent='Editing a saved memory; the original ID and creation date are kept.';$('mcMemoryTitle').focus()}else if(del){const m=(await mcGetAll('memories')).find(x=>x.id===del.dataset.mcDeleteMemory);if(!m||!confirm(`Delete memory “${m.title}”? This cannot be undone unless you have a backup.`))return;await mcDelete('memories',m.id);if(mcEditingMemoryId===m.id)resetMemoryComposer();await renderMemoryList();updateMemoryStatus();toast('Memory deleted')}});
+ $('mcChatMessages').addEventListener('click',e=>{const ap=e.target.closest('[data-mc-approve]'),re=e.target.closest('[data-mc-reject]');if(ap)handleMCActionButton(ap,true);if(re)handleMCActionButton(re,false)});
+ $('mcRecallResults').addEventListener('click',async e=>{const b=e.target.closest('[data-mc-open-chat]');if(!b)return;mcActiveChatId=b.dataset.mcOpenChat;try{localStorage.setItem(MC_ACTIVE_CHAT_KEY,mcActiveChatId)}catch(err){}await renderMemoryUI();navigateToPage('memory',true)});
+ $('mcDeleteChatsBtn').addEventListener('click',async()=>{if(!confirm('Delete ALL saved AI conversations and their messages? Long-term memories and study progress will stay. Export first if needed.'))return;await mcClear('conversations');const c={id:makeId('chat'),title:'New conversation',createdAt:new Date().toISOString(),updatedAt:new Date().toISOString(),messages:[]};await mcPut('conversations',c);mcActiveChatId=c.id;await renderMemoryUI();toast('All chats deleted; memories preserved')});
+ $('mcSaveAISettingsBtn').addEventListener('click',()=>{data.settings.aiEndpoint=$('mcEndpoint').value.trim();data.settings.aiModel=$('mcModel').value.trim();saveData();updateMemoryStatus();toast('Endpoint/model saved; API key is not saved')});
+ $('mcConnectBtn').addEventListener('click',async()=>{if(!$('mcEndpoint').value.trim()||!$('mcModel').value.trim()){toast('Enter endpoint and model first');return}const key=$('mcApiKey').value.trim();if(key)mcSessionApiKey=key;$('mcApiKey').value='';updateMemoryStatus();const b=$('mcConnectBtn');b.disabled=true;b.textContent='Testing…';try{const temp={title:'Connection test',messages:[]};const out=await callConfiguredAI(temp,'Reply with the JSON object {"reply":"Connection successful","actions":[]}.');toast('AI connection test completed: '+(out.reply||'response received').slice(0,100))}catch(e){toast('AI test failed: '+e.message.slice(0,160))}finally{b.disabled=false;b.textContent='Connect / test AI';updateMemoryStatus()}});
+ $('mcForgetKeyBtn').addEventListener('click',()=>{mcSessionApiKey='';$('mcApiKey').value='';updateMemoryStatus();toast('Session API key cleared')});
+ try{if(data.settings.aiEndpoint)$('mcEndpoint').value=data.settings.aiEndpoint;if(data.settings.aiModel)$('mcModel').value=data.settings.aiModel}catch(e){}
+}
+
+
+setupPageViews();document.querySelectorAll('.nav a[data-page]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();navigateToPage(a.dataset.page,true)}));bindMemoryControls();initMemoryEngine();selectedDate=(dateToday()>=START_DATE?dateToday():(data.selectedDate||START_DATE));document.body.classList.toggle('light-mode',data.settings.theme==='light');renderAll();
+})();
+</script></body></html>
